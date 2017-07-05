@@ -1,6 +1,6 @@
 # Semplificazione Amministrativa
 
-Nell'ambito delle attività in corso del **Tavolo tecnico interoperabilità per la semplificazione amministrativa**, il presente progetto è stato reso disponibile come area di condivisione per le attività del Gruppo di Lavoro denominato **XSD Schema** per dare seguito alla linea d'azione **Formalizzazione Moduli PA**.
+Nell'ambito delle attività in corso del **Tavolo tecnico interoperabilit&grave;� per la semplificazione amministrativa**, il presente progetto è stato reso disponibile come area di condivisione per le attività del Gruppo di Lavoro denominato **XSD Schema** per dare seguito alla linea d'azione **Formalizzazione Moduli PA**.
 
 L’obiettivo del GdL di *formalizzare i moduli approvati dalla Conferenza Unificata del 4 maggio 2017* attraverso l’utilizzo dello standard XSD mantenute dal XML Schema Working Group del W3C, usando i seguenti standard: 
 
