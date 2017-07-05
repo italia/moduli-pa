@@ -2,7 +2,7 @@
 
 Nell&apos;ambito delle attivit&agrave;  in corso del **Tavolo tecnico interoperabilit&agrave;  per la semplificazione amministrativa**, il presente progetto &egrave; stato reso disponibile come area di condivisione per le attivit&agrave;  del Gruppo di Lavoro denominato **XSD Schema** per dare seguito alla linea d&apos;azione **Formalizzazione Moduli PA**.
 
-L&apos;obiettivo del GdL &egrave; di *formalizzare i moduli approvati dalla Conferenza Unificata del 4 maggio 2017* attraverso l&apos;utilizzo dello standard XSD mantenute dal XML Schema Working Group del W3C, usando i seguenti standard: 
+L&apos;obiettivo del GdL &egrave; di *formalizzare i moduli approvati dalla Conferenza Unificata del 4 maggio 2017* attraverso l&apos;utilizzo delle specifiche dello standard XSD mantenute dal XML Schema Working Group del W3C, utilizzando nel dettaglio: 
 
 - *W3C XML Schema Definition Language (XSD) 1.1 Part 1: Structures* 
 - *W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes*
