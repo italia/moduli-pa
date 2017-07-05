@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:suapcommon="http://www.agid.gov.it/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/SUAP/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"    
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:ccts="urn:un:unece:uncefact:documentation:2"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/SUAP/suap_common_components"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/SUAP/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+        
+    <xs:complexType name="SchedaAnagraficaSUAPType">
+        <xs:sequence>
+            <xs:element name="datiDichiarante" type="suapcommon:DichiaranteType"/>
+            <xs:element name="datiImpresa" type="suapcommon:ImpresaType"/>
+            <xs:element name="datiProcuratore" type="suapcommon:ProcuratoreType" minOccurs="0"/>           
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiaranteType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:PersonaAnagraficaType">
+                <xs:attribute name="in-qualita" type="suapcommon:InQualitaEnum" use="required"/>
+                <xs:attribute name="altro" type="xs:string"/>                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ProcuratoreType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:PersonaAnagraficaType">
+                <xs:attribute name="tipo-procura" type="suapcommon:TipoProcuraEnum" use="required"/>
+                <xs:attribute name="denominazione-agenzia-imprese" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ImpresaType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:ImpresaAnagraficaType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="IndirizzoContattiFoniaAttivitaType">
+        <xs:sequence>
+            <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+            <xs:element name="contatto" type="aggregate:ContattiFoniaType"/>
+        </xs:sequence>    
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="IntegrazioneAnagraficaType">
+        <xs:sequence>
+            <xs:element name="indirizzoAttivita" type="suapcommon:IndirizzoContattiFoniaAttivitaType" />
+            <xs:element name="datiCastali" type="moduli:DatiCatastaliType"/>
+        </xs:sequence>        
+    </xs:complexType>
+  
+    <xs:complexType name="InCentroCommercialeBaseType" abstract="true">
+        
+    </xs:complexType>
+    
+    <xs:complexType name="InCentroCommercialeType">
+       <xs:complexContent>
+           <xs:extension base="suapcommon:InCentroCommercialeBaseType">
+               <xs:sequence>
+                   <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
+               </xs:sequence> 
+               <xs:attribute name="presente" type="xs:boolean" default="false"/>
+           </xs:extension>
+       </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="complessiva" minOccurs="0" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SettoriMerceologiciSuperficieType" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
+                <xs:sequence>
+                    <xs:element name="alimentare" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    <xs:complexType name="VariazioneSettoriMerceologiciSuperficieType" >
+        <xs:complexContent>
+            <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
+                <xs:sequence>
+                    <xs:element name="alimentare" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="da" type="xs:integer"/>
+                                <xs:element name="a" type="xs:integer"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="nonAlimentare" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="da" type="xs:integer"/>
+                                <xs:element name="a" type="xs:integer"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    <xs:complexType name="SettoriMerceologiciBaseType" abstract="true">
+        
+    </xs:complexType>
+    
+    <xs:complexType name="SettoriMerceologiciType" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:SettoriMerceologiciBaseType">
+                <xs:sequence>
+                    <xs:element name="alimentare" type="xs:boolean" default="false"/>
+                    <xs:element name="nonAlimentare" type="xs:boolean" default="false"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    <xs:complexType name="OccupazioneSuperficiType" abstract="true">
+        <xs:sequence>
+            <xs:element name="tabelleSpeciali">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="generiMonopolio" minOccurs="0" type="xs:integer"/>
+                        <xs:element name="farmacie" minOccurs="0" type="xs:integer"/>
+                        <xs:element name="carburanti" minOccurs="0" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>    
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="OccupazioneSuperficiBaseType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:OccupazioneSuperficiType">
+                <xs:sequence>
+                    <xs:element name="merciIngombranti">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="nonAlimentare" minOccurs="0" type="xs:integer"/>                                
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    
+    <xs:complexType name="variazioneOccupazioneSuperficiType" abstract="true">
+        <xs:sequence>
+            <xs:element name="tabelleSpeciali">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="generiMonopolio" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="da" type="xs:integer"/>
+                                    <xs:element name="a" type="xs:integer"/>
+                                </xs:sequence>    
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="farmacie" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="da" type="xs:integer"/>
+                                    <xs:element name="a" type="xs:integer"/>
+                                </xs:sequence>    
+                            </xs:complexType>                            
+                        </xs:element>
+                        <xs:element name="carburanti" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="da" type="xs:integer"/>
+                                    <xs:element name="a" type="xs:integer"/>
+                                </xs:sequence>    
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>    
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="variazioneOccupazioneSuperficiBaseType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:variazioneOccupazioneSuperficiType">
+                <xs:sequence>
+                    <xs:element name="merciIngombranti">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="nonAlimentari" minOccurs="0">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="da" type="xs:integer"/>
+                                            <xs:element name="a" type="xs:integer"/>
+                                        </xs:sequence>    
+                                    </xs:complexType>
+                                </xs:element>                                
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    
+    <xs:complexType name="ModalitaVenditaType" abstract="true">
+        
+    </xs:complexType>
+    
+    <xs:complexType name="ModalitaVenditaBaseType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ModalitaVenditaType">
+                <xs:sequence>                    
+                    <xs:element name="superficieMQ">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:integer">
+                                    <xs:attribute name="modalita" type="suapcommon:ModalitaVenditaEnum"/> 
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>                                                     
+                    </xs:element>                                              
+                </xs:sequence>       
+                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    
+    <xs:complexType name="TrasferimentoDaAType">
+        <xs:sequence>
+            <xs:element name="da">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+                        <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="a">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="indirizzo" type="suapcommon:IndirizzoContattiFoniaAttivitaType"/>
+                        <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AmpliamentoSuperficieVenditaType">
+        <xs:sequence>
+            <xs:element name="da" type="xs:integer"/>
+            <xs:element name="a" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiarazioniType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="dichiaranteRequisitiProfessionali" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>
+                <xs:element name="prepostoRequisitiProfessionali" type="suapcommon:PrepostoRequisitiProfessionaliType"/>
+            </xs:choice>      
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="DichiaranteRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="corsoProfessionale">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="istituto" type="xs:string"/>
+                        <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+                        <xs:element name="oggettoCorso" type="xs:string"/>
+                        <xs:element name="annoConclusione" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>            
+            <xs:element name="esercitatoInProprio">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attivita" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="tipo" type="xs:string"/>
+                                    <xs:element name="dal" type="xs:date"/>
+                                    <xs:element name="al" type="xs:date"/>
+                                </xs:sequence>              
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="prestatoOpera">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="impresa">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="nome" type="xs:string"/>
+                                    <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:choice>
+                            <xs:element name="ruolo" type="suapcommon:RuoloInImpresa"/>
+                            <xs:element name="altroRuolo" type="xs:string"/>
+                        </xs:choice>
+                        <xs:element name="iscrittoINPS">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="da" type="xs:date"/>
+                                    <xs:element name="a" type="xs:date"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>             
+            </xs:element>
+            <xs:element name="titoloStudio">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="istituto" type="xs:string"/>
+                        <xs:element name="annoConclusione" type="xs:integer"/>
+                        <xs:element name="materiaAttinente" type="xs:string" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="riconoscimentoAutoritItaliana">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="numeroAtto" type="xs:string"/>
+                        <xs:element name="dataAtto" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="possessoRequisitoPraticaProfessionale">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="iscrittoREASettoreAlimentare">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="anno" type="xs:integer"/>
+                                    <xs:element name="CCIAA" type="enumeration:CCIAAEnum"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="esameIdoneitaREA">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="anno" type="xs:integer"/>
+                                    <xs:element name="presso" type="xs:string"/>                                    
+                                </xs:sequence>
+                                <xs:attribute name="sezioneSpecialeTurismo" type="xs:boolean" default="false"/>
+                            </xs:complexType>
+                        </xs:element>
+                        
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>        
+    </xs:complexType>
+    
+    <xs:complexType name="PrepostoRequisitiProfessionaliType">
+        <xs:sequence>
+            <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="inData" type="xs:date"/>
+            <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>            
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="fileAttachment">
+        <xs:sequence>
+            <xs:element name="file" type="xs:base64Binary"/>
+            <xs:element name="mimeType" type="enumeration:MimeTypeEnum"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altraNormativaRegionale" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- IMPLEMENTATO NELL'IPOTESI DI SCELTA MULTIPLA, DA VERIFICA SE INVECE SCELTA SINGOLA IN QUESTO CASO SEMPLIFICARE CON ENUMERATION -->
+    <xs:complexType name="VariazioniTabelleSpecialiType">
+        <xs:attribute name="aggiunta" type="xs:boolean" default="false"/>
+        <xs:attribute name="eliminazione" type="xs:boolean" default="false"/>
+        <xs:attribute name="sostituzione" type="xs:boolean" default="false"/>
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    
+    <!-- ELEMENTI ALLEGATI --> 
+    
+    <xs:element name="allegatoProcuraDelega" type="suapcommon:fileAttachment"  >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+               <ccts:Definition>Procura/delega</ccts:Definition>
+               <ccts:UsageRule>Nel caso di procura/delega a presentare la segnalazione/domanda/comunicazione</ccts:UsageRule>
+           </xs:documentation>
+        </xs:annotation>
+    </xs:element> 
+    
+    <xs:element name="allegatoDocumentoIdentitaTitolare" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Copia del documento di identità del/i titolare/i</ccts:Definition>
+                <ccts:UsageRule>Nel caso in cui la segnalazione non sia sottoscritta in forma digitale e in assenza di procura</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoNotificaSanitaria" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria in caso di vendita per corrispondenza di prodotti alimentari</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria in caso di esercizio alimentare</ccts:UsageRule>
+            </xs:documentation>
+            
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria in caso di media o grande struttura di vendita alimentare</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria in caso di commercio in spacci interni di prodotti alimentari</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria in caso di vendita mediante apparecchi automatici di prodotti alimentari</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria in caso di commercio presso il domicilio dei consumatori di prodotti alimentari</ccts:UsageRule>
+            </xs:documentation>
+            
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>Nel caso di subingresso in attività di vendita e/o somministrazione di prodotti alimentari</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoVenditaProdottiAlimentazioneAnimale" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>SCIA per la vendita di prodotti agricoli e zootecnici, mangimi, prodotti di origine minerale e chimico industriale</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di prodotti agricoli e zootecnici, mangimi, prodotti di origine minerale e chimico industriali destinati all’alimentazione animale</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoComunicazioneAlcolici" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Comunicazione, che vale quale denuncia ai sensi del D.Lgs. n. 504/1995 per la vendita di alcolici</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di alcolici</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoPrevenzioniIncendi" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>SCIA prevenzione incendi</ccts:Definition>
+                <ccts:UsageRule>In caso di esercizio con superficie totale lorda, comprensiva di servizi e depositi (es. magazzini), superiore a 400 mq, o comunque se l’attività ricade in uno qualsiasi dei punti dell’Allegato I al D.P.R. n. 151/2011, ovvero 
+                    In caso di vendita di gas liquefatti (GPL) in recipienti mobili con quantitativi superiori o uguali a 75 kg, ovvero 
+                    In caso di vendita di gas infiammabili in recipienti mobili compressi con capacità geometrica complessiva superiore o uguale a 0,75 mc
+                </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+     </xs:element>
+    
+    <xs:element name="allegatoVenditaFarmaciBanco" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Comunicazione per la vendita di farmaci da banco e medicinali veterinari</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di farmaci da banco o medicinali veterinari</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoVenditaGPL" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Comunicazione per la vendita di gas di petrolio liquefatto (GPL) per combustione</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di gas di petrolio liquefatto (GPL) per combustione</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoVenditaGASInfiammabile" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Comunicazione, che vale quale denuncia per la vendita di gas infiammabili in recipienti mobili compressi (D.Lgs. n. 504/1995)</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di gas infiammabili in recipienti mobili compressi</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoInsegnaEsercizio" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Autorizzazione per insegna di esercizio</ccts:Definition>
+                <ccts:UsageRule>In caso di attività che preveda insegna esterna (dove è prevista la domanda di autorizzazione)</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta dell’autorizzazione per insegna di esercizio</ccts:Definition>
+                <ccts:UsageRule>In caso di attività che preveda insegna esterna (dove è prevista la domanda di autorizzazione)</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>SCIA per insegna di esercizio</ccts:Definition>
+                <ccts:UsageRule>In caso di attività che preveda insegna esterna (dove è prevista la SCIA)</ccts:UsageRule>
+            </xs:documentation> 
+        </xs:annotation>
+        
+    </xs:element>
+    
+    <xs:element name="allegatoVenditaFitosanitari" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per il rilascio dell’autorizzazione per la vendita di prodotti fitosanitari</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di prodotti fitosanitari</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoVenditaPreziosi" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta dell’autorizzazione di Pubblica Sicurezza per la vendita di oggetti preziosi</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di oggetti preziosi</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoVenditaArmi" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta dell’autorizzazione di Pubblica Sicurezza per la vendita di armi diverse da quelle da guerra</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di armi diverse da quelle da guerra</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+       
+    </xs:element>    
+    
+    <xs:element name="allegatoVersamentoOneri" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Attestazione del versamento di oneri, di diritti, ecc.(*)</ccts:Definition>
+                <ccts:UsageRule>Nella misura e con le modalità indicate sul sito dell’amministrazione</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoImpostaDiBollo" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
+                    ovvero  
+                    Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
+                </ccts:Definition>
+                <ccts:UsageRule>Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA (SCIA condizionata)</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
+                    ovvero  
+                    Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
+                </ccts:Definition>
+                <ccts:UsageRule>"Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA (SCIA condizionata)</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
+                    ovvero 
+                    Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
+                </ccts:Definition>
+                <ccts:UsageRule>Obbligatoria per la presentazione di una domanda</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
+                    ovvero 
+                    Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
+                </ccts:Definition>
+                <ccts:UsageRule>Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA unica (SCIA condizionata)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoAltraDocumentazioneRegionale" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Altra documentazione prevista dalla normativa regionale (*) Esempi: Piano parcheggi, viabilità, ecc.</ccts:Definition>
+                <ccts:UsageRule>Se espressamente prevista dalla normativa regionale di settore</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Altre comunicazioni o segnalazioni previste dalla normativa regionale (*)</ccts:Definition>
+                <ccts:UsageRule>Se espressamente prevista dalla normativa regionale di settore</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Altre domande previste dalla normativa regionale (*)</ccts:Definition>
+                <ccts:UsageRule>Se espressamente prevista dalla normativa regionale di settore</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+          
+    <xs:element name="allegatoProdottiOrigineAnimale" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di Riconoscimento per la produzione e la commercializzazione dei prodotti di origine animale (Reg.CE n. 853/2004) o non animale (Reg.CE n. 852/2004)</ccts:Definition>
+                <ccts:UsageRule>In caso di produzione e commercializzazione dei prodotti di origine animale o non animale</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoPlanimetrieLocali" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Planimetria quotata dei locali</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Planimetria quotata dei locali in scala minima 1:100 con layout superfici di vendita, attrezzature, arredi</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria
+                    (Eccettuato il caso di affitto di poltrona) (*)
+                </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoImpattoAcustico" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Comunicazione di impatto acustico</ccts:Definition>
+                <ccts:UsageRule>In caso di utilizzo di impianti di diffusione sonora o di manifestazioni ed eventi con diffusione di musica o utilizzo di strumenti musicali, se non si superano le soglie della zonizzazione comunale</ccts:UsageRule>
+            </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per il rilascio del nulla osta di impatto acustico</ccts:Definition>
+                <ccts:UsageRule>In caso di utilizzo di impianti di diffusione sonora o di manifestazioni ed eventi con diffusione di musica o utilizzo di strumenti musicali, se si superano le soglie della zonizzazione comunale</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <!-- ENUMERATION -->
+    
+    <xs:simpleType name="ModalitaVenditaEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DETTAGLIO"/>
+            <xs:enumeration value="DETTAGLIO-INGROSSO"/>            
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    
+    <xs:simpleType name="TipoDisponibilitAreaImmobileEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AFFITTO"/>
+            <xs:enumeration value="PRELIMINARE ACQUISTO"/>
+            <xs:enumeration value="PROPRIETA"/>
+            <xs:enumeration value="USO_GRATUITO"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="InQualitaEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TITOLARE"/>
+            <xs:enumeration value="LEGALE RAPPRESENTATE"/>
+            <xs:enumeration value="ALTRO"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="RuoloInImpresa">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DIPENDENTE QUALIFICATO"/>
+            <xs:enumeration value="COADIUTORE FAMILIARE"/>
+            <xs:enumeration value="SOCIO LAVORATORE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    <xs:simpleType name="TipoProcuraEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="procura-delega"/>
+            <xs:enumeration value="agenzia-imprese"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+   
+</xs:schema>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:appauto="http://www.agid.gov.it/SUAP/modulo_apparecchi_automatici"
+    xmlns:suapcommon="http://www.agid.gov.it/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/SUAP/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/SUAP/modulo_apparecchi_automatici"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/SUAP/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/> 
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloApparecchiAutomatici">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="apertura" type="appauto:AperturaType"/>
+            </xs:choice>
+            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="tabellaAllegati" type="appauto:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:element name="settoriMerceologici" type="appauto:SettoriMerceologiciEnum"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+   
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="0"/>
+            <xs:element name="allegatoSemestraleApparecchiAutomatici" type="appauto:AllegatoSemestraleApparecchiAutomaticiType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:complexContent>
+            <xs:extension base="appauto:AllegatiSCIAUnicaBaseType">
+                <xs:sequence>            
+                    <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>            
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="appauto:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>         
+                </xs:sequence>  
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+        
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="appauto:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="appauto:AllegatiSCIAUnicaBaseType"/>
+            <xs:element name="allegatiAltri" type="appauto:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ApparecchiAutomaticiType">
+        <xs:sequence>
+            <xs:element name="numeroTotale" type="xs:integer"/>
+            <xs:element name="numeroAlimenti" type="xs:integer"/>
+            <xs:element name="areaPubblica" type="xs:boolean" default="true"/>
+            <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+            <xs:element name="presso" type="xs:string"/>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoSemestraleApparecchiAutomaticiType">
+        <xs:sequence>
+            <xs:element name="installazioni" type="appauto:ApparecchiAutomaticiType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="disinstallazioni" type="appauto:ApparecchiAutomaticiType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="anno" type="xs:integer"/>
+        <xs:attribute name="primoSemetre" type="xs:boolean" default="true"/>
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+    <xs:simpleType name="SettoriMerceologiciEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ALIMENTARE"/>
+            <xs:enumeration value="NON_ALIMENTARE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>

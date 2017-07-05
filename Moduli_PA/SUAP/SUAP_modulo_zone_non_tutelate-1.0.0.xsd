@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:nontutela="http://www.agid.gov.it/SUAP/modulo_zone_non_tutelate"
+    xmlns:suapcommon="http://www.agid.gov.it/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/SUAP/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/SUAP/modulo_zone_non_tutelate"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/SUAP/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloZoneNonTutelate">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="apertura" type="nontutela:AperturaType"/>
+                <xs:element name="trasferimento" type="nontutela:TrasferimentoBaseType"/>
+                <xs:element name="ampliamento" type="nontutela:AmpliamentoBaseType"/>
+            </xs:choice>
+            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="tabellaAllegati" type="nontutela:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>           
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoPlanimetrieLocali" />
+            <xs:element ref="suapcommon:allegatoNotificaSanitaria" />
+            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/> 
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>           
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="nontutela:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>   
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="nontutela:AllegatiSCIAType"/>            
+            <xs:element name="allegatiSCIACondizionata" type="nontutela:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="nontutela:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AperturaBaseType">
+        <xs:sequence>
+            <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
+            <xs:element name="carattereEsercizio" type="nontutela:CarattereEsercizioType"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence>
+            <xs:element name="tipo" type="nontutela:TipoCarattereEsercizioEnum"/>
+            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:date"/>
+                        <xs:element name="a" type="xs:date"/>    
+                    </xs:sequence>                        
+                </xs:complexType>                
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AperturaType">
+        <xs:complexContent>
+            <xs:extension base="nontutela:AperturaBaseType">
+                <xs:sequence>
+                    <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
+                    <xs:element name="superficieEsercizio" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="TrasferimentoBaseType">
+        <xs:sequence>
+            <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>            
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TrasferimentoType">
+        <xs:complexContent>
+            <xs:extension base="nontutela:TrasferimentoBaseType">
+                <xs:sequence>
+                    <xs:element name="superficieEsercizio" type="xs:integer"/>        
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AmpliamentoBaseType">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AmpliamentoType">
+        <xs:complexContent>
+            <xs:extension base="nontutela:AmpliamentoBaseType">
+                <xs:sequence>
+                    <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+    <xs:simpleType name="TipoCarattereEsercizioEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PERMANENTE"/>
+            <xs:enumeration value="STAGIONALE"/>                    
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>

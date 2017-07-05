@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Library:           ISA Core Vocabularies 1.1 BETA
+                     https://joinup.ec.europa.eu/asset/core_vocabularies/description
+  Module:            xsdrt/CoreVocabularies-AggregateComponents-1.1.xsd
+  Generated on:      2015-02-03 07:46z
+-->
+<xsd:schema xmlns="http://www.w3.org/ns/corevocabulary/AggregateComponents"            
+            xmlns:cvb="http://www.w3.org/ns/corevocabulary/BasicComponents"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.w3.org/ns/corevocabulary/AggregateComponents"
+            elementFormDefault="unqualified"
+            attributeFormDefault="unqualified"
+            version="1.91">
+   <xsd:import namespace="http://www.w3.org/ns/corevocabulary/BasicComponents"
+               schemaLocation="CoreVocabularies-BasicComponents-1.1.xsd"/>
+   <xsd:element name="Agent" type="AgentType"/>
+   <xsd:element name="AgentPlaysRoleCorePublicService" type="CorePublicServiceType"/>
+   <xsd:element name="AgentProvidesCorePublicService" type="CorePublicServiceType"/>
+   <xsd:element name="AgentUsesCorePublicService" type="CorePublicServiceType"/>
+   <xsd:element name="Channel" type="ChannelType"/>
+   <xsd:element name="CoreAddress" type="CoreAddressType"/>
+   <xsd:element name="CoreBusiness" type="CoreBusinessType"/>
+   <xsd:element name="CoreLocation" type="CoreLocationType"/>
+   <xsd:element name="CorePerson" type="CorePersonType"/>
+   <xsd:element name="CorePublicService" type="CorePublicServiceType"/>
+   <xsd:element name="CreatorAgent" type="AgentType"/>
+   <xsd:element name="FormalFramework" type="FormalFrameworkType"/>
+   <xsd:element name="Geometry" type="GeometryType"/>
+   <xsd:element name="ImplementsFormalFramework" type="FormalFrameworkType"/>
+   <xsd:element name="Input" type="InputType"/>
+   <xsd:element name="Jurisdiction" type="JurisdictionType"/>
+   <xsd:element name="LegalEntityCoreAddress" type="CoreAddressType"/>
+   <xsd:element name="LegalEntityCoreLocation" type="CoreLocationType"/>
+   <xsd:element name="LocationCoreAddress" type="CoreAddressType"/>
+   <xsd:element name="LocationGeometry" type="GeometryType"/>
+   <xsd:element name="Output" type="OutputType"/>
+   <xsd:element name="PeriodOfTime" type="PeriodOfTimeType"/>
+   <xsd:element name="PersonCitizenshipJurisdiction" type="JurisdictionType"/>
+   <xsd:element name="PersonCoreAddress" type="CoreAddressType"/>
+   <xsd:element name="PersonCountryOfBirthCoreLocation" type="CoreLocationType"/>
+   <xsd:element name="PersonCountryOfDeathCoreLocation" type="CoreLocationType"/>
+   <xsd:element name="PersonPlaceOfBirthCoreLocation" type="CoreLocationType"/>
+   <xsd:element name="PersonPlaceOfDeathCoreLocation" type="CoreLocationType"/>
+   <xsd:element name="PersonResidencyJurisdiction" type="JurisdictionType"/>
+   <xsd:element name="PublicServiceChannel" type="ChannelType"/>
+   <xsd:element name="PublicServiceFollowsRule" type="RuleType"/>
+   <xsd:element name="PublicServiceInput" type="InputType"/>
+   <xsd:element name="PublicServicePhysicallyAvailableAtCoreLocation"
+                type="CoreLocationType"/>
+   <xsd:element name="PublicServiceProducesOutput" type="OutputType"/>
+   <xsd:element name="PublicServiceSpatialCoreLocation" type="CoreLocationType"/>
+   <xsd:element name="PublicServiceTemporalPeriodOfTime" type="PeriodOfTimeType"/>
+   <xsd:element name="RegisteredCoreAddress" type="CoreAddressType"/>
+   <xsd:element name="RelatedCorePublicService" type="CorePublicServiceType"/>
+   <xsd:element name="RelatedFormalFramework" type="FormalFrameworkType"/>
+   <xsd:element name="RequiresCorePublicService" type="CorePublicServiceType"/>
+   <xsd:element name="Rule" type="RuleType"/>
+   <xsd:complexType name="AgentType">
+      <xsd:sequence>
+         <xsd:element ref="AgentPlaysRoleCorePublicService" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="AgentProvidesCorePublicService" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="AgentUsesCorePublicService" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ChannelType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:ChannelID" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="CoreAddressType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:AddressFullAddress" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressPostOfficeBox" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressThoroughfare" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressLocatorDesignator"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressLocatorName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressAddressArea" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressPostName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressAdminUnitLocationTwo"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressAdminUnitLocationOne"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressPostCode" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:AddressID" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="CoreBusinessType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:LegalEntityLegalID" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:LegalEntityID" minOccurs="1" maxOccurs="1"/>
+         <xsd:element ref="cvb:LegalEntityLegalName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:LegalEntityAlternativeName"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:LegalEntityCompanyTypeCode" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:LegalEntityCompanyStatusCode" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:LegalEntityCompanyActivityCode"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="RegisteredCoreAddress" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="LegalEntityCoreAddress" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="LegalEntityCoreLocation" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="CoreLocationType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:LocationGeographicName" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:LocationGeographicID" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="LocationCoreAddress" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="LocationGeometry" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="CorePersonType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:PersonID" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonFullName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonFamilyName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonGivenName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonPatronymicName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonAlternativeName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonGenderCode" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonBirthName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonBirthDate" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PersonDeathDate" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="PersonCountryOfBirthCoreLocation"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PersonCountryOfDeathCoreLocation"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PersonPlaceOfBirthCoreLocation"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PersonPlaceOfDeathCoreLocation"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PersonCitizenshipJurisdiction"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PersonResidencyJurisdiction"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PersonCoreAddress" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="CorePublicServiceType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:PublicServiceName" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PublicServiceDescription" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PublicServiceTypeCode" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PublicServiceLanguageCode" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:PublicServiceHomepageID" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="PublicServiceChannel" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="PublicServicePhysicallyAvailableAtCoreLocation"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="RequiresCorePublicService" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="RelatedCorePublicService" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="PublicServiceInput" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="PublicServiceProducesOutput"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PublicServiceFollowsRule" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="PublicServiceSpatialCoreLocation"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="PublicServiceTemporalPeriodOfTime"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="FormalFrameworkType">
+      <xsd:sequence>
+         <xsd:element ref="CreatorAgent" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="RelatedFormalFramework" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="GeometryType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:GeometryCoordinateReferenceSystemID"
+                      minOccurs="0"
+                      maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:GeometryTypeCode" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:GeometryCoordinates" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="InputType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:InputName" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:InputDescription" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:InputTypeCode" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="JurisdictionType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:JurisdictionID" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="cvb:JurisdictionName" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="OutputType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:OutputName" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:OutputDescription" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:OutputTypeCode" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="PeriodOfTimeType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:PeriodOfTimeStartDate" minOccurs="0" maxOccurs="1"/>
+         <xsd:element ref="cvb:PeriodOfTimeEndDate" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="RuleType">
+      <xsd:sequence>
+         <xsd:element ref="cvb:RuleID" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="CreatorAgent" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element ref="ImplementsFormalFramework" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:schema>
+<!-- ===== Copyright Notice ===== --><!--
+  Copyright (c) European Union, 2014
+  Licensed under the ISA Open Metadata Licence
+
+  ISA Open Metadata Licence v1.1
+
+  1. Copyright
+
+  The Work (as defined below) is provided under the terms of this ISA 
+  Open Metadata Licence (this Licence, or later versions of this Licence 
+  published by the European Commission). The work is protected by 
+  copyright and/or other applicable law. Any use of the work other than 
+  as authorised under this Licence or copyright law is prohibited.
+
+  By exercising any rights to the work provided here, you accept and
+  agree to be bound by the terms of this Licence. The Owner (as defined
+  below) grants You the rights contained here in consideration of your
+  acceptance of such terms and conditions.
+
+  2. Definitions
+
+  The “Owner” is the European Union represented by the European 
+  Commission, which is the original licensor and/or controls the 
+  copyright and any other intellectual and industrial property rights 
+  related to the Work.
+
+  The “Work” is the information and/or data offered to You under this 
+  Licence, according to the “Copyright Notice”:
+
+      Copyright (c) European Union, YEAR
+      Licensed under the ISA Open Metadata Licence,
+      Original author: CONTRIBUTOR(s)
+
+  "You" means the natural or legal person, or body of persons corporate 
+  or incorporate, acquiring rights under this licence.
+
+  "Contributor" means the natural or legal person whose Work is, by 
+  agreement with the European Commission, provided under this Licence.
+
+  "Use" means doing any act which is restricted by copyright or database 
+  right, whether in the original medium or in any other medium, and 
+  includes without limitation distributing, copying, adapting, modifying 
+  as may be technically necessary to use it in a different mode or 
+  format. It includes "re-Use", meaning the use, communication to the 
+  public and/or distribution of the Works for purposes other than the 
+  initial purpose for which the Work was produced.
+
+  3. Rights
+
+  In accordance to Commission Decision 2011/833/EU, You are herewith 
+  granted a worldwide, royalty-free, perpetual, non-exclusive licence to 
+  Use and re-Use the Works and any modifications thereof for any 
+  commercial and non-commercial purpose allowed by the law and provided 
+  that the following conditions are met:
+    a) Distributions or communication to the public must retain the 
+       above Copyright Notice;
+    b) Distributions must retain the following “No Warranty” disclaimer;
+    c) Where possible and practical, distributions or communication to 
+       the public will provide a link to the Joinup platform;
+    d) Acts directed to mislead others or misrepresent the Work, its 
+       content or source are prohibited;
+    e) You will not use the name of the European Commission and that of 
+       its Contributor(s) to endorse or promote products and services 
+       derived from the Use of the Work without specific prior written 
+       permission.
+
+  4. No Warranty
+
+  EACH WORK IS PROVIDED "AS IS" WITHOUT REPRESENTATIONS, WARRANTIES, 
+  OBLIGATIONS AND LIABILITIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, TO 
+  THE FULL EXTENT PERMITTED BY LAW INCLUDING, BUT NOT LIMITED TO, ANY 
+  IMPLIED WARRANTY OF MERCHANTABILITY, INTEGRATION, SATISFACTORY QUALITY 
+  AND FITNESS FOR A PARTICULAR PURPOSE.
+
+  EXCEPT IN THE CASES OF WILFUL MISCONDUCT OR DAMAGES DIRECTLY CAUSED TO 
+  NATURAL PERSONS, NEITHER EUROPEAN UNION NOR ITS CONTRIBUTOR(S) WILL BE 
+  LIABLE FOR ANY INCIDENTAL, CONSEQUENTIAL, DIRECT OR INDIRECT DAMAGES 
+  INCLUDING BUT NOT LIMITED TO THE LOSS OF DATA, LOST PROFITS, OR ANY 
+  OTHER FINANCIAL LOSS ARISING FROM THE USE OF, OR INABILITY TO USE, 
+  EVEN IF THE EUROPEAN UNION HAS BEEN NOTIFIED OF THE POSSIBILITY OF 
+  SUCH LOSS, DAMAGES, CLAIMS OR COSTS OR FOR ANY CLAIM BY ANY THIRD 
+  PARTY. HOWEVER, THE LICENSOR WILL BE LIABLE UNDER STATUTORY PRODUCT 
+  LIABILITY LAWS AS FAR SUCH LAWS APPLY TO THE WORK.
+
+  5. Governing Law
+
+  This licence is governed by the laws of the jurisdiction in which the 
+  first Contributor listed in the Copyright Notice has its principal 
+  place of business, unless otherwise specified by this Contributor.
+-->

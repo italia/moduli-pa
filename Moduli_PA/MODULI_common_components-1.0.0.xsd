@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:moduli="http://www.agid.gov.it/SUAP/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    
+    targetNamespace="http://www.agid.gov.it/SUAP/moduli_common_components"  
+    
+    elementFormDefault="qualified"
+    
+    version="1.0.0" xml:lang="it">
+    
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <xs:complexType name="DatiCatastaliType" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="aggregate:CoordinateCatastaliType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="DatiCatastaliBaseType">
+        <xs:complexContent>
+            <xs:extension base="moduli:DatiCatastaliType"/>               
+        </xs:complexContent>
+    </xs:complexType>
+    
+</xs:schema>
