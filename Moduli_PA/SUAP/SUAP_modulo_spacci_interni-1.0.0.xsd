@@ -92,7 +92,7 @@
     
     <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="venditaEsclusiva" type="spacci:VenditaEsclusivaEnum"/>
+            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum"/>
         </xs:sequence>        
     </xs:complexType>
     
@@ -130,7 +130,7 @@
            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
            <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
            <xs:element name="variazioniTabelleSpeciali" type="suapcommon:VariazioniTabelleSpecialiType" minOccurs="0"/>
-           <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieBaseType"/>
+           <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType"/>
        </xs:sequence> 
     </xs:complexType>
     
@@ -138,15 +138,6 @@
     
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="VenditaEsclusivaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="dipendenti"/>
-            <xs:enumeration value="militari"/>
-            <xs:enumeration value="soci"/>
-            <xs:enumeration value="accessoScuole"/>
-            <xs:enumeration value="accessoOspedali"/>            
-        </xs:restriction>
-    </xs:simpleType>
-    
+   
 </xs:schema>
 

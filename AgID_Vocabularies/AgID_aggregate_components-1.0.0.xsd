@@ -259,5 +259,12 @@
         </xs:choice>
     </xs:complexType>
     
+    <xs:complexType name="AttoBaseType">
+        <xs:sequence>
+            <xs:element name="numero" type="xs:string"/>
+            <xs:element name="data" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
     
 </xs:schema>

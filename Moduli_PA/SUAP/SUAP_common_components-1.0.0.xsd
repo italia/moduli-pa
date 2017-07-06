@@ -281,6 +281,23 @@
             </xs:choice>      
         </xs:sequence>
     </xs:complexType>
+    
+    
+    <xs:group name="ResponsabileTecnicoRequisitiProfessionaliGroup">
+            <xs:sequence>
+                <xs:element name="acconciatore" type="suapcommon:AcconciatoriResponsabileTecnicoRequisitiProfessionaliType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="estetista" type="suapcommon:EstetistiResponsabileTecnicoRequisitiProfessionaliType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="AcconciatoriResponsabileTecnicoRequisitiProfessionaliType">
+        <!-- TODO: COMPLETE -->
+    </xs:complexType>
+    
+    <xs:complexType name="EstetistiResponsabileTecnicoRequisitiProfessionaliType">
+        <!-- TODO: COMPLETE -->
+    </xs:complexType>
+    
         
     <xs:complexType name="DichiaranteRequisitiProfessionaliType">
         <xs:choice>
@@ -387,6 +404,17 @@
             <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>            
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="AllegatoAcconciatoriType">
+        
+        
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoEstetistiType">
+        
+        
+    </xs:complexType>
+    
     
     <xs:complexType name="fileAttachment">
         <xs:sequence>
@@ -677,6 +705,15 @@
         </xs:annotation>
     </xs:element>
     
+    <xs:element name="allegatoDichiarazioneNotaio" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Dichiarazione da parte del notaio</ccts:Definition>
+                <ccts:UsageRule>Nel caso in cui l’atto alla base del subingresso sia in corso di registrazione</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
     <!-- ENUMERATION -->   
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
@@ -714,6 +751,16 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="procura-delega"/>
             <xs:enumeration value="agenzia-imprese"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="VenditaEsclusivaEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="dipendenti"/>
+            <xs:enumeration value="militari"/>
+            <xs:enumeration value="soci"/>
+            <xs:enumeration value="accessoScuole"/>
+            <xs:enumeration value="accessoOspedali"/>            
         </xs:restriction>
     </xs:simpleType>
     
