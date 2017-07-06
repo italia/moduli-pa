@@ -76,6 +76,13 @@
     </xs:simpleType>
     <!-- WARNING: da verificare con IPA -->
     
+    
+    <xs:simpleType name="NumeroREAType">
+            <xs:restriction base="xs:string">
+                <xs:pattern value="[0-9]{10}"/>
+            </xs:restriction>
+    </xs:simpleType>
+    
     <xs:complexType name="EmptyType"/>
     
     <xs:complexType name="PeriodoDateType">

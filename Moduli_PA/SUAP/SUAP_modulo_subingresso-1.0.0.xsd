@@ -18,7 +18,6 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
    
-    <xs:element name="test" type="subingresso:ModuloSubingressoType"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSubingressoType" >
@@ -98,11 +97,11 @@
     <!-- AGGREGATE SPECIALIZED TYPE -->
     
     <xs:complexType name="DichiarazioniType">
-        <xs:complexContent>
-               <xs:extension base="suapcommon:DichiarazioniType">
-                   <xs:group ref="suapcommon:ResponsabileTecnicoRequisitiProfessionaliGroup"></xs:group>
-               </xs:extension>
-        </xs:complexContent>
+        <xs:choice>
+            <xs:element name="commercioSomministrazione" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="acconciatori" type="suapcommon:DichiarazioniResponsabileTecnicoAcconciatoriType" />
+            <xs:element name="estetisti" type="suapcommon:DichiarazioniResponsabileTecnicoEstetistiType"/>
+        </xs:choice>
     </xs:complexType>
     
     

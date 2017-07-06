@@ -282,23 +282,6 @@
         </xs:sequence>
     </xs:complexType>
     
-    
-    <xs:group name="ResponsabileTecnicoRequisitiProfessionaliGroup">
-            <xs:sequence>
-                <xs:element name="acconciatore" type="suapcommon:AcconciatoriResponsabileTecnicoRequisitiProfessionaliType" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="estetista" type="suapcommon:EstetistiResponsabileTecnicoRequisitiProfessionaliType" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-    </xs:group>
-    
-    <xs:complexType name="AcconciatoriResponsabileTecnicoRequisitiProfessionaliType">
-        <!-- TODO: COMPLETE -->
-    </xs:complexType>
-    
-    <xs:complexType name="EstetistiResponsabileTecnicoRequisitiProfessionaliType">
-        <!-- TODO: COMPLETE -->
-    </xs:complexType>
-    
-        
     <xs:complexType name="DichiaranteRequisitiProfessionaliType">
         <xs:choice>
             <xs:element name="corsoProfessionale">
@@ -362,14 +345,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="riconoscimentoAutoritItaliana">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="numeroAtto" type="xs:string"/>
-                        <xs:element name="dataAtto" type="xs:date"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
             <xs:element name="possessoRequisitoPraticaProfessionale">
                 <xs:complexType>
                     <xs:choice>
@@ -397,6 +373,8 @@
         </xs:choice>        
     </xs:complexType>
     
+   
+  
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
@@ -405,17 +383,125 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AllegatoAcconciatoriType">
-        
-        
+    
+    <xs:complexType name="DichiarazioniResponsabileTecnicoAcconciatoriType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
+                <xs:element name="resposabileTecnicoRequisitiProfessionali" type="suapcommon:ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType" maxOccurs="unbounded"/>
+            </xs:choice>      
+        </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AllegatoEstetistiType">
-        
-        
+    <xs:complexType name="DichiarazioniResponsabileTecnicoEstetistiType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiaranteEstetistiRequisitiProfessionaliType"/>
+                <xs:element name="resposabileTecnicoRequisitiProfessionali" type="suapcommon:ResponsabileTecnicoEstetistiRequisitiProfessionaliType" maxOccurs="unbounded"/>
+            </xs:choice>      
+        </xs:sequence>
     </xs:complexType>
     
     
+   
+    <xs:complexType name="DichiaranteAcconciatoriRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="abilitazioneProfessionale">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rilasciataDa" type="xs:string"/>
+                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="possessoQualificaProfessionale">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rilasciataDa" type="xs:string"/>
+                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
+            <xs:element name="altro" type="suapcommon:altroRequisitoProfessionaleBaseType"/>
+         </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiaranteEstetistiRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="possessoQualificaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
+            <xs:element name="abilitazioneProfessionale">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="titolare" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="socio" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="direzione" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="dipendente">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="impresaStudioMedico" type="xs:string"/>
+                                    <xs:element name="periodoDalAl" type="basic:PeriodoDateType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="frequenzaCorso">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="corsoRegionale" type="aggregate:AttoRilasciatoDaType" />
+                        <xs:element name="corsoScuolaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>  
+            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
+            <xs:element name="altro" type="suapcommon:altroRequisitoProfessionaleBaseType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="altroRequisitoProfessionaleBaseType" abstract="true" >
+        <xs:simpleContent>
+            <xs:extension base="xs:string"></xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliType" abstract="true">
+        <xs:sequence>
+            <xs:element name="responsabileTecnico" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="inQualita">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="dittaIndividuale" type="xs:string"/>
+                        <xs:element name="societa" type="xs:string"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+        
+    <xs:complexType name="ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliType">
+                <xs:sequence>
+                    <xs:element name="requisiti" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ResponsabileTecnicoEstetistiRequisitiProfessionaliType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliType">
+                <xs:sequence>
+                    <xs:element name="requisiti" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+   
+       
     <xs:complexType name="fileAttachment">
         <xs:sequence>
             <xs:element name="file" type="xs:base64Binary"/>
