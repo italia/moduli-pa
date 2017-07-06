@@ -19,7 +19,85 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloSomministrazioneTemporaneaType"></xs:complexType>
+    <xs:complexType name="ModuloSomministrazioneTemporaneaType">
+        <xs:sequence>
+            <xs:element name="denominazioneManifestazione" type="xs:string"/>
+            <xs:element name="manifestazione">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tipologia" type="temporanea:TipologiaManifestazioneEnum"/>
+                        <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+                    </xs:sequence>                   
+                </xs:complexType>                 
+            </xs:element>
+            <xs:element name="modaitaSomministrazione" type="temporanea:ModalitaSomministrazioneEnum"/>
+            <xs:element name="periodoSomministrazione">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:date"/>
+                        <xs:element name="a" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="tabellaAllegati" type="temporanea:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
     
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoNotificaSanitaria" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType">                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="temporanea:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatSCIA" type="temporanea:AllegatiSCIAType"/>                        
+            <xs:element name="allegatAltri" type="temporanea:AllegatiAltriType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+    <xs:simpleType name="TipologiaManifestazioneEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SAGRA"/>
+            <xs:enumeration value="FIERA"/>                    
+            <xs:enumeration value="RELIGIOSO_TRADIZIONALE"/>
+            <xs:enumeration value="EVENTO_LOCALE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ModalitaSomministrazioneEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="APERTO_AREA_PRIVATA"/>
+            <xs:enumeration value="APERTO_AREA_PUBBLICA"/>
+            <xs:enumeration value="EDIFICIO_AREA_PRIVATA"/>
+            <xs:enumeration value="EDIFICIO_AREA_PUBBLICA"/>
+        </xs:restriction>
+    </xs:simpleType>
     
 </xs:schema>
