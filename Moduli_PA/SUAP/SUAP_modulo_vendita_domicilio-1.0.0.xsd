@@ -20,7 +20,7 @@
     
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloVenditaVicinato">
+    <xs:complexType name="ModuloVenditaVicinatoType">
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>

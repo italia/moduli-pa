@@ -18,7 +18,6 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-        
     <xs:complexType name="SchedaAnagraficaSUAPType">
         <xs:sequence>
             <xs:element name="datiDichiarante" type="suapcommon:DichiaranteType"/>
@@ -57,9 +56,7 @@
             <xs:element name="contatto" type="aggregate:ContattiFoniaType"/>
         </xs:sequence>    
     </xs:complexType>
-    
-    
-    
+       
     <xs:complexType name="IntegrazioneAnagraficaType">
         <xs:sequence>
             <xs:element name="indirizzoAttivita" type="suapcommon:IndirizzoContattiFoniaAttivitaType" />
@@ -67,8 +64,7 @@
         </xs:sequence>        
     </xs:complexType>
   
-    <xs:complexType name="InCentroCommercialeBaseType" abstract="true">
-        
+    <xs:complexType name="InCentroCommercialeBaseType" abstract="true">   
     </xs:complexType>
     
     <xs:complexType name="InCentroCommercialeType">
@@ -124,8 +120,7 @@
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="SettoriMerceologiciBaseType" abstract="true">
-        
+    <xs:complexType name="SettoriMerceologiciBaseType" abstract="true">   
     </xs:complexType>
     
     <xs:complexType name="SettoriMerceologiciType" abstract="true">
@@ -286,8 +281,7 @@
             </xs:choice>      
         </xs:sequence>
     </xs:complexType>
-    
-    
+        
     <xs:complexType name="DichiaranteRequisitiProfessionaliType">
         <xs:choice>
             <xs:element name="corsoProfessionale">
@@ -426,8 +420,7 @@
     <!-- BASIC COMPONENTS TYPE -->
     
     
-    <!-- ELEMENTI ALLEGATI --> 
-    
+    <!-- ELEMENTI ALLEGATI -->     
     <xs:element name="allegatoProcuraDelega" type="suapcommon:fileAttachment"  >
         <xs:annotation>
             <xs:documentation xml:lang="it">
@@ -684,17 +677,14 @@
         </xs:annotation>
     </xs:element>
     
-    <!-- ENUMERATION -->
-    
+    <!-- ENUMERATION -->   
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="DETTAGLIO"/>
             <xs:enumeration value="DETTAGLIO-INGROSSO"/>            
         </xs:restriction>
     </xs:simpleType>
-    
-    
-    
+        
     <xs:simpleType name="TipoDisponibilitAreaImmobileEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="AFFITTO"/>
@@ -719,8 +709,7 @@
             <xs:enumeration value="SOCIO LAVORATORE"/>
         </xs:restriction>
     </xs:simpleType>
-    
-    
+       
     <xs:simpleType name="TipoProcuraEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="procura-delega"/>
@@ -728,5 +717,4 @@
         </xs:restriction>
     </xs:simpleType>
     
-   
 </xs:schema>

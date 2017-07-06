@@ -19,7 +19,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>   
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloSpacciInterni">
+    <xs:complexType name="ModuloSpacciInterniType">
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>

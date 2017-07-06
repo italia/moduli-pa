@@ -18,8 +18,6 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
    
-    
-   
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloCorrispondenzaBaseType" abstract="true">
         <xs:sequence>
@@ -45,7 +43,6 @@
             <xs:extension base="corrispondenza:ModuloCorrispondenzaBaseType"/>
         </xs:complexContent>
     </xs:complexType>
-    
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
@@ -101,13 +98,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
-   
-    
-    <!-- BASIC COMPONENTS TYPE -->
-    
-    
+        
+    <!-- BASIC COMPONENTS TYPE -->  
     <xs:complexType name="TipoEsercizioType" >
         <xs:sequence>
             <xs:element name="venditaPerCorrispondenza" minOccurs="0" type="basic:EmptyType"/>
@@ -117,8 +109,7 @@
         </xs:sequence>        
     </xs:complexType>
     <!-- esempio implementazione risposte multiple -->
-    
-    
+        
     <xs:complexType name="SettoriMerceologiciType">
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciType"></xs:extension>
@@ -126,9 +117,5 @@
     </xs:complexType>
     
     <!-- ENUMERATION -->
-    
-    
-    
-    
     
 </xs:schema>

@@ -19,7 +19,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloMediaGrandeStruttura">
+    <xs:complexType name="ModuloMediaGrandeStrutturaType">
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -78,7 +78,6 @@
         </xs:sequence>
     </xs:complexType>
     
-
     <xs:complexType name="AllegatiSCIA_SCIAUnicaType" abstract="true">
         <xs:complexContent>
             <xs:extension base="mediagrande:AllegatiSCIA_SCIAUnicaBaseType">
@@ -89,8 +88,6 @@
         </xs:complexContent>
     </xs:complexType>
     
-    
-  
     <xs:complexType name="AllegatiAutorizzazioneBaseType" abstract="true">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProdottiOrigineAnimale" minOccurs="0"/>
@@ -127,7 +124,6 @@
         </xs:sequence>
     </xs:complexType>
     
-  
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/>
@@ -191,6 +187,5 @@
             <xs:enumeration value="STAGIONALE"/>                    
         </xs:restriction>
     </xs:simpleType>
-    
     
 </xs:schema>

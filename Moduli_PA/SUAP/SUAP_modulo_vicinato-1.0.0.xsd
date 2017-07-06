@@ -42,14 +42,12 @@
             </xs:element> 
         </xs:sequence>
     </xs:complexType>   
-    
-    
+      
     <xs:complexType name="ModuloVicinatoBaseType">
         <xs:complexContent>
             <xs:extension base="vicinato:ModuloVicinatoType"/>
         </xs:complexContent>
     </xs:complexType>
-    
     
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
@@ -148,11 +146,9 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-       
-    
+         
     <!-- BASIC COMPONENTS TYPE -->
-    
-    
+       
     <!-- ENUMERATION -->
     <xs:simpleType name="TipoEsercizioEnum">
         <xs:restriction base="xs:string">
@@ -165,6 +161,7 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="PERMANENTE"/>
             <xs:enumeration value="STAGIONALE"/>
+          
             <xs:enumeration value="TEMPORANEO"/>            
         </xs:restriction>
     </xs:simpleType>
