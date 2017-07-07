@@ -29,7 +29,7 @@
     <xs:complexType name="DichiaranteType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="in-qualita" type="suapcommon:InQualitaEnum" use="required"/>
+                <xs:attribute name="inQualita" type="suapcommon:InQualitaEnum" use="required"/>
                 <xs:attribute name="altro" type="xs:string"/>                
             </xs:extension>
         </xs:complexContent>
@@ -38,8 +38,8 @@
     <xs:complexType name="ProcuratoreType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="tipo-procura" type="suapcommon:TipoProcuraEnum" use="required"/>
-                <xs:attribute name="denominazione-agenzia-imprese" type="xs:string" use="required"/>
+                <xs:attribute name="tipoProcura" type="suapcommon:TipoProcuraEnum" use="required"/>
+                <xs:attribute name="denominazioneAgenziaImprese" type="xs:string" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -804,14 +804,14 @@
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="DETTAGLIO"/>
-            <xs:enumeration value="DETTAGLIO-INGROSSO"/>            
+            <xs:enumeration value="DETTAGLIO_INGROSSO"/>            
         </xs:restriction>
     </xs:simpleType>
         
     <xs:simpleType name="TipoDisponibilitAreaImmobileEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="AFFITTO"/>
-            <xs:enumeration value="PRELIMINARE ACQUISTO"/>
+            <xs:enumeration value="PRELIMINARE_ACQUISTO"/>
             <xs:enumeration value="PROPRIETA"/>
             <xs:enumeration value="USO_GRATUITO"/>
         </xs:restriction>
@@ -820,33 +820,33 @@
     <xs:simpleType name="InQualitaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="TITOLARE"/>
-            <xs:enumeration value="LEGALE RAPPRESENTATE"/>
+            <xs:enumeration value="LEGALE_RAPPRESENTATE"/>
             <xs:enumeration value="ALTRO"/>
         </xs:restriction>
     </xs:simpleType>
     
     <xs:simpleType name="RuoloInImpresa">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="DIPENDENTE QUALIFICATO"/>
-            <xs:enumeration value="COADIUTORE FAMILIARE"/>
-            <xs:enumeration value="SOCIO LAVORATORE"/>
+            <xs:enumeration value="DIPENDENTE_QUALIFICATO"/>
+            <xs:enumeration value="COADIUTORE_FAMILIARE"/>
+            <xs:enumeration value="SOCIO_LAVORATORE"/>
         </xs:restriction>
     </xs:simpleType>
        
     <xs:simpleType name="TipoProcuraEnum">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="procura-delega"/>
-            <xs:enumeration value="agenzia-imprese"/>
+            <xs:enumeration value="PROCURA_DELEGA"/>
+            <xs:enumeration value="AGENZIA_IMPRESE"/>
         </xs:restriction>
     </xs:simpleType>
     
     <xs:simpleType name="VenditaEsclusivaEnum">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="dipendenti"/>
-            <xs:enumeration value="militari"/>
-            <xs:enumeration value="soci"/>
-            <xs:enumeration value="accessoScuole"/>
-            <xs:enumeration value="accessoOspedali"/>            
+            <xs:enumeration value="DIPENDENTI"/>
+            <xs:enumeration value="MILITARI"/>
+            <xs:enumeration value="SOCI"/>
+            <xs:enumeration value="ACCESSO_SCUOLE"/>
+            <xs:enumeration value="ACCESSO_OSPEDALI"/>            
         </xs:restriction>
     </xs:simpleType>
     
