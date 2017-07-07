@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:acconcestet="http://www.agid.gov.it/SUAP/modulo_acconciatori_estetisti"
+    xmlns:suapcommon="http://www.agid.gov.it/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/SUAP/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/SUAP/modulo_acconciatori_estetisti"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/SUAP/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloAcconciatoriEstetistiType">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="apertura" type="acconcestet:AperturaType"/>
+                <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
+            </xs:choice>
+            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
+            <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
+                        <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO ACCONCIATORI/ESTETISTI  INCLUSO IN DICHIARAZIONI -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>  
+    </xs:complexType>
+    
+    <xs:complexType name="AltraDocumentazioneRegionale" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoAltraDocumentazioneRegionale" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence> 
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoPlanimetrieLocali"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoRelazioneLocali"  minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+   
+    <xs:complexType name="AllegatiSCIAUnicaBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:complexType name="AllegatiSCIACondizionataBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/> 
+            <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:complexType name="AllegatiAltriType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" />                                                                                                                                      
+        </xs:sequence>  
+    </xs:complexType>  
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegati" type="acconcestet:AllegatiBaseType"/>
+            <xs:element name="allegatiSCIA_SCIAUnica" type="acconcestet:AllegatiSCIAUnicaBaseType"/>
+            <xs:element name="allegatiAutorizzazione" type="acconcestet:AllegatiSCIACondizionataBaseType"/>
+            <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:group ref="acconcestet:attivitaGroup"/>
+            <xs:element name="superficeComplessiva" type="xs:integer"/>
+            <xs:element name="superficeAdibitaAttivita" type="xs:integer"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
+            <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaType"/>
+       </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TrasferimentoType">
+        <xs:sequence>
+            <xs:group ref="acconcestet:attivitaGroup"/>
+            <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    
+
+    <!-- AGGREGATE SPECIALIZED TYPE -->
+    
+    <xs:group name="attivitaGroup">
+        <xs:sequence>
+            <xs:element name="acconciatore" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="estetista" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="DichiarazioniType">
+        <xs:choice>
+            <xs:element name="acconciatori" type="suapcommon:DichiarazioniResponsabileTecnicoAcconciatoriType" />
+            <xs:element name="estetisti" type="suapcommon:DichiarazioniResponsabileTecnicoEstetistiType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="AttivitaEsercitaType">
+        <xs:choice>
+            <xs:element name="unicaPrevalente" type="basic:EmptyType"/>
+            <xs:element name="svoltaCongiutamente">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attivita" type="xs:string"/>
+                        <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType" >
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType"/>
+                <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType"/>
+            </xs:choice>
+            <xs:element name="altraNormativaRegionale" type="xs:string" maxOccurs="unbounded"/>  
+        </xs:sequence>        
+    </xs:complexType>
+    
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+    <xs:simpleType name="TipoEsercizioEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="acconciatore"/>
+            <xs:enumeration value="estetista"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+  
+    
+</xs:schema>

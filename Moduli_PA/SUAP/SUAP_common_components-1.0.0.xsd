@@ -778,6 +778,26 @@
         </xs:annotation>
     </xs:element>
     
+    <xs:element name="allegatoRelazioneLocali" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Relazione descrittiva delle caratteristiche dei locali medesimi, della loro localizzazione e attrezzatura utilizzata per il servizio (*)</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria
+                    (Eccettuato il caso di affitto di poltrona) (*)
+                </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoScaricoAcqueAUA" type="suapcommon:fileAttachment" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per il rilascio dell’Autorizzazione Unica Ambientale (AUA) per scarico delle acque</ccts:Definition>
+                <ccts:UsageRule>In caso di attività di acconciatore con consumo idrico giornaliero superiore a 1 m3 al momento di massima attività</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
     <xs:element name="allegatoImpattoAcustico" type="suapcommon:fileAttachment" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
