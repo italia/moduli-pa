@@ -504,12 +504,16 @@
   
    
    <xs:complexType name="NotificaSanitariaType">
-       <xs:choice>
-           <xs:element name="apertura" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaAperturaType"/>
-           <xs:element name="subingresso" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaSubingressoType"/>
-           <xs:element name="modificaAttivita" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariModificaAttivitaType"/>
-           <xs:element name="cessazioneSospensione" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaCessazioneSospensioneType"/>
-       </xs:choice>
+       <xs:sequence>
+           <xs:choice>
+               <xs:element name="apertura" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaAperturaType"/>
+               <xs:element name="subingresso" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaSubingressoType"/>
+               <xs:element name="modificaAttivita" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariModificaAttivitaType"/>
+               <xs:element name="cessazioneSospensione" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaCessazioneSospensioneType"/>
+           </xs:choice>
+           <xs:element name="note" type="xs:string" minOccurs="0"/>
+       </xs:sequence>
+      
    </xs:complexType>
     
     <xs:complexType name="NotificaSanitariaRelativaAType" abstract="true">
@@ -551,6 +555,12 @@
             <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
                 <xs:sequence>
                     <xs:element name="soggettoDitta" type="xs:string"/>
+                    <xs:choice>
+                        <xs:element name="codiceFiscale" type="basic:CodiceFiscaleType"/>
+                        <xs:element name="pIVA" type="aggregate:PIVA"/>
+                    </xs:choice>
+                    <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
+                    <xs:element name="inizioAttivita" type="suapcommon:NotificaSanitariaDecorrenzaType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -559,7 +569,10 @@
     <xs:complexType name="NotificaSanitariModificaAttivitaType">
         <xs:complexContent>
             <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
-                
+                <xs:sequence>
+                    <xs:element name="tipologiaAttivita" type="suapcommon:NotificaSanitariaTipologiaAttivitaType"/>
+                    <xs:element name="decorrenzaModifiche" type="suapcommon:NotificaSanitariaDecorrenzaType"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -568,7 +581,14 @@
     <xs:complexType name="NotificaSanitariaCessazioneSospensioneType">
         <xs:complexContent>
             <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
-                
+                <xs:sequence>
+                    <xs:element name="protocolloAttivita" type="aggregate:ProtocolloStandardType"/>
+                    <xs:element name="sede" type="aggregate:IndirizzoType"/>
+                    <xs:choice>
+                        <xs:element name="dataCessazione" type="xs:date"/>
+                        <xs:element name="periodoSospensione" type="basic:PeriodoDateType"/>
+                    </xs:choice>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -653,7 +673,6 @@
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria in caso di esercizio alimentare</ccts:UsageRule>
             </xs:documentation>
-            
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria in caso di media o grande struttura di vendita alimentare</ccts:UsageRule>
@@ -680,6 +699,13 @@
                 <ccts:UsageRule>Nel caso di subingresso in attività di vendita e/o somministrazione di prodotti alimentari</ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
+        
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="notificaSanitaria" type="suapcommon:NotificaSanitariaType"/>
+                <xs:element name="file" type="suapcommon:fileAttachment"/>
+            </xs:sequence>
+        </xs:complexType>
     </xs:element>
     
     <xs:element name="allegatoVenditaProdottiAlimentazioneAnimale" type="suapcommon:fileAttachment" >
