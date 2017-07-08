@@ -22,7 +22,7 @@
         <xs:sequence>
             <xs:element name="cognome" type="isacvbc:PersonFamilyNameType"/>
             <xs:element name="nome" type="isacvbc:PersonGivenNameType"/>
-            <xs:element name="codice-fiscale" type="basic:CodiceFiscaleType"/>
+            <xs:element name="codiceFiscale" type="basic:CodiceFiscaleType"/>
         </xs:sequence>
     </xs:group>    
     

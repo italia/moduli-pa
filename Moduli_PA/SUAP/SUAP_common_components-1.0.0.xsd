@@ -501,7 +501,97 @@
     </xs:complexType>
     
    
-       
+  
+   
+   <xs:complexType name="NotificaSanitariaType">
+       <xs:choice>
+           <xs:element name="apertura" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaAperturaType"/>
+           <xs:element name="subingresso" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaSubingressoType"/>
+           <xs:element name="modificaAttivita" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariModificaAttivitaType"/>
+           <xs:element name="cessazioneSospensione" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaCessazioneSospensioneType"/>
+       </xs:choice>
+   </xs:complexType>
+    
+    <xs:complexType name="NotificaSanitariaRelativaAType" abstract="true">
+        <xs:sequence>
+            <xs:element name="dichiarante">
+                <xs:complexType>
+                    <xs:group ref="aggregate:PersonaBaseGroup"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType> 
+    
+   <xs:complexType name="NotificaSanitariaAperturaType">
+      <xs:complexContent>
+          <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+             <xs:sequence>
+                 <xs:element name="sedeFissa" type="xs:boolean" />
+                 <xs:element name="sede" type="aggregate:IndirizzoType"/>
+                 <xs:element name="contatti" >
+                     <xs:complexType>
+                         <xs:complexContent>
+                             <xs:extension base="aggregate:ContattiFoniaType">
+                                 <xs:sequence>
+                                     <xs:element name="altroDomicilioElettronico" type="xs:string"/>
+                                 </xs:sequence>
+                             </xs:extension>
+                         </xs:complexContent>
+                     </xs:complexType>
+                 </xs:element>
+                 <xs:element name="tipologiaAttivita" type="suapcommon:NotificaSanitariaTipologiaAttivitaType"/>
+                 <xs:element name="inizioAttivita" type="suapcommon:NotificaSanitariaDecorrenzaType"/>
+             </xs:sequence>
+          </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="NotificaSanitariaSubingressoType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+                <xs:sequence>
+                    <xs:element name="soggettoDitta" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="NotificaSanitariModificaAttivitaType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="NotificaSanitariaCessazioneSospensioneType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+   
+    <xs:complexType name="NotificaSanitariaDecorrenzaType">
+        <xs:choice>
+            <xs:element name="contestuale" type="basic:EmptyType"/>
+            <xs:element name="decorrenza" >
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="dal" type="xs:date"/>
+                        <xs:element name="termine" type="xs:date" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    
+     
+    <xs:complexType name="NotificaSanitariaTipologiaAttivitaType">
+        <!-- TODO implements -->
+    </xs:complexType>
+   
     <xs:complexType name="fileAttachment">
         <xs:sequence>
             <xs:element name="file" type="xs:base64Binary"/>
