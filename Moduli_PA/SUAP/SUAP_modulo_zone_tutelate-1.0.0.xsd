@@ -164,6 +164,5 @@
             <xs:enumeration value="STAGIONALE"/>                    
         </xs:restriction>
     </xs:simpleType>
-    
-    
+      
 </xs:schema>

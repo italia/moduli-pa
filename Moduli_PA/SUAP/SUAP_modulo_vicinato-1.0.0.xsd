@@ -165,9 +165,5 @@
             <xs:enumeration value="TEMPORANEO"/>            
         </xs:restriction>
     </xs:simpleType>
-    
-   
-    
-    
-    
+
 </xs:schema>

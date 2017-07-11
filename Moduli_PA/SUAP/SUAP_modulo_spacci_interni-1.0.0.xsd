@@ -62,8 +62,7 @@
             <xs:element ref="suapcommon:allegatoVenditaFitosanitari" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoVenditaPreziosi" minOccurs="0"/>
         </xs:sequence>
-    </xs:complexType>
-    
+    </xs:complexType>   
     
     <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
@@ -104,10 +103,7 @@
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-    
-  
-    
+    </xs:complexType>  
     
     <xs:complexType name="AperturaType">
         <xs:sequence>

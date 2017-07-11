@@ -103,17 +103,14 @@
             <xs:element name="estetisti" type="suapcommon:DichiarazioniResponsabileTecnicoEstetistiType"/>
         </xs:choice>
     </xs:complexType>
-    
-    
+       
     <!-- BASIC COMPONENTS TYPE -->
         
     <xs:complexType name="AltreDichiarazioniType" >
         <xs:sequence>
             <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum"/>
         </xs:sequence>        
-    </xs:complexType>
-        
-        
+    </xs:complexType>     
         
     <!-- ENUMERATION -->
     <xs:simpleType name="MotivazioneSubingressoEnum">
