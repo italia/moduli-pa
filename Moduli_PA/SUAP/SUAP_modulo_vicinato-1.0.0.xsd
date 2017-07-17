@@ -21,7 +21,7 @@
      
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloVicinatoType" abstract="true">
+    <xs:complexType name="ModuloVicinatoBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -43,9 +43,9 @@
         </xs:sequence>
     </xs:complexType>   
       
-    <xs:complexType name="ModuloVicinatoBaseType">
+    <xs:complexType name="ModuloVicinatoType">
         <xs:complexContent>
-            <xs:extension base="vicinato:ModuloVicinatoType"/>
+            <xs:extension base="vicinato:ModuloVicinatoBaseType"/>
         </xs:complexContent>
     </xs:complexType>
     

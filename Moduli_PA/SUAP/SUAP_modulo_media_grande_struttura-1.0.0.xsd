@@ -19,7 +19,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloMediaGrandeStrutturaType">
+    <xs:complexType name="ModuloMediaGrandeStrutturaBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -39,6 +39,12 @@
                 </xs:complexType>
             </xs:element> 
         </xs:sequence>  
+    </xs:complexType>
+    
+    <xs:complexType name="ModuloMediaGrandeStrutturaType">
+        <xs:complexContent>
+            <xs:extension base="mediagrande:ModuloMediaGrandeStrutturaBaseType"/>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="AltraDocumentazioneRegionale" abstract="true">

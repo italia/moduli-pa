@@ -784,7 +784,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoNotificaSanitaria" >
+    <xs:element name="allegatoNotificaSanitaria"  >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE 852/2004)</ccts:Definition>
