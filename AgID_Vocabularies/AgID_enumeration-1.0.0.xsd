@@ -1026,12 +1026,12 @@
  
     <xs:simpleType name="TipoDocumentoSoggiornoEnum">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="permesso-soggiorno"/>
-            <xs:enumeration value="documento-identita"/>
-            <xs:enumeration value="passaporto"/>
-            <xs:enumeration value="dichiarazione-presenza"/>            
-            <xs:enumeration value="attestazione-regolarità-soggiorno-UE"/>
-            <xs:enumeration value="altro"/>
+            <xs:enumeration value="PERMESSO_SOGGIORNO"/>
+            <xs:enumeration value="DOCUMENTO_IDENTITA"/>
+            <xs:enumeration value="PASSAPORTO"/>
+            <xs:enumeration value="DICHIRAZIONE_PRESENZA"/>            
+            <xs:enumeration value="ATTESTAZIONE_REGOLARITA_SOGGIORNO_UE"/>
+            <xs:enumeration value="ALTRO"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1114,16 +1114,16 @@
     
     <xs:simpleType name="IscrizioneRegistroImpreseEnum">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="iscritto"/>
-            <xs:enumeration value="non-iscritto"/>
-            <xs:enumeration value="non-necessario"/>
+            <xs:enumeration value="ISCRITTO"/>
+            <xs:enumeration value="NON_ISCRITTO"/>
+            <xs:enumeration value="NON_NECESSARIO"/>
         </xs:restriction>
     </xs:simpleType>
       
     <xs:simpleType name="TipoCoordinateCatastaliEnum">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="fabbricati"/>
-            <xs:enumeration value="terreni"/>            
+            <xs:enumeration value="FABBRICATI"/>
+            <xs:enumeration value="TERRENI"/>            
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
