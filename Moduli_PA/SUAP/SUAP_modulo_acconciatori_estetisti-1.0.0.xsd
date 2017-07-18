@@ -27,7 +27,7 @@
                 <xs:element name="apertura" type="acconcestet:AperturaType"/>
                 <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
             </xs:choice>
-            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
             <xs:element name="Allegati">
