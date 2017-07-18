@@ -16,15 +16,15 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
-    <xs:complexType name="DatiCatastaliType" abstract="true">
+    <xs:complexType name="DatiCatastaliBaseType" abstract="true">
         <xs:complexContent>
             <xs:extension base="aggregate:CoordinateCatastaliType"/>
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="DatiCatastaliBaseType">
+    <xs:complexType name="DatiCatastaliType">
         <xs:complexContent>
-            <xs:extension base="moduli:DatiCatastaliType"/>               
+            <xs:extension base="moduli:DatiCatastaliBaseType"/>               
         </xs:complexContent>
     </xs:complexType>
     
