@@ -72,7 +72,7 @@
         <xs:complexContent>
             <xs:extension base="aggregate:CoordinateCatastaliBaseType">
                 <xs:sequence> 
-                    <xs:element name="tipo" type="enum:TipoCoordinateCatastaliEnum" fixed="fabbricati"/>
+                    <xs:element name="tipo" type="enum:TipoCoordinateCatastaliEnum" fixed="FABBRICATI"/>
                     <xs:element name="sezioneAmministrativa" type="xs:string" minOccurs="0"/>
                     <xs:element name="sezioneUrbana" type="xs:string" minOccurs="0"/>
                 </xs:sequence>
@@ -84,7 +84,7 @@
         <xs:complexContent>
             <xs:extension base="aggregate:CoordinateCatastaliBaseType">
                 <xs:sequence> 
-                    <xs:element name="tipo" type="enum:TipoCoordinateCatastaliEnum" fixed="terreni"/>
+                    <xs:element name="tipo" type="enum:TipoCoordinateCatastaliEnum" fixed="TERRENI"/>
                     <xs:element name="sezioneCensuaria" type="xs:string" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
@@ -96,7 +96,7 @@
             <xs:element name="catastoFabbricati" type="aggregate:CoordinateCatastaliFabbricatiType"/>
             <xs:element name="catastoTerreni" type="aggregate:CoordinateCatastaliTerreniType"/>
         </xs:choice>
-        <xs:attribute name="comune-catastale" type="basic:CodiceComuneCatastaleType"/>            
+        <xs:attribute name="comuneCatastale" type="basic:CodiceComuneCatastaleType"/>            
     </xs:complexType>
     
     <xs:complexType name="ProtocolloStandardType">
@@ -161,7 +161,7 @@
             <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
                 <xs:sequence>
                     <xs:element name="cittadinanza" type="enum:NazioniAlpha3Enum" default="ITA" minOccurs="0"/>
-                    <xs:element name="documento-soggiorno" type="aggregate:DocumentoSoggiornoType" minOccurs="0"/>
+                    <xs:element name="documentoSoggiorno" type="aggregate:DocumentoSoggiornoType" minOccurs="0"/>
                     <xs:element name="residente" type="aggregate:IndirizzoType"/>
                     <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
                 </xs:sequence>    
@@ -173,9 +173,9 @@
         <xs:sequence>
             <xs:element name="tipo" type="enum:TipoDocumentoSoggiornoEnum"/>
             <xs:element name="estremi" type="xs:string"/>
-            <xs:element name="rilasciato-da" type="xs:string"/>
-            <xs:element name="data-rilascio" type="xs:date"/> 
-            <xs:element name="data-scadenza" type="xs:date" minOccurs="0"/>
+            <xs:element name="rilasciatoDa" type="xs:string"/>
+            <xs:element name="dataRilascio" type="xs:date"/> 
+            <xs:element name="dataScadenza" type="xs:date" minOccurs="0"/>
         </xs:sequence>
         
     </xs:complexType>
@@ -198,23 +198,17 @@
     <xs:complexType name="RegioneType">
         <xs:simpleContent>
             <xs:extension base="isacvbc:AddressAdminUnitLocationTwoType">
-                <xs:attribute name="codice-istat" type="basic:CodiceIstatRegioneType" use="required"/>
+                <xs:attribute name="codiceIstat" type="basic:CodiceIstatRegioneType" use="required"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
     
-    <xs:complexType name="PIVA">
-        <xs:simpleContent>
-            <xs:restriction base="isacvbc:LegalEntityIDType">
-                <xs:pattern value="[0-9]{11}"/>
-            </xs:restriction>
-        </xs:simpleContent>
-    </xs:complexType>
+    
     
     <xs:complexType name="ProvinciaType">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="codice-istat" type="basic:CodiceIstatProvinciaType" use="required"/>
+                <xs:attribute name="codiceIstat" type="basic:CodiceIstatProvinciaType" use="required"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -222,21 +216,21 @@
     <xs:complexType name="ComuneType">
         <xs:simpleContent>
             <xs:extension base="isacvbc:AddressPostNameType">
-                <xs:attribute name="codice-istat" type="basic:CodiceIstatComuneType" use="required"/>
+                <xs:attribute name="codiceIstat" type="basic:CodiceIstatComuneType" use="required"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
     
     <xs:complexType name="ImpresaAnagraficaType">
         <xs:sequence>
-            <xs:element name="ragione-sociale" type="isacvbc:LegalEntityLegalNameType"/>
-            <xs:element name="partita-iva" type="aggregate:PIVA"/>
-            <xs:element name="forma-giuridica" type="enum:FormaGiuridicaEnum"/> 
-            <xs:element name="iscrizione-registro-imprese" type="enum:IscrizioneRegistroImpreseEnum"/>
+            <xs:element name="ragioneSociale" type="isacvbc:LegalEntityLegalNameType"/>
+            <xs:element name="pIVA" type="basic:PIVA"/>
+            <xs:element name="formaGiuridica" type="enum:FormaGiuridicaEnum"/> 
+            <xs:element name="iscrizioneRegistroImprese" type="enum:IscrizioneRegistroImpreseEnum"/>
             <xs:element name="CCIAA" type="aggregate:CCIAAType" minOccurs="0"/>
-            <xs:element name="sede-legale" type="aggregate:IndirizzoType"/>
+            <xs:element name="sedeLegale" type="aggregate:IndirizzoType"/>
             <xs:element name="contatti" type="aggregate:ContattiType"/>
-            <xs:element name="domicilio-elettronico-comunicazioni" type="basic:EMailIndirizzoType" minOccurs="0"/>
+            <xs:element name="domicilioElettronicoComunicazioni" type="basic:EMailIndirizzoType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     

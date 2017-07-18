@@ -557,7 +557,7 @@
                     <xs:element name="soggettoDitta" type="xs:string"/>
                     <xs:choice>
                         <xs:element name="codiceFiscale" type="basic:CodiceFiscaleType"/>
-                        <xs:element name="pIVA" type="aggregate:PIVA"/>
+                        <xs:element name="pIVA" type="basic:PIVA"/>
                     </xs:choice>
                     <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
                     <xs:element name="inizioAttivita" type="suapcommon:NotificaSanitariaDecorrenzaType"/>

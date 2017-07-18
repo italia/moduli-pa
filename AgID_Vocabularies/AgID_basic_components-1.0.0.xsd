@@ -48,6 +48,14 @@
         </xs:restriction>
     </xs:simpleType>
     
+    <xs:complexType name="PIVA">
+        <xs:simpleContent>
+            <xs:restriction base="isacvbc:LegalEntityIDType">
+                <xs:pattern value="[0-9]{11}"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>
+    
     <xs:complexType name="CAPType">
         <xs:simpleContent>
             <xs:restriction base="isacvbc:AddressPostCodeType">
