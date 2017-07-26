@@ -18,6 +18,9 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/> 
     
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloApparecchiAutomatici" type="appauto:ModuloApparecchiAutomaticiType"/>
+    
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloApparecchiAutomaticiType">
         <xs:sequence>
@@ -27,7 +30,7 @@
                 <xs:element name="apertura" type="appauto:AperturaType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="appauto:AltreDichiarazioniBaseType" />
             <xs:element name="tabellaAllegati" type="appauto:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -38,6 +41,21 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="appauto:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="AperturaType">
@@ -70,27 +88,17 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+    <xs:complexType name="AllegatiAltriType">       
         <xs:sequence>
-            
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="appauto:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>         
-                </xs:sequence>  
-            </xs:extension>
-        </xs:complexContent>        
+            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>         
+        </xs:sequence>  
     </xs:complexType>
         
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIA" type="appauto:AllegatiSCIAType"/>
             <xs:element name="allegatiSCIAUnica" type="appauto:AllegatiSCIAUnicaBaseType"/>
-            <xs:element name="allegatiAltri" type="appauto:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiAltri" type="appauto:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
     

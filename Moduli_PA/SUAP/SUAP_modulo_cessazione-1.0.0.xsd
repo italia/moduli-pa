@@ -18,7 +18,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
    
-     
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloCessazione" type="cessazione:ModuloCessazioneType" />
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloCessazioneType" >
@@ -79,7 +80,6 @@
        </xs:sequence>
     </xs:complexType>
        
-    
     <!-- BASIC COMPONENTS TYPE -->
     
     <!-- ENUMERATION -->

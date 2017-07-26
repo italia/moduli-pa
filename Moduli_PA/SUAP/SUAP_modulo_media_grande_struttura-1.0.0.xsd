@@ -18,8 +18,11 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloMediaGrandeStruttura" type="mediagrande:ModuloMediaGrandeStrutturaType"/>
+    
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloMediaGrandeStrutturaBaseType" abstract="true">
+    <xs:complexType name="ModuloMediaGrandeStrutturaType">
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -29,6 +32,7 @@
                 <xs:element name="ampliamento" type="mediagrande:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="mediagrande:AltreDichiarazioniBaseType"/>
             <xs:element name="tabellaAllegati" type="mediagrande:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -41,19 +45,22 @@
         </xs:sequence>  
     </xs:complexType>
     
-    <xs:complexType name="ModuloMediaGrandeStrutturaType">
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
         <xs:complexContent>
-            <xs:extension base="mediagrande:ModuloMediaGrandeStrutturaBaseType"/>
+            <xs:extension base="mediagrande:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="AltraDocumentazioneRegionale" abstract="true">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoAltraDocumentazioneRegionale" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence> 
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiBaseType" abstract="true">
+    <xs:complexType name="AllegatiType" >
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
@@ -61,17 +68,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AllegatiType" abstract="true">
-        <xs:complexContent>
-            <xs:extension base="mediagrande:AllegatiBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoAltraDocumentazioneRegionale" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence> 
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <xs:complexType name="AllegatiSCIA_SCIAUnicaBaseType" abstract="true">
+    <xs:complexType name="AllegatiSCIA_SCIAUnicaType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="0"/>
@@ -84,17 +81,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIA_SCIAUnicaType" abstract="true">
-        <xs:complexContent>
-            <xs:extension base="mediagrande:AllegatiSCIA_SCIAUnicaBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoAltraDocumentazioneRegionale" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence> 
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiAutorizzazioneBaseType" abstract="true">
+    <xs:complexType name="AllegatiAutorizzazioneType" abstract="true">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProdottiOrigineAnimale" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoVenditaFitosanitari" minOccurs="0"/>
@@ -102,16 +89,6 @@
             <xs:element ref="suapcommon:allegatoVenditaArmi" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>        
         </xs:sequence>  
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiAutorizzazioneType" >
-        <xs:complexContent>
-            <xs:extension base="mediagrande:AllegatiAutorizzazioneBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoAltraDocumentazioneRegionale" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence> 
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="AllegatiAltriType">
@@ -123,9 +100,9 @@
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegati" type="mediagrande:AllegatiBaseType"/>
-            <xs:element name="allegatiSCIA_SCIAUnica" type="mediagrande:AllegatiSCIA_SCIAUnicaBaseType"/>
-            <xs:element name="allegatiAutorizzazione" type="mediagrande:AllegatiAutorizzazioneBaseType"/>
+            <xs:element name="allegati" type="mediagrande:AllegatiType"/>
+            <xs:element name="allegatiSCIA_SCIAUnica" type="mediagrande:AllegatiSCIA_SCIAUnicaType"/>
+            <xs:element name="allegatiAutorizzazione" type="mediagrande:AllegatiAutorizzazioneType"/>
             <xs:element name="allegatiAltri" type="mediagrande:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
@@ -133,11 +110,11 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/>
-            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaType"/>
+            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaBaseType"/>
             <xs:element name="carattereEsercizio" type="mediagrande:CarattereEsercizioType"/>
-            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
-            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>            
+            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiBaseType"/>            
         </xs:sequence>
     </xs:complexType>
     
@@ -147,7 +124,7 @@
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
             <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
-            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>
+            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiBaseType"/>
         </xs:sequence>        
     </xs:complexType>
     
@@ -157,8 +134,8 @@
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
             <xs:element name="variazioniTabelleSpeciali" type="suapcommon:VariazioniTabelleSpecialiType" minOccurs="0"/>
-            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType" />
-            <xs:element name="variazioneOccupazioneSuperfici" type="suapcommon:variazioneOccupazioneSuperficiType"/>
+            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType" />
+            <xs:element name="variazioneOccupazioneSuperfici" type="suapcommon:VariazioneOccupazioneSuperficiBaseType"/>
         </xs:sequence>
     </xs:complexType>
     

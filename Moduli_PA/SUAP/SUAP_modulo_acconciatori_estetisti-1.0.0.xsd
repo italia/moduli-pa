@@ -18,6 +18,9 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloAcconciatoriEstetisti" type="acconcestet:ModuloAcconciatoriEstetistiType"/>
+    
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloAcconciatoriEstetistiType">
         <xs:sequence>
@@ -41,14 +44,8 @@
             </xs:element>
         </xs:sequence>  
     </xs:complexType>
-    
-    <xs:complexType name="AltraDocumentazioneRegionale" abstract="true">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoAltraDocumentazioneRegionale" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence> 
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiBaseType" abstract="true">
+       
+    <xs:complexType name="AllegatiType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
@@ -57,13 +54,13 @@
         </xs:sequence>
     </xs:complexType>
    
-    <xs:complexType name="AllegatiSCIAUnicaBaseType" abstract="true">
+    <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/> 
         </xs:sequence>
     </xs:complexType>
  
-    <xs:complexType name="AllegatiSCIACondizionataBaseType" abstract="true">
+    <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/> 
             <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/> 
@@ -79,9 +76,9 @@
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegati" type="acconcestet:AllegatiBaseType"/>
-            <xs:element name="allegatiSCIA_SCIAUnica" type="acconcestet:AllegatiSCIAUnicaBaseType"/>
-            <xs:element name="allegatiAutorizzazione" type="acconcestet:AllegatiSCIACondizionataBaseType"/>
+            <xs:element name="allegati" type="acconcestet:AllegatiType"/>
+            <xs:element name="allegatiSCIA_SCIAUnica" type="acconcestet:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiAutorizzazione" type="acconcestet:AllegatiSCIACondizionataType"/>
             <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
@@ -91,7 +88,7 @@
             <xs:group ref="acconcestet:attivitaGroup"/>
             <xs:element name="superficeComplessiva" type="xs:integer"/>
             <xs:element name="superficeAdibitaAttivita" type="xs:integer"/>
-            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaType"/>
        </xs:sequence>
     </xs:complexType>
@@ -104,8 +101,6 @@
         </xs:sequence>        
     </xs:complexType>
     
-    
-
     <!-- AGGREGATE SPECIALIZED TYPE -->
     
     <xs:group name="attivitaGroup">
@@ -136,27 +131,29 @@
         </xs:choice>
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniType" >
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true" >
         <xs:sequence>
             <xs:choice>
                 <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType"/>
                 <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType"/>
-            </xs:choice>
-            <xs:element name="altraNormativaRegionale" type="xs:string" maxOccurs="unbounded"/>  
+            </xs:choice>         
         </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     
     <!-- BASIC COMPONENTS TYPE -->
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="TipoEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="acconciatore"/>
-            <xs:enumeration value="estetista"/>
-        </xs:restriction>
-    </xs:simpleType>
     
-  
     
 </xs:schema>

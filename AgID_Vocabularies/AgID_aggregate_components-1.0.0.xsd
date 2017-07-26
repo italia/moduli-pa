@@ -56,8 +56,6 @@
         </xs:sequence>
     </xs:complexType>
     
-    
-    
     <xs:complexType name="CoordinateCatastaliBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="tipo" type="enum:TipoCoordinateCatastaliEnum" />
@@ -130,12 +128,6 @@
         </xs:sequence>
     </xs:group>
     
-    <xs:complexType name="ContattiDatiType">
-        <xs:sequence>
-            <xs:group ref="aggregate:ContattiDatiGroup"/>
-        </xs:sequence>
-    </xs:complexType>
-    
     <xs:group name="ContattiGroup">
         <xs:sequence>
             <xs:group ref="aggregate:ContattiDatiGroup"/>
@@ -202,8 +194,6 @@
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
-    
-    
     
     <xs:complexType name="ProvinciaType">
         <xs:simpleContent>
