@@ -6,7 +6,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     
-    targetNamespace="http://www.agid.gov.it/MODULI-PA/moduli_common_components"  
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"  
     
     elementFormDefault="qualified"
     
