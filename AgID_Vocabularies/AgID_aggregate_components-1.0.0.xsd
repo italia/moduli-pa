@@ -20,7 +20,7 @@
     
     <xs:group name="PersonaBaseGroup">
         <xs:annotation>
-            <xs:documentation>Un gruppo di proprietà associate alla persona</xs:documentation>
+            <xs:documentation>Gruppo di proprietà associate alla persona</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="cognome" type="isacvbc:PersonFamilyNameType"/>
@@ -31,7 +31,7 @@
     
     <xs:group name="PersonaNascitaGroup">
         <xs:annotation>
-            <xs:documentation>Un gruppo di proprietà associate alla nascita di una persona</xs:documentation>
+            <xs:documentation>Gruppo di proprietà associate alla nascita di una persona</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="a" type="aggregate:LuogoType"/>
@@ -41,7 +41,7 @@
     
     <xs:complexType name="PersonaNascitaType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare la nascita di una persona</xs:documentation>
+            <xs:documentation>Tipo per specificare la nascita di una persona</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:PersonaNascitaGroup"/>
@@ -50,7 +50,7 @@
     
     <xs:group name="IndirizzoGroup">
         <xs:annotation>
-            <xs:documentation>Un gruppo di proprietà associate ad un indirizzo</xs:documentation>
+            <xs:documentation>Gruppo di proprietà associate ad un indirizzo</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:LuogoGroup"/>
@@ -64,7 +64,7 @@
     
     <xs:complexType name="IndirizzoType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare un indirizzo</xs:documentation>
+            <xs:documentation>Tipo per specificare un indirizzo</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:IndirizzoGroup"/>
@@ -73,7 +73,7 @@
     
     <xs:complexType name="CoordinateCatastaliBaseType" abstract="true">
         <xs:annotation>
-            <xs:documentation>Un tipo astratto. Tutti gli elementi CoordinateCatastaliBase sono ereditati da questo tipo utile per specificare le coordinate catastali</xs:documentation>
+            <xs:documentation>Tipo astratto. Tutti gli elementi CoordinateCatastaliBase sono ereditati da questo tipo utile per specificare le coordinate catastali</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="tipo" type="enum:TipoCoordinateCatastaliEnum" />
@@ -86,7 +86,7 @@
     
     <xs:complexType name="CoordinateCatastaliFabbricatiType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare le coordinate catastali di un fabbricato</xs:documentation>
+            <xs:documentation>Tipo per specificare le coordinate catastali di un fabbricato</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="aggregate:CoordinateCatastaliBaseType">
@@ -101,7 +101,7 @@
 
     <xs:complexType name="CoordinateCatastaliTerreniType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare le coordinate catastali di un terreno</xs:documentation>
+            <xs:documentation>Tipo per specificare le coordinate catastali di un terreno</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="aggregate:CoordinateCatastaliBaseType">
@@ -115,7 +115,7 @@
     
     <xs:complexType name="CoordinateCatastaliType">
         <xs:annotation>
-            <xs:documentation>Un tipo per definire le coordinate catastali da utilizzare</xs:documentation>
+            <xs:documentation>Tipo per definire le coordinate catastali da utilizzare</xs:documentation>
         </xs:annotation>
         <xs:choice>
             <xs:element name="catastoFabbricati" type="aggregate:CoordinateCatastaliFabbricatiType"/>
@@ -126,7 +126,7 @@
     
     <xs:complexType name="ProtocolloStandardType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati che compongono il Protocollo Standard</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati che compongono il Protocollo Standard</xs:documentation>
         </xs:annotation>
         <xs:sequence>			
             <xs:element name="codiceAmministrazione" type="basic:CodiceAmministrazione" minOccurs="0"/>
@@ -139,7 +139,7 @@
     
     <xs:group name="ContattiFoniaGroup">
         <xs:annotation>
-            <xs:documentation>Un gruppo di proprietà associate ai contatti fonia</xs:documentation>
+            <xs:documentation>Gruppo di proprietà associate ai contatti fonia</xs:documentation>
         </xs:annotation>
         <xs:sequence> 
             <xs:element name="telefono" type="xs:string" minOccurs="0"/>
@@ -150,7 +150,7 @@
     
     <xs:complexType name="ContattiFoniaType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i contatti fonia</xs:documentation>
+            <xs:documentation>Tipo per specificare i contatti fonia</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:ContattiFoniaGroup"/>
@@ -159,7 +159,7 @@
     
     <xs:group name="ContattiDatiGroup">
         <xs:annotation>
-            <xs:documentation>Un gruppo di proprietà associate ai contatti mail</xs:documentation>
+            <xs:documentation>Gruppo di proprietà associate ai contatti mail</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="PEC" type="basic:EMailIndirizzoType" minOccurs="0"/>
@@ -170,7 +170,7 @@
 
     <xs:complexType name="ContattiDatiType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i contatti mail</xs:documentation>
+            <xs:documentation>Tipo per specificare i contatti mail</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:ContattiDatiGroup"/>
@@ -179,7 +179,7 @@
 
     <xs:group name="ContattiGroup">
         <xs:annotation>
-            <xs:documentation>Un gruppo di proprietà associate ai contatti</xs:documentation>
+            <xs:documentation>Gruppo di proprietà associate ai contatti</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:ContattiDatiGroup"/>
@@ -189,7 +189,7 @@
     
     <xs:complexType name="ContattiType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i contatti</xs:documentation>
+            <xs:documentation>Tipo per specificare i contatti</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:ContattiGroup"/>
@@ -198,7 +198,7 @@
     
     <xs:complexType name="PersonaAnagraficaNascitaType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati di nascita di una persona</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati di nascita di una persona</xs:documentation>
         </xs:annotation>
         <xs:sequence>            
             <xs:group ref="aggregate:PersonaBaseGroup"/>
@@ -208,7 +208,7 @@
         
     <xs:complexType name="PersonaAnagraficaType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare tutti i dati anagrafici di una persona</xs:documentation>
+            <xs:documentation>Tipo per specificare tutti i dati anagrafici di una persona</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
@@ -224,7 +224,7 @@
     
     <xs:complexType name="DocumentoSoggiornoType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare tutti i dati di un documento di soggiorno</xs:documentation>
+            <xs:documentation>Tipo per specificare tutti i dati di un documento di soggiorno</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="tipo" type="enum:TipoDocumentoSoggiornoEnum"/>
@@ -238,7 +238,7 @@
     
     <xs:group name="LuogoGroup">
         <xs:annotation>
-            <xs:documentation>Un gruppo di proprietà associate al luogo</xs:documentation>
+            <xs:documentation>Gruppo di proprietà associate al luogo</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="stato" type="isacvbc:AddressAdminUnitLocationOneType" default="it_IT" />
@@ -250,7 +250,7 @@
     
     <xs:complexType name="LuogoType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare tutti i dati di un luogo</xs:documentation>
+            <xs:documentation>Tipo per specificare tutti i dati di un luogo</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="aggregate:LuogoGroup"/>
@@ -259,7 +259,7 @@
     
     <xs:complexType name="RegioneType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati di una Regione</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati di una Regione</xs:documentation>
         </xs:annotation>
         <xs:simpleContent>
             <xs:extension base="isacvbc:AddressAdminUnitLocationTwoType">
@@ -270,7 +270,7 @@
     
     <xs:complexType name="ProvinciaType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati di una Provincia</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati di una Provincia</xs:documentation>
         </xs:annotation>
         <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -281,7 +281,7 @@
     
     <xs:complexType name="ComuneType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati di un Comune</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati di un Comune</xs:documentation>
         </xs:annotation>
         <xs:simpleContent>
             <xs:extension base="isacvbc:AddressPostNameType">
@@ -292,7 +292,7 @@
     
     <xs:complexType name="ImpresaAnagraficaType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati dell'anagrafica di una Impresa</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati dell'anagrafica di una Impresa</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="ragioneSociale" type="isacvbc:LegalEntityLegalNameType"/>
@@ -308,7 +308,7 @@
     
     <xs:complexType name="CCIAAType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati Impresa relativi all'iscrizione alla Camera Commercio Industria Artigianato Agricoltura</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati Impresa relativi all'iscrizione alla Camera Commercio Industria Artigianato Agricoltura</xs:documentation>
         </xs:annotation>       
         <xs:choice>        
             <xs:sequence>
@@ -324,7 +324,7 @@
     
     <xs:complexType name="ImpresaREAType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare il numero REA (Repertorio economico e amministrativo) di un Impersa</xs:documentation>
+            <xs:documentation>Tipo per specificare il numero REA (Repertorio economico e amministrativo) di un Impersa</xs:documentation>
         </xs:annotation>          
         <xs:choice>        
             <xs:sequence>
@@ -343,7 +343,7 @@
     
     <xs:complexType name="AttoRilasciatoDaType">
         <xs:annotation>
-            <xs:documentation>Un tipo per specificare i dati di un Atto</xs:documentation>
+            <xs:documentation>Tipo per specificare i dati di un Atto</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="aggregate:AttoBaseType">
