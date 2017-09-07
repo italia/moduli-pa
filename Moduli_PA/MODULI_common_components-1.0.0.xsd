@@ -6,7 +6,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     
-    targetNamespace="http://www.agid.gov.it/SUAP/moduli_common_components"  
+    targetNamespace="http://www.agid.gov.it/MODULI-PA/moduli_common_components"  
     
     elementFormDefault="qualified"
     
@@ -26,6 +26,18 @@
         <xs:complexContent>
             <xs:extension base="moduli:DatiCatastaliBaseType"/>               
         </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ACKType">
+        <xs:sequence>
+            <xs:element name="maxVersionManageable ">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*"></xs:pattern>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
     </xs:complexType>
     
 </xs:schema>

@@ -8,7 +8,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
-    targetNamespace="http://www.agid.gov.it/SUAP/modulo_cessazione"
+    targetNamespace="http://www.agid.gov.it/MODULI-PA/SUAP/modulo_cessazione"
     
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
    
