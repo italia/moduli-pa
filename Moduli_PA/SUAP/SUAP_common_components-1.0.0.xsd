@@ -8,7 +8,7 @@
     xmlns:ccts="urn:un:unece:uncefact:documentation:2"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
-    targetNamespace="http://www.agid.gov.it/SUAP/suap_common_components"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
     
@@ -63,13 +63,12 @@
     <xs:complexType name="IntegrazioneAnagraficaType">
         <xs:sequence>
             <xs:element name="indirizzoAttivita" type="suapcommon:IndirizzoContattiFoniaAttivitaType" />
-            <xs:element name="datiCastali" type="moduli:DatiCatastaliType"/>
+            <xs:element name="datiCastali" type="moduli:DatiCatastaliBaseType"/>
         </xs:sequence>        
     </xs:complexType>
   
-    <xs:complexType name="InCentroCommercialeBaseType" abstract="true">   
-    </xs:complexType>
-    
+    <xs:complexType name="InCentroCommercialeBaseType" abstract="true"/>   
+        
     <xs:complexType name="InCentroCommercialeType">
        <xs:complexContent>
            <xs:extension base="suapcommon:InCentroCommercialeBaseType">
@@ -87,7 +86,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="SettoriMerceologiciSuperficieType" abstract="true">
+    <xs:complexType name="SettoriMerceologiciSuperficieType">
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
@@ -123,10 +122,9 @@
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="SettoriMerceologiciBaseType" abstract="true">   
-    </xs:complexType>
+    <xs:complexType name="SettoriMerceologiciBaseType" abstract="true"/>   
     
-    <xs:complexType name="SettoriMerceologiciType" abstract="true">
+    <xs:complexType name="SettoriMerceologiciType">
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciBaseType">
                 <xs:sequence>
@@ -137,7 +135,7 @@
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="OccupazioneSuperficiType" abstract="true">
+    <xs:complexType name="OccupazioneSuperficiBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
@@ -151,9 +149,9 @@
         </xs:sequence>        
     </xs:complexType>
     
-    <xs:complexType name="OccupazioneSuperficiBaseType">
+    <xs:complexType name="OccupazioneSuperficiType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:OccupazioneSuperficiType">
+            <xs:extension base="suapcommon:OccupazioneSuperficiBaseType">
                 <xs:sequence>
                     <xs:element name="merciIngombranti">
                         <xs:complexType>
@@ -167,7 +165,7 @@
         </xs:complexContent>
     </xs:complexType>    
     
-    <xs:complexType name="variazioneOccupazioneSuperficiType" abstract="true">
+    <xs:complexType name="VariazioneOccupazioneSuperficiBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
@@ -202,9 +200,9 @@
         </xs:sequence>        
     </xs:complexType>
     
-    <xs:complexType name="variazioneOccupazioneSuperficiBaseType">
+    <xs:complexType name="VariazioneOccupazioneSuperficiType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:variazioneOccupazioneSuperficiType">
+            <xs:extension base="suapcommon:VariazioneOccupazioneSuperficiBaseType">
                 <xs:sequence>
                     <xs:element name="merciIngombranti">
                         <xs:complexType>
@@ -225,13 +223,11 @@
         </xs:complexContent>
     </xs:complexType>    
     
-    <xs:complexType name="ModalitaVenditaType" abstract="true">
-        
-    </xs:complexType>
-    
-    <xs:complexType name="ModalitaVenditaBaseType">
+    <xs:complexType name="ModalitaVenditaBaseType" abstract="true"/>
+             
+    <xs:complexType name="ModalitaVenditaType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:ModalitaVenditaType">
+            <xs:extension base="suapcommon:ModalitaVenditaBaseType">
                 <xs:sequence>                    
                     <xs:element name="superficieMQ">
                         <xs:complexType>
@@ -376,8 +372,6 @@
         </xs:choice>        
     </xs:complexType>
     
-   
-  
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
@@ -385,7 +379,6 @@
             <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>            
         </xs:sequence>
     </xs:complexType>
-    
     
     <xs:complexType name="DichiarazioniResponsabileTecnicoAcconciatoriType">
         <xs:sequence>
@@ -405,8 +398,6 @@
         </xs:sequence>
     </xs:complexType>
     
-    
-   
     <xs:complexType name="DichiaranteAcconciatoriRequisitiProfessionaliType">
         <xs:choice>
             <xs:element name="abilitazioneProfessionale">
@@ -426,7 +417,7 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
-            <xs:element name="altro" type="suapcommon:altroRequisitoProfessionaleBaseType"/>
+            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
          </xs:choice>
     </xs:complexType>
     
@@ -459,17 +450,17 @@
                 </xs:complexType>
             </xs:element>  
             <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
-            <xs:element name="altro" type="suapcommon:altroRequisitoProfessionaleBaseType"/>
+            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
         </xs:choice>
     </xs:complexType>
     
-    <xs:complexType name="altroRequisitoProfessionaleBaseType" abstract="true" >
+    <xs:complexType name="AltroRequisitoProfessionaleBaseType">
         <xs:simpleContent>
             <xs:extension base="xs:string"></xs:extension>
         </xs:simpleContent>
     </xs:complexType>
     
-    <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliType" abstract="true">
+    <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="responsabileTecnico" type="aggregate:PersonaAnagraficaType"/>
             <xs:element name="inQualita">
@@ -485,7 +476,7 @@
         
     <xs:complexType name="ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliType">
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
                 <xs:sequence>
                     <xs:element name="requisiti" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
                 </xs:sequence>
@@ -495,7 +486,7 @@
     
     <xs:complexType name="ResponsabileTecnicoEstetistiRequisitiProfessionaliType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliType">
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
                 <xs:sequence>
                     <xs:element name="requisiti" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
                 </xs:sequence>
@@ -503,10 +494,7 @@
         </xs:complexContent>
     </xs:complexType>
     
-   
-  
-   
-   <xs:complexType name="NotificaSanitariaType">
+    <xs:complexType name="NotificaSanitariaType">
        <xs:sequence>
            <xs:choice>
                <xs:element name="apertura" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaAperturaType"/>
@@ -515,11 +503,10 @@
                <xs:element name="cessazioneSospensione" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaCessazioneSospensioneType"/>
            </xs:choice>
            <xs:element name="note" type="xs:string" minOccurs="0"/>
-       </xs:sequence>
-      
+       </xs:sequence>      
    </xs:complexType>
     
-    <xs:complexType name="NotificaSanitariaRelativaAType" abstract="true">
+    <xs:complexType name="NotificaSanitariaRelativaBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="dichiarante">
                 <xs:complexType>
@@ -529,9 +516,9 @@
         </xs:sequence>
     </xs:complexType> 
     
-   <xs:complexType name="NotificaSanitariaAperturaType">
+    <xs:complexType name="NotificaSanitariaAperturaType">
       <xs:complexContent>
-          <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+          <xs:extension base="suapcommon:NotificaSanitariaRelativaBaseType">
              <xs:sequence>
                  <xs:element name="sedeFissa" type="xs:boolean" />
                  <xs:element name="sede" type="aggregate:IndirizzoType"/>
@@ -555,7 +542,7 @@
     
     <xs:complexType name="NotificaSanitariaSubingressoType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+            <xs:extension base="suapcommon:NotificaSanitariaRelativaBaseType">
                 <xs:sequence>
                     <xs:element name="soggettoDitta" type="xs:string"/>
                     <xs:choice>
@@ -571,7 +558,7 @@
     
     <xs:complexType name="NotificaSanitariModificaAttivitaType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+            <xs:extension base="suapcommon:NotificaSanitariaRelativaBaseType">
                 <xs:sequence>
                     <xs:element name="tipologiaAttivita" type="suapcommon:NotificaSanitariaTipologiaAttivitaType"/>
                     <xs:element name="decorrenzaModifiche" type="suapcommon:NotificaSanitariaDecorrenzaType"/>
@@ -579,11 +566,10 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+     
     <xs:complexType name="NotificaSanitariaCessazioneSospensioneType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:NotificaSanitariaRelativaAType">
+            <xs:extension base="suapcommon:NotificaSanitariaRelativaBaseType">
                 <xs:sequence>
                     <xs:element name="protocolloAttivita" type="aggregate:ProtocolloStandardType"/>
                     <xs:element name="sede" type="aggregate:IndirizzoType"/>
@@ -609,108 +595,57 @@
             </xs:element>
         </xs:choice>
     </xs:complexType>
-    
      
     <xs:complexType name="NotificaSanitariaTipologiaAttivitaType">
         <xs:sequence>
             <xs:element name="produzionePrimaria" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="raccoltaVegetaliSpontanei" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="raccolaFunghiTartufi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioneVegetali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="raccoltaSelvaggina" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="caccia" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="pesca" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="imbarcazioniPesca" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="imbarcazioniRaccoltaMolluschi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="raccoltaMolluschi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="venditaDirettaUova" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="cacciaEraccoltaSelvaggina" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="PescaEimbarcazioniDaPesca" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="raccoltaEimbarcazioniRaccoltaMolluschi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="venditaDirettaLatte" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="venditaDirettaUova" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="venditaDirettaMiele" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="raccolaFunghiTartufi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/> 
+                        <xs:element name="raccoltaVegetaliSpontanei" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="coltivazioniPermanentiUsoAlimentare" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="coltivazioniNonPermanentiUsoAlimentare" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             
-            <xs:element name="produzioneTrasformazioneAlimentiOrigineAnimale" minOccurs="0" maxOccurs="1">
+            <xs:element name="vegetaliProduzioneTrasformazioneConfezionamento" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="produzioneVegetaliPrecotti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioneVegetaliCongelati" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioneVegetaliSecchi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="lavorazioneVegetaliInfusi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzionebevandeAlcoliche" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="lavorazioneSemiLegumiCereali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioneBevandeFruttaOrtaggi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioneOliGrassiVegetali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioniConserveVegetali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="macellazioneEviscerazioneProdottiPesca" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="macellazioneAvicunicoli" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="lavorazioneCarneVenditaSede" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="lavorazioneCarneVenditaAmbulante" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="lavorazioneProdottiPescaVenditaSede" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="lavorazioneProdottiPescaVenditaAmbulante" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="lavorazioneProdottiApiario" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioneProdottiLatte" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzioneHomeFood" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="conserveVegetaliIIGamma" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="vegetaliCongelatiSurgelatiIIIGamma" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="freshCutIVGamma" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="ortofrutticoliPrecottiVGamma" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="secchiTostatiSpezie" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="succhiFruttaOrtaggi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="olio" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/> 
+                        <xs:element name="grassiVegetali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="viniMosti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="alcolici" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="sidroAltriViniBaseFrutta" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="birraAltreFermetateNonDistillate" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="molituraFrumentoAltriCereali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="lavorazioneRiso" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="altreLavorazioniSemiGranaglieLegumi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="amidiProdottiAmidacei" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="zucchero" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="caffe" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="teAltriInfusi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="homeFood" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             
-            
-            <xs:element name="ristorazioneCollettivaPubblica" minOccurs="0" maxOccurs="1">
+            <xs:element name="prodottiFornoPasticceriaGelatiPiattiPronti" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="produzionePastiUtenzaSensibile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzionePastiUtenzaNonSensibile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="somministrazioneMensaUtenzaSensibile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="somministrazioneMensaAncheNonSensibile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="terminaliDistribuzione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="somministrazioneDirettaAgricoleIttiche" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="barAssimilati" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="ristorazioneInManifestazioniTemporanee" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="homeRestaurant" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            
-            <xs:element name="commercioAlimentiBevande" minOccurs="0" maxOccurs="1">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="cashCarry" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="broker" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="ingrosso" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="dettaglioVicinato" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="dettaglioMediaStruttura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="dettaglioGrandeStruttura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="dettaglioCorrispondenza" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="ambulantePostoFisso" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="autospaccio" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="depositiDistributoriAutomatici" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="distributoriAcquaPotabile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="distributoriLatteCrudo" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="distributoriConfezionati" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="venditaInManifestazioniTemporanee" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            
-            <xs:element name="depositoAlimentiBevanteContoTerzi" minOccurs="0" maxOccurs="1">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="depositoInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="depositoNonInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="piattaformaDistribuzioneAlimenti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="depositoConnessiEserciziVenditaInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="depositoConnessiEserciziVenditaNonInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            
-            <xs:element name="prodottiFornoGelatiPiattiPronti" minOccurs="0" maxOccurs="1">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="produzionePastaFresca" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="produzionePastaSeccaFarinaceiSimili" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="produzionePastaFrescaSeccaFarinaceiSimili" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="produzionePanePizzaAltri" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="produzionePasticceria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="produzioneGelateria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
@@ -721,10 +656,112 @@
                 </xs:complexType>
             </xs:element>
             
+            
+            <xs:element name="altriAlimentiProduzioneTrasformazione" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="bibiteAnalcolicheAcqueBottiglia" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="ghiaccio" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="saleEstrazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="saleIodato" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="alimentiAnimaliProduzioneTrasformazioneConfezionamento" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="prodottiPescaAziendeAcquacoltura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="avicoliCunicoli" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="carniLavorazioneImpiantiAnnessiEsercizio" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="prodottiPescaLavorazioneImpiantiAnnessiEsercizio" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="prodottiApiarioRaccoltaLavorazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="prodottiBaseLatte" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="produzioneHomeFood" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+                
+            <xs:element name="ristorazione" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="produzionePastiProntiRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="somministrazioneRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="somministrazioneDirettaRistorazionePubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="barAssimilati" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="ristorazioneInManifestazioniTemporanee" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="homeRestaurant" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            
+            <xs:element name="commercioIngrossoAlimentiBevande" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cashCarry" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="broker" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="ingrossoConDeposito" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="commercioDettaglioAlimentiBevande" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="inEsercizioVicinato" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="inMediaStruttura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="inGrandeStruttura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="perCorrispondenzaFormeSpeciali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="commercioAmbulante" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="aPostoFisso" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="inFormaItinerante" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="distributori" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="automaticiAlimentiBevande" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="latteCrudo" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="acquaPotabileTrattata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="depositoAlimentiBevandeContoTerziNoRisconoscimento" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="inRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="nonInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="piattaformaDistribuzioneAlimenti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            
+            <xs:element name="depositoAlimentiBevandeAnnessoEsercizi" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="inRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="nonInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            
             <xs:element name="trasportoAlimentiBevandeContoTerzi" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="inCisterna" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="inCisternaInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="inCisternaNonInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="inRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="nonInRegimeTemperatura" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                     </xs:sequence>
@@ -736,25 +773,22 @@
         </xs:sequence>
     </xs:complexType>
    
-    <xs:complexType name="fileAttachment">
+    <xs:complexType name="FileAttachmentType">
         <xs:sequence>
-            <xs:element name="file" type="xs:base64Binary"/>
+            <xs:element name="contenuto" type="xs:base64Binary"/>
             <xs:element name="mimeType" type="enumeration:MimeTypeEnum"/>
         </xs:sequence>
     </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        
+    <xs:complexType name="AllegatoBaseType" abstract="true">
         <xs:sequence>
-        </xs:sequence>        
+            <xs:element name="file" type="suapcommon:FileAttachmentType"/>
+        </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniType">
+    <xs:complexType name="AllegatoType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altraNormativaRegionale" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
+            <xs:extension base="suapcommon:AllegatoBaseType"/>
         </xs:complexContent>
     </xs:complexType>
     
@@ -769,7 +803,7 @@
     
     
     <!-- ELEMENTI ALLEGATI -->     
-    <xs:element name="allegatoProcuraDelega" type="suapcommon:fileAttachment"  >
+    <xs:element name="allegatoProcuraDelega" type="suapcommon:AllegatoBaseType"  >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                <ccts:Definition>Procura/delega</ccts:Definition>
@@ -778,7 +812,7 @@
         </xs:annotation>
     </xs:element> 
     
-    <xs:element name="allegatoDocumentoIdentitaTitolare" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoDocumentoIdentitaTitolare" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Copia del documento di identità del/i titolare/i</ccts:Definition>
@@ -825,14 +859,18 @@
         </xs:annotation>
         
         <xs:complexType>
-            <xs:sequence>
-                <xs:element name="notificaSanitaria" type="suapcommon:NotificaSanitariaType"/>
-                <xs:element name="file" type="suapcommon:fileAttachment"/>
-            </xs:sequence>
+            <xs:complexContent>
+                <xs:extension base="suapcommon:AllegatoBaseType">
+                    <xs:sequence>
+                        <xs:element name="notificaSanitaria" type="suapcommon:NotificaSanitariaType"/>                        
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+            
         </xs:complexType>
     </xs:element>
     
-    <xs:element name="allegatoVenditaProdottiAlimentazioneAnimale" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVenditaProdottiAlimentazioneAnimale" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>SCIA per la vendita di prodotti agricoli e zootecnici, mangimi, prodotti di origine minerale e chimico industriale</ccts:Definition>
@@ -841,7 +879,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoComunicazioneAlcolici" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoComunicazioneAlcolici" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione, che vale quale denuncia ai sensi del D.Lgs. n. 504/1995 per la vendita di alcolici</ccts:Definition>
@@ -850,7 +888,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoPrevenzioniIncendi" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoPrevenzioniIncendi" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>SCIA prevenzione incendi</ccts:Definition>
@@ -862,7 +900,7 @@
         </xs:annotation>
      </xs:element>
     
-    <xs:element name="allegatoVenditaFarmaciBanco" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVenditaFarmaciBanco" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione per la vendita di farmaci da banco e medicinali veterinari</ccts:Definition>
@@ -871,7 +909,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaGPL" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVenditaGPL" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione per la vendita di gas di petrolio liquefatto (GPL) per combustione</ccts:Definition>
@@ -880,7 +918,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaGASInfiammabile" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVenditaGASInfiammabile" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione, che vale quale denuncia per la vendita di gas infiammabili in recipienti mobili compressi (D.Lgs. n. 504/1995)</ccts:Definition>
@@ -889,7 +927,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoInsegnaEsercizio" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoInsegnaEsercizio" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Autorizzazione per insegna di esercizio</ccts:Definition>
@@ -907,7 +945,7 @@
         
     </xs:element>
     
-    <xs:element name="allegatoVenditaFitosanitari" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVenditaFitosanitari" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per il rilascio dell’autorizzazione per la vendita di prodotti fitosanitari</ccts:Definition>
@@ -916,7 +954,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaPreziosi" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVenditaPreziosi" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione di Pubblica Sicurezza per la vendita di oggetti preziosi</ccts:Definition>
@@ -925,17 +963,16 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaArmi" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVenditaArmi" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione di Pubblica Sicurezza per la vendita di armi diverse da quelle da guerra</ccts:Definition>
                 <ccts:UsageRule>In caso di vendita di armi diverse da quelle da guerra</ccts:UsageRule>
             </xs:documentation>
-        </xs:annotation>
-       
+        </xs:annotation>       
     </xs:element>    
     
-    <xs:element name="allegatoVersamentoOneri" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoVersamentoOneri" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento di oneri, di diritti, ecc.(*)</ccts:Definition>
@@ -944,7 +981,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoImpostaDiBollo" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoImpostaDiBollo" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
@@ -977,7 +1014,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoAltraDocumentazioneRegionale" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoAltraDocumentazioneRegionale" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Altra documentazione prevista dalla normativa regionale (*) Esempi: Piano parcheggi, viabilità, ecc.</ccts:Definition>
@@ -994,7 +1031,7 @@
         </xs:annotation>
     </xs:element>
           
-    <xs:element name="allegatoProdottiOrigineAnimale" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoProdottiOrigineAnimale" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di Riconoscimento per la produzione e la commercializzazione dei prodotti di origine animale (Reg.CE n. 853/2004) o non animale (Reg.CE n. 852/2004)</ccts:Definition>
@@ -1003,7 +1040,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoPlanimetrieLocali" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoPlanimetrieLocali" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Planimetria quotata dei locali</ccts:Definition>
@@ -1018,7 +1055,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoRelazioneLocali" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoRelazioneLocali" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Relazione descrittiva delle caratteristiche dei locali medesimi, della loro localizzazione e attrezzatura utilizzata per il servizio (*)</ccts:Definition>
@@ -1029,7 +1066,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoScaricoAcqueAUA" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoScaricoAcqueAUA" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per il rilascio dell’Autorizzazione Unica Ambientale (AUA) per scarico delle acque</ccts:Definition>
@@ -1038,7 +1075,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoImpattoAcustico" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoImpattoAcustico" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione di impatto acustico</ccts:Definition>
@@ -1051,7 +1088,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoDichiarazioneNotaio" type="suapcommon:fileAttachment" >
+    <xs:element name="allegatoDichiarazioneNotaio" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Dichiarazione da parte del notaio</ccts:Definition>
@@ -1060,20 +1097,20 @@
         </xs:annotation>
     </xs:element>
     
+    <xs:element name="allegatoIncaricatiVendita">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nuoviIncaricati" type="aggregate:PersonaAnagraficaNascitaType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="cessatiIncaricati" type="aggregate:PersonaAnagraficaNascitaType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>        
+    </xs:element>
+    
     <!-- ENUMERATION -->   
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="DETTAGLIO"/>
             <xs:enumeration value="DETTAGLIO_INGROSSO"/>            
-        </xs:restriction>
-    </xs:simpleType>
-        
-    <xs:simpleType name="TipoDisponibilitAreaImmobileEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="AFFITTO"/>
-            <xs:enumeration value="PRELIMINARE_ACQUISTO"/>
-            <xs:enumeration value="PROPRIETA"/>
-            <xs:enumeration value="USO_GRATUITO"/>
         </xs:restriction>
     </xs:simpleType>
     

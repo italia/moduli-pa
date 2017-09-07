@@ -8,7 +8,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
-    targetNamespace="http://www.agid.gov.it/SUAP/modulo_spacci_interni"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_spacci_interni"
     
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
     
@@ -18,6 +18,9 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>   
     
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSpacciInterni" type="spacci:ModuloSpacciInterniType"/>
+        
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSpacciInterniType">
         <xs:sequence>
@@ -99,7 +102,7 @@
         <xs:complexContent>
             <xs:extension base="spacci:AltreDichiarazioniBaseType">
                 <xs:sequence>
-                    <xs:element name="altraNormativaRegionale" type="xs:string" maxOccurs="unbounded"/>                    
+                    <xs:element name="altra" type="xs:string" maxOccurs="unbounded"/>                    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -126,7 +129,7 @@
            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
            <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
            <xs:element name="variazioniTabelleSpeciali" type="suapcommon:VariazioniTabelleSpecialiType" minOccurs="0"/>
-           <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType"/>
+           <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
        </xs:sequence> 
     </xs:complexType>
     

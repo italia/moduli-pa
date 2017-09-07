@@ -75,16 +75,13 @@
             <xs:pattern value="[A-Za-z0-9\-_]{1,16}"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- WARNING: da verificare con IPA -->
     
     <xs:simpleType name="CodiceAOO">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Za-z0-9\-_]{1,16}"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- WARNING: da verificare con IPA -->
-    
-    
+        
     <xs:simpleType name="NumeroREAType">
             <xs:restriction base="xs:string">
                 <xs:pattern value="[0-9]{10}"/>

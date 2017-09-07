@@ -8,7 +8,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
-    targetNamespace="http://www.agid.gov.it/SUAP/modulo_subingresso"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_subingresso"
     
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
    
@@ -17,8 +17,10 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
-   
     
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSubingresso" type="subingresso:ModuloSubingressoType" />
+       
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSubingressoType" >
         <xs:sequence>
@@ -62,9 +64,7 @@
     
     <xs:complexType name="AllegatiAltriType" >
         <xs:complexContent>
-            <xs:extension base="subingresso:AllegatiAltriBaseType">
-                
-            </xs:extension>
+            <xs:extension base="subingresso:AllegatiAltriBaseType"/>              
         </xs:complexContent>
     </xs:complexType>
           
@@ -123,6 +123,5 @@
             <xs:enumeration value="SUCCESSIONE"/> 
         </xs:restriction>
     </xs:simpleType>
-        
         
 </xs:schema>

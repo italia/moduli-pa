@@ -167,6 +167,7 @@
         </xs:sequence>
     </xs:group>
     
+
     <xs:complexType name="ContattiDatiType">
         <xs:annotation>
             <xs:documentation>Un tipo per specificare i contatti mail</xs:documentation>
@@ -175,7 +176,7 @@
             <xs:group ref="aggregate:ContattiDatiGroup"/>
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:group name="ContattiGroup">
         <xs:annotation>
             <xs:documentation>Un gruppo di proprietà associate ai contatti</xs:documentation>
