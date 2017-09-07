@@ -19,6 +19,9 @@
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="SchedaAnagraficaSUAPType">
+        <xs:annotation>
+            <xs:documentation>Scheda anagrafica riportante i dati del dichiarante, comune a tutti i moduli SUAP</xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="datiDichiarante" type="suapcommon:DichiaranteType"/>
             <xs:element name="datiImpresa" type="suapcommon:ImpresaType"/>
