@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:moduli="http://www.agid.gov.it/SUAP/moduli_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
     xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
