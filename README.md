@@ -15,4 +15,4 @@ Una prima analisi realizzata da AgID ha evidenziato la possibilit&agrave;  di p
 - eventuali scope vocabulary che a partire dai data entity presenti nel core vocabulary definisce i data entity comuni ad uno dei specifici ambiti di interesse: Attivit&agrave;  commerciali e assimilabili, Edilizia e Ambiente.
 - la definizione di specifici XSD per ogni modulo che assicuri la formalizzazione dei moduli a partire dal core vocabulary e scope vocabulary.
 
-L'attività svolta dal **GdL XML Shema** assicura la formalizzazione dei moduli approvati in Conferenza Unificata (Accordo del 04/05/2017, Accordo del 06/07/2017) attraverso un processo incrementale. Per visionare lo stato dei lavori si rimanda alla [Roadmap](ROADMAP.md) del **GdL XML Shema**. 
+L'attività svolta dal **GdL XML Shema** assicura la formalizzazione dei moduli approvati in Conferenza Unificata (Accordo del 04/05/2017, Accordo del 06/07/2017) attraverso un processo incrementale. Per visionare lo stato dei lavori si rimanda alla [roadmap](ROADMAP.md) del **GdL XML Shema**. 
