@@ -2,7 +2,7 @@
 
 
 **GdL – XML Schema : attività avviate**
-- CONCLUSO il07/09/2017: definiti gli XML Schema per i moduli approvati con l'accordo Conferenza unificata del 4 maggio 2017 relativi alle Attività commerciali e assimilate (SUAP).
+- CONCLUSO il 07/09/2017: definiti gli XML Schema per i moduli approvati con l'accordo Conferenza unificata del 4 maggio 2017 relativi alle Attività commerciali e assimilate (SUAP).
 
 - Per il 22/09/2017: completamento XML Schema moduli approvati con l'accordo in Conferenza unificata del 6 luglio 2017 relativi alle Attività commerciali e assimilate (SUAP).
 
