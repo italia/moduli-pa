@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:autoriparatori="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_autoriparatori"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_autoriparatori"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0"    
+    >
+
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloAutoripatori" type="autoriparatori:ModuloAutoripatoriType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloAutoripatoriType">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="apertura" type="autoriparatori:AperturaType"/>
+            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="autoriparatori:AltreDichiarazioniBaseType"/>
+            <xs:element name="tabellaAllegati" type="autoriparatori:TabellaAllegatiType"/>
+            <xs:element name="allegatoA">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="societa" type="aggregate:ImpresaAnagraficaType"/>
+                        <!-- ALLEGATO DICHIARAZIONE SUL POSSESSO DEI REQUISITI DA PARTE DEGLI ALTRI SOCI -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+            <xs:element name="allegatoB">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="societa" type="aggregate:ImpresaAnagraficaType"/>
+                        <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+                        <!-- ALLEGATO DICHIARAZIONE SUL POSSESSO DEI REQUISITI DA PARTE DEL/LA RESPONSABILE TECNICO/A -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+        </xs:sequence>  
+    </xs:complexType>
+
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:element name="tipoEsercizio" type="autoriparatori:TipoEsercizioEnum"/>
+            <xs:element name="superficieCoperta" type="xs:integer"/>         
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="autoriparatori:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIAUnica" type="autoriparatori:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="autoriparatori:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="autoriparatori:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoIndustriaInsalubre" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaAUA" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="autoriparatori:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+   
+    <!-- ENUMERATION -->
+    <xs:simpleType name="TipoEsercizioEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="meccatronica"/>
+            <xs:enumeration value="carrozzeria"/>
+            <xs:enumeration value="gommista"/>            
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
