@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:alimenti18="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_alimenti_18"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_alimenti_18"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0"    
+    >   
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI ATTIVITÀ DI SOMMINISTRAZIONE DI ALIMENTI E BEVANDE NELLE SCUOLE, 
+            NEGLI OSPEDALI, NELLE COMUNITÀ RELIGIOSE, IN STABILIMENTI MILITARI O NEI MEZZI DI TRASPORTO PUBBLICO
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSomministrazioneAlimenti18" type="alimenti18:ModuloSomministrazioneAlimentiType"/>
+
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloSomministrazioneAlimentiType">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="apertura" type="alimenti18:AvvioType"/>
+                <xs:element name="ampliamento" type="alimenti18:AmpliamentoType"/>
+            </xs:choice>
+            <xs:element name="altreDichiarazioni" type="alimenti18:AltreDichiarazioniBaseType"/>
+            <xs:element name="tabellaAllegati" type="alimenti18:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+        </xs:sequence>  
+    </xs:complexType>
+
+    <xs:complexType name="AvvioBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="tipoEsercizio" type="alimenti18:TipoEsercizioType"/>
+            <xs:element name="superficieSomministrazione" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AvvioType">
+        <xs:complexContent>
+            <xs:extension base="alimenti18:AvvioBaseType">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+
+    <xs:complexType name="AmpliamentoBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieSomministrazioneType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AmpliamentoType">
+        <xs:complexContent>
+            <xs:extension base="alimenti18:AmpliamentoBaseType">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence/>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="alimenti18:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIAUnica" type="alimenti18:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="alimenti18:AllegatiSCIACondizionataBaseType"/>
+            <xs:element name="allegatiAltri" type="alimenti18:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataBaseType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="alimenti18:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- BASIC COMPONENTS TYPE -->  
+    <xs:complexType name="TipoEsercizioType">
+        <xs:choice>
+            <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType">
+                <xs:annotation>
+                    <xs:documentation>nelle scuole, negli ospedali, nelle comunità religiose, in stabilimenti militari delle Forze di polizia e del Corpo nazionale dei vigili del fuoco
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string">
+            </xs:element>
+            <xs:element name="altro" minOccurs="0" type="xs:string"/>
+        </xs:choice>
+    </xs:complexType>
+
+</xs:schema>
