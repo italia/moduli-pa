@@ -99,7 +99,8 @@
 
     <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+            
         </xs:sequence>                                
     </xs:complexType>
 
@@ -107,7 +108,7 @@
         <xs:complexContent>
             <xs:extension base="autorimesse:AllegatiAltriBaseType">
                 <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
