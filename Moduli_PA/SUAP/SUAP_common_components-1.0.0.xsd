@@ -283,16 +283,7 @@
     
     <xs:complexType name="DichiaranteRequisitiProfessionaliType">
         <xs:choice>
-            <xs:element name="corsoProfessionale">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="istituto" type="xs:string"/>
-                        <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
-                        <xs:element name="oggettoCorso" type="xs:string"/>
-                        <xs:element name="annoConclusione" type="xs:integer"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>            
+            <xs:element name="corsoProfessionale" type="aggregate:IstitutoType"/>
             <xs:element name="esercitatoInProprio">
                 <xs:complexType>
                     <xs:sequence>
