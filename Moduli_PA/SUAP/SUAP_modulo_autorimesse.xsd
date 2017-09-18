@@ -19,7 +19,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloAutorimesseType" type="autorimesse:ModuloAutorimesseType" />
+    <xs:element name="ModuloAutorimesse" type="autorimesse:ModuloAutorimesseType" />
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloAutorimesseType">
