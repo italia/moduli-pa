@@ -80,12 +80,21 @@
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIACondizionataType">
+    <xs:complexType name="AllegatiSCIACondizionataBaseType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoScaricoAcqueAUA" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
         </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:complexContent>
+            <xs:extension base="autorimesse:AllegatiSCIACondizionataBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
+                </xs:sequence>  
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="AllegatiAltriBaseType" abstract="true">
