@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:autorimesse="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_autorimesse"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_autorimesse"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloAutorimesseType" type="autorimesse:ModuloAutorimesseType" />
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloAutorimesseType">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/> 
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="apertura" type="autorimesse:AperturaType"/>       
+            <xs:element name="altreDichiarazioni" type="autorimesse:AltreDichiarazioniBaseType"/>
+            <xs:element name="tabellaAllegati" type="autorimesse:TabellaAllegatiType"/>  
+            <xs:element name="allegatoA">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="societa" type="aggregate:ImpresaAnagraficaType"/>
+                        <!-- ALLEGATO DICHIARAZIONE SUL POSSESSO DEI REQUISITI DA PARTE DEGLI ALTRI SOCI -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:element name="tipoEsercizio" type="autorimesse:TipoEsercizioType"/>
+            <xs:element name="superficieCoperta" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TipoEsercizioType">
+        <xs:simpleContent>
+            <xs:extension base="autorimesse:TipoEsercizioEnum">
+                <xs:attribute name="altro" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true"/>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="autorimesse:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/> 
+                    <xs:element name="superficieComplessivaCoperta" type="autorimesse:SuperficieComplessivaCopertaEnum"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIAUnica" type="autorimesse:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="autorimesse:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="autorimesse:AllegatiAltriBaseType"/>      
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>                               
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoScaricoAcqueAUA" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="autorimesse:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ENUMERATION -->
+    <xs:simpleType name="TipoEsercizioEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="autorimessa senza lavaggio auto"/>
+            <xs:enumeration value="autorimessa con lavaggio auto e scarico acque"/> 
+            <xs:enumeration value="altro"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SuperficieComplessivaCopertaEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="non superiore a 300 m2"/>
+            <xs:enumeration value="oltre 300 m2 e fino a 1.000 m2"/> 
+            <xs:enumeration value="oltre 1.000 m2 e fino a 3.000 m2"/>
+            <xs:enumeration value="superiore a 3.000 m2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

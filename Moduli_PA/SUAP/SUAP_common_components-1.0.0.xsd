@@ -895,6 +895,7 @@
                 <ccts:UsageRule>In caso di esercizio con superficie totale lorda, comprensiva di servizi e depositi (es. magazzini), superiore a 400 mq, o comunque se l’attività ricade in uno qualsiasi dei punti dell’Allegato I al D.P.R. n. 151/2011, ovvero 
                     In caso di vendita di gas liquefatti (GPL) in recipienti mobili con quantitativi superiori o uguali a 75 kg, ovvero 
                     In caso di vendita di gas infiammabili in recipienti mobili compressi con capacità geometrica complessiva superiore o uguale a 0,75 mc
+                    Nel caso di a) officine di riparazioni di veicoli a motore, rimorchi per autoveicoli e carrozzerie, di superficie coperta superiore a 300mq. B) officine meccaniche per lavorazioni a freddo con oltre 25 addetti
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
@@ -1105,7 +1106,50 @@
             </xs:sequence>
         </xs:complexType>        
     </xs:element>
+
+    <xs:element name="allegatoAutorizzazioneInDeroga" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
+                <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+        
+    </xs:element>
     
+    <xs:element name="allegatoIndustriaInsalubre" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Comunicazione al Sindaco per industria insalubre</ccts:Definition>
+                <ccts:UsageRule>In caso di carrozzeria (L’attività può essere avviata dopo 15 giorni)
+                </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+        
+    </xs:element>
+
+    <xs:element name="allegatoEmissioneAtmosferaGenerale" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta dell’autorizzazione generale o AUA (nel caso di più autorizzazioni) alle emissioni in atmosfera</ccts:Definition>
+                <ccts:UsageRule>Nel caso di attività di riparazione e verniciatura di carrozzerie di autoveicoli, mezzi e macchine agricole con utilizzo di impianti a ciclo aperto e utilizzo complessivo di prodotti vernicianti pronti all’uso giornaliero non superiore a 20 kg
+                </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+        
+    </xs:element>
+    
+    <xs:element name="allegatoEmissioneAtmosferaAUA" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di AUA per emissioni in atmosfera</ccts:Definition>
+                <ccts:UsageRule>Nel caso di attività di riparazione e verniciatura di carrozzerie di autoveicoli, mezzi e macchine agricole con utilizzo di impianti a ciclo aperto e utilizzo complessivo di prodotti vernicianti pronti all’uso giornaliero superiore a 20 kg
+                </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+        
+    </xs:element>
+
     <!-- ENUMERATION -->   
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
