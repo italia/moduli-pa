@@ -88,17 +88,26 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriType">       
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>         
-        </xs:sequence>  
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
     </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="appauto:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>                                                                                                                                                 
+                </xs:sequence>  
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+   
         
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIA" type="appauto:AllegatiSCIAType"/>
             <xs:element name="allegatiSCIAUnica" type="appauto:AllegatiSCIAUnicaBaseType"/>
-            <xs:element name="allegatiAltri" type="appauto:AllegatiAltriType"/>
+            <xs:element name="allegatiAltri" type="appauto:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
     

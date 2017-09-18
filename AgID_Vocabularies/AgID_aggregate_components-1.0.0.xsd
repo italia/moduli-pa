@@ -354,4 +354,13 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="IstitutoType">
+            <xs:sequence>
+                <xs:element name="istituto" type="xs:string"/>
+                <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+                <xs:element name="oggettoCorso" type="xs:string"/>
+                <xs:element name="annoConclusione" type="xs:integer"/>
+            </xs:sequence>
+    </xs:complexType>  
+    
 </xs:schema>

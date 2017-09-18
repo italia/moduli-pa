@@ -33,7 +33,7 @@
                     </xs:sequence>                   
                 </xs:complexType>                 
             </xs:element>
-            <xs:element name="modaitaSomministrazione" type="temporanea:ModalitaSomministrazioneEnum"/>
+            <xs:element name="modalitaSomministrazione" type="temporanea:ModalitaSomministrazioneEnum"/>
             <xs:element name="periodoSomministrazione">
                 <xs:complexType>
                     <xs:sequence>

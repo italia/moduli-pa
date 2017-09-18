@@ -19,7 +19,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
    
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloVicinatoBase" type="vicinato:ModuloVicinatoType" />
+    <xs:element name="ModuloVicinato" type="vicinato:ModuloVicinatoType" />
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloVicinatoType">
@@ -93,7 +93,7 @@
     
     <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
@@ -101,7 +101,8 @@
         <xs:complexContent>
             <xs:extension base="vicinato:AllegatiAltriBaseType">
                 <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                   
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

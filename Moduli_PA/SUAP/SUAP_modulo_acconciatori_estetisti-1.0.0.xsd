@@ -67,11 +67,22 @@
         </xs:sequence>
     </xs:complexType>
  
-    <xs:complexType name="AllegatiAltriType">
+ 
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" />                                                                                                                                      
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>                                                                                                                                      
         </xs:sequence>  
+    </xs:complexType>  
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                </xs:sequence>  
+            </xs:extension>
+        </xs:complexContent>
+        
     </xs:complexType>  
     
     <xs:complexType name="TabellaAllegatiType">
@@ -79,7 +90,7 @@
             <xs:element name="allegati" type="acconcestet:AllegatiType"/>
             <xs:element name="allegatiSCIA_SCIAUnica" type="acconcestet:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiAutorizzazione" type="acconcestet:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriType"/>
+            <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
     
