@@ -28,28 +28,27 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="autoriparatori:AperturaType"/>
-            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="dichiarazioni" type="autoriparatori:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="autoriparatori:AltreDichiarazioniBaseType"/>
             <xs:element name="tabellaAllegati" type="autoriparatori:TabellaAllegatiType"/>
-            <xs:element name="allegatoA">
+            <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                        <xs:element name="societa" type="aggregate:ImpresaAnagraficaType"/>
-                        <!-- ALLEGATO DICHIARAZIONE SUL POSSESSO DEI REQUISITI DA PARTE DEGLI ALTRI SOCI -->
+                        <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO  INCLUSO IN DICHIARAZIONI -->
                     </xs:sequence>
                 </xs:complexType>
             </xs:element> 
-            <xs:element name="allegatoB">
+           <!-- <xs:element name="allegatoB">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
                         <xs:element name="societa" type="aggregate:ImpresaAnagraficaType"/>
                         <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-                        <!-- ALLEGATO DICHIARAZIONE SUL POSSESSO DEI REQUISITI DA PARTE DEL/LA RESPONSABILE TECNICO/A -->
+                        <!-\- ALLEGATO DICHIARAZIONE SUL POSSESSO DEI REQUISITI DA PARTE DEL/LA RESPONSABILE TECNICO/A -\->
                     </xs:sequence>
                 </xs:complexType>
-            </xs:element> 
+            </xs:element> -->
         </xs:sequence>  
     </xs:complexType>
 
@@ -61,8 +60,7 @@
     </xs:complexType>
 
     <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence>
-        </xs:sequence>        
+        <xs:sequence/>
     </xs:complexType>
     
     <xs:complexType name="AltreDichiarazioniType">
@@ -94,19 +92,28 @@
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIACondizionataType">
+    <xs:complexType name="AllegatiSCIACondizionataBaseType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoEmissioneAtmosferaAUA" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
         </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:complexContent>
+            <xs:extension base="autoriparatori:AllegatiSCIACondizionataBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
@@ -114,11 +121,30 @@
         <xs:complexContent>
             <xs:extension base="autoriparatori:AllegatiAltriBaseType">
                 <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+   
+   
+   <!-- BASIC TYPE -->
+    
+    <xs:complexType name="DichiarazioniType">
+      <!-- TODO implements -->
+    </xs:complexType>
+    
+   <!-- <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliBaseType" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
+                <xs:sequence>
+                    <xs:element name="tipoQualifica" type="autoriparatori:TipoQualicaEnum"/>
+                        
+                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>-->
    
     <!-- ENUMERATION -->
     <xs:simpleType name="TipoEsercizioEnum">
