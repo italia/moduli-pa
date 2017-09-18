@@ -87,7 +87,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriBaseType">
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
         </xs:sequence>
