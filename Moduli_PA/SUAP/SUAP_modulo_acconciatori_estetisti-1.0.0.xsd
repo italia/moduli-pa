@@ -90,7 +90,7 @@
             <xs:element name="allegati" type="acconcestet:AllegatiType"/>
             <xs:element name="allegatiSCIA_SCIAUnica" type="acconcestet:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiAutorizzazione" type="acconcestet:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriType"/>
+            <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
     

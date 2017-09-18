@@ -72,7 +72,7 @@
         <xs:sequence>
             <xs:element name="allegati" type="subingresso:AllegatiType"/>
             <xs:element name="allegatiSCIAUnica" type="subingresso:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiAltri" type="subingresso:AllegatiAltriType"/>   
+            <xs:element name="allegatiAltri" type="subingresso:AllegatiAltriBaseType"/>   
         </xs:sequence>
     </xs:complexType>
     

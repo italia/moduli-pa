@@ -107,7 +107,7 @@
         <xs:sequence>
             <xs:element name="allegatiSCIA" type="appauto:AllegatiSCIAType"/>
             <xs:element name="allegatiSCIAUnica" type="appauto:AllegatiSCIAUnicaBaseType"/>
-            <xs:element name="allegatiAltri" type="appauto:AllegatiAltriType"/>
+            <xs:element name="allegatiAltri" type="appauto:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
     
