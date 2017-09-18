@@ -29,12 +29,10 @@
             <xs:element name="apertura" type="autorimesse:AperturaType"/>       
             <xs:element name="altreDichiarazioni" type="autorimesse:AltreDichiarazioniBaseType"/>
             <xs:element name="tabellaAllegati" type="autorimesse:TabellaAllegatiType"/>  
-            <xs:element name="allegatoA">
+            <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                        <xs:element name="societa" type="aggregate:ImpresaAnagraficaType"/>
-                        <!-- ALLEGATO DICHIARAZIONE SUL POSSESSO DEI REQUISITI DA PARTE DEGLI ALTRI SOCI -->
                     </xs:sequence>
                 </xs:complexType>
             </xs:element> 
@@ -56,14 +54,17 @@
         </xs:simpleContent>
     </xs:complexType>
 
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true"/>
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+            <xs:sequence>
+                <xs:element name="superficieComplessivaCoperta" type="autorimesse:SuperficieComplessivaCopertaEnum"/>
+            </xs:sequence>
+    </xs:complexType>
     
     <xs:complexType name="AltreDichiarazioniType">
         <xs:complexContent>
             <xs:extension base="autorimesse:AltreDichiarazioniBaseType">
                 <xs:sequence>
                     <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/> 
-                    <xs:element name="superficieComplessivaCoperta" type="autorimesse:SuperficieComplessivaCopertaEnum"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
