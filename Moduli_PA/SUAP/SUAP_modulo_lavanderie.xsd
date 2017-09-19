@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:tintolav="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_tintolavanderie"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_tintolavanderie"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo tintolavanderie ## internal code ref 019 // -->
+    
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloTintoLavanderieBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica"         type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica"   type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="apertura"                 type="tintolav:AperturaType"/>            
+            <xs:element name="dichiarazioni"            type="suapcommon:DichiarazioniType"/>
+            <xs:element name="altreDichiarazioni"       type="tintolav:AltreDichiarazioniBaseType"/>
+            <xs:element name="tabellaAllegati"          type="tintolav:TabellaAllegatiType"/>                 
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Attività : Apertura -->
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:element name="tipoAttivita" type="tintolav:TipoAttivita"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
+            <xs:element name="settoriMerceologici" type="suapcommon:SuperficieEsercizioAttivitaType"/>
+            <xs:element name="carattereEsercizio" type="tintolav:CarattereEsercizioType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TipoAttivita">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Tintolavanderia"/>
+            <xs:enumeration value="lavanderia a gettoni"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence>
+            <xs:element name="tipo" type="tintolav:TipoAttivita"/>
+            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:date"/>
+                        <xs:element name="a" type="xs:date"/>    
+                    </xs:sequence>                        
+                </xs:complexType>                
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TipoCarattereEsercizioEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PERMANENTE"/>
+            <xs:enumeration value="STAGIONALE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Dichiarazioni -->
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence>
+        <xs:element name="qtaBiancheria" type="xs:integer"/>
+        <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>   
+    </xs:complexType>
+    
+    
+    <!-- Allegati -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA"             type="tintolav:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica"        type="tintolav:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="tintolav:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri"            type="tintolav:AllegatiAltriType"/>      
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoIndustriaInsalubre" minOccurs="0"/> <!-- non contemplato per lavanderie a gettone -->
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"               minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale"     minOccurs="0"/> <!-- non contemplato per lavanderie a gettone -->
+            <xs:element ref="suapcommon:allegatoscarichiAcqueReflueAUA"         minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoRichAutorizzinDeroga"           minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="tintolav:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+</xs:schema>

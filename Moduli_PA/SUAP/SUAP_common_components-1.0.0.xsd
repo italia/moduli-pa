@@ -97,6 +97,20 @@
         </xs:complexContent>        
     </xs:complexType>
     
+   
+    <xs:complexType name="SuperficieEsercizioAttivitaType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
+                <xs:sequence>
+                    <xs:element name="tontolavanderia_lavanderia" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="altriusi" minOccurs="0" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    
+    
     <xs:complexType name="VariazioneSettoriMerceologiciSuperficieType" >
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
@@ -1196,6 +1210,15 @@
         </xs:annotation>
     </xs:element>
 
+    <xs:element name="allegatoscarichiAcqueReflueAUA" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di AUA per gli scarichi di acque reflue </ccts:Definition>
+                <ccts:UsageRule>Nel caso di impiego di lavatrici ad acqua analoghe a quelle di uso domestico e che effettivamente trattino oltre 100 kg di biancheria al giorno</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
     <!-- ENUMERATION -->   
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
