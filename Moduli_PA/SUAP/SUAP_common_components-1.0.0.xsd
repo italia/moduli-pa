@@ -272,6 +272,27 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="DichiarazioniAntiMafiaType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="dichiaranteConformita" type="suapcommon:DichiaranteConformitaType"/>
+                <xs:element name="prepostoRequisitiProfessionali" type="suapcommon:PrepostoRequisitiProfessionaliType"/>
+            </xs:choice>      
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiaranteConformitaType">
+        <xs:choice>
+            <xs:element name="dicRespAttProd">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="altro" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>            
+        </xs:choice>        
+    </xs:complexType>
+    
     <xs:complexType name="DichiarazioniType">
         <xs:sequence>
             <xs:choice>
@@ -812,6 +833,16 @@
         </xs:annotation>
     </xs:element>
     
+    <xs:element name="allegatoDichRequisitiSoci" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition></ccts:Definition>
+                <ccts:UsageRule></ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+       
+    
     <xs:element name="allegatoNotificaSanitaria"  >
         <xs:annotation>
             <xs:documentation xml:lang="it">
@@ -1064,6 +1095,33 @@
                 <ccts:Definition>Documentazione per il rilascio dell’Autorizzazione Unica Ambientale (AUA) per scarico delle acque</ccts:Definition>
                 <ccts:UsageRule>In caso di attività di acconciatore con consumo idrico giornaliero superiore a 1 m3 al momento di massima attività</ccts:UsageRule>
             </xs:documentation>
+        </xs:annotation> 
+    </xs:element>
+    
+    <xs:element name="allegatoRichiestaAutorizAUA" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta dell’autorizzazione generale o AUA (nel caso di più autorizzazioni) alle emissioni in atmosfera</ccts:Definition>
+                <ccts:UsageRule>Nel caso di panificazione, pasticce-ria e affini con consumo di farina giornaliero >300 kg e ? 1500 kg</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoEmissAtmosferaAUA" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di AUA per l’autorizzazione ordinaria alle emissioni in atmosfera</ccts:Definition>
+                <ccts:UsageRule>Nel caso di panificazione, pasticceria e affini con consumo di farina > 1500 kg/giorno</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoRichAutorizzinDeroga" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
+                <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
+            </xs:documentation>
         </xs:annotation>
     </xs:element>
     
@@ -1116,7 +1174,6 @@
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
-        
     </xs:element>
 
     <xs:element name="allegatoEmissioneAtmosferaGenerale" type="suapcommon:AllegatoBaseType" >
@@ -1127,7 +1184,6 @@
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
-        
     </xs:element>
     
     <xs:element name="allegatoEmissioneAtmosferaAUA" type="suapcommon:AllegatoBaseType" >
@@ -1138,7 +1194,6 @@
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
-        
     </xs:element>
 
     <!-- ENUMERATION -->   
