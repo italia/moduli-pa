@@ -1174,7 +1174,6 @@
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
-        
     </xs:element>
 
     <xs:element name="allegatoEmissioneAtmosferaGenerale" type="suapcommon:AllegatoBaseType" >
@@ -1185,7 +1184,6 @@
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
-        
     </xs:element>
     
     <xs:element name="allegatoEmissioneAtmosferaAUA" type="suapcommon:AllegatoBaseType" >
@@ -1196,7 +1194,6 @@
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
-        
     </xs:element>
 
     <!-- ENUMERATION -->   
