@@ -146,8 +146,6 @@
         </xs:choice>        
     </xs:complexType>
     
-    
-    
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
@@ -197,6 +195,5 @@
             <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
-    
     
 </xs:schema>

@@ -1095,7 +1095,7 @@
                 <ccts:Definition>Documentazione per il rilascio dell’Autorizzazione Unica Ambientale (AUA) per scarico delle acque</ccts:Definition>
                 <ccts:UsageRule>In caso di attività di acconciatore con consumo idrico giornaliero superiore a 1 m3 al momento di massima attività</ccts:UsageRule>
             </xs:documentation>
-        </xs:annotation>
+        </xs:annotation> 
     </xs:element>
     
     <xs:element name="allegatoRichiestaAutorizAUA" type="suapcommon:AllegatoBaseType" >
