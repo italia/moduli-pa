@@ -32,18 +32,15 @@
                 <xs:element name="trasferimento" type="panifici:TrasferimentoType"/>
                 <xs:element name="ampliamento" type="panifici:TrasformazioneType"/>
             </xs:choice>
-
-            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniAntiMafiaType"/>
+            <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniBaseType" />
             <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
             <xs:element name="Allegati">
-
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
-
             </xs:element> 
         </xs:sequence>
     </xs:complexType>
@@ -123,28 +120,7 @@
     
     
     <!-- Altre dichiazioni Local -->
-    <xs:complexType name="AltreDichiarazioniBaseType">
-        <xs:choice>
-            <xs:element name="dicConsumoFarina">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="qtamin" type="xs:boolean" default="0" />
-                        <xs:element name="qtamid" type="xs:boolean" default="0"/>
-                        <xs:element name="qtamax" type="xs:boolean" default="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>            
-            <xs:element name="dichConsumoIdrico">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="qtamin" type="xs:boolean" default="0" />
-                        <xs:element name="qtamax" type="xs:boolean" default="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="dichRegolamenti" type="xs:string"/>
-        </xs:choice>        
-    </xs:complexType>
+    
     
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
@@ -159,10 +135,6 @@
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
             <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
-            
-            <!-- !!!! Creato in Suap_Commo / Era assente ma in Modulo Vicinato doveva essere riportato ref modulo 01 - eventualmente rimuovere questo elemento -->
-            <xs:element ref="suapcommon:allegatoDichRequisitiSoci" minOccurs="0" />
-            
             <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="1"/>
             <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
@@ -175,7 +147,7 @@
             <xs:element ref="suapcommon:allegatoRichiestaAutorizAUA"  minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoEmissAtmosferaAUA"  minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoRichAutorizzinDeroga"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga"  minOccurs="0"/>
                                                                                    
         </xs:sequence>                                
     </xs:complexType>
@@ -195,5 +167,49 @@
             <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
+    
+    <!-- AGGREGATE SPECIALIZED TYPE -->
+    <xs:complexType name="DichiarazioniType">
+        <xs:choice>
+            <xs:element name="dichiaranteRequisitiAntimafia" type="suapcommon:RequisitiAntimafiaBaseType"/>
+            <xs:element name="responsabileAttivitàProduttiveRequisitiAntimafia" type="suapcommon:ResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
+        </xs:choice>  
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinEnum"/>
+            <xs:element name="dichConsumoIdrico" type="panifici:ConsumoIdricoEnum"/>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="panifici:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string"/>
+                </xs:sequence> 
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+    
+    <xs:simpleType name="ConsumoFarinEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MINORE_UGUALE_300_KG"/>
+            <xs:enumeration value="MAGGIORE_300_MINORE_UGUALE_1500_KG"/>
+            <xs:enumeration value="MAGGIORE_1500_K"/>            
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ConsumoIdricoEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MINORE_UGUALE_5_MC"/>
+            <xs:enumeration value="MAGGIORE_5_MC"/>           
+        </xs:restriction>
+    </xs:simpleType>
     
 </xs:schema>
