@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:alimenti18="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_alimenti_18"
+    xmlns:somscuoleospetc="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_scuole_ospedali_ecc"
     xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
@@ -8,7 +8,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
-    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_alimenti_18"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_scuole_ospedali_ecc"
     
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0"    
     >   
@@ -27,7 +27,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloSomministrazioneAlimenti18" type="alimenti18:ModuloSomministrazioneAlimentiType"/>
+    <xs:element name="ModuloSomministrazioneAlimenti18" type="somscuoleospetc:ModuloSomministrazioneAlimentiType"/>
 
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSomministrazioneAlimentiType">
@@ -35,11 +35,11 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
-                <xs:element name="apertura" type="alimenti18:AvvioType"/>
-                <xs:element name="ampliamento" type="alimenti18:AmpliamentoType"/>
+                <xs:element name="apertura" type="somscuoleospetc:AvvioType"/>
+                <xs:element name="ampliamento" type="somscuoleospetc:AmpliamentoType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="alimenti18:AltreDichiarazioniBaseType"/>
-            <xs:element name="tabellaAllegati" type="alimenti18:TabellaAllegatiType"/>
+            <xs:element name="altreDichiarazioni" type="somscuoleospetc:AltreDichiarazioniBaseType"/>
+            <xs:element name="tabellaAllegati" type="somscuoleospetc:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
@@ -52,14 +52,14 @@
 
     <xs:complexType name="AvvioBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="alimenti18:TipoEsercizioType"/>
+            <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
             <xs:element name="superficieSomministrazione" type="xs:integer"/>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AvvioType">
         <xs:complexContent>
-            <xs:extension base="alimenti18:AvvioBaseType">
+            <xs:extension base="somscuoleospetc:AvvioBaseType">
                 <xs:sequence/>
             </xs:extension>
         </xs:complexContent>        
@@ -68,13 +68,13 @@
     <xs:complexType name="AmpliamentoBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieSomministrazioneType" minOccurs="0"/>
+            <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="AmpliamentoType">
         <xs:complexContent>
-            <xs:extension base="alimenti18:AmpliamentoBaseType">
+            <xs:extension base="somscuoleospetc:AmpliamentoBaseType">
                 <xs:sequence/>
             </xs:extension>
         </xs:complexContent>
@@ -86,7 +86,7 @@
     
     <xs:complexType name="AltreDichiarazioniType">
         <xs:complexContent>
-            <xs:extension base="alimenti18:AltreDichiarazioniBaseType">
+            <xs:extension base="somscuoleospetc:AltreDichiarazioniBaseType">
                 <xs:sequence>
                     <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
                 </xs:sequence>
@@ -96,9 +96,9 @@
 
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIAUnica" type="alimenti18:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiSCIACondizionata" type="alimenti18:AllegatiSCIACondizionataBaseType"/>
-            <xs:element name="allegatiAltri" type="alimenti18:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiSCIAUnica" type="somscuoleospetc:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="somscuoleospetc:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="somscuoleospetc:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -111,7 +111,7 @@
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIACondizionataBaseType">
+    <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
         </xs:sequence>                                
@@ -125,7 +125,7 @@
     
     <xs:complexType name="AllegatiAltriType">
         <xs:complexContent>
-            <xs:extension base="alimenti18:AllegatiAltriBaseType">
+            <xs:extension base="somscuoleospetc:AllegatiAltriBaseType">
                 <xs:sequence>
                     <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
                 </xs:sequence>
