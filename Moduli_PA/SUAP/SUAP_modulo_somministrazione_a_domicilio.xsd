@@ -19,15 +19,14 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- // Modulo sommin a domicilio ## internal code ref 016 // -->
-   
+    <xs:element name="ModuloSomministrzioneDomicilio" type="sommdom:ModuloSommaDomicilioType"/>
     
-    <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloSommaDomicilioBaseType" abstract="true">
+    
+    <xs:complexType name="ModuloSommaDomicilioType" >
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
-            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
-            <xs:element name="schedamMagazzino" type="suapcommon:SchedaAnagraficaSUAPType"/>     
-            <xs:element name="integrazioneMagazzino" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="integrazioneAnagraficaCottura" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="integrazioneAnagraficaMagazzino" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="sommdom:AltreDichiarazioniBaseType"/>
             <xs:element name="tabellaAllegati" type="sommdom:TabellaAllegatiType"/>                 
@@ -41,16 +40,14 @@
        </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence />                
-    </xs:complexType>
+    
     
     
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="sommdom:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiAltri" type="sommdom:AllegatiAltriType"/>      
+            <xs:element name="allegatiAltri" type="sommdom:AllegatiAltriBaseType"/>      
         </xs:sequence>
     </xs:complexType>
     
@@ -63,21 +60,32 @@
         </xs:sequence>                                
     </xs:complexType>
       
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+    </xs:complexType>  
+      
     <xs:complexType name="AllegatiAltriType">
         <xs:complexContent>
             <xs:extension base="sommdom:AllegatiAltriBaseType">
                 <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence />                
+    </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-        </xs:sequence>                                
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="sommdom:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
 </xs:schema>
