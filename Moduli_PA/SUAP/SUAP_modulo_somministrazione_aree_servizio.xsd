@@ -53,17 +53,18 @@
 
     <xs:complexType name="AvvioBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="somareeserviziostazioni:TipoEsercizioType"/>
-            <xs:element name="superficieSomministrazione" type="xs:integer"/>
-            <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneEnum"/>
-            
+            <xs:element name="tipoEsercizio" type="somareeserviziostazioni:TipoEsercizioBaseType"/>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AvvioType">
         <xs:complexContent>
             <xs:extension base="somareeserviziostazioni:AvvioBaseType">
-                <xs:sequence/>
+                <xs:sequence>
+                   <xs:element name="superficieSomministrazione" type="xs:integer"/>
+                   <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneEnum"/>
+                   <xs:element name="tipoEsercizio" type="somareeserviziostazioni:TipoEsercizioType"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
     </xs:complexType>
@@ -71,15 +72,16 @@
     <xs:complexType name="AmpliamentoBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AmpliamentoType">
         <xs:complexContent>
             <xs:extension base="somareeserviziostazioni:AmpliamentoBaseType">
-                <xs:sequence/>
-            </xs:extension>
+                <xs:sequence>
+                    <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>    
         </xs:complexContent>
     </xs:complexType>
 
@@ -139,7 +141,7 @@
     </xs:complexType>
 
     <!-- BASIC COMPONENTS TYPE -->  
-    <xs:complexType name="TipoEsercizioType">
+    <xs:complexType name="TipoEsercizioBaseType" abstract="true">
         <xs:choice>
             <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
             <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
@@ -147,7 +149,17 @@
             <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
         </xs:choice>
     </xs:complexType>
-
+    
+    <xs:complexType name="TipoEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:TipoEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>    
+        </xs:complexContent>
+    </xs:complexType>
+    
     <!-- ENUMERATION -->
     <xs:simpleType name="ModalitaGestioneEnum">
         <xs:restriction base="xs:string">
