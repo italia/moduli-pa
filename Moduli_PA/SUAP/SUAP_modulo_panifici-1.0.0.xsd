@@ -20,9 +20,10 @@
     
     <!-- // Modulo panifici ## internal code ref 015 // -->
     
-
-    <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloPanificiBaseType" abstract="true">
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloPanifici" type="panifici:ModuloPanificiType"/>
+    
+    <xs:complexType name="ModuloPanificiType" >
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -30,7 +31,7 @@
             <xs:choice>
                 <xs:element name="apertura" type="panifici:AperturaType"/>
                 <xs:element name="trasferimento" type="panifici:TrasferimentoType"/>
-                <xs:element name="ampliamento" type="panifici:TrasformazioneType"/>
+                <xs:element name="trasformazione" type="panifici:TrasformazioneType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniBaseType" />
@@ -45,47 +46,22 @@
         </xs:sequence>
     </xs:complexType>
 
-
     <!-- Attività : Apertura -->
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="carattereConsumo" type="panifici:CarattereConsumoType"/>
+            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="xs:boolean"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
-
-    <xs:simpleType name="CarattereConsumoType">
-        <xs:restriction base="xs:boolean"></xs:restriction>
-    </xs:simpleType>  
-    
-    <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="panifici:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>
-        </xs:restriction>
-    </xs:simpleType>
-
+  
     <!-- Attività : Trasferimento -->
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="comuneRilascio" type="xs:string"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-            <xs:element name="carattereConsumo" type="panifici:CarattereConsumoType"/>
+            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="xs:boolean"/>
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
         </xs:sequence>        
     </xs:complexType>
@@ -94,33 +70,14 @@
     <xs:complexType name="TrasformazioneType">
         <xs:sequence>
             <xs:element name="protocolloTrasfomazione" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="trasfCicloProduttivo"  type="panifici:modificheCicloProduttivoType"/>
-            <xs:element name="trasfCongiuntaVenditasulPosto" type="panifici:attivitaCongiuntaVenditasulPosto"/>
-            <xs:element name="trasfAltro" type="xs:string"/>
+            <xs:choice>
+                <xs:element name="modificheCicloProduttivo"  type="xs:string"/>
+                <xs:element name="trasfCongiuntaVendProdConsPosto" type="panifici:TipoModificaEnum"/>
+                <xs:element name="trasfAltro" type="basic:EmptyType"/>
+            </xs:choice>
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>    
         </xs:sequence>        
     </xs:complexType>
-
-    <xs:simpleType name="modificheCicloProduttivoType">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-    
-    <xs:complexType name="attivitaCongiuntaVenditasulPosto">        
-        <xs:sequence>
-            <xs:element name="tipo" type="panifici:TipoAttivitaEnum"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:simpleType name="TipoAttivitaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="aggiunta"/>
-            <xs:enumeration value="eliminata"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    
-    <!-- Altre dichiazioni Local -->
-    
     
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
@@ -178,7 +135,7 @@
     
     <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinEnum"/>
+            <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinaEnum"/>
             <xs:element name="dichConsumoIdrico" type="panifici:ConsumoIdricoEnum"/>
         </xs:sequence>        
     </xs:complexType>
@@ -193,15 +150,28 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence>
+            <xs:element name="tipo" type="panifici:TipoCarattereEsercizioEnum"/>
+            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:date"/>
+                        <xs:element name="a" type="xs:date"/>    
+                    </xs:sequence>                        
+                </xs:complexType>                
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
     <!-- BASIC COMPONENTS TYPE -->
     
     <!-- ENUMERATION -->
     
-    <xs:simpleType name="ConsumoFarinEnum">
+    <xs:simpleType name="ConsumoFarinaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="MINORE_UGUALE_300_KG"/>
             <xs:enumeration value="MAGGIORE_300_MINORE_UGUALE_1500_KG"/>
-            <xs:enumeration value="MAGGIORE_1500_K"/>            
+            <xs:enumeration value="MAGGIORE_1500_KG"/>            
         </xs:restriction>
     </xs:simpleType>
     
@@ -209,6 +179,20 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="MINORE_UGUALE_5_MC"/>
             <xs:enumeration value="MAGGIORE_5_MC"/>           
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TipoCarattereEsercizioEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PERMANENTE"/>
+            <xs:enumeration value="STAGIONALE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TipoModificaEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AGGIUNTA"/>
+            <xs:enumeration value="ELIMINATA"/>
         </xs:restriction>
     </xs:simpleType>
     
