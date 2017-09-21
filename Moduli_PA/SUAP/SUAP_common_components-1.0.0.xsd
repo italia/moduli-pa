@@ -98,18 +98,6 @@
     </xs:complexType>
     
    
-    <xs:complexType name="SuperficieEsercizioAttivitaType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
-                <xs:sequence>
-                    <xs:element name="tontolavanderia_lavanderia" minOccurs="0" type="xs:integer"/>
-                    <xs:element name="altriusi" minOccurs="0" type="xs:integer"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>        
-    </xs:complexType>
-    
-    
     
     <xs:complexType name="VariazioneSettoriMerceologiciSuperficieType" >
         <xs:complexContent>
@@ -398,6 +386,65 @@
         </xs:choice>        
     </xs:complexType>
     
+    
+    <xs:complexType name="ResponsabileTecnicoLavanderieRequisitiProfessionaliBaseType">
+        <xs:choice>
+            <xs:element name="corsoProfessionale" type="aggregate:IstitutoType"/>
+            <xs:element name="formazioneconInserimentoImpresa">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="istituto" type="aggregate:IstitutoType"/>
+                        <xs:sequence>
+                            <xs:element name="attivita" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="tipo" type="xs:string"/>
+                                        <xs:element name="dal" type="xs:date"/>
+                                        <xs:element name="al" type="xs:date"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"
+                            />
+                        </xs:sequence>
+                    </xs:sequence> 
+                </xs:complexType>             
+            </xs:element>
+            
+            <xs:element name="titoloStudio">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="istituto" type="aggregate:IstitutoType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="periodoInserimentoImprese">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="durata" type="xs:integer" />
+                        
+                        
+                        <xs:sequence>
+                            <xs:element name="attivita" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="tipo" type="xs:string"/>
+                                        <xs:element name="dal" type="xs:date"/>
+                                        <xs:element name="al" type="xs:date"/>
+                                    </xs:sequence>              
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"/>
+                        </xs:sequence>
+                    </xs:sequence> 
+                </xs:complexType>      
+            </xs:element>
+            <xs:element name="riconoscimentoQualificaMinistero" type="xs:date"/>
+        </xs:choice>        
+    </xs:complexType>
+    
+    
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
@@ -446,6 +493,10 @@
             <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
          </xs:choice>
     </xs:complexType>
+    
+
+    
+    
     
     <xs:complexType name="DichiaranteEstetistiRequisitiProfessionaliType">
         <xs:choice>
