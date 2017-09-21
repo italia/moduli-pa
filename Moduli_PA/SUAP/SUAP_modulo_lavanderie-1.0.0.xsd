@@ -27,9 +27,13 @@
             <xs:element name="schedaAnagrafica"         type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica"   type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura"                 type="tintolav:AperturaType"/>            
-            <xs:element name="dichiarazioni"            type="suapcommon:DichiarazioniType"/>
+            <xs:element name="dichiarazioni"            type="tintolav:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni"       type="tintolav:AltreDichiarazioniBaseType"/>
-            <xs:element name="tabellaAllegati"          type="tintolav:TabellaAllegatiType"/>                 
+            <xs:choice>
+                <xs:element name="tabellaAllegatiLavanderie"          type="tintolav:TabellaAllegatiLavanderieType"/>    
+                <xs:element name="tabellaAllegatiLavanderieGettoni"   type="tintolav:TabellaAllegatiLavanderieGettoniType"/>
+             </xs:choice>
+            
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
@@ -45,7 +49,7 @@
         <xs:sequence>
             <xs:element name="tipoAttivita" type="tintolav:TipoAttivita"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
-            <xs:element name="settoriMerceologici" type="suapcommon:SuperficieEsercizioAttivitaType"/>
+            <xs:element name="settoriMerceologici" type="tintolav:SuperficieEsercizioAttivitaType"/>
             <xs:element name="carattereEsercizio" type="tintolav:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
@@ -53,7 +57,7 @@
     <xs:simpleType name="TipoAttivita">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Tintolavanderia"/>
-            <xs:enumeration value="lavanderia a gettoni"/>
+            <xs:enumeration value="Lavanderia a gettoni"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -78,6 +82,47 @@
         </xs:restriction>
     </xs:simpleType>
     
+    
+    <xs:complexType name="SuperficieEsercizioAttivitaType">
+        <xs:complexContent>
+            <xs:extension base="tintolav:SettoriMerceologiciSuperficieBaseType">
+                <xs:sequence>
+                    <xs:element name="tintolavanderia_lavanderia" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="altriusi" minOccurs="0" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="complessiva" minOccurs="0" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="DichiarazioniType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="tintolavanderia"      type="suapcommon:ResponsabileTecnicoLavanderieRequisitiProfessionaliBaseType" />
+            </xs:choice>      
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="responsabileTecnico" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="inQualita">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="dittaIndividuale" type="xs:string"/>
+                        <xs:element name="societa" type="xs:string"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
     <!-- Dichiarazioni -->
     <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
         <xs:sequence>
@@ -88,14 +133,24 @@
     
     
     <!-- Allegati -->
-    <xs:complexType name="TabellaAllegatiType">
+    <xs:complexType name="TabellaAllegatiLavanderieType">
         <xs:sequence>
             <xs:element name="allegatiSCIA"             type="tintolav:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIAUnica"        type="tintolav:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiSCIACondizionata" type="tintolav:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiSCIAUnica"        type="tintolav:AllegatiLavSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="tintolav:AllegatiLavSCIACondizionataType"/>
             <xs:element name="allegatiAltri"            type="tintolav:AllegatiAltriType"/>      
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="TabellaAllegatiLavanderieGettoniType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA"             type="tintolav:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica"        type="tintolav:AllegatiLavGettSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="tintolav:AllegatiLavGettSCIACondizionataType"/>
+            <xs:element name="allegatiAltri"            type="tintolav:AllegatiAltriType"/>      
+        </xs:sequence>
+    </xs:complexType>
+    
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
@@ -103,23 +158,37 @@
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIAUnicaType">
+    <xs:complexType name="AllegatiLavSCIAUnicaType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoIndustriaInsalubre" minOccurs="0"/> <!-- non contemplato per lavanderie a gettone -->
+            <xs:element ref="suapcommon:allegatoIndustriaInsalubre" minOccurs="0"/> 
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIACondizionataType">
+    <xs:complexType name="AllegatiLavGettSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiLavSCIACondizionataType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoInsegnaEsercizio"               minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale"     minOccurs="0"/> <!-- non contemplato per lavanderie a gettone -->
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale"     minOccurs="0"/> 
             <xs:element ref="suapcommon:allegatoscarichiAcqueReflueAUA"         minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoRichAutorizzinDeroga"           minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
+    <xs:complexType name="AllegatiLavGettSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"               minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoscarichiAcqueReflueAUA"         minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoRichAutorizzinDeroga"           minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
     
     <xs:complexType name="AllegatiAltriType">
         <xs:complexContent>
