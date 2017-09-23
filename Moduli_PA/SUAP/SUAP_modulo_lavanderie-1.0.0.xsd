@@ -98,10 +98,10 @@
     
     <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliType" abstract="true">
         <xs:sequence>
-            <xs:choice>
+            
                 <xs:element name="resposabileTecnicoRequisitiProfessionali" type="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType" maxOccurs="unbounded"/>
                 <xs:element name="riconoscimentoQualificaMinistero" type="xs:date"/>
-            </xs:choice>
+            
         </xs:sequence>
     </xs:complexType>
     
