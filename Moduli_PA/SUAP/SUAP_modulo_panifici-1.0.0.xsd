@@ -34,7 +34,8 @@
                 <xs:element name="trasformazione" type="panifici:TrasformazioneType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniType" />
+
+            <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniBaseType" />
             <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -45,7 +46,7 @@
             </xs:element> 
         </xs:sequence>
     </xs:complexType>
-    
+
     <!-- Attività : Apertura -->
     <xs:complexType name="AperturaType">
         <xs:sequence>
@@ -54,7 +55,7 @@
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
-    
+
     <!-- Attività : Trasferimento -->
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
@@ -105,7 +106,6 @@
             <xs:element ref="suapcommon:allegatoEmissAtmosferaAUA"  minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga"  minOccurs="0"/>
-            
         </xs:sequence>                                
     </xs:complexType>
     

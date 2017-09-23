@@ -1174,14 +1174,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoRichAutorizzinDeroga" type="suapcommon:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
-                <ccts:UsageRule>Nel caso di attivitÃ  ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
+
     
     <xs:element name="allegatoImpattoAcustico" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
