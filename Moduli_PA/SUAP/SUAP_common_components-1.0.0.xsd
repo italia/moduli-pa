@@ -97,8 +97,6 @@
         </xs:complexContent>        
     </xs:complexType>
     
-   
-    
     <xs:complexType name="VariazioneSettoriMerceologiciSuperficieType" >
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
@@ -274,26 +272,35 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="DichiarazioniAntiMafiaType">
+    
+    <xs:complexType name="RequisitiAntimafiaBaseType" abstract="true">
+    </xs:complexType>
+    
+    <xs:complexType name="RequisitiAntimafiaType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:RequisitiAntimafiaBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ResponsabileAttivitàProduttiveRequisitiAntimafiaType">
         <xs:sequence>
-            <xs:choice>
-                <xs:element name="dichiaranteConformita" type="suapcommon:DichiaranteConformitaType"/>
-                <xs:element name="prepostoRequisitiProfessionali" type="suapcommon:PrepostoRequisitiProfessionaliType"/>
-            </xs:choice>      
+            <xs:element name="responsabile" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="inQualita">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="societa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dichiarazione" type="suapcommon:RequisitiAntimafiaBaseType"/>            
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="DichiaranteConformitaType">
-        <xs:choice>
-            <xs:element name="dicRespAttProd">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="altro" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>            
-        </xs:choice>        
-    </xs:complexType>
+    
     
     <xs:complexType name="DichiarazioniType">
         <xs:sequence>
@@ -386,7 +393,6 @@
         </xs:choice>        
     </xs:complexType>
     
-    
     <xs:complexType name="ResponsabileTecnicoLavanderieRequisitiProfessionaliBaseType">
         <xs:choice>
             <xs:element name="corsoProfessionale" type="aggregate:IstitutoType"/>
@@ -418,7 +424,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-
+            
             <xs:element name="periodoInserimentoImprese">
                 <xs:complexType>
                     <xs:sequence>
@@ -493,10 +499,6 @@
             <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
          </xs:choice>
     </xs:complexType>
-    
-
-    
-    
     
     <xs:complexType name="DichiaranteEstetistiRequisitiProfessionaliType">
         <xs:choice>
@@ -898,15 +900,6 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoDichRequisitiSoci" type="suapcommon:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition></ccts:Definition>
-                <ccts:UsageRule></ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-       
     
     <xs:element name="allegatoNotificaSanitaria"  >
         <xs:annotation>
@@ -1185,7 +1178,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
-                <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
+                <ccts:UsageRule>Nel caso di attivitÃ  ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1227,6 +1220,10 @@
                 <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
                 <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi</ccts:UsageRule>
             </xs:documentation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
+                <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
+            </xs:documentation>
         </xs:annotation>
         
     </xs:element>
@@ -1261,7 +1258,7 @@
         </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoscarichiAcqueReflueAUA" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoScarichiAcqueReflueAUA" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di AUA per gli scarichi di acque reflue </ccts:Definition>
@@ -1269,7 +1266,7 @@
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    
+
     <!-- ENUMERATION -->   
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
