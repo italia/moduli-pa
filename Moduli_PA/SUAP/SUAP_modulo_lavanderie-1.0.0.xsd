@@ -95,22 +95,14 @@
         </xs:sequence>
     </xs:complexType>
     
-    
     <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliType" abstract="true">
         <xs:sequence>
-            
                 <xs:element name="resposabileTecnicoRequisitiProfessionali" type="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType" maxOccurs="unbounded"/>
                 <xs:element name="riconoscimentoQualificaMinistero" type="xs:date"/>
-            
         </xs:sequence>
     </xs:complexType>
     
-
-    
-    
     <!-- Dichiarazioni -->
-    
-    
     <xs:complexType name="AltreDichiarazioniType">
         <xs:complexContent>
             <xs:extension base="tintolav:AltreDichiarazioniBaseType">
