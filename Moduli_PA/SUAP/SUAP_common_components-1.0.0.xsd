@@ -393,7 +393,7 @@
         </xs:choice>        
     </xs:complexType>
     
-    <xs:complexType name="ResponsabileTecnicoLavanderieRequisitiProfessionaliBaseType">
+    <xs:complexType name="DichiarazioniResponsabileTecnicoLavanderieRequisitiProfessionaliBaseType">
         <xs:choice>
             <xs:element name="corsoProfessionale" type="aggregate:IstitutoType"/>
             <xs:element name="formazioneconInserimentoImpresa">
