@@ -393,6 +393,64 @@
         </xs:choice>        
     </xs:complexType>
     
+    <xs:complexType name="DichiarazioniResponsabileTecnicoLavanderieRequisitiProfessionaliBaseType">
+        <xs:choice>
+            <xs:element name="corsoProfessionale" type="aggregate:IstitutoType"/>
+            <xs:element name="formazioneconInserimentoImpresa">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="istituto" type="aggregate:IstitutoType"/>
+                        <xs:sequence>
+                            <xs:element name="attivita" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="tipo" type="xs:string"/>
+                                        <xs:element name="dal" type="xs:date"/>
+                                        <xs:element name="al" type="xs:date"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"
+                            />
+                        </xs:sequence>
+                    </xs:sequence> 
+                </xs:complexType>             
+            </xs:element>
+            
+            <xs:element name="titoloStudio">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="istituto" type="aggregate:IstitutoType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="periodoInserimentoImprese">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="durata" type="xs:integer" />
+                        
+                        
+                        <xs:sequence>
+                            <xs:element name="attivita" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="tipo" type="xs:string"/>
+                                        <xs:element name="dal" type="xs:date"/>
+                                        <xs:element name="al" type="xs:date"/>
+                                    </xs:sequence>              
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"/>
+                        </xs:sequence>
+                    </xs:sequence> 
+                </xs:complexType>      
+            </xs:element>
+            <xs:element name="riconoscimentoQualificaMinistero" type="xs:date"/>
+        </xs:choice>        
+    </xs:complexType>
+    
+    
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
@@ -1116,6 +1174,7 @@
         </xs:annotation>
     </xs:element>
     
+
     
     <xs:element name="allegatoImpattoAcustico" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
@@ -1188,6 +1247,15 @@
                 <ccts:Definition>Documentazione per la richiesta di AUA per emissioni in atmosfera</ccts:Definition>
                 <ccts:UsageRule>Nel caso di attività di riparazione e verniciatura di carrozzerie di autoveicoli, mezzi e macchine agricole con utilizzo di impianti a ciclo aperto e utilizzo complessivo di prodotti vernicianti pronti all’uso giornaliero superiore a 20 kg
                 </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoScarichiAcqueReflueAUA" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta di AUA per gli scarichi di acque reflue </ccts:Definition>
+                <ccts:UsageRule>Nel caso di impiego di lavatrici ad acqua analoghe a quelle di uso domestico e che effettivamente trattino oltre 100 kg di biancheria al giorno</ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
     </xs:element>

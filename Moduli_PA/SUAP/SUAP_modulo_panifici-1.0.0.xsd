@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-        xmlns:panifici="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
-        xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
-        xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
-        xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
-        xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
-        xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        
-        targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
-        
-        elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
-        
-        <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
-        <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
-        <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
-        <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
-        <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    xmlns:panifici="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- // Modulo panifici ## internal code ref 015 // -->
     
@@ -27,13 +27,14 @@
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
-           
+            
             <xs:choice>
                 <xs:element name="apertura" type="panifici:AperturaType"/>
                 <xs:element name="trasferimento" type="panifici:TrasferimentoType"/>
                 <xs:element name="trasformazione" type="panifici:TrasformazioneType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
+
             <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniBaseType" />
             <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
             <xs:element name="Allegati">
@@ -54,7 +55,7 @@
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
-  
+
     <!-- Attività : Trasferimento -->
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
@@ -105,7 +106,6 @@
             <xs:element ref="suapcommon:allegatoEmissAtmosferaAUA"  minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga"  minOccurs="0"/>
-                                                                                   
         </xs:sequence>                                
     </xs:complexType>
     
