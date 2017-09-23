@@ -393,62 +393,7 @@
         </xs:choice>        
     </xs:complexType>
     
-    <xs:complexType name="DichiarazioniResponsabileTecnicoLavanderieRequisitiProfessionaliBaseType">
-        <xs:choice>
-            <xs:element name="corsoProfessionale" type="aggregate:IstitutoType"/>
-            <xs:element name="formazioneconInserimentoImpresa">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="istituto" type="aggregate:IstitutoType"/>
-                        <xs:sequence>
-                            <xs:element name="attivita" maxOccurs="unbounded">
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element name="tipo" type="xs:string"/>
-                                        <xs:element name="dal" type="xs:date"/>
-                                        <xs:element name="al" type="xs:date"/>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
-                            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"
-                            />
-                        </xs:sequence>
-                    </xs:sequence> 
-                </xs:complexType>             
-            </xs:element>
-            
-            <xs:element name="titoloStudio">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="istituto" type="aggregate:IstitutoType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            
-            <xs:element name="periodoInserimentoImprese">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="durata" type="xs:integer" />
-                        
-                        
-                        <xs:sequence>
-                            <xs:element name="attivita" maxOccurs="unbounded">
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element name="tipo" type="xs:string"/>
-                                        <xs:element name="dal" type="xs:date"/>
-                                        <xs:element name="al" type="xs:date"/>
-                                    </xs:sequence>              
-                                </xs:complexType>
-                            </xs:element>
-                            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"/>
-                        </xs:sequence>
-                    </xs:sequence> 
-                </xs:complexType>      
-            </xs:element>
-            <xs:element name="riconoscimentoQualificaMinistero" type="xs:date"/>
-        </xs:choice>        
-    </xs:complexType>
+   
     
     
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
@@ -457,80 +402,6 @@
             <xs:element name="inData" type="xs:date"/>
             <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>            
         </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="DichiarazioniResponsabileTecnicoAcconciatoriType">
-        <xs:sequence>
-            <xs:choice>
-                <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
-                <xs:element name="resposabileTecnicoRequisitiProfessionali" type="suapcommon:ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType" maxOccurs="unbounded"/>
-            </xs:choice>      
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="DichiarazioniResponsabileTecnicoEstetistiType">
-        <xs:sequence>
-            <xs:choice>
-                <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiaranteEstetistiRequisitiProfessionaliType"/>
-                <xs:element name="resposabileTecnicoRequisitiProfessionali" type="suapcommon:ResponsabileTecnicoEstetistiRequisitiProfessionaliType" maxOccurs="unbounded"/>
-            </xs:choice>      
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="DichiaranteAcconciatoriRequisitiProfessionaliType">
-        <xs:choice>
-            <xs:element name="abilitazioneProfessionale">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="rilasciataDa" type="xs:string"/>
-                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="possessoQualificaProfessionale">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="rilasciataDa" type="xs:string"/>
-                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
-            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
-         </xs:choice>
-    </xs:complexType>
-    
-    <xs:complexType name="DichiaranteEstetistiRequisitiProfessionaliType">
-        <xs:choice>
-            <xs:element name="possessoQualificaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
-            <xs:element name="abilitazioneProfessionale">
-                <xs:complexType>
-                    <xs:choice>
-                        <xs:element name="titolare" type="aggregate:ImpresaREAType"/>
-                        <xs:element name="socio" type="aggregate:ImpresaREAType"/>
-                        <xs:element name="direzione" type="aggregate:ImpresaREAType"/>
-                        <xs:element name="dipendente">
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="impresaStudioMedico" type="xs:string"/>
-                                    <xs:element name="periodoDalAl" type="basic:PeriodoDateType"/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:choice>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="frequenzaCorso">
-                <xs:complexType>
-                    <xs:choice>
-                        <xs:element name="corsoRegionale" type="aggregate:AttoRilasciatoDaType" />
-                        <xs:element name="corsoScuolaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
-                    </xs:choice>
-                </xs:complexType>
-            </xs:element>  
-            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
-            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
-        </xs:choice>
     </xs:complexType>
     
     <xs:complexType name="AltroRequisitoProfessionaleBaseType">
@@ -551,26 +422,6 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
-    </xs:complexType>
-        
-    <xs:complexType name="ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
-                <xs:sequence>
-                    <xs:element name="requisiti" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="ResponsabileTecnicoEstetistiRequisitiProfessionaliType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
-                <xs:sequence>
-                    <xs:element name="requisiti" type="suapcommon:DichiaranteAcconciatoriRequisitiProfessionaliType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="NotificaSanitariaType">
