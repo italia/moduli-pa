@@ -21,7 +21,6 @@
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloVicinato" type="vicinato:ModuloVicinatoType" />
     
-    <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloVicinatoType">
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
