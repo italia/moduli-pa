@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUAP/sue_common_components"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"    
     xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
@@ -18,4 +18,74 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>    
     
+    <!-- Reference suecommon:PersonaAnagraficaType -->
+    <xs:complexType name="PersonaAnagraficaType">
+        <xs:annotation>
+            <xs:documentation>Tipo per specificare tutti i dati anagrafici di una
+                persona</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
+                <xs:sequence>
+                    <xs:element name="residente" type="aggregate:IndirizzoType"/>
+                    <!-- <xs:element name="cittadinanza" type="enum:NazioniAlpha3Enum" default="ITA" minOccurs="0"/> -->
+                    <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="DittaAnagraficaType">
+        <xs:annotation>
+            <xs:documentation>Dati della Ditta o Società</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="inQualita" type="xs:string"/>
+            <xs:element name="dittaNome" type="xs:string"/>
+            <xs:choice>
+                <xs:element name="dittaCF" type="basic:CodiceFiscaleType"/>
+                <xs:element name="dittaPiva" type="basic:PIVA"/>
+            </xs:choice>
+            <xs:element name="dittaIndirizzo" type="aggregate:IndirizzoType"/>
+            <xs:element name="dittaRegistroImpreseCCIAA" type="aggregate:CCIAAType"/>
+            <xs:element name="dittaContatti" type="aggregate:ContattiType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Reference suecommon:TitoloPossessoType -->
+    <xs:complexType name="TitoloPossessoType">
+        <xs:sequence>
+            <xs:element name="titolo" type="xs:string"/>
+            <xs:element name="titolaritaIntervento" type="suecommon:TitolaritaInterventoEnum"/>
+        </xs:sequence>        
+    </xs:complexType>
+        
+    <!-- Reference suecommon:LocalizzazioneInterventoType -->
+    <xs:complexType name="LocalizzazioneInterventoType">
+        <xs:sequence>
+            <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+            <xs:element name="contatto" type="moduli:DatiCatastaliBaseType"/>
+            <xs:element name="destinazioneDUso" type="xs:string"/>
+            <xs:element name="coordinate" type="xs:string"/>
+        </xs:sequence>    
+    </xs:complexType>
+    
+    <!-- ENUMERATION -->
+    <xs:simpleType name="TitolaritaInterventoEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Titolare"/>
+            <xs:enumeration value="NonTitolare"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ENUMERATION -->
+    <xs:simpleType name="OperePrevisteEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NoPartiComuni"/>
+            <xs:enumeration value="PartiComuniCondominio"/>
+            <xs:enumeration value="PartiComuniFabbricatoMultiProp"/>
+            <xs:enumeration value="PartiComuniNoAssenso"/>
+        </xs:restriction>
+    </xs:simpleType>
+
 </xs:schema>

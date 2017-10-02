@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:scia="http://www.agid.gov.it/MODULI_PA/SUE/modulo_scia"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_scia"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSCIA" type="scia:ModuloSCIAType" />
+    
+    <xs:complexType name="ModuloSCIAType">
+        <xs:sequence>
+            <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="suecommon:DittaAnagraficaType"/>
+            <xs:element name="schedaDelegati" type="suecommon:PersonaAnagraficaType"/>
+            <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>
+            <xs:element name="presentazioneInizioLavori" type="scia:PresentazioneInzioLavoriType"/>
+            <xs:element name="qualificazioneIntervento" type="scia:QualificazioneInterventoType"/>
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- BASE TYPE -->
+    <xs:complexType name="PresentazioneInzioLavoriType">
+        <xs:choice>
+            <xs:element name="SCIA" minOccurs="0" type="xs:date"/>
+            <xs:element name="SCIAUnica" minOccurs="0" type="xs:date"/>
+            <xs:element name="SCIACondizionata" minOccurs="0" type="basic:EmptyType" />
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="QualificazioneInterventoBaseType" abstract="true"/>
+    
+    <xs:complexType name="QualificazioneInterventoType">
+        <xs:complexContent>
+            <xs:extension base="scia:QualificazioneInterventoBaseType">
+                <xs:choice>
+                    <xs:element name="manutenzioneStarordinaria" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="corsoDiEsecuzione" minOccurs="0" type="CorsoDiEsecuzioneType"/>
+                    <xs:element name="sanatoriaIntervento" minOccurs="0" type="SanatoriaInterventoType"/>
+                    <xs:element name="varianteInCorsoDOpera" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                </xs:choice>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="CorsoDiEsecuzioneType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:boolean" name="ricevuta"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SanatoriaInterventoType">
+        <xs:sequence>
+            <xs:element type="xs:date" name="data"/>
+        </xs:sequence>
+        <xs:attribute type="xs:boolean" name="ricevuta"/>
+    </xs:complexType>      
+    
+</xs:schema>
