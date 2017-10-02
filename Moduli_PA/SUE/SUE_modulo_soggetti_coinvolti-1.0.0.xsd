@@ -31,56 +31,29 @@
             <xs:element name="Titolari">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType"
-                            minOccurs="2" maxOccurs="unbounded"/>
+                        <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType" minOccurs="2" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element> 
 
-            <xs:element name="TecniciIncaricatiType">
+            <xs:element name="TecniciIncaricati">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="schedaProgettistaOpereArchitettoniche"
-                            type="suecommon:ProfessionistaAnagraficaDirettoreType" minOccurs="1"/>
-                        <xs:element name="schedaDirettoreOpereArchitettoniche"
-                            type="suecommon:ProfessionistaAnagraficaType" minOccurs="0"/>
-                        <xs:element name="schedaProgettistaOpereStrutturali"
-                            type="suecommon:ProfessionistaAnagraficaDirettoreType" minOccurs="0"/>
-                        <xs:element name="schedaDirettoreOpereStrutturali"
-                            type="suecommon:ProfessionistaAnagraficaType" minOccurs="0"/>
-                        <xs:element name="schedaAltritecnici" type="soggcoinv:AltriTecniciType"
-                            minOccurs="0"/>
+                        <xs:element name="schedaTecnico" type="suecommon:TecniciIncaricatiType" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
 
-            <xs:element name="ImpreseEsecutrici----">
+            <xs:element name="ImpreseEsecutrici">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType"
-                            minOccurs="1" maxOccurs="unbounded"/>
+                        <xs:element name="schedaImpreseEsecutriciType" type="suecommon:ImpreseEsecutriciType" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
 
         </xs:sequence>
     </xs:complexType>
-
-    <xs:element name="AltriTecniciType">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="incaricatoDi" type="xs:string"/>
-                <xs:element base="suecommon:ProfessionistaAnagraficaType"/>
-                <xs:element base="suecommon:DittaAnagraficaType"/>
-                <xs:element name="legaleRappresentante" type="xs:string"/>
-                <xs:element name="estremiAbilitazione" type="xs:string"/>
-                <xs:element name="dittaContatti" type="aggregate:ContattiType" minOccurs="0"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-
-
 
 </xs:schema>
 
