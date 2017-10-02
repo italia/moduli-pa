@@ -35,7 +35,7 @@
                             minOccurs="2" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
-            </xs:element>
+            </xs:element> 
 
             <xs:element name="TecniciIncaricatiType">
                 <xs:complexType>
