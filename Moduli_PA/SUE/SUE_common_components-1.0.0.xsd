@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
     xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
@@ -16,10 +16,8 @@
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
-    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/> 
-
-    <!-- AGGREGATE COMPONENTS TYPE   -->
-
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>    
+    
     <!-- Reference suapcommon:PersonaAnagraficaType -->
     <xs:complexType name="PersonaAnagraficaType">
         <xs:annotation>
@@ -36,8 +34,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ref aggregate : ImpresaAnagraficaType -->
+    
+    <!-- ref aggregate:ImpresaAnagraficaType -->
     <xs:complexType name="DittaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Dati della Ditta o Società</xs:documentation>
@@ -54,8 +52,7 @@
             <xs:element name="dittaContatti" type="aggregate:ContattiType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
-
-
+    
     <xs:complexType name="ProfessionistaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
@@ -71,16 +68,15 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+    
     <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
         <xs:complexContent>
             <xs:extension base="suecommon:ProfessionistaAnagraficaType">
-            <xs:attribute name="incaricaDirettoreLavori" type="xs:string"/>
+                <xs:attribute name="incaricaDirettoreLavori" type="xs:string"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-
     <xs:complexType name="OrdineProfessionaleType">
         <xs:sequence>
             <xs:element name="OrdineNome" type="xs:string"/>
@@ -88,7 +84,6 @@
             <xs:element name="OrdineNumero" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-
     
     <xs:complexType name="TecniciIncaricatiType">
         <xs:sequence>
@@ -101,8 +96,7 @@
             </xs:sequence>
         </xs:sequence>
     </xs:complexType>
-
-
+    
     <xs:complexType name="AltriTecniciType">
         <xs:sequence>
             <xs:element name="incaricatoDi" type="xs:string"/>
@@ -113,8 +107,6 @@
             <xs:element name="dittaContatti" type="aggregate:ContattiType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
-
-
     
     <xs:complexType name="ImpreseEsecutriciType">
         <xs:sequence>
@@ -150,12 +142,14 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="DatiProgettistaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ProfessionistaAnagraficaType">
+                <xs:attribute name="ordineProfessionale" type="suecommon:OrdineProfessionaleType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
-    
-    
-    
-
-
     <!-- Reference suecommon:TitoloPossessoType -->
     <xs:complexType name="TitoloPossessoType">
         <xs:sequence>
@@ -202,13 +196,13 @@
                 <xs:element name="DIA_SCIAAlternativa" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="certificazioneInizioAttivita" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="comunicazioneEdiliziaLibera" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
-                <xs:element name="altraPraticaEdilizia" minOccurs="0" type="scia:altraPraticaEdiliziaType"/>
+                <xs:element name="altraPraticaEdilizia" minOccurs="0" type="scia:AltraPraticaEdiliziaType"/>
                 <xs:element name="primoAccatastamento" minOccurs="0" type="basic:EmptyType"/>
             </xs:choice>        
         </xs:complexContent>
     </xs:complexType> 
     
-    <xs:complexType name="altraPraticaEdiliziaType">
+    <xs:complexType name="AltraPraticaEdiliziaType">
         <xs:sequence>
             <xs:element name="altro" type="xs:string"/>
             <xs:element name="comunicazione" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
@@ -252,6 +246,36 @@
         </xs:choice>
     </xs:complexType>
     
+    <!-- Reference suecommon:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:choice>
+            <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="ricade" minOccurs="0" type="suecommon:SaluteSicurezzaRicadeType"/>
+            <xs:element name="ricadeConRiserva" minOccurs="0"  type="basic:EmptyType"/>
+        </xs:choice>        
+    </xs:complexType> 
+    
+    <xs:complexType name="SaluteSicurezzaRicadeType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="inf200ggUomo" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="pariSup200ggUomo" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+            <xs:choice>
+                <xs:element name="noInvioNotifica" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="invioNotifica" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:boolean" name="allegato"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>        
+    </xs:complexType>
+    
     <!-- ENUMERATION -->
     <xs:simpleType name="TitolaritaInterventoEnum">
         <xs:restriction base="xs:string">
@@ -269,5 +293,14 @@
         </xs:restriction>
     </xs:simpleType>
     
-
+    <xs:simpleType name="InterventiSoggettiACILAEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NoAttoAssenso"/>
+            <xs:enumeration value="ConAllegatiCila"/>
+            <xs:enumeration value="ContestualeAttoAssensoAllegatoCila"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    
 </xs:schema>
