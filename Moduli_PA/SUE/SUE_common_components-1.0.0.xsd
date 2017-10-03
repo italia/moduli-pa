@@ -18,7 +18,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>    
     
-    <!-- Reference suecommon:PersonaAnagraficaType -->
+    <!-- Reference suapcommon:PersonaAnagraficaType -->
     <xs:complexType name="PersonaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di una
@@ -35,6 +35,7 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- ref aggregate:ImpresaAnagraficaType -->
     <xs:complexType name="DittaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Dati della Ditta o Società</xs:documentation>
@@ -56,7 +57,7 @@
         <xs:annotation>
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
         </xs:annotation>
-        <xs:complexContent>
+        <xs:complexContent >
             <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
                 <xs:sequence>
                     <xs:element name="residenza" type="aggregate:IndirizzoType"/>
@@ -68,11 +69,76 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ProfessionistaAnagraficaType">
+                <xs:attribute name="incaricaDirettoreLavori" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="OrdineProfessionaleType">
         <xs:sequence>
             <xs:element name="OrdineNome" type="xs:string"/>
             <xs:element name="OrdineCitta" type="xs:string"/>
             <xs:element name="OrdineNumero" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TecniciIncaricatiType">
+        <xs:sequence>
+            <xs:element name="schedaProgettistaOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>
+            <xs:element name="schedaDirettoreOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaType"/>
+            <xs:element name="schedaProgettistaOpereStrutturali" type="suecommon:ProfessionistaAnagraficaDirettoreType" />
+            <xs:element name="schedaDirettoreOpereStrutturali" type="suecommon:ProfessionistaAnagraficaType"/>
+            <xs:sequence>
+                <xs:element name="schedaAltritecnici" type="suecommon:AltriTecniciType"/>
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AltriTecniciType">
+        <xs:sequence>
+            <xs:element name="incaricatoDi" type="xs:string"/>
+            <xs:element name="schedaAltroTecnico" type="suecommon:ProfessionistaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="suecommon:DittaAnagraficaType"/>
+            <xs:element name="legaleRappresentante" type="xs:string"/>
+            <xs:element name="estremiAbilitazione" type="xs:string"/>
+            <xs:element name="dittaContatti" type="aggregate:ContattiType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ImpreseEsecutriciType">
+        <xs:sequence>
+            <xs:element name="schedaDitta" type="suecommon:DittaAnagraficaType"/>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="cassaEdile">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="sede" type="xs:string"/>
+                            <xs:element name="codiceMatrPos" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Inps">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="sede" type="xs:string"/>
+                            <xs:element name="codiceImpres" type="xs:string"/>
+                            <xs:element name="cocideCassa" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Inail">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="sede" type="xs:string"/>
+                            <xs:element name="codiceImpres" type="xs:string"/>
+                            <xs:element name="podAssicurativa" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
         </xs:sequence>
     </xs:complexType>
     
@@ -122,13 +188,13 @@
                 <xs:element name="DIA_SCIAAlternativa" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="certificazioneInizioAttivita" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="comunicazioneEdiliziaLibera" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
-                <xs:element name="altraPraticaEdilizia" minOccurs="0" type="scia:altraPraticaEdiliziaType"/>
+                <xs:element name="altraPraticaEdilizia" minOccurs="0" type="scia:AltraPraticaEdiliziaType"/>
                 <xs:element name="primoAccatastamento" minOccurs="0" type="basic:EmptyType"/>
             </xs:choice>        
         </xs:complexContent>
     </xs:complexType> 
     
-    <xs:complexType name="altraPraticaEdiliziaType">
+    <xs:complexType name="AltraPraticaEdiliziaType">
         <xs:sequence>
             <xs:element name="altro" type="xs:string"/>
             <xs:element name="comunicazione" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
@@ -162,16 +228,46 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType> 
-
+    
     <xs:complexType name="VersamentoType">
-            <xs:choice>
-                <xs:element name="allegaAttestazione" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="trasmettePrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>      
-                <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>   
-                <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>                   
-            </xs:choice>
+        <xs:choice>
+            <xs:element name="allegaAttestazione" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="trasmettePrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>      
+            <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>   
+            <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>                   
+        </xs:choice>
     </xs:complexType>
 
+    <!-- Reference suecommon:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:choice>
+            <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="ricade" minOccurs="0" type="suecommon:SaluteSicurezzaRicadeType"/>
+            <xs:element name="ricadeConRiserva" minOccurs="0"  type="basic:EmptyType"/>
+        </xs:choice>        
+    </xs:complexType> 
+    
+    <xs:complexType name="SaluteSicurezzaRicadeType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="inf200ggUomo" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="pariSup200ggUomo" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+            <xs:choice>
+                <xs:element name="noInvioNotifica" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="invioNotifica" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:boolean" name="allegato"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>        
+    </xs:complexType>
+    
     <!-- ENUMERATION -->
     <xs:simpleType name="TitolaritaInterventoEnum">
         <xs:restriction base="xs:string">

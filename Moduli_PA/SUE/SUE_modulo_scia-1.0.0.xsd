@@ -32,6 +32,9 @@
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaType"/>
+            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiType"/>
+            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciType"/>
+            <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>        
         </xs:sequence>
     </xs:complexType>
 
@@ -73,5 +76,7 @@
         </xs:sequence>
         <xs:attribute type="xs:boolean" name="ricevuta"/>
     </xs:complexType>      
+
+
 
 </xs:schema>
