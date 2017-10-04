@@ -26,6 +26,7 @@
             <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType"/>
             <xs:element name="schedaDitta" type="suecommon:DittaAnagraficaType"/>
             <xs:element name="schedaDelegati" type="suecommon:PersonaAnagraficaType"/>
+            
             <!-- DICHIARAZIONI -->
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>
             <xs:element name="presentazioneInizioLavori" type="scia:PresentazioneInzioLavoriType"/>
@@ -36,6 +37,7 @@
             <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
+            
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE  -->
             <xs:element name="datiProgettista" type="suecommon:DatiProgettistaType"/>
             <xs:element name="tipoInterventiOpere" type="scia:TipoInterventiOpere"/>
@@ -60,7 +62,7 @@
             <xs:element name="rischioRilevante" type="suecommon:RischioRilevanteType"/>
             <xs:element name="tutelaEcologica" type="suecommon:TutelaEcologicaType"/>
             <xs:element name="efficienzaInfrastrutture" type="suecommon:EfficienzaInfrastruttureType"/>
-
+            
             <!-- ALLEGATI  -->
             <xs:element name="tabellaAllegati" type="scia:TabellaAllegatiType"/>
         </xs:sequence>
@@ -133,6 +135,14 @@
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoVersamentoOblazioneInEsecuzione" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoVersamentoOblazioneSanatoria" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDeterminazioneContributoCostruzione" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoPreventivoContributoCostruzione" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoVersamentoContributoCostruzione" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoNotificaPreliminare" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
