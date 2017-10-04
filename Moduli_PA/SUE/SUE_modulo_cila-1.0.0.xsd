@@ -9,6 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_cila"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
 
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
         schemaLocation="SUE_common_components-1.0.0.xsd"/>
@@ -38,15 +39,23 @@
             <xs:element name="presentazioneInizioLavori" type="suecommon:InterventiSoggettiACILAEnum"/>
             <xs:element name="qualificazioneIntervento" type="cila:QualificazioneInterventoType"/>
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
-            <!--  !! Su questo ho un dubbio dobbiamo verificare -->
-            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="calcoloContributoCostruzione" type="cila:CalcoloContributoBaseType"/>
             <xs:element name="tecniciIncaricati" type="cila:TecniciIncaricatiType"/>
-
+            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutricideiLavoriType"/>
+            <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
+            <xs:element name="progettista" type="suecommon:DatiProgettistaType"/>
+            <xs:element name="tipoDiIntervento" type="cila:TipologiaInterventoType"/>
+            
+            <!-- ... -->
             <!-- 
-            <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaType"/>
-            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciType"/>
-            <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>     
-             -->
+            <xs:element name="altreComunicazioni" type=""/>
+            <xs:element name="attDiAssenso" type=""/>
+            -->
+            
+            <!-- ... -->
+            <!-- 
+            <xs:element name="Allegati" type=""/>
+            -->
         </xs:sequence>
     </xs:complexType>
 
@@ -92,6 +101,38 @@
             </xs:choice>
     </xs:complexType>
     
+    
+    <xs:complexType name="CalcoloContributoBaseType">
+        <xs:sequence>
+            <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
+            <xs:element name="titoloOneroso" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="ricVersamento" minOccurs="0" type="xs:boolean"/>
+                        <xs:element name="versamentoInizioLavori" minOccurs="0" type="xs:boolean"/>                                                   
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TipologiaInterventoType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="manStraordDPR380-2001"  minOccurs="0" type="xs:boolean"/>
+                <xs:element name="restauroRisanamentoDPR380-2001"  minOccurs="0" type="xs:boolean"/>
+                <xs:element name="barriereArchitettoniche" minOccurs="0" type="xs:boolean"/>
+                <xs:element name="sottosuoloCentroEdificato" minOccurs="0" type="xs:boolean"/>
+                <xs:element name="movimentiTerra" minOccurs="0" type="xs:boolean"/>
+                <xs:element name="serreMobiliStagionali" minOccurs="0" type="xs:boolean"/>
+                <xs:element name="pertinenzeMinori" minOccurs="0" type="xs:boolean"/>
+                <xs:element name="altriExtraArt6-10-22" minOccurs="0" type="xs:boolean"/>
+                <xs:element name="altriExtraArt6-10-22-specificare" minOccurs="0" type="xs:string"/>
+            </xs:choice>        
+        </xs:sequence>
+    </xs:complexType> 
+
+
     
     
 </xs:schema>
