@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:soggcoinv="http://www.agid.gov.it/MODULI_PA/SUE/modulo_soggetti_coinvolti"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_soggetti_coinvolti"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+        schemaLocation="SUE_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+        schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components"
+        schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components"
+        schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration"
+        schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+
+    <!-- // Modulo Soggetti Coinvolti ## internal code ref 05/D // -->
+
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSoggettiCoinvolti" type="soggcoinv:ModuloSoggettiCoinvoltiType"/>
+
+    <xs:complexType name="ModuloSoggettiCoinvoltiType">
+        <xs:sequence>
+            <xs:element name="Titolari">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType" minOccurs="2" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+
+            <xs:element name="TecniciIncaricati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="schedaTecnico" type="suecommon:TecniciIncaricatiType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ImpreseEsecutrici">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="schedaImpreseEsecutriciType" type="suecommon:ImpreseEsecutriciType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
+
+
+
+
