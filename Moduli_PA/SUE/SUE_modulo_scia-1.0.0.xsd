@@ -49,7 +49,11 @@
             <xs:element name="prevenzioneIncendi" type="suecommon:PrevenzioneIncendiType"/>
             <xs:element name="amianto" type="suecommon:AmiantoType"/>
             <xs:element name="conformitaSanitaria" type="suecommon:ConformitaSanitariaType"/> 
-            <xs:element name="interventoZonaSismica" type="suecommon:interventoZonaSismicaType"/>
+            <xs:element name="interventoZonaSismica" type="suecommon:InterventoZonaSismicaType"/>
+            <xs:element name="autorizzazionePaesaggistica" type="suecommon:AutorizzazionePaesaggisticaType"/> 
+            <xs:element name="autorizzazioneSoprintendenza" type="suecommon:AutorizzazioneSoprintendenzaType"/> 
+            <xs:element name="areaProtetta" type="suecommon:AreaProtettaType"/>  
+ 
             <!-- ALLEGATI  -->
  
         </xs:sequence>
