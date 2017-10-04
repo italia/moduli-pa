@@ -23,6 +23,7 @@
     
     <xs:complexType name="ModuloSCIAType">
         <xs:sequence>
+            <!-- SOGGETTI -->
             <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType"/>
             <xs:element name="schedaDitta" type="suecommon:DittaAnagraficaType"/>
             <xs:element name="schedaDelegati" type="suecommon:PersonaAnagraficaType"/>
