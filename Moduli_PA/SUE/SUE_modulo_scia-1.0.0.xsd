@@ -43,9 +43,13 @@
             <xs:element name="strumentazioneUrbanistica" type="suecommon:StrumentazioneUrbanisticaType"/>
             <xs:element name="barriereArchitettoniche" type="suecommon:BarriereArchitettonicheType"/>
             <xs:element name="sicurezzaImpianti" type="suecommon:SicurezzaImpiantiType"/>
-            
+            <xs:element name="consumiEnergetici" type="suecommon:ConsumiEnergeticiType"/>
+            <xs:element name="tutelaInquinamentoAcustico" type="suecommon:TutelaInquinamentoAcusticoType"/>
+            <xs:element name="materialiRisulta" type="suecommon:MaterialiRisultaType"/>
+            <xs:element name="prevenzioneIncendi" type="suecommon:PrevenzioneIncendiType"/>
+            <xs:element name="amianto" type="suecommon:AmiantoType"/>
             <!-- ALLEGATI  -->
-            
+ 
         </xs:sequence>
     </xs:complexType>
 

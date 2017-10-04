@@ -296,11 +296,11 @@
     </xs:complexType> 
     
     <!-- Reference suecommon:StrumentazioneUrbanisticaType -->
-    <xs:complexType name="StrumentazioneUrbanisticaTypeBaseType" abstract="true"/>
+    <xs:complexType name="StrumentazioneUrbanisticaBaseType" abstract="true"/>
     
     <xs:complexType name="StrumentazioneUrbanisticaType">
         <xs:complexContent>
-            <xs:extension base="suecommon:StrumentazioneUrbanisticaTypeBaseType">
+            <xs:extension base="suecommon:StrumentazioneUrbanisticaBaseType">
                 <xs:sequence>
                     <xs:element name="prg" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
                     <xs:element name="pianoParticolareggiato" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
@@ -374,6 +374,266 @@
                             </xs:complexType>
                         </xs:element>
                     </xs:sequence>                    
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ConsumiEnergeticiType -->
+    <xs:complexType name="ConsumiEnergeticiBaseType" abstract="true"/>
+    
+    <xs:complexType name="ConsumiEnergeticiType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ConsumiEnergeticiBaseType">
+                <xs:sequence>
+                    <xs:element name="nonSoggettoFontiRinnovabili" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation>non è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005
+                            che l’intervento, in relazione agli obblighi in materia di fonti rinnovabili</xs:annotation>
+                    </xs:element>
+                    <xs:element name="nonSoggettoNuovaCostruzioneRistrutturazioneRilevante" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation>non è soggetto all’applicazione del d.lgs. n. 28/2011, in quanto non riguarda edifici di nuova costruzione o edifici sottoposti ad una 
+                            ristrutturazione rilevante</xs:annotation>
+                    </xs:element>
+                    <xs:element name="soggettoApplicazione" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="prescrizioniInRelTecnica" minOccurs="0" type="basic:EmptyType">
+                                    <xs:annotation>il rispetto delle prescrizioni in materia di utilizzo di fonti di energia rinnovabili è indicato negli elaborati progettuali e 
+                                        nella relazione tecnica prevista dall’articolo 125 del d.P.R. n. 380/2001 e dal d.lgs. n. 192/2005 in materia di risparmio energetico</xs:annotation>
+                                </xs:element>
+                                <xs:element name="nonFattibilitaInRelTecnica" minOccurs="0" type="basic:EmptyType">
+                                    <xs:annotation>l’impossibilità tecnica di ottemperare, in tutto o in parte, agli obblighi previsti, è evidenziata nella relazione tecnica 
+                                        dovuta ai sensi dell’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005, con l’indicazione della non fattibilità di tutte le 
+                                        diverse opzioni tecnologiche disponibili</xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ricadeSpessoriDistanze" minOccurs="0">
+                        <xs:annotation>ricade nell’articolo 14, comma 6,  del d.lgs. n. 102/2014 in merito al computo degli spessori delle murature, nonché alla deroga alle 
+                            distanze minime e alle altezze massime degli edifici</xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation>si certifica nella relazione tecnica una riduzione minima del 20 per cento dell’indice di prestazione energetica previsto 
+                                    dal d.lgs. n. 192/2005</xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="certificaRiduzione20"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ricadeDistanze" minOccurs="0">
+                        <xs:annotation>ricade nell’articolo 14, comma 7, del d.lgs. n. 102/2014 in merito alle deroga alle distanze minime e alle altezze 
+                            massime degli edifici</xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation>si certifica nella relazione tecnica una riduzione minima del 10 per cento del limite di trasmittanza previsto 
+                                    dal d.lgs. n. 192/2005</xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="certificaRiduzione10"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ricadeBonusVolumetrico" minOccurs="0">
+                        <xs:annotation>ricade nell’articolo 12, comma 1, del d.lgs. n. 28/2011 in merito al bonus volumetrico del 5 per cento</xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation>si certifica nella relazione tecnica una copertura dei consumi di calore, di elettricità e per il raffrescamento, 
+                                    mediante energia prodotta da fonti rinnovabili, in misura superiore di almeno il 30 per cento rispetto ai valori minimi obbligatori 
+                                    di cui all’allegato 3 del d.lgs. n. 28/2011</xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="certificaCopertura30"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="soggettoDepositoProgetto" minOccurs="0">
+                        <xs:annotation>è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del 
+                            d.lgs. n. 192/2005</xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation>si allega la relazione tecnica sul rispetto delle prescrizioni in materia di risparmio energetico e la 
+                                    documentazione richiesta dalla legge</xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoRispettoPrescrizioni"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence> 
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:TutelaInquinamentoAcusticoType -->
+    <xs:complexType name="TutelaInquinamentoAcusticoBaseType" abstract="true"/>
+    
+    <xs:complexType name="TutelaInquinamentoAcusticoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TutelaInquinamentoAcusticoBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="nonRientraArt8" minOccurs="0" type="basic:EmptyType">
+                            <xs:annotation>non rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995</xs:annotation>
+                        </xs:element>
+                        <xs:element name="rientraArt8" minOccurs="0">
+                            <xs:annotation>rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995, integrato con i 
+                                contenuti dell’articolo 4 del d.P.R. n. 227/2011</xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="documentazioneImpattoAcustico" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation>documentazione di impatto acustico  (art. 8, commi 2 e 4, l. n. 447/1995)</xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="previsioneClimaAcustico" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation>valutazione previsionale di clima acustico (art. 8, comma 3, l. n. 447/1995)</xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="dichiarazioneRispettoLimiti" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation>dichiarazione sostitutiva dell’atto di notorietà, a firma del titolare, relativa al rispetto 
+                                            dei limiti stabiliti dal documento di classificazione acustica del territorio comunale di riferimento 
+                                            ovvero, ove questo non sia stato adottato, ai limiti individuati dal d.P.C.M. 14 novembre 1997 
+                                            (art. 4, commi 1 e 2, d.P.R. n. 227/2011)</xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="documentazioneMisureNullaOsta" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation>la documentazione di previsione di impatto acustico con l’indicazione delle misure previste 
+                                            per ridurre o eliminare le emissioni sonore, nel caso in cui i valori di emissioni sono superiori a quelli 
+                                            della zonizzazione acustica comunale o a quelli individuati dal d.P.C.M. 14 novembre 1997 
+                                            (art. 8, comma 6, l. n. 447/1995) ai fini del rilascio del nulla-osta da parte del Comune 
+                                            (art. 8, comma 6, l. n. 447/1995)</xs:annotation>
+                                    </xs:element>                                    
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element> 
+                    </xs:choice> 
+                    <xs:choice>
+                        <xs:element name="nonRientra19971205" minOccurs="0" type="basic:EmptyType">
+                            <xs:annotation>non rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:annotation>
+                        </xs:element>
+                        <xs:element name="rientra19971205" minOccurs="0" type="basic:EmptyType">
+                            <xs:annotation>rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:annotation>
+                        </xs:element> 
+                    </xs:choice> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:MaterialiRisultaType -->
+    <xs:complexType name="MaterialiRisultaBaseType" abstract="true"/>
+    
+    <xs:complexType name="MaterialiRisultaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:MaterialiRisultaBaseType">
+                <xs:sequence>
+                    <xs:element name="nonSoggettaNormativa" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation>non sono soggette alla normativa relativa ai materiali da scavo (art. 41-bis d.l. n. 69 del 2013 e 
+                            art. 184-bis d.lgs. n. 152 del 2006)</xs:annotation>
+                    </xs:element>
+                    <xs:element name="comportaProduzione" minOccurs="0">
+                        <xs:annotation>comportano la produzione di materiali da scavo considerati come sottoprodotti ai sensi dell’articolo 
+                            184-bis, comma 1, del d.lgs. n. 152/2006 o dell’articolo 41-bis, comma 1, d.l. n. 69 del 2013 e del d.m. 
+                            n. 161/2012</xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="volInfUgu6000" type="basic:EmptyType">
+                                    <xs:annotation>le opere comportano la produzione di materiali da scavo per un volume inferiore o 
+                                        uguale a 6000 mc ovvero (pur superando tale soglia) non sono soggette a VIA o AIA</xs:annotation>                                    
+                                </xs:element>
+                                <xs:element name="volInfUgu6000" minOccurs="0">
+                                    <xs:annotation>le opere comportano la produzione di materiali da scavo per un volume superiore a 6000 mc 
+                                        e sono soggette a VIA o AIA, e pertanto, ai sensi dell’art. 184-bis, comma 2-bis del d.lgs. n. 152/2006, 
+                                        e del d.m. n. 161/2012  si prevede la presentazione del Piano di Utilizzo.</xs:annotation>
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="estremiProvvedimento" minOccurs="0" type="aggregate:ProtocolloStandardType">
+                                                <xs:annotation>si comunicano gli estremi del provvedimento di VIA o AIA, comprensivo dell’assenso 
+                                                    al Piano di Utilizzo dei materiali da scavo, rilasciato da__________________________con 
+                                                    prot. _____________ in data  |__|__|__|__|__|__|__|__</xs:annotation>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="produzioneRiutilizzataInLuogo" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation>comportano la produzione di materiali da scavo che saranno riutilizzati nello stesso luogo di produzione </xs:annotation>
+                    </xs:element>
+                    <xs:element name="soggettaNormativa" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation>riguardano interventi di demolizione di edifici o altri manufatti preesistenti e producono rifiuti la cui 
+                            gestione è disciplinata ai sensi della parte quarta del d.lgs. n. 152/ 2006</xs:annotation>
+                    </xs:element>
+                    <xs:element name="produzioneRifiuti" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation>comportano la produzione di materiali da scavo che saranno gestiti dall’interessato come rifiuti</xs:annotation>
+                    </xs:element>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:PrevenzioneIncendiType -->
+    <xs:complexType name="PrevenzioneIncendiType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="nonSoggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
+                    <xs:annotation>non è soggetto alle norme di prevenzione incendi</xs:annotation>
+                </xs:element>
+                <xs:element name="soggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
+                    <xs:annotation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:annotation>
+                </xs:element>
+                <xs:element name="parzialeCoperturaPrevenzioneIncendi" minOccurs="0">
+                    <xs:annotation>presenta caratteristiche tali da non consentire l’integrale osservanza delle regole tecniche di prevenzione incendi</xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:annotation>si allega documentazione necessaria all’ottenimento della deroga</xs:annotation>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:boolean" name="allegatoDeroga"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:choice>
+                <xs:element name="nonSoggettoValutazioneProgetto" minOccurs="0" type="basic:EmptyType">
+                    <xs:annotation>non è soggetto alla valutazione del progetto da parte del Comando Provinciale dei Vigili del Fuoco ai sensi del 
+                        d.P.R. n. 151/2011</xs:annotation>
+                </xs:element>                
+                <xs:element name="soggettoValutazioneProgetto" minOccurs="0">
+                    <xs:annotation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:annotation>si allega la documentazione necessaria alla valutazione del progetto</xs:annotation>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:boolean" name="allegatoValutazioneProgetto"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="varianteProgetto" minOccurs="0">
+                    <xs:annotation>costituisce variante e il sottoscritto assevera che le modifiche non costituiscono variazione 
+                        dei requisiti di sicurezza antincendio già approvati con parere del Comando Provinciale dei Vigili 
+                        del fuoco rilasciato con prot. ______________  in data  |__|__|__|__|__|__|__|__|</xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="parereVigiliDelFuoco" type="aggregate:ProtocolloStandardType"/>
+                        </xs:sequence>                      
+                    </xs:complexType>
+                </xs:element>                 
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Reference suecommon:AmiantoType -->
+    <xs:complexType name="AmiantoType">
+        <xs:choice>
+            <xs:element name="interessano" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="nonInteressano" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute type="xs:boolean" name="allegato"/>
+                        </xs:extension>
+                    </xs:simpleContent>                   
                 </xs:complexType>
             </xs:element>
         </xs:choice>
