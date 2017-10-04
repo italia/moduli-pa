@@ -18,7 +18,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>    
     
-    <!-- Reference suapcommon:PersonaAnagraficaType -->
+    <!-- @giacomo : Cross Reference to suapcommon:PersonaAnagraficaType REFACTORY ??? -->
     <xs:complexType name="PersonaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di una
@@ -34,25 +34,14 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+ 
     <!-- ref aggregate:ImpresaAnagraficaType -->
     <xs:complexType name="DittaAnagraficaType">
-        <xs:annotation>
-            <xs:documentation>Dati della Ditta o Società</xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="inQualita" type="xs:string"/>
-            <xs:element name="dittaNome" type="xs:string"/>
-            <xs:choice>
-                <xs:element name="dittaCF" type="basic:CodiceFiscaleType"/>
-                <xs:element name="dittaPiva" type="basic:PIVA"/>
-            </xs:choice>
-            <xs:element name="dittaIndirizzo" type="aggregate:IndirizzoType"/>
-            <xs:element name="dittaRegistroImpreseCCIAA" type="aggregate:CCIAAType"/>
-            <xs:element name="dittaContatti" type="aggregate:ContattiType" minOccurs="0"/>
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="aggregate:ImpresaAnagraficaType"/>
+        </xs:complexContent>
     </xs:complexType>
-    
+     
     <xs:complexType name="ProfessionistaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
@@ -88,12 +77,10 @@
     <xs:complexType name="TecniciIncaricatiType">
         <xs:sequence>
             <xs:element name="schedaProgettistaOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>
-            <xs:element name="schedaDirettoreOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaType"/>
-            <xs:element name="schedaProgettistaOpereStrutturali" type="suecommon:ProfessionistaAnagraficaDirettoreType" />
-            <xs:element name="schedaDirettoreOpereStrutturali" type="suecommon:ProfessionistaAnagraficaType"/>
-            <xs:sequence>
-                <xs:element name="schedaAltritecnici" type="suecommon:AltriTecniciType"/>
-            </xs:sequence>
+            <xs:element name="schedaDirettoreOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaType" minOccurs="0"/>
+            <xs:element name="schedaProgettistaOpereStrutturali" type="suecommon:ProfessionistaAnagraficaDirettoreType" minOccurs="0" />
+            <xs:element name="schedaDirettoreOpereStrutturali" type="suecommon:ProfessionistaAnagraficaType" minOccurs="0" />
+            <xs:element name="schedaAltritecnici" type="suecommon:AltriTecniciType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -145,7 +132,9 @@
     <xs:complexType name="DatiProgettistaType">
         <xs:complexContent>
             <xs:extension base="suecommon:ProfessionistaAnagraficaType">
-                <xs:element name="ordineProfessionale" type="suecommon:OrdineProfessionaleType"/>
+                <xs:sequence>
+                     <xs:element name="ordineProfessionale" type="suecommon:OrdineProfessionaleType"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -192,15 +181,14 @@
                 <xs:element name="permessoLicenzaConc" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="autorizzazioneEdilizia" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="comunicazioneEdilizia" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
-                <xs:element name="autorizzazioneEdilizia" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="condonoEdilizio" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="denunciaInzioAttivita" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="DIA_SCIAAlternativa" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="certificazioneInizioAttivita" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                 <xs:element name="comunicazioneEdiliziaLibera" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
-                <xs:element name="altraPraticaEdilizia" minOccurs="0" type="scia:AltraPraticaEdiliziaType"/>
+                <xs:element name="altraPraticaEdilizia" minOccurs="0" type="suecommon:AltraPraticaEdiliziaType"/>
                 <xs:element name="primoAccatastamento" minOccurs="0" type="basic:EmptyType"/>
-            </xs:choice>        
+            </xs:choice>            
     </xs:complexType> 
     
     <xs:complexType name="AltraPraticaEdiliziaType">
@@ -387,35 +375,35 @@
             <xs:extension base="suecommon:ConsumiEnergeticiBaseType">
                 <xs:sequence>
                     <xs:element name="nonSoggettoFontiRinnovabili" minOccurs="0" type="basic:EmptyType">
-                        <xs:annotation>non è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005
-                            che l’intervento, in relazione agli obblighi in materia di fonti rinnovabili</xs:annotation>
+                        <xs:annotation><xs:documentation>non è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005
+                            che l’intervento, in relazione agli obblighi in materia di fonti rinnovabili</xs:documentation></xs:annotation>
                     </xs:element>
                     <xs:element name="nonSoggettoNuovaCostruzioneRistrutturazioneRilevante" minOccurs="0" type="basic:EmptyType">
-                        <xs:annotation>non è soggetto all’applicazione del d.lgs. n. 28/2011, in quanto non riguarda edifici di nuova costruzione o edifici sottoposti ad una 
-                            ristrutturazione rilevante</xs:annotation>
+                        <xs:annotation><xs:documentation>non è soggetto all’applicazione del d.lgs. n. 28/2011, in quanto non riguarda edifici di nuova costruzione o edifici sottoposti ad una 
+                            ristrutturazione rilevante</xs:documentation></xs:annotation>
                     </xs:element>
                     <xs:element name="soggettoApplicazione" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="prescrizioniInRelTecnica" minOccurs="0" type="basic:EmptyType">
-                                    <xs:annotation>il rispetto delle prescrizioni in materia di utilizzo di fonti di energia rinnovabili è indicato negli elaborati progettuali e 
-                                        nella relazione tecnica prevista dall’articolo 125 del d.P.R. n. 380/2001 e dal d.lgs. n. 192/2005 in materia di risparmio energetico</xs:annotation>
+                                    <xs:annotation><xs:documentation>il rispetto delle prescrizioni in materia di utilizzo di fonti di energia rinnovabili è indicato negli elaborati progettuali e 
+                                        nella relazione tecnica prevista dall’articolo 125 del d.P.R. n. 380/2001 e dal d.lgs. n. 192/2005 in materia di risparmio energetico</xs:documentation></xs:annotation>
                                 </xs:element>
                                 <xs:element name="nonFattibilitaInRelTecnica" minOccurs="0" type="basic:EmptyType">
-                                    <xs:annotation>l’impossibilità tecnica di ottemperare, in tutto o in parte, agli obblighi previsti, è evidenziata nella relazione tecnica 
+                                    <xs:annotation><xs:documentation>l’impossibilità tecnica di ottemperare, in tutto o in parte, agli obblighi previsti, è evidenziata nella relazione tecnica 
                                         dovuta ai sensi dell’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005, con l’indicazione della non fattibilità di tutte le 
-                                        diverse opzioni tecnologiche disponibili</xs:annotation>
+                                        diverse opzioni tecnologiche disponibili</xs:documentation></xs:annotation>
                                 </xs:element>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="ricadeSpessoriDistanze" minOccurs="0">
-                        <xs:annotation>ricade nell’articolo 14, comma 6,  del d.lgs. n. 102/2014 in merito al computo degli spessori delle murature, nonché alla deroga alle 
-                            distanze minime e alle altezze massime degli edifici</xs:annotation>
+                        <xs:annotation><xs:documentation>ricade nell’articolo 14, comma 6,  del d.lgs. n. 102/2014 in merito al computo degli spessori delle murature, nonché alla deroga alle 
+                            distanze minime e alle altezze massime degli edifici</xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:simpleContent>
-                                <xs:annotation>si certifica nella relazione tecnica una riduzione minima del 20 per cento dell’indice di prestazione energetica previsto 
-                                    dal d.lgs. n. 192/2005</xs:annotation>
+                                <xs:annotation><xs:documentation>si certifica nella relazione tecnica una riduzione minima del 20 per cento dell’indice di prestazione energetica previsto 
+                                    dal d.lgs. n. 192/2005</xs:documentation></xs:annotation>
                                 <xs:extension base="xs:string">
                                     <xs:attribute type="xs:boolean" name="certificaRiduzione20"/>
                                 </xs:extension>
@@ -423,12 +411,12 @@
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="ricadeDistanze" minOccurs="0">
-                        <xs:annotation>ricade nell’articolo 14, comma 7, del d.lgs. n. 102/2014 in merito alle deroga alle distanze minime e alle altezze 
-                            massime degli edifici</xs:annotation>
+                        <xs:annotation><xs:documentation>ricade nell’articolo 14, comma 7, del d.lgs. n. 102/2014 in merito alle deroga alle distanze minime e alle altezze 
+                            massime degli edifici</xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:simpleContent>
-                                <xs:annotation>si certifica nella relazione tecnica una riduzione minima del 10 per cento del limite di trasmittanza previsto 
-                                    dal d.lgs. n. 192/2005</xs:annotation>
+                                <xs:annotation><xs:documentation>si certifica nella relazione tecnica una riduzione minima del 10 per cento del limite di trasmittanza previsto 
+                                    dal d.lgs. n. 192/2005</xs:documentation></xs:annotation>
                                 <xs:extension base="xs:string">
                                     <xs:attribute type="xs:boolean" name="certificaRiduzione10"/>
                                 </xs:extension>
@@ -436,12 +424,12 @@
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="ricadeBonusVolumetrico" minOccurs="0">
-                        <xs:annotation>ricade nell’articolo 12, comma 1, del d.lgs. n. 28/2011 in merito al bonus volumetrico del 5 per cento</xs:annotation>
+                        <xs:annotation><xs:documentation>ricade nell’articolo 12, comma 1, del d.lgs. n. 28/2011 in merito al bonus volumetrico del 5 per cento</xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:simpleContent>
-                                <xs:annotation>si certifica nella relazione tecnica una copertura dei consumi di calore, di elettricità e per il raffrescamento, 
+                                <xs:annotation><xs:documentation>si certifica nella relazione tecnica una copertura dei consumi di calore, di elettricità e per il raffrescamento, 
                                     mediante energia prodotta da fonti rinnovabili, in misura superiore di almeno il 30 per cento rispetto ai valori minimi obbligatori 
-                                    di cui all’allegato 3 del d.lgs. n. 28/2011</xs:annotation>
+                                    di cui all’allegato 3 del d.lgs. n. 28/2011</xs:documentation></xs:annotation>
                                 <xs:extension base="xs:string">
                                     <xs:attribute type="xs:boolean" name="certificaCopertura30"/>
                                 </xs:extension>
@@ -449,12 +437,12 @@
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="soggettoDepositoProgetto" minOccurs="0">
-                        <xs:annotation>è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del 
-                            d.lgs. n. 192/2005</xs:annotation>
+                        <xs:annotation><xs:documentation>è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del 
+                            d.lgs. n. 192/2005</xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:simpleContent>
-                                <xs:annotation>si allega la relazione tecnica sul rispetto delle prescrizioni in materia di risparmio energetico e la 
-                                    documentazione richiesta dalla legge</xs:annotation>
+                                <xs:annotation><xs:documentation>si allega la relazione tecnica sul rispetto delle prescrizioni in materia di risparmio energetico e la 
+                                    documentazione richiesta dalla legge</xs:documentation></xs:annotation>
                                 <xs:extension base="xs:string">
                                     <xs:attribute type="xs:boolean" name="allegatoRispettoPrescrizioni"/>
                                 </xs:extension>
@@ -475,31 +463,31 @@
                 <xs:sequence>
                     <xs:choice>
                         <xs:element name="nonRientraArt8" minOccurs="0" type="basic:EmptyType">
-                            <xs:annotation>non rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995</xs:annotation>
+                            <xs:annotation><xs:documentation>non rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995</xs:documentation></xs:annotation>
                         </xs:element>
                         <xs:element name="rientraArt8" minOccurs="0">
-                            <xs:annotation>rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995, integrato con i 
-                                contenuti dell’articolo 4 del d.P.R. n. 227/2011</xs:annotation>
+                            <xs:annotation><xs:documentation>rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995, integrato con i 
+                                contenuti dell’articolo 4 del d.P.R. n. 227/2011</xs:documentation></xs:annotation>
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="documentazioneImpattoAcustico" minOccurs="0" type="basic:EmptyType">
-                                        <xs:annotation>documentazione di impatto acustico  (art. 8, commi 2 e 4, l. n. 447/1995)</xs:annotation>
+                                        <xs:annotation><xs:documentation>documentazione di impatto acustico  (art. 8, commi 2 e 4, l. n. 447/1995)</xs:documentation></xs:annotation>
                                     </xs:element>
                                     <xs:element name="previsioneClimaAcustico" minOccurs="0" type="basic:EmptyType">
-                                        <xs:annotation>valutazione previsionale di clima acustico (art. 8, comma 3, l. n. 447/1995)</xs:annotation>
+                                        <xs:annotation><xs:documentation>valutazione previsionale di clima acustico (art. 8, comma 3, l. n. 447/1995)</xs:documentation></xs:annotation>
                                     </xs:element>
                                     <xs:element name="dichiarazioneRispettoLimiti" minOccurs="0" type="basic:EmptyType">
-                                        <xs:annotation>dichiarazione sostitutiva dell’atto di notorietà, a firma del titolare, relativa al rispetto 
+                                        <xs:annotation><xs:documentation>dichiarazione sostitutiva dell’atto di notorietà, a firma del titolare, relativa al rispetto 
                                             dei limiti stabiliti dal documento di classificazione acustica del territorio comunale di riferimento 
                                             ovvero, ove questo non sia stato adottato, ai limiti individuati dal d.P.C.M. 14 novembre 1997 
-                                            (art. 4, commi 1 e 2, d.P.R. n. 227/2011)</xs:annotation>
+                                            (art. 4, commi 1 e 2, d.P.R. n. 227/2011)</xs:documentation></xs:annotation>
                                     </xs:element>
                                     <xs:element name="documentazioneMisureNullaOsta" minOccurs="0" type="basic:EmptyType">
-                                        <xs:annotation>la documentazione di previsione di impatto acustico con l’indicazione delle misure previste 
+                                        <xs:annotation><xs:documentation>la documentazione di previsione di impatto acustico con l’indicazione delle misure previste 
                                             per ridurre o eliminare le emissioni sonore, nel caso in cui i valori di emissioni sono superiori a quelli 
                                             della zonizzazione acustica comunale o a quelli individuati dal d.P.C.M. 14 novembre 1997 
                                             (art. 8, comma 6, l. n. 447/1995) ai fini del rilascio del nulla-osta da parte del Comune 
-                                            (art. 8, comma 6, l. n. 447/1995)</xs:annotation>
+                                            (art. 8, comma 6, l. n. 447/1995)</xs:documentation></xs:annotation>
                                     </xs:element>                                    
                                 </xs:sequence>
                             </xs:complexType>
@@ -507,10 +495,10 @@
                     </xs:choice> 
                     <xs:choice>
                         <xs:element name="nonRientra19971205" minOccurs="0" type="basic:EmptyType">
-                            <xs:annotation>non rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:annotation>
+                            <xs:annotation><xs:documentation>non rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:documentation></xs:annotation>
                         </xs:element>
                         <xs:element name="rientra19971205" minOccurs="0" type="basic:EmptyType">
-                            <xs:annotation>rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:annotation>
+                            <xs:annotation><xs:documentation>rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:documentation></xs:annotation>
                         </xs:element> 
                     </xs:choice> 
                 </xs:sequence>
@@ -526,29 +514,29 @@
             <xs:extension base="suecommon:MaterialiRisultaBaseType">
                 <xs:sequence>
                     <xs:element name="nonSoggettaNormativa" minOccurs="0" type="basic:EmptyType">
-                        <xs:annotation>non sono soggette alla normativa relativa ai materiali da scavo (art. 41-bis d.l. n. 69 del 2013 e 
-                            art. 184-bis d.lgs. n. 152 del 2006)</xs:annotation>
+                        <xs:annotation><xs:documentation>non sono soggette alla normativa relativa ai materiali da scavo (art. 41-bis d.l. n. 69 del 2013 e 
+                            art. 184-bis d.lgs. n. 152 del 2006)</xs:documentation></xs:annotation>
                     </xs:element>
                     <xs:element name="comportaProduzione" minOccurs="0">
-                        <xs:annotation>comportano la produzione di materiali da scavo considerati come sottoprodotti ai sensi dell’articolo 
+                        <xs:annotation><xs:documentation>comportano la produzione di materiali da scavo considerati come sottoprodotti ai sensi dell’articolo 
                             184-bis, comma 1, del d.lgs. n. 152/2006 o dell’articolo 41-bis, comma 1, d.l. n. 69 del 2013 e del d.m. 
-                            n. 161/2012</xs:annotation>
+                            n. 161/2012</xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="volInfUgu6000" type="basic:EmptyType">
-                                    <xs:annotation>le opere comportano la produzione di materiali da scavo per un volume inferiore o 
-                                        uguale a 6000 mc ovvero (pur superando tale soglia) non sono soggette a VIA o AIA</xs:annotation>                                    
+                                    <xs:annotation><xs:documentation>le opere comportano la produzione di materiali da scavo per un volume inferiore o 
+                                        uguale a 6000 mc ovvero (pur superando tale soglia) non sono soggette a VIA o AIA</xs:documentation></xs:annotation>                                    
                                 </xs:element>
-                                <xs:element name="volInfUgu6000" minOccurs="0">
-                                    <xs:annotation>le opere comportano la produzione di materiali da scavo per un volume superiore a 6000 mc 
+                                <xs:element name="volSup6000" minOccurs="0">
+                                    <xs:annotation><xs:documentation>le opere comportano la produzione di materiali da scavo per un volume superiore a 6000 mc 
                                         e sono soggette a VIA o AIA, e pertanto, ai sensi dell’art. 184-bis, comma 2-bis del d.lgs. n. 152/2006, 
-                                        e del d.m. n. 161/2012  si prevede la presentazione del Piano di Utilizzo.</xs:annotation>
+                                        e del d.m. n. 161/2012  si prevede la presentazione del Piano di Utilizzo.</xs:documentation></xs:annotation>
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element name="estremiProvvedimento" minOccurs="0" type="aggregate:ProtocolloStandardType">
-                                                <xs:annotation>si comunicano gli estremi del provvedimento di VIA o AIA, comprensivo dell’assenso 
+                                                <xs:annotation><xs:documentation>si comunicano gli estremi del provvedimento di VIA o AIA, comprensivo dell’assenso 
                                                     al Piano di Utilizzo dei materiali da scavo, rilasciato da__________________________con 
-                                                    prot. _____________ in data  |__|__|__|__|__|__|__|__</xs:annotation>
+                                                    prot. _____________ in data  |__|__|__|__|__|__|__|__</xs:documentation></xs:annotation>
                                             </xs:element>
                                         </xs:sequence>
                                     </xs:complexType>
@@ -557,14 +545,14 @@
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="produzioneRiutilizzataInLuogo" minOccurs="0" type="basic:EmptyType">
-                        <xs:annotation>comportano la produzione di materiali da scavo che saranno riutilizzati nello stesso luogo di produzione </xs:annotation>
+                        <xs:annotation><xs:documentation>comportano la produzione di materiali da scavo che saranno riutilizzati nello stesso luogo di produzione</xs:documentation> </xs:annotation>
                     </xs:element>
                     <xs:element name="soggettaNormativa" minOccurs="0" type="basic:EmptyType">
-                        <xs:annotation>riguardano interventi di demolizione di edifici o altri manufatti preesistenti e producono rifiuti la cui 
-                            gestione è disciplinata ai sensi della parte quarta del d.lgs. n. 152/ 2006</xs:annotation>
+                        <xs:annotation><xs:documentation>riguardano interventi di demolizione di edifici o altri manufatti preesistenti e producono rifiuti la cui 
+                            gestione è disciplinata ai sensi della parte quarta del d.lgs. n. 152/ 2006</xs:documentation></xs:annotation>
                     </xs:element>
                     <xs:element name="produzioneRifiuti" minOccurs="0" type="basic:EmptyType">
-                        <xs:annotation>comportano la produzione di materiali da scavo che saranno gestiti dall’interessato come rifiuti</xs:annotation>
+                        <xs:annotation><xs:documentation>comportano la produzione di materiali da scavo che saranno gestiti dall’interessato come rifiuti</xs:documentation></xs:annotation>
                     </xs:element>                    
                 </xs:sequence>
             </xs:extension>
@@ -576,16 +564,16 @@
         <xs:sequence>
             <xs:choice>
                 <xs:element name="nonSoggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
-                    <xs:annotation>non è soggetto alle norme di prevenzione incendi</xs:annotation>
+                    <xs:annotation><xs:documentation>non è soggetto alle norme di prevenzione incendi</xs:documentation></xs:annotation>
                 </xs:element>
                 <xs:element name="soggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
-                    <xs:annotation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:annotation>
+                    <xs:annotation><xs:documentation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:documentation></xs:annotation>
                 </xs:element>
                 <xs:element name="parzialeCoperturaPrevenzioneIncendi" minOccurs="0">
-                    <xs:annotation>presenta caratteristiche tali da non consentire l’integrale osservanza delle regole tecniche di prevenzione incendi</xs:annotation>
+                    <xs:annotation><xs:documentation>presenta caratteristiche tali da non consentire l’integrale osservanza delle regole tecniche di prevenzione incendi</xs:documentation></xs:annotation>
                     <xs:complexType>
                         <xs:simpleContent>
-                            <xs:annotation>si allega documentazione necessaria all’ottenimento della deroga</xs:annotation>
+                            <xs:annotation><xs:documentation>si allega documentazione necessaria all’ottenimento della deroga</xs:documentation></xs:annotation>
                             <xs:extension base="xs:string">
                                 <xs:attribute type="xs:boolean" name="allegatoDocumentazioneDeroga"/>
                             </xs:extension>
@@ -595,14 +583,14 @@
             </xs:choice>
             <xs:choice>
                 <xs:element name="nonSoggettoValutazioneProgetto" minOccurs="0" type="basic:EmptyType">
-                    <xs:annotation>non è soggetto alla valutazione del progetto da parte del Comando Provinciale dei Vigili del Fuoco ai sensi del 
-                        d.P.R. n. 151/2011</xs:annotation>
+                    <xs:annotation><xs:documentation>non è soggetto alla valutazione del progetto da parte del Comando Provinciale dei Vigili del Fuoco ai sensi del 
+                        d.P.R. n. 151/2011</xs:documentation></xs:annotation>
                 </xs:element>                
                 <xs:element name="soggettoValutazioneProgetto" minOccurs="0">
-                    <xs:annotation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:annotation>
+                    <xs:annotation><xs:documentation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:documentation></xs:annotation>
                     <xs:complexType>
                         <xs:simpleContent>
-                            <xs:annotation>si allega la documentazione necessaria alla valutazione del progetto</xs:annotation>
+                            <xs:annotation><xs:documentation>si allega la documentazione necessaria alla valutazione del progetto</xs:documentation></xs:annotation>
                             <xs:extension base="xs:string">
                                 <xs:attribute type="xs:boolean" name="allegatoValutazioneProgetto"/>
                             </xs:extension>
@@ -610,9 +598,9 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="varianteProgetto" minOccurs="0">
-                    <xs:annotation>costituisce variante e il sottoscritto assevera che le modifiche non costituiscono variazione 
+                    <xs:annotation><xs:documentation>costituisce variante e il sottoscritto assevera che le modifiche non costituiscono variazione 
                         dei requisiti di sicurezza antincendio già approvati con parere del Comando Provinciale dei Vigili 
-                        del fuoco rilasciato con prot. ______________  in data  |__|__|__|__|__|__|__|__|</xs:annotation>
+                        del fuoco rilasciato con prot. ______________  in data  |__|__|__|__|__|__|__|__|</xs:documentation></xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="parereVigiliDelFuoco" type="aggregate:ProtocolloStandardType"/>
@@ -666,15 +654,15 @@
     
     <xs:complexType name="InterventoZonaSismicaType">
         <xs:complexContent>
-            <xs:extension base="suecommon:interventoZonaSismicaBaseType">
+            <xs:extension base="suecommon:InterventoZonaSismicaBaseType">
                 <xs:sequence>
                     <xs:choice>
                         <xs:element name="nonPrevisteOpere" minOccurs="0" type="basic:EmptyType"/>
                         <xs:element name="previsteOpere" minOccurs="0">
-                            <xs:annotation>prevede la realizzazione di opere di conglomerato cementizio armato, normale e precompresso ed a 
-                                struttura metallica</xs:annotation>
+                            <xs:annotation><xs:documentation>prevede la realizzazione di opere di conglomerato cementizio armato, normale e precompresso ed a 
+                                struttura metallica</xs:documentation></xs:annotation>
                             <xs:complexType>
-                                <xs:annotation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:annotation>
+                                <xs:annotation><xs:documentation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:documentation></xs:annotation>
                                 <xs:simpleContent>
                                     <xs:extension base="xs:string">
                                         <xs:attribute type="xs:boolean" name="allegatoDenuncia"/>
@@ -693,10 +681,10 @@
                             </xs:complexType>
                         </xs:element> 
                         <xs:element name="previsteOpereNormativaRegionale" minOccurs="0">
-                            <xs:annotation>prevede opere in zona sismica da denunciare ai sensi dell’articolo 93 del d.P.R. n. 380/2001 
-                                o della corrispondente normativa regionale</xs:annotation>
+                            <xs:annotation><xs:documentation>prevede opere in zona sismica da denunciare ai sensi dell’articolo 93 del d.P.R. n. 380/2001 
+                                o della corrispondente normativa regionale</xs:documentation></xs:annotation>
                             <xs:complexType>
-                                <xs:annotation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:annotation>
+                                <xs:annotation><xs:documentation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:documentation></xs:annotation>
                                 <xs:simpleContent>
                                     <xs:extension base="xs:string">
                                         <xs:attribute type="xs:boolean" name="allegatoDenuncia"/>
@@ -705,10 +693,10 @@
                             </xs:complexType>                            
                         </xs:element> 
                         <xs:element name="previsteOpereStrutturali" minOccurs="0">
-                            <xs:annotation>prevede opere strutturali soggette ad autorizzazione sismica ai sensi dell’articolo 94 del 
-                                d.P.R. n. 380/2001 o della corrispondente normativa regional</xs:annotation>
+                            <xs:annotation><xs:documentation>prevede opere strutturali soggette ad autorizzazione sismica ai sensi dell’articolo 94 del 
+                                d.P.R. n. 380/2001 o della corrispondente normativa regional</xs:documentation></xs:annotation>
                             <xs:complexType>
-                                <xs:annotation>si allega la documentazione necessaria per il rilascio dell’autorizzazione sismica</xs:annotation>
+                                <xs:annotation><xs:documentation>si allega la documentazione necessaria per il rilascio dell’autorizzazione sismica</xs:documentation></xs:annotation>
                                 <xs:simpleContent>
                                     <xs:extension base="xs:string">
                                         <xs:attribute type="xs:boolean" name="allegatoDocumentazioneAutorizzazione"/>
@@ -731,19 +719,19 @@
                 <xs:choice>
                     <xs:element name="nonRicadeInZonaTutelata" minOccurs="0" type="basic:EmptyType"/>
                     <xs:element name="nonSoggettoAutorizzazione" minOccurs="0" type="basic:EmptyType">
-                        <xs:annotation>ricade  in zona tutelata, ma le opere non comportano alterazione dei luoghi o dell’aspetto 
+                        <xs:annotation><xs:documentation>ricade  in zona tutelata, ma le opere non comportano alterazione dei luoghi o dell’aspetto 
                             esteriore degli edifici ovvero non sono soggetti ad autorizzazione ai sensi dell’art. 149, d.lgs. 
-                            n. 42/2004 e del d.P.R. n. 31/2017,  allegato A e art. 4</xs:annotation>
+                            n. 42/2004 e del d.P.R. n. 31/2017,  allegato A e art. 4</xs:documentation></xs:annotation>
                     </xs:element>
                     <xs:element name="ricadeInZonaTutelata" minOccurs="0">
                         <xs:complexType>
                             <xs:choice>
                                 <xs:element name="procedimentoSemplificato">
-                                    <xs:annotation>è assoggettato al procedimento semplificato di autorizzazione paesaggistica, in quanto di lieve 
-                                        entità, secondo quanto previsto dal d.P.R. n. 31/2017</xs:annotation>
+                                    <xs:annotation><xs:documentation>è assoggettato al procedimento semplificato di autorizzazione paesaggistica, in quanto di lieve 
+                                        entità, secondo quanto previsto dal d.P.R. n. 31/2017</xs:documentation></xs:annotation>
                                     <xs:complexType>
-                                        <xs:annotation>si allega la relazione paesaggistica semplificata e la documentazione necessaria ai fini 
-                                            del rilascio dell’autorizzazione paesaggistica semplificata</xs:annotation>
+                                        <xs:annotation><xs:documentation>si allega la relazione paesaggistica semplificata e la documentazione necessaria ai fini 
+                                            del rilascio dell’autorizzazione paesaggistica semplificata</xs:documentation></xs:annotation>
                                         <xs:simpleContent>
                                             <xs:extension base="xs:string">
                                                 <xs:attribute type="xs:boolean" name="allegatoRelazionePaesaggisticaSemplificata"/>
@@ -752,10 +740,10 @@
                                     </xs:complexType>  
                                 </xs:element>
                                 <xs:element name="procedimentoOrdinario">
-                                    <xs:annotation>è assoggettato al procedimento ordinario di autorizzazione paesaggistica</xs:annotation>
+                                    <xs:annotation><xs:documentation>è assoggettato al procedimento ordinario di autorizzazione paesaggistica</xs:documentation></xs:annotation>
                                     <xs:complexType>
-                                        <xs:annotation>si allega la relazione paesaggistica e la documentazione necessaria ai fini 
-                                            del rilascio dell’autorizzazione paesaggistica</xs:annotation>
+                                        <xs:annotation><xs:documentation>si allega la relazione paesaggistica e la documentazione necessaria ai fini 
+                                            del rilascio dell’autorizzazione paesaggistica</xs:documentation></xs:annotation>
                                         <xs:simpleContent>
                                             <xs:extension base="xs:string">
                                                 <xs:attribute type="xs:boolean" name="allegatoRelazionePaesaggistica"/>
@@ -777,7 +765,7 @@
             <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
             <xs:element name="sottopostoTutela" minOccurs="0">
                 <xs:complexType>
-                    <xs:annotation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta</xs:annotation>
+                    <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta</xs:documentation></xs:annotation>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
                             <xs:attribute type="xs:boolean" name="allegatoRilascioParere"/>
@@ -798,9 +786,9 @@
                     <xs:element name="nonRicadeTutela" minOccurs="0" type="basic:EmptyType"/>
                     <xs:element name="ricadeTutela" minOccurs="0" type="basic:EmptyType"/>
                     <xs:element name="sottopostoDisposizioni" minOccurs="0">
-                        <xs:annotation>è sottoposto alle relative disposizioni</xs:annotation>
+                        <xs:annotation><xs:documentation>è sottoposto alle relative disposizioni</xs:documentation></xs:annotation>
                         <xs:complexType>
-                            <xs:annotation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta </xs:annotation>
+                            <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta </xs:documentation></xs:annotation>
                             <xs:simpleContent>
                                 <xs:extension base="xs:string">
                                     <xs:attribute type="xs:boolean" name="allegatoRilascioParere"/>
