@@ -1444,7 +1444,7 @@
                     </xs:documentation>
             </xs:annotation>
     </xs:element>
-    .
+
     <xs:element name="allegatoDerogaPrevenzioneIncendi" type="suecommon:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
