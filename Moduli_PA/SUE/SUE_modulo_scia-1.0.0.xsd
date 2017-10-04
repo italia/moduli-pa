@@ -53,15 +53,14 @@
             <xs:element name="autorizzazionePaesaggistica" type="suecommon:AutorizzazionePaesaggisticaType"/> 
             <xs:element name="autorizzazioneSoprintendenza" type="suecommon:AutorizzazioneSoprintendenzaType"/> 
             <xs:element name="areaProtetta" type="suecommon:AreaProtettaType"/>   
-            <!-- 
-            <xs:element name="vincoloIdrogeologico" type="suecommon:vincoloIdrogeologicoType"/>
-            <xs:element name="vincoloIdraulico" type="suecommon:vincoloIdraulicoType"/>
-            <xs:element name="natura2000" type="suecommon:natura2000Type"/>
-            <xs:element name="rispettoCimiteriale" type="suecommon:rispettoCimiterialeType"/>
-            <xs:element name="rischioRilevante" type="suecommon:rischioRilevanteType"/>
-            <xs:element name="tutelaEcologica" type="suecommon:tutelaEcologicaType"/>
-            <xs:element name="efficienzaInfrastrutture" type="suecommon:efficienzaInfrastruttureType"/>
-            -->
+            <xs:element name="vincoloIdrogeologico" type="suecommon:VincoloIdrogeologicoType"/>
+            <xs:element name="vincoloIdraulico" type="suecommon:VincoloIdraulicoType"/>
+            <xs:element name="natura2000" type="suecommon:Natura2000Type"/>
+            <xs:element name="rispettoCimiteriale" type="suecommon:RispettoCimiterialeType"/>
+            <xs:element name="rischioRilevante" type="suecommon:RischioRilevanteType"/>
+            <xs:element name="tutelaEcologica" type="suecommon:TutelaEcologicaType"/>
+            <xs:element name="efficienzaInfrastrutture" type="suecommon:EfficienzaInfrastruttureType"/>
+
             <!-- ALLEGATI  -->
             <xs:element name="tabellaAllegati" type="scia:TabellaAllegatiType"/>
         </xs:sequence>

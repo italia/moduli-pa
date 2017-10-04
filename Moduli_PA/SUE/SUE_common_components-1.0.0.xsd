@@ -800,11 +800,212 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <!-- Reference suecommon:VincoloIdrogeologicoType -->
+    <xs:complexType name="VincoloIdrogeologicoBaseType" abstract="true"/>
+    
+    <xs:complexType name="VincoloIdrogeologicoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:VincoloIdrogeologicoBaseType">
+                <xs:choice>
+                    <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="tutelaSenzaAutorizzazione" minOccurs="0" type="basic:EmptyType"/>                   
+                    <xs:element name="sottopostoTutela" minOccurs="0">
+                        <xs:complexType>
+                            <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio dell’autorizzazione</xs:documentation></xs:annotation>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDocumentazione"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:VincoloIdraulicoType -->
+    <xs:complexType name="VincoloIdraulicoBaseType" abstract="true"/>
+    
+    <xs:complexType name="VincoloIdraulicoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:VincoloIdraulicoBaseType">
+                <xs:choice>
+                    <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="sottopostoTutela" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDocumentazione"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:Natura2000Type -->
+    <xs:complexType name="Natura2000BaseType" abstract="true"/>
+    
+    <xs:complexType name="Natura2000Type">
+        <xs:complexContent>
+            <xs:extension base="suecommon:Natura2000BaseType">
+                <xs:choice>
+                    <xs:element name="nonSoggettoVINCA" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="soggettoVINCA" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDocumentazione"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:RispettoCimiterialeType -->
+    <xs:complexType name="RispettoCimiterialeBaseType" abstract="true"/>
+    
+    <xs:complexType name="RispettoCimiterialeType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:RispettoCimiterialeBaseType">
+                <xs:choice>
+                    <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="ricadeConsentito" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="ricadeNonConsentito" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDeroga"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:RischioRilevanteType -->
+    <xs:complexType name="RischioRilevanteType">
+        <xs:choice>
+            <xs:element name="assenzaAttivita" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="presenzaAttivitaAreaDanno">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="nonRicadeAreaDanno" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="ricadeAreaDanno" minOccurs="0">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoValutazioneProgetto"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>    
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>              
+            </xs:element>
+            <xs:element name="presenzaAttivitaNoAreaDanno" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute type="xs:boolean" name="allegatoValutazioneProgetto"/>
+                        </xs:extension>
+                    </xs:simpleContent>                   
+                </xs:complexType>              
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:TutelaEcologicaType -->
+    <xs:complexType name="TutelaEcologicaBaseType" abstract="true"/>
+    
+    <xs:complexType name="TutelaEcologicaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TutelaEcologicaBaseType">
+                <xs:sequence>
+                    <xs:element name="fasciaRispettoDepuratori" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="altro" minOccurs="0" type="xs:string"/>
+                    <xs:element name="allegatiXVincoli">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="autocertificazioniConformita" minOccurs="0" type="basic:EmptyType"/>
+                                <xs:element name="documentazioneAttiDiAssenso" minOccurs="0" type="basic:EmptyType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:EfficienzaInfrastruttureType -->
+    <xs:complexType name="EfficienzaInfrastruttureBaseType" abstract="true"/>
+    
+    <xs:complexType name="EfficienzaInfrastruttureType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:EfficienzaInfrastruttureBaseType">
+                <xs:sequence>
+                    <xs:element name="stradale" minOccurs="0" type="xs:string"/>
+                    <xs:element name="ferroviario" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="elettrodotto" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="gasdotto" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="militare" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="aeroportuale" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="altro" minOccurs="0" type="xs:string"/>
+                    <xs:element name="allegatiXVincoli">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="autocertificazioniConformita" minOccurs="0" type="basic:EmptyType"/>
+                                <xs:element name="documentazioneAttiDiAssenso" minOccurs="0" type="basic:EmptyType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ImpreseEsecutricideiLavoriType -->
     <xs:complexType name="ImpreseEsecutricideiLavoriType">
         <xs:choice>
             <xs:element type="xs:boolean" name="lavoriDaImpresa"/>
             <xs:element type="xs:boolean" name="lavoriPrivati"/>
         </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ComunicazioniSegnalazioniType -->
+    <xs:complexType name="ComunicazioniSegnalazioniBaseType" abstract="true"/>
+    
+    <xs:complexType name="ComunicazioniSegnalazioniType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ComunicazioniSegnalazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="comunicazioni" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                    <xs:element name="autoritaCompetente" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                </xs:sequence>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:AttiAssensoType -->
+    <xs:complexType name="AttiAssensoBaseType" abstract="true"/>
+    
+    <xs:complexType name="AttiAssensoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:AttiAssensoBaseType">
+                <xs:sequence>
+                    <xs:element name="tipoAtto" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                    <xs:element name="autoritaCompetente" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                </xs:sequence>        
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <!-- Reference suecommon:AllegatoType -->
@@ -828,7 +1029,7 @@
     </xs:complexType>
     
     <!-- ELEMENTI ALLEGATI --> 
-    <xs:element name="allegatoProcuraDelega" type="suapcommon:AllegatoBaseType"  >
+    <xs:element name="allegatoProcuraDelega" type="suecommon:AllegatoBaseType"  >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Procura/delega</ccts:Definition>
@@ -837,7 +1038,7 @@
         </xs:annotation>
     </xs:element> 
 
-    <xs:element name="allegatoDocumentiIdentita" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoDocumentiIdentita" type="suecommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Copia del documento di identità del/i titolare/i e/o del tecnico</ccts:Definition>
@@ -848,19 +1049,18 @@
     
     <!-- ... -->
     
-    <xs:element name="allegatoAltriVincoliTutelaEcologica" type="suapcommon:AllegatoBaseType" >
+    <xs:complexType name="allegatoAltriVincoliTutelaEcologica">
         <xs:annotation>
             <xs:documentation xml:lang="it">
-                <ccts:Definition>Copia del documento di identità del/i titolare/i e/o del tecnico</ccts:Definition>
-                <ccts:UsageRule>Solo se i soggetti coinvolti non hanno sottoscritto digitalmente e/o in assenza di procura/delega</ccts:UsageRule>
+                <ccts:Definition>Autocertificazione relativa alla conformità dell’intervento per altri vincoli di tutela ecologica (specificare i vincoli in oggetto)</ccts:Definition>
+                <ccts:UsageRule>(ad es. se l’intervento ricade nella fascia di rispetto dei depuratori)</ccts:UsageRule>
             </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="specifica" minOccurs="0" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+        </xs:annotation>       
+        <xs:sequence>
+            <xs:element name="fileAllegato" minOccurs="0" type="suecommon:AllegatoBaseType"/>
+            <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>
 
     <!-- ENUMERATION -->
     <xs:simpleType name="TitolaritaInterventoEnum">
