@@ -587,7 +587,7 @@
                         <xs:simpleContent>
                             <xs:annotation>si allega documentazione necessaria all’ottenimento della deroga</xs:annotation>
                             <xs:extension base="xs:string">
-                                <xs:attribute type="xs:boolean" name="allegatoDeroga"/>
+                                <xs:attribute type="xs:boolean" name="allegatoDocumentazioneDeroga"/>
                             </xs:extension>
                         </xs:simpleContent>
                     </xs:complexType>
@@ -638,6 +638,89 @@
             </xs:element>
         </xs:choice>
     </xs:complexType>
+
+    <!-- Reference suecommon:ConformitaSanitariaType -->
+    <xs:complexType name="ConformitaSanitariaBaseType" abstract="true"/>
+    
+    <xs:complexType name="ConformitaSanitariaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ConformitaSanitariaBaseType">
+                <xs:choice>
+                    <xs:element name="conforme" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="nonConforme" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoRichiestaDeroga"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                       
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+
+    <!-- Reference suecommon:interventoZonaSismicaType -->
+    <xs:complexType name="interventoZonaSismicaBaseType" abstract="true"/>
+    
+    <xs:complexType name="interventoZonaSismicaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:interventoZonaSismicaBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="nonPrevisteOpere" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="previsteOpere" minOccurs="0">
+                            <xs:annotation>prevede la realizzazione di opere di conglomerato cementizio armato, normale e precompresso ed a 
+                                struttura metallica</xs:annotation>
+                            <xs:complexType>
+                                <xs:annotation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:annotation>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoDenuncia"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>   
+                        </xs:element>
+                    </xs:choice>
+                    <xs:choice>
+                        <xs:element name="nonPrevisteOpereNormativaRegionale" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="varianteSostanziale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="progettoEsecutivo" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element> 
+                        <xs:element name="previsteOpereNormativaRegionale" minOccurs="0">
+                            <xs:annotation>prevede opere in zona sismica da denunciare ai sensi dell’articolo 93 del d.P.R. n. 380/2001 
+                                o della corrispondente normativa regionale</xs:annotation>
+                            <xs:complexType>
+                                <xs:annotation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:annotation>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoDenuncia"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>                            
+                        </xs:element> 
+                        <xs:element name="previsteOpereStrutturali" minOccurs="0">
+                            <xs:annotation>prevede opere strutturali soggette ad autorizzazione sismica ai sensi dell’articolo 94 del 
+                                d.P.R. n. 380/2001 o della corrispondente normativa regional</xs:annotation>
+                            <xs:complexType>
+                                <xs:annotation>si allega la documentazione necessaria per il rilascio dell’autorizzazione sismica</xs:annotation>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoDocumentazioneAutorizzazione"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>                            
+                        </xs:element>                        
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
 
     <!-- ENUMERATION -->
     <xs:simpleType name="TitolaritaInterventoEnum">

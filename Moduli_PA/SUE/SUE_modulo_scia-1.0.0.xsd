@@ -48,6 +48,8 @@
             <xs:element name="materialiRisulta" type="suecommon:MaterialiRisultaType"/>
             <xs:element name="prevenzioneIncendi" type="suecommon:PrevenzioneIncendiType"/>
             <xs:element name="amianto" type="suecommon:AmiantoType"/>
+            <xs:element name="conformitaSanitaria" type="suecommon:ConformitaSanitariaType"/> 
+            <xs:element name="interventoZonaSismica" type="suecommon:interventoZonaSismicaType"/>
             <!-- ALLEGATI  -->
  
         </xs:sequence>
