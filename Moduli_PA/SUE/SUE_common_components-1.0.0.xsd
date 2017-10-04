@@ -21,14 +21,12 @@
     <!-- @giacomo : Cross Reference to suapcommon:PersonaAnagraficaType REFACTORY ??? -->
     <xs:complexType name="PersonaAnagraficaType">
         <xs:annotation>
-            <xs:documentation>Tipo per specificare tutti i dati anagrafici di una
-                persona</xs:documentation>
+            <xs:documentation>Tipo per specificare tutti i dati anagrafici di una persona</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
                 <xs:sequence>
                     <xs:element name="residente" type="aggregate:IndirizzoType"/>
-                    <!-- <xs:element name="cittadinanza" type="enum:NazioniAlpha3Enum" default="ITA" minOccurs="0"/> -->
                     <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
@@ -42,6 +40,7 @@
         </xs:complexContent>
     </xs:complexType>
      
+
     <xs:complexType name="ProfessionistaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
@@ -800,6 +799,68 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:complexType name="ImpreseEsecutricideiLavoriType">
+        <xs:choice>
+            <xs:element type="xs:boolean" name="lavoriDaImpresa"/>
+            <xs:element type="xs:boolean" name="lavoriPrivati"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:AllegatoType -->
+    <xs:complexType name="FileAttachmentType">
+        <xs:sequence>
+            <xs:element name="contenuto" type="xs:base64Binary"/>
+            <xs:element name="mimeType" type="enumeration:MimeTypeEnum"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="file" type="suecommon:FileAttachmentType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:AllegatoBaseType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- ELEMENTI ALLEGATI --> 
+    <xs:element name="allegatoProcuraDelega" type="suapcommon:AllegatoBaseType"  >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Procura/delega</ccts:Definition>
+                <ccts:UsageRule>Nel caso di procura/delega a presentare la segnalazione/domanda/comunicazione</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element> 
+
+    <xs:element name="allegatoDocumentiIdentita" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Copia del documento di identità del/i titolare/i e/o del tecnico</ccts:Definition>
+                <ccts:UsageRule>Solo se i soggetti coinvolti non hanno sottoscritto digitalmente e/o in assenza di procura/delega</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <!-- ... -->
+    
+    <xs:element name="allegatoAltriVincoliTutelaEcologica" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Copia del documento di identità del/i titolare/i e/o del tecnico</ccts:Definition>
+                <ccts:UsageRule>Solo se i soggetti coinvolti non hanno sottoscritto digitalmente e/o in assenza di procura/delega</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ENUMERATION -->
     <xs:simpleType name="TitolaritaInterventoEnum">

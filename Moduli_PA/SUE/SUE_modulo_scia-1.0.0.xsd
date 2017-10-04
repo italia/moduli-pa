@@ -52,10 +52,18 @@
             <xs:element name="interventoZonaSismica" type="suecommon:InterventoZonaSismicaType"/>
             <xs:element name="autorizzazionePaesaggistica" type="suecommon:AutorizzazionePaesaggisticaType"/> 
             <xs:element name="autorizzazioneSoprintendenza" type="suecommon:AutorizzazioneSoprintendenzaType"/> 
-            <xs:element name="areaProtetta" type="suecommon:AreaProtettaType"/>  
- 
+            <xs:element name="areaProtetta" type="suecommon:AreaProtettaType"/>   
+            <!-- 
+            <xs:element name="vincoloIdrogeologico" type="suecommon:vincoloIdrogeologicoType"/>
+            <xs:element name="vincoloIdraulico" type="suecommon:vincoloIdraulicoType"/>
+            <xs:element name="natura2000" type="suecommon:natura2000Type"/>
+            <xs:element name="rispettoCimiteriale" type="suecommon:rispettoCimiterialeType"/>
+            <xs:element name="rischioRilevante" type="suecommon:rischioRilevanteType"/>
+            <xs:element name="tutelaEcologica" type="suecommon:tutelaEcologicaType"/>
+            <xs:element name="efficienzaInfrastrutture" type="suecommon:efficienzaInfrastruttureType"/>
+            -->
             <!-- ALLEGATI  -->
- 
+            <xs:element name="tabellaAllegati" type="scia:TabellaAllegatiType"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -113,5 +121,32 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
+
+    <!-- Reference scia:TabellaAllegatiType -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="scia:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="scia:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="scia:AllegatiSCIACondizionataType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <!-- <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/> -->
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <!-- <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/> -->
+        </xs:sequence>                                
+    </xs:complexType>
 
 </xs:schema>
