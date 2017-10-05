@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUAP/sue_common_components"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"    
     xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
@@ -18,4 +18,1701 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>    
     
+    <!-- @giacomo : Cross Reference to suapcommon:PersonaAnagraficaType REFACTORY ??? -->
+    <xs:complexType name="PersonaAnagraficaType">
+        <xs:annotation>
+            <xs:documentation>Tipo per specificare tutti i dati anagrafici di una persona</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
+                <xs:sequence>
+                    <xs:element name="residente" type="aggregate:IndirizzoType"/>
+                    <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <!-- ref aggregate:ImpresaAnagraficaType -->
+    <xs:complexType name="DittaAnagraficaType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:ImpresaAnagraficaType"/>
+        </xs:complexContent>
+    </xs:complexType>
+     
+
+    <xs:complexType name="ProfessionistaAnagraficaType">
+        <xs:annotation>
+            <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent >
+            <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
+                <xs:sequence>
+                    <xs:element name="residenza" type="aggregate:IndirizzoType"/>
+                    <xs:element name="studiopro" type="aggregate:IndirizzoType"/>
+                    <xs:element name="ordineprofessionale" type="suecommon:OrdineProfessionaleType"/>    
+                    <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ProfessionistaAnagraficaType">
+                <xs:attribute name="incaricaDirettoreLavori" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="OrdineProfessionaleType">
+        <xs:sequence>
+            <xs:element name="OrdineNome" type="xs:string"/>
+            <xs:element name="OrdineCitta" type="xs:string"/>
+            <xs:element name="OrdineNumero" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TecniciIncaricatiType">
+        <xs:sequence>
+            <xs:element name="schedaProgettistaOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>
+            <xs:element name="schedaDirettoreOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaType" minOccurs="0"/>
+            <xs:element name="schedaProgettistaOpereStrutturali" type="suecommon:ProfessionistaAnagraficaDirettoreType" minOccurs="0" />
+            <xs:element name="schedaDirettoreOpereStrutturali" type="suecommon:ProfessionistaAnagraficaType" minOccurs="0" />
+            <xs:element name="schedaAltritecnici" type="suecommon:AltriTecniciType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AltriTecniciType">
+        <xs:sequence>
+            <xs:element name="incaricatoDi" type="xs:string"/>
+            <xs:element name="schedaAltroTecnico" type="suecommon:ProfessionistaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="suecommon:DittaAnagraficaType"/>
+            <xs:element name="legaleRappresentante" type="xs:string"/>
+            <xs:element name="estremiAbilitazione" type="xs:string"/>
+            <xs:element name="dittaContatti" type="aggregate:ContattiType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ImpreseEsecutriciType">
+        <xs:sequence>
+            <xs:element name="schedaDitta" type="suecommon:DittaAnagraficaType"/>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="cassaEdile">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="sede" type="xs:string"/>
+                            <xs:element name="codiceMatrPos" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Inps">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="sede" type="xs:string"/>
+                            <xs:element name="codiceImpres" type="xs:string"/>
+                            <xs:element name="cocideCassa" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Inail">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="sede" type="xs:string"/>
+                            <xs:element name="codiceImpres" type="xs:string"/>
+                            <xs:element name="podAssicurativa" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DatiProgettistaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ProfessionistaAnagraficaType">
+                <xs:sequence>
+                     <xs:element name="ordineProfessionale" type="suecommon:OrdineProfessionaleType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:TitoloPossessoType -->
+    <xs:complexType name="TitoloPossessoType">
+        <xs:sequence>
+            <xs:element name="titolo" type="xs:string"/>
+            <xs:element name="titolaritaIntervento" type="suecommon:TitolaritaInterventoEnum"/>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <!-- Reference suecommon:LocalizzazioneInterventoType -->
+    <xs:complexType name="LocalizzazioneInterventoType">
+        <xs:sequence>
+            <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+            <xs:element name="contatto" type="moduli:DatiCatastaliBaseType"/>
+            <xs:element name="destinazioneDUso" type="xs:string"/>
+            <xs:element name="coordinate" type="xs:string"/>
+        </xs:sequence>    
+    </xs:complexType>
+
+    <!-- Reference suecommon:QualificazioneInterventoBaseType -->
+    <xs:complexType name="QualificazioneInterventoBaseType" abstract="true"/>
+    
+    <!-- Reference suecommon:RegolaritaUrbanisticaType -->
+    <xs:complexType name="RegolaritaUrbanisticaBaseType" abstract="true"/>
+    
+    <xs:complexType name="RegolaritaUrbanisticaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:RegolaritaUrbanisticaBaseType">
+                <xs:choice>
+                    <xs:element name="pienamenteConforme" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="inDifformita" minOccurs="0" type="suecommon:InDifformitaType"/>
+                    <xs:element name="noTitoliAbilitativi" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:choice>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="InDifformitaType">
+            <xs:choice>
+                <xs:element name="titoloUnico" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="permessoLicenzaConc" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="autorizzazioneEdilizia" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="comunicazioneEdilizia" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="condonoEdilizio" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="denunciaInzioAttivita" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="DIA_SCIAAlternativa" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="certificazioneInizioAttivita" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="comunicazioneEdiliziaLibera" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                <xs:element name="altraPraticaEdilizia" minOccurs="0" type="suecommon:AltraPraticaEdiliziaType"/>
+                <xs:element name="primoAccatastamento" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>            
+    </xs:complexType> 
+    
+    <xs:complexType name="AltraPraticaEdiliziaType">
+        <xs:sequence>
+            <xs:element name="altro" type="xs:string"/>
+            <xs:element name="comunicazione" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!-- Reference suecommon:CalcoloContributoBaseType -->
+    <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
+    
+    <xs:complexType name="CalcoloContributoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
+                <xs:sequence>
+                    <xs:element name="contributo" minOccurs="0" type="suecommon:ContributoType"/>
+                    <xs:element name="versamento" minOccurs="0" type="suecommon:VersamentoType"/>
+                </xs:sequence>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    
+    <xs:complexType name="ContributoType">
+        <xs:sequence>
+            <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
+            <xs:element name="titoloOneroso" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="calcoloSportello" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="calcoloPreventivo" minOccurs="0" type="basic:EmptyType"/>                                                    
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="VersamentoType">
+        <xs:choice>
+            <xs:element name="allegaAttestazione" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="trasmettePrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>      
+            <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>   
+            <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>                   
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:choice>
+            <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="ricade" minOccurs="0" type="suecommon:SaluteSicurezzaRicadeType"/>
+            <xs:element name="ricadeConRiserva" minOccurs="0"  type="basic:EmptyType"/>
+        </xs:choice>        
+    </xs:complexType> 
+    
+    <xs:complexType name="SaluteSicurezzaRicadeType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="inf200ggUomo" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="pariSup200ggUomo" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+            <xs:choice>
+                <xs:element name="noInvioNotifica" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="invioNotifica" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:boolean" name="allegato"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>        
+    </xs:complexType>
+
+    <!-- Reference suecommon:TipoInterventiOpereBaseType -->
+    <xs:complexType name="TipoInterventiOpereBaseType" abstract="true"/>
+
+    <!-- Reference suecommon:DatiGeometriciType -->
+    <xs:complexType name="DatiGeometriciBaseType" abstract="true"/>
+
+    <xs:complexType name="DatiGeometriciType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:DatiGeometriciBaseType">
+                <xs:sequence>
+                    <xs:element name="superficieMq" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="volumetriaMc" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="numeroPianiN" minOccurs="0" type="xs:integer"/>
+                </xs:sequence> 
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <!-- Reference suecommon:StrumentazioneUrbanisticaType -->
+    <xs:complexType name="StrumentazioneUrbanisticaBaseType" abstract="true"/>
+    
+    <xs:complexType name="StrumentazioneUrbanisticaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:StrumentazioneUrbanisticaBaseType">
+                <xs:sequence>
+                    <xs:element name="prg" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
+                    <xs:element name="pianoParticolareggiato" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
+                    <xs:element name="pianoRecupero" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
+                    <xs:element name="pip" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
+                    <xs:element name="peep" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
+                    <xs:element name="altro" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
+                </xs:sequence> 
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="TabellaStrumentazioneUrbanisticaType">
+        <xs:sequence>
+            <xs:element name="specificare" minOccurs="0" type="xs:string"/>
+            <xs:element name="zona" minOccurs="0" type="xs:string"/>
+            <xs:element name="art" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>
+
+    <!-- Reference suecommon:BarriereArchitettonicheType -->
+    <xs:complexType name="BarriereArchitettonicheType">
+        <xs:choice>
+            <xs:element name="nonSoggetto" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="edificioPrivatoApertoAlPubblico" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="soggetto" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="accessibilita" type="basic:EmptyType"/>
+                        <xs:element name="visibilita" type="basic:EmptyType"/>
+                        <xs:element name="adattabilita" type="basic:EmptyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="soggettoNonRispetta" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="allegaRelazioneTecnica" type="basic:EmptyType"/>
+                    </xs:sequence>
+                </xs:complexType>                
+            </xs:element>
+        </xs:choice>        
+    </xs:complexType> 
+    
+    <!-- Reference suecommon:SicurezzaImpiantiType -->
+    <xs:complexType name="SicurezzaImpiantiType">
+        <xs:choice>
+            <xs:element name="nonComportaImpianti" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="comportaImpianti">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="elettronici" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="climatizzazione" minOccurs="0" type="basic:EmptyType"/>                        
+                        <xs:element name="gas" minOccurs="0" type="basic:EmptyType"/>    
+                        <xs:element name="sollevamento" minOccurs="0" type="basic:EmptyType"/> 
+                        <xs:element name="antincendio" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="altro" minOccurs="0">
+                            <xs:complexType mixed="true">
+                                <xs:choice>
+                                    <xs:element name="nonSoggetto" minOccurs="0" type="basic:EmptyType"/>
+                                    <xs:element name="soggetto">
+                                        <xs:complexType>
+                                            <xs:simpleContent>
+                                                <xs:extension base="xs:string">
+                                                    <xs:attribute type="xs:byte" name="allega"/>
+                                                </xs:extension>
+                                            </xs:simpleContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>                               
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>                    
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ConsumiEnergeticiType -->
+    <xs:complexType name="ConsumiEnergeticiBaseType" abstract="true"/>
+    
+    <xs:complexType name="ConsumiEnergeticiType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ConsumiEnergeticiBaseType">
+                <xs:sequence>
+                    <xs:element name="nonSoggettoFontiRinnovabili" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation><xs:documentation>non è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005
+                            che l’intervento, in relazione agli obblighi in materia di fonti rinnovabili</xs:documentation></xs:annotation>
+                    </xs:element>
+                    <xs:element name="nonSoggettoNuovaCostruzioneRistrutturazioneRilevante" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation><xs:documentation>non è soggetto all’applicazione del d.lgs. n. 28/2011, in quanto non riguarda edifici di nuova costruzione o edifici sottoposti ad una 
+                            ristrutturazione rilevante</xs:documentation></xs:annotation>
+                    </xs:element>
+                    <xs:element name="soggettoApplicazione" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="prescrizioniInRelTecnica" minOccurs="0" type="basic:EmptyType">
+                                    <xs:annotation><xs:documentation>il rispetto delle prescrizioni in materia di utilizzo di fonti di energia rinnovabili è indicato negli elaborati progettuali e 
+                                        nella relazione tecnica prevista dall’articolo 125 del d.P.R. n. 380/2001 e dal d.lgs. n. 192/2005 in materia di risparmio energetico</xs:documentation></xs:annotation>
+                                </xs:element>
+                                <xs:element name="nonFattibilitaInRelTecnica" minOccurs="0" type="basic:EmptyType">
+                                    <xs:annotation><xs:documentation>l’impossibilità tecnica di ottemperare, in tutto o in parte, agli obblighi previsti, è evidenziata nella relazione tecnica 
+                                        dovuta ai sensi dell’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005, con l’indicazione della non fattibilità di tutte le 
+                                        diverse opzioni tecnologiche disponibili</xs:documentation></xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ricadeSpessoriDistanze" minOccurs="0">
+                        <xs:annotation><xs:documentation>ricade nell’articolo 14, comma 6,  del d.lgs. n. 102/2014 in merito al computo degli spessori delle murature, nonché alla deroga alle 
+                            distanze minime e alle altezze massime degli edifici</xs:documentation></xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation><xs:documentation>si certifica nella relazione tecnica una riduzione minima del 20 per cento dell’indice di prestazione energetica previsto 
+                                    dal d.lgs. n. 192/2005</xs:documentation></xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="certificaRiduzione20"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ricadeDistanze" minOccurs="0">
+                        <xs:annotation><xs:documentation>ricade nell’articolo 14, comma 7, del d.lgs. n. 102/2014 in merito alle deroga alle distanze minime e alle altezze 
+                            massime degli edifici</xs:documentation></xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation><xs:documentation>si certifica nella relazione tecnica una riduzione minima del 10 per cento del limite di trasmittanza previsto 
+                                    dal d.lgs. n. 192/2005</xs:documentation></xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="certificaRiduzione10"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ricadeBonusVolumetrico" minOccurs="0">
+                        <xs:annotation><xs:documentation>ricade nell’articolo 12, comma 1, del d.lgs. n. 28/2011 in merito al bonus volumetrico del 5 per cento</xs:documentation></xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation><xs:documentation>si certifica nella relazione tecnica una copertura dei consumi di calore, di elettricità e per il raffrescamento, 
+                                    mediante energia prodotta da fonti rinnovabili, in misura superiore di almeno il 30 per cento rispetto ai valori minimi obbligatori 
+                                    di cui all’allegato 3 del d.lgs. n. 28/2011</xs:documentation></xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="certificaCopertura30"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="soggettoDepositoProgetto" minOccurs="0">
+                        <xs:annotation><xs:documentation>è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del 
+                            d.lgs. n. 192/2005</xs:documentation></xs:annotation>
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:annotation><xs:documentation>si allega la relazione tecnica sul rispetto delle prescrizioni in materia di risparmio energetico e la 
+                                    documentazione richiesta dalla legge</xs:documentation></xs:annotation>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoRispettoPrescrizioni"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence> 
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:TutelaInquinamentoAcusticoType -->
+    <xs:complexType name="TutelaInquinamentoAcusticoBaseType" abstract="true"/>
+    
+    <xs:complexType name="TutelaInquinamentoAcusticoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TutelaInquinamentoAcusticoBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="nonRientraArt8" minOccurs="0" type="basic:EmptyType">
+                            <xs:annotation><xs:documentation>non rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995</xs:documentation></xs:annotation>
+                        </xs:element>
+                        <xs:element name="rientraArt8" minOccurs="0">
+                            <xs:annotation><xs:documentation>rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995, integrato con i 
+                                contenuti dell’articolo 4 del d.P.R. n. 227/2011</xs:documentation></xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="documentazioneImpattoAcustico" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation><xs:documentation>documentazione di impatto acustico  (art. 8, commi 2 e 4, l. n. 447/1995)</xs:documentation></xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="previsioneClimaAcustico" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation><xs:documentation>valutazione previsionale di clima acustico (art. 8, comma 3, l. n. 447/1995)</xs:documentation></xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="dichiarazioneRispettoLimiti" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation><xs:documentation>dichiarazione sostitutiva dell’atto di notorietà, a firma del titolare, relativa al rispetto 
+                                            dei limiti stabiliti dal documento di classificazione acustica del territorio comunale di riferimento 
+                                            ovvero, ove questo non sia stato adottato, ai limiti individuati dal d.P.C.M. 14 novembre 1997 
+                                            (art. 4, commi 1 e 2, d.P.R. n. 227/2011)</xs:documentation></xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="documentazioneMisureNullaOsta" minOccurs="0" type="basic:EmptyType">
+                                        <xs:annotation><xs:documentation>la documentazione di previsione di impatto acustico con l’indicazione delle misure previste 
+                                            per ridurre o eliminare le emissioni sonore, nel caso in cui i valori di emissioni sono superiori a quelli 
+                                            della zonizzazione acustica comunale o a quelli individuati dal d.P.C.M. 14 novembre 1997 
+                                            (art. 8, comma 6, l. n. 447/1995) ai fini del rilascio del nulla-osta da parte del Comune 
+                                            (art. 8, comma 6, l. n. 447/1995)</xs:documentation></xs:annotation>
+                                    </xs:element>                                    
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element> 
+                    </xs:choice> 
+                    <xs:choice>
+                        <xs:element name="nonRientra19971205" minOccurs="0" type="basic:EmptyType">
+                            <xs:annotation><xs:documentation>non rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:documentation></xs:annotation>
+                        </xs:element>
+                        <xs:element name="rientra19971205" minOccurs="0" type="basic:EmptyType">
+                            <xs:annotation><xs:documentation>rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:documentation></xs:annotation>
+                        </xs:element> 
+                    </xs:choice> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:MaterialiRisultaType -->
+    <xs:complexType name="MaterialiRisultaBaseType" abstract="true"/>
+    
+    <xs:complexType name="MaterialiRisultaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:MaterialiRisultaBaseType">
+                <xs:sequence>
+                    <xs:element name="nonSoggettaNormativa" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation><xs:documentation>non sono soggette alla normativa relativa ai materiali da scavo (art. 41-bis d.l. n. 69 del 2013 e 
+                            art. 184-bis d.lgs. n. 152 del 2006)</xs:documentation></xs:annotation>
+                    </xs:element>
+                    <xs:element name="comportaProduzione" minOccurs="0">
+                        <xs:annotation><xs:documentation>comportano la produzione di materiali da scavo considerati come sottoprodotti ai sensi dell’articolo 
+                            184-bis, comma 1, del d.lgs. n. 152/2006 o dell’articolo 41-bis, comma 1, d.l. n. 69 del 2013 e del d.m. 
+                            n. 161/2012</xs:documentation></xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="volInfUgu6000" type="basic:EmptyType">
+                                    <xs:annotation><xs:documentation>le opere comportano la produzione di materiali da scavo per un volume inferiore o 
+                                        uguale a 6000 mc ovvero (pur superando tale soglia) non sono soggette a VIA o AIA</xs:documentation></xs:annotation>                                    
+                                </xs:element>
+                                <xs:element name="volSup6000" minOccurs="0">
+                                    <xs:annotation><xs:documentation>le opere comportano la produzione di materiali da scavo per un volume superiore a 6000 mc 
+                                        e sono soggette a VIA o AIA, e pertanto, ai sensi dell’art. 184-bis, comma 2-bis del d.lgs. n. 152/2006, 
+                                        e del d.m. n. 161/2012  si prevede la presentazione del Piano di Utilizzo.</xs:documentation></xs:annotation>
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="estremiProvvedimento" minOccurs="0" type="aggregate:ProtocolloStandardType">
+                                                <xs:annotation><xs:documentation>si comunicano gli estremi del provvedimento di VIA o AIA, comprensivo dell’assenso 
+                                                    al Piano di Utilizzo dei materiali da scavo, rilasciato da__________________________con 
+                                                    prot. _____________ in data  |__|__|__|__|__|__|__|__</xs:documentation></xs:annotation>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="produzioneRiutilizzataInLuogo" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation><xs:documentation>comportano la produzione di materiali da scavo che saranno riutilizzati nello stesso luogo di produzione</xs:documentation> </xs:annotation>
+                    </xs:element>
+                    <xs:element name="soggettaNormativa" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation><xs:documentation>riguardano interventi di demolizione di edifici o altri manufatti preesistenti e producono rifiuti la cui 
+                            gestione è disciplinata ai sensi della parte quarta del d.lgs. n. 152/ 2006</xs:documentation></xs:annotation>
+                    </xs:element>
+                    <xs:element name="produzioneRifiuti" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation><xs:documentation>comportano la produzione di materiali da scavo che saranno gestiti dall’interessato come rifiuti</xs:documentation></xs:annotation>
+                    </xs:element>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:PrevenzioneIncendiType -->
+    <xs:complexType name="PrevenzioneIncendiType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="nonSoggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
+                    <xs:annotation><xs:documentation>non è soggetto alle norme di prevenzione incendi</xs:documentation></xs:annotation>
+                </xs:element>
+                <xs:element name="soggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
+                    <xs:annotation><xs:documentation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:documentation></xs:annotation>
+                </xs:element>
+                <xs:element name="parzialeCoperturaPrevenzioneIncendi" minOccurs="0">
+                    <xs:annotation><xs:documentation>presenta caratteristiche tali da non consentire l’integrale osservanza delle regole tecniche di prevenzione incendi</xs:documentation></xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:annotation><xs:documentation>si allega documentazione necessaria all’ottenimento della deroga</xs:documentation></xs:annotation>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:boolean" name="allegatoDocumentazioneDeroga"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:choice>
+                <xs:element name="nonSoggettoValutazioneProgetto" minOccurs="0" type="basic:EmptyType">
+                    <xs:annotation><xs:documentation>non è soggetto alla valutazione del progetto da parte del Comando Provinciale dei Vigili del Fuoco ai sensi del 
+                        d.P.R. n. 151/2011</xs:documentation></xs:annotation>
+                </xs:element>                
+                <xs:element name="soggettoValutazioneProgetto" minOccurs="0">
+                    <xs:annotation><xs:documentation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:documentation></xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:annotation><xs:documentation>si allega la documentazione necessaria alla valutazione del progetto</xs:documentation></xs:annotation>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:boolean" name="allegatoValutazioneProgetto"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="varianteProgetto" minOccurs="0">
+                    <xs:annotation><xs:documentation>costituisce variante e il sottoscritto assevera che le modifiche non costituiscono variazione 
+                        dei requisiti di sicurezza antincendio già approvati con parere del Comando Provinciale dei Vigili 
+                        del fuoco rilasciato con prot. ______________  in data  |__|__|__|__|__|__|__|__|</xs:documentation></xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="parereVigiliDelFuoco" type="aggregate:ProtocolloStandardType"/>
+                        </xs:sequence>                      
+                    </xs:complexType>
+                </xs:element>                 
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Reference suecommon:AmiantoType -->
+    <xs:complexType name="AmiantoType">
+        <xs:choice>
+            <xs:element name="interessano" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="nonInteressano" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute type="xs:boolean" name="allegato"/>
+                        </xs:extension>
+                    </xs:simpleContent>                   
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ConformitaSanitariaType -->
+    <xs:complexType name="ConformitaSanitariaBaseType" abstract="true"/>
+    
+    <xs:complexType name="ConformitaSanitariaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ConformitaSanitariaBaseType">
+                <xs:choice>
+                    <xs:element name="conforme" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="nonConforme" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoRichiestaDeroga"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                       
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+
+    <!-- Reference suecommon:InterventoZonaSismicaType -->
+    <xs:complexType name="InterventoZonaSismicaBaseType" abstract="true"/>
+    
+    <xs:complexType name="InterventoZonaSismicaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:InterventoZonaSismicaBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="nonPrevisteOpere" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="previsteOpere" minOccurs="0">
+                            <xs:annotation><xs:documentation>prevede la realizzazione di opere di conglomerato cementizio armato, normale e precompresso ed a 
+                                struttura metallica</xs:documentation></xs:annotation>
+                            <xs:complexType>
+                                <xs:annotation><xs:documentation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:documentation></xs:annotation>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoDenuncia"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>   
+                        </xs:element>
+                    </xs:choice>
+                    <xs:choice>
+                        <xs:element name="nonPrevisteOpereNormativaRegionale" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="varianteSostanziale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="progettoEsecutivo" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element> 
+                        <xs:element name="previsteOpereNormativaRegionale" minOccurs="0">
+                            <xs:annotation><xs:documentation>prevede opere in zona sismica da denunciare ai sensi dell’articolo 93 del d.P.R. n. 380/2001 
+                                o della corrispondente normativa regionale</xs:documentation></xs:annotation>
+                            <xs:complexType>
+                                <xs:annotation><xs:documentation>si allega la denuncia di cui all’articolo 65 del d.P.R. n. 380/2001</xs:documentation></xs:annotation>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoDenuncia"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>                            
+                        </xs:element> 
+                        <xs:element name="previsteOpereStrutturali" minOccurs="0">
+                            <xs:annotation><xs:documentation>prevede opere strutturali soggette ad autorizzazione sismica ai sensi dell’articolo 94 del 
+                                d.P.R. n. 380/2001 o della corrispondente normativa regional</xs:documentation></xs:annotation>
+                            <xs:complexType>
+                                <xs:annotation><xs:documentation>si allega la documentazione necessaria per il rilascio dell’autorizzazione sismica</xs:documentation></xs:annotation>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoDocumentazioneAutorizzazione"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>                            
+                        </xs:element>                        
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+
+    <!-- Reference suecommon:AutorizzazionePaesaggisticaType -->
+    <xs:complexType name="AutorizzazionePaesaggisticaBaseType" abstract="true"/>
+    
+    <xs:complexType name="AutorizzazionePaesaggisticaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:AutorizzazionePaesaggisticaBaseType">
+                <xs:choice>
+                    <xs:element name="nonRicadeInZonaTutelata" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="nonSoggettoAutorizzazione" minOccurs="0" type="basic:EmptyType">
+                        <xs:annotation><xs:documentation>ricade  in zona tutelata, ma le opere non comportano alterazione dei luoghi o dell’aspetto 
+                            esteriore degli edifici ovvero non sono soggetti ad autorizzazione ai sensi dell’art. 149, d.lgs. 
+                            n. 42/2004 e del d.P.R. n. 31/2017,  allegato A e art. 4</xs:documentation></xs:annotation>
+                    </xs:element>
+                    <xs:element name="ricadeInZonaTutelata" minOccurs="0">
+                        <xs:complexType>
+                            <xs:choice>
+                                <xs:element name="procedimentoSemplificato">
+                                    <xs:annotation><xs:documentation>è assoggettato al procedimento semplificato di autorizzazione paesaggistica, in quanto di lieve 
+                                        entità, secondo quanto previsto dal d.P.R. n. 31/2017</xs:documentation></xs:annotation>
+                                    <xs:complexType>
+                                        <xs:annotation><xs:documentation>si allega la relazione paesaggistica semplificata e la documentazione necessaria ai fini 
+                                            del rilascio dell’autorizzazione paesaggistica semplificata</xs:documentation></xs:annotation>
+                                        <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                                <xs:attribute type="xs:boolean" name="allegatoRelazionePaesaggisticaSemplificata"/>
+                                            </xs:extension>
+                                        </xs:simpleContent>                   
+                                    </xs:complexType>  
+                                </xs:element>
+                                <xs:element name="procedimentoOrdinario">
+                                    <xs:annotation><xs:documentation>è assoggettato al procedimento ordinario di autorizzazione paesaggistica</xs:documentation></xs:annotation>
+                                    <xs:complexType>
+                                        <xs:annotation><xs:documentation>si allega la relazione paesaggistica e la documentazione necessaria ai fini 
+                                            del rilascio dell’autorizzazione paesaggistica</xs:documentation></xs:annotation>
+                                        <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                                <xs:attribute type="xs:boolean" name="allegatoRelazionePaesaggistica"/>
+                                            </xs:extension>
+                                        </xs:simpleContent>                   
+                                    </xs:complexType>  
+                                </xs:element>                                
+                            </xs:choice>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <!-- Reference suecommon:AutorizzazioneSoprintendenzaType -->
+    <xs:complexType name="AutorizzazioneSoprintendenzaType">
+        <xs:choice>
+            <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="sottopostoTutela" minOccurs="0">
+                <xs:complexType>
+                    <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta</xs:documentation></xs:annotation>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute type="xs:boolean" name="allegatoRilascioParere"/>
+                        </xs:extension>
+                    </xs:simpleContent>                   
+                </xs:complexType>                
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:AreaProtettaType -->
+    <xs:complexType name="AreaProtettaBaseType" abstract="true"/>
+    
+    <xs:complexType name="AreaProtettaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:AreaProtettaBaseType">
+                <xs:choice>
+                    <xs:element name="nonRicadeTutela" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="ricadeTutela" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="sottopostoDisposizioni" minOccurs="0">
+                        <xs:annotation><xs:documentation>è sottoposto alle relative disposizioni</xs:documentation></xs:annotation>
+                        <xs:complexType>
+                            <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta </xs:documentation></xs:annotation>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoRilascioParere"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>  
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:VincoloIdrogeologicoType -->
+    <xs:complexType name="VincoloIdrogeologicoBaseType" abstract="true"/>
+    
+    <xs:complexType name="VincoloIdrogeologicoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:VincoloIdrogeologicoBaseType">
+                <xs:choice>
+                    <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="tutelaSenzaAutorizzazione" minOccurs="0" type="basic:EmptyType"/>                   
+                    <xs:element name="sottopostoTutela" minOccurs="0">
+                        <xs:complexType>
+                            <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio dell’autorizzazione</xs:documentation></xs:annotation>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDocumentazione"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:VincoloIdraulicoType -->
+    <xs:complexType name="VincoloIdraulicoBaseType" abstract="true"/>
+    
+    <xs:complexType name="VincoloIdraulicoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:VincoloIdraulicoBaseType">
+                <xs:choice>
+                    <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="sottopostoTutela" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDocumentazione"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:Natura2000Type -->
+    <xs:complexType name="Natura2000BaseType" abstract="true"/>
+    
+    <xs:complexType name="Natura2000Type">
+        <xs:complexContent>
+            <xs:extension base="suecommon:Natura2000BaseType">
+                <xs:choice>
+                    <xs:element name="nonSoggettoVINCA" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="soggettoVINCA" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDocumentazione"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:RispettoCimiterialeType -->
+    <xs:complexType name="RispettoCimiterialeBaseType" abstract="true"/>
+    
+    <xs:complexType name="RispettoCimiterialeType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:RispettoCimiterialeBaseType">
+                <xs:choice>
+                    <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="ricadeConsentito" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="ricadeNonConsentito" minOccurs="0">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute type="xs:boolean" name="allegatoDeroga"/>
+                                </xs:extension>
+                            </xs:simpleContent>                   
+                        </xs:complexType>                                             
+                    </xs:element>                   
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:RischioRilevanteType -->
+    <xs:complexType name="RischioRilevanteType">
+        <xs:choice>
+            <xs:element name="assenzaAttivita" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="presenzaAttivitaAreaDanno">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="nonRicadeAreaDanno" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="ricadeAreaDanno" minOccurs="0">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:boolean" name="allegatoValutazioneProgetto"/>
+                                    </xs:extension>
+                                </xs:simpleContent>                   
+                            </xs:complexType>    
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>              
+            </xs:element>
+            <xs:element name="presenzaAttivitaNoAreaDanno" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute type="xs:boolean" name="allegatoValutazioneProgetto"/>
+                        </xs:extension>
+                    </xs:simpleContent>                   
+                </xs:complexType>              
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:TutelaEcologicaType -->
+    <xs:complexType name="TutelaEcologicaBaseType" abstract="true"/>
+    
+    <xs:complexType name="TutelaEcologicaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TutelaEcologicaBaseType">
+                <xs:sequence>
+                    <xs:element name="fasciaRispettoDepuratori" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="altro" minOccurs="0" type="xs:string"/>
+                    <xs:element name="allegatiXVincoli">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="autocertificazioniConformita" minOccurs="0" type="basic:EmptyType"/>
+                                <xs:element name="documentazioneAttiDiAssenso" minOccurs="0" type="basic:EmptyType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:EfficienzaInfrastruttureType -->
+    <xs:complexType name="EfficienzaInfrastruttureBaseType" abstract="true"/>
+    
+    <xs:complexType name="EfficienzaInfrastruttureType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:EfficienzaInfrastruttureBaseType">
+                <xs:sequence>
+                    <xs:element name="stradale" minOccurs="0" type="xs:string"/>
+                    <xs:element name="ferroviario" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="elettrodotto" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="gasdotto" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="militare" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="aeroportuale" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="altro" minOccurs="0" type="xs:string"/>
+                    <xs:element name="allegatiXVincoli">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="autocertificazioniConformita" minOccurs="0" type="basic:EmptyType"/>
+                                <xs:element name="documentazioneAttiDiAssenso" minOccurs="0" type="basic:EmptyType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ImpreseEsecutricideiLavoriType -->
+    <xs:complexType name="ImpreseEsecutricideiLavoriType">
+        <xs:choice>
+            <xs:element type="xs:boolean" name="lavoriDaImpresa"/>
+            <xs:element type="xs:boolean" name="lavoriPrivati"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ComunicazioniSegnalazioniType -->
+    <xs:complexType name="ComunicazioniSegnalazioniBaseType" abstract="true"/>
+    
+    <xs:complexType name="ComunicazioniSegnalazioniType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ComunicazioniSegnalazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="comunicazioni" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                    <xs:element name="autoritaCompetente" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                </xs:sequence>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:AttiAssensoType -->
+    <xs:complexType name="AttiAssensoBaseType" abstract="true"/>
+    
+    <xs:complexType name="AttiAssensoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:AttiAssensoBaseType">
+                <xs:sequence>
+                    <xs:element name="tipoAtto" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                    <xs:element name="autoritaCompetente" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                </xs:sequence>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:AllegatoType -->
+    <xs:complexType name="FileAttachmentType">
+        <xs:sequence>
+            <xs:element name="contenuto" type="xs:base64Binary"/>
+            <xs:element name="mimeType" type="enumeration:MimeTypeEnum"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="file" type="suecommon:FileAttachmentType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:AllegatoBaseType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- ELEMENTI ALLEGATI --> 
+    <xs:element name="allegatoProcuraDelega" type="suecommon:AllegatoBaseType"  >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Procura/delega</ccts:Definition>
+                <ccts:UsageRule>Nel caso di procura/delega a presentare la segnalazione/domanda/comunicazione</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element> 
+    
+    <xs:element name="allegatoVersamentoDirittiSegreteria" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Ricevuta di versamento dei diritti di segreteria(*)</ccts:Definition>
+                <ccts:UsageRule>Se previsto dal Comune</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoDocumentiIdentita" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Copia del documento di identità del/i titolare/i e/o del tecnico</ccts:Definition>
+                <ccts:UsageRule>Solo se i soggetti coinvolti non hanno sottoscritto digitalmente e/o in assenza di procura/delega</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoAssensoTerzi" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Dichiarazione di assenso dei terzi titolari di altri diritti reali o obbligatori (allegato soggetti coinvolti)</ccts:Definition>
+                <ccts:UsageRule>Se non si ha titolarità esclusiva all’esecuzione dell’intervento</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoModelloISTAT" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Modello ISTAT</ccts:Definition>
+                <ccts:UsageRule>Per interventi di nuova costruzione e di ampliamento di volume di fabbricati esistenti (art. 7 d.lgs. n. 322/1989)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoVersamentoOblazioneInEsecuzione" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Ricevuta di versamento a titolo di oblazione  (intervento in corso di esecuzione)</ccts:Definition>
+                <ccts:UsageRule>Se, ai sensi dell’art. 6-bis, comma 5 del d.P.R. n. 380/2001, la comunicazione è presentata spontaneamente quando l'intervento è in corso di esecuzione.</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoVersamentoOblazioneSanatoria" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Ricevuta di versamento a titolo di oblazione  (intervento in sanatoria)</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento, ai sensi dell’art. 6-bis, comma 5 del d.P.R. n. 380/2001 è stato realizzato in assenza di comunicazione asseverata di inizio lavori.</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoPreventivoContributoCostruzione" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Prospetto di calcolo preventivo del contributo di costruzione</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento da realizzare è a titolo oneroso ed il contributo di costruzione è calcolato dal tecnico abilitato.</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoRicevutaVersamentoContributoCostruzione" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Ricevuta di versamento del contributo di costruzione</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento da realizzare è a titolo oneroso.</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoNotificaPreliminare" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Notifica preliminare (articolo 99 del d.lgs. n. 81/2008)</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento ricade nell’ambito di applicazione del d.lgs. n. 81/2008, fatte salve le specifiche modalità tecniche adottate dai sistemi informativi regionali.</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoElaboratoGrafico" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Elaborati grafici dello stato di fatto e progetto</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatori</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoAltreComunicazioni" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione necessaria per la presentazione di altre comunicazioni, segnalazioni (specificare)</ccts:Definition>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoRilascioAttiAssenso" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione necessaria per il rilascio di atti di assenso obbligatori ai sensi delle normative di settore (specificare)</ccts:Definition>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoDeterminazioneContributoCostruzione" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione tecnica necessaria alla determinazione del contributo di costruzione</ccts:Definition>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoProgettoUrbanizzazione" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Proposta di progetto per la realizzazione delle opere di urbanizzazione</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento da realizzare è a titolo oneroso e viene richiesto lo scomputo degli onere di urbanizzazione</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>		
+    
+    <xs:element name="allegatoVersamentoContributoCostruzione" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Attestazione del versamento del contributo di costruzione</ccts:Definition>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoDocumentazioneFotografica" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione fotografica dello stato di fatto (*)</ccts:Definition>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoRelazioneGeologica" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Relazione geologica/geotecnica</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento comporta opere elencate nelle NTC 14/01/2008 per cui è necessaria la progettazione geotecnica</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoSuperamentoBarriereArch" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Elaborati relativi al superamento delle barriere architettoniche</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento è soggetto alle prescrizioni dell’art. 82 e seguenti (edifici privati aperti al pubblico) ovvero degli artt. 77 e seguenti (nuova costruzione e ristrutturazione di interi edifici residenziali) del d.P.R. n. 380/2001</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoProgettoImpianti" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Progetto degli impianti</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento comporta installazione, trasformazione o ampliamento di impianti tecnologici, ai sensi del d.m. n. 37/2008</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoRelazioneConsumiEnergetici" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Relazione tecnica sui consumi energetici</ccts:Definition>
+                <ccts:UsageRule>Se intervento è soggetto all’applicazione del d.lgs. n. 192/2005 e/o del d.lgs. n. 28/2011</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:complexType name="allegatoConformitaVincoliEcologica">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Autocertificazione relativa alla conformità dell’intervento per altri vincoli di tutela ecologica (specificare i vincoli in oggetto)</ccts:Definition>
+                <ccts:UsageRule>(ad es. se l’intervento ricade nella fascia di rispetto dei depuratori)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation> 
+        <xs:sequence>
+            <xs:element name="fileAllegato" minOccurs="0" type="suecommon:AllegatoBaseType"/>
+            <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>		
+    
+    <xs:complexType name="allegatoConformitaVincoliFunzionale">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Autocertificazione relativa alla conformità dell’intervento per altri vincoli di tutela funzionale (specificare i vincoli in oggetto)</ccts:Definition>
+                <ccts:UsageRule>ad es. se l’intervento ricade nella fascia di rispetto stradale, ferroviario, di elettrodotto, gasdotto, militare, etc...)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>     
+        <xs:sequence>
+            <xs:element name="fileAllegato" minOccurs="0" type="suecommon:AllegatoBaseType"/>
+            <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>	
+    
+    <xs:element name="allegatoPlanimetricoVariantiConcluse" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Copia di elaborato planimetrico del progetto con eventuali varianti depositato in Comune con individuazione delle opere parzialmente concluse</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatorio in caso di lavori ultimati</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoConformitaImpianti" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Dichiarazione di conformità degli impianti o dichiarazione di rispondenza, ex art. 7 d.m. n. 37/2008</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento ha comportato installazione, trasformazione o ampliamento di impianti tecnologici, ai sensi del d.m. n. 37/2008</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoCertificatoCollaudo" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Certificato di collaudo ove previsto, degli impianti installati (art. 9 d.m. n. 37/2008)</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento ha comportato installazione, trasformazione o ampliamento di impianti tecnologici, ai sensi del d.m. n. 37/2008</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoCertificatoCollaudoStatico" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Certificato di collaudo statico o dichiarazione di regolare esecuzione</ccts:Definition>
+                <ccts:UsageRule>Se i lavori hanno interessato le strutture e se l’intervento prevede la realizzazione di opere in conglomerato cementizio armato, normale e precompresso ed a struttura metallica ai sensi degli artt. 65 e 67 del d.P.R. n. 380/2001</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoAQE" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Attestato di qualificazione energetica (AQE)</ccts:Definition>
+                <ccts:UsageRule>Se l’intervento è soggetto all'osservanza dei requisiti minimi di prestazione energetica dell’edificio o dell’unità immobiliare ai sensi dell’art. 6 del d.lgs n. 192/2005</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>	
+    
+    <xs:element name="allegatoAggiornamentoNumerazioneCivica" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione necessaria per l’assegnazione o aggiornamento di numerazione civica</ccts:Definition>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoElaboratiProgetto" type="suecommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Elaborati grafici dello stato di fatto, di progetto e comparativi</ccts:Definition>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDenunciaLavori" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Denuncia dei lavori
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento prevede la realizzazione di opere in conglomerato cementizio armato, normale e precompresso ed a struttura metallica da denunciare ai sensi dell’art. 65 del d.P.R. n. 380/2001
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDenunciaLavoriZonaSismica" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Denuncia dei lavori in zona sismica
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento prevede opere da denunciare ai sensi dell’art. 93 del d.P.R. n. 380/2001
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDocumentazioneImpattoAcustico" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione di impatto acustico
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento rientra nell’ambito di applicazione dell’art. 8, commi 2 e 4 della l. n. 447/1995, integrato con il contenuto dell’art. 4 del d.P.R. n. 227/2011.
+                                    Valutazione previsionale di clima acustico        Se l’intervento rientra nell’ambito di applicazione dell’art. 8, comma 3, della l. n. 447/1995.
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDichiarazioneSostitutiva" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Dichiarazione sostitutivao
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    "Se l’intervento, rientra nelle attività “a bassa rumorosità”, di cui all’allegato B del d.P.R. n. 227/2011, che utilizzano impianti di diffusione sonora ovvero svolgono manifestazioni ed eventi con diffusione di musica o utilizzo di strumenti musicali,ma rispettano i limiti di rumore individuati dal d.P.C.M. n. 14 novembre 1997 (assoluti e differenziali): art.4, comma 1, d.P.R. n. 227/2011; 
+                                     ovvero se l’interventononrientra nelle attività “a bassa rumorosità”, di cui all’allegato B del d.P.R. n. 227/2011, e rispetta i limiti di rumore individuati dal d.P.C.M. 14 novembre 1997 (assoluti e differenziali): art.4, comma 2, d.P.R. n. 227/2011"
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoPianoDemolizioneAmianto" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Piano di lavoro di demolizione o rimozione dell’amianto
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se le opere interessano parti di edifici con presenza di fibre di amianto, ai sensi dell’art. 256 del D.lgs. 81/2008
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoAttestazioneVersamentoOneriDiritti" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Attestazione di versamento relativa ad oneri, diritti etc… connessa alla ulteriore segnalazione presentata
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Ove prevista
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoRisultatiQualitaTerreni" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Risultati delle analisi ambientali sulla qualità dei terreni
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento richiede indagini ambientali preventive sulla qualità dei terreni
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoSCIAart4DPR1512011" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    SCIA ai sensi dell’art. 4 comma 1 del d.P.R. n. 151/2011 per le attività indicate nell’allegato I
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    In caso di presentazione contestuale di SCIA ai sensi dell’art. 4 comma 1 del d.P.R. n. 151/2011
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoAutorizzazioneSismica" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione necessaria per il rilascio dell’autorizzazione sismica
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento prevede opere da autorizzare ai sensi dell’art. 94 del d.P.R. n. 380/2001
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDerogaConformitaRequisitiIgienicoSanitari" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione per la richiesta di deroga alla conformità ai requisiti igienico sanitari
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento non rispetta le prescrizioni di cui al d.m. 5 luglio 1975 e/o del d.lgs. n. 81/2008 e/o del Regolamento Edilizio
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoPrevisioneImpattoAcusticoRilascioNullaosta" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione di previsione di impatto acustico ai fini del rilascio del nulla-osta
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento rientra nell’ambito di applicazione dell’art. 8, comma 6, della l. n. 447/1995, integrato con il contenuto dell’art. 4 del d.P.R. n. 227/2011.
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDerogaPrevenzioneIncendi" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione per la  all’integrale osservanza delle regole tecniche di prevenzione incendi
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Qualora le attività soggette ai controlli di prevenzione incendi, presentino caratteristiche tali da non consentire l'integrale osservanza delle regole tecniche, di cui all’art. 7 del d.P.R. n. 151/2011
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoRilascioParereVigiliFuoro" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione necessaria al rilascio del parere progetto da parte dei Vigili del Fuoco
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento è soggetto a valutazione di conformità ai sensi dell’art. 3 e dell’art. 8 del d.P.R. n. 151/2011
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoVersamentoImpostaBollo" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    "Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato ovvero Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite @bollo"
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA
+                                     (SCIA condizionata)
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDerogaBarriereArchitettoniche" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione per la richiesta di deroga alla normativa per l’abbattimento delle barriere architettoniche
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento è soggetto alle prescrizioni dell’art. 82 e seguenti (edifici privati aperti al pubblico) ovvero degli artt. 77 e seguenti (nuova costruzione e ristrutturazione di interi edifici residenziali) del d.P.R. n. 380/2001
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoRelazionePaesaggisticaSemplificata" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    "Relazione paesaggistica semplificata e documentazione per il rilascio per l’autorizzazione paesaggistica semplificata
+                                    Relazione paesaggistica e documentazione per il rilascio per l’autorizzazione paesaggistica"
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    "Se l’intervento è assoggettato ad autorizzazione paesaggistica di lieve entità (d.P.R. n. 31/2017)
+                                    Se l’intervento è soggetto al procedimento ordinario di autorizzazione paesaggistica"
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoRilascioParereSoprintendenza" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione per il rilascio del parere/nulla osta da parte della Soprintendenza
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’immobile oggetto dei lavori è sottoposto a tutela ai sensi del Titolo I, Capo I, Parte II del d.lgs. n. 42/2004
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoRilascioNullaOstaAreaProtetta" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione per il rilascio del parere/nulla osta dell’ente competente per bene in area protetta
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’immobile oggetto dei lavori ricade in area tutelata e le opere comportano alterazione dei luoghi ai sensi della l. n. 394/1991
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoRilascioloAutorizzazioneVincoloIdrogeologico" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione per il rilascio dell’autorizzazione relativa al vincolo idrogeologico
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’area oggetto di intervento è sottoposta a tutela ai sensi dell’articolo 61 del d.lgs. n. 152/2006
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoRilascioAutorizzazioneVincoloIdraulico" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione per il rilascio dell’autorizzazione relativa al vincolo idraulico
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’area oggetto di intervento è sottoposta a tutela ai sensi dell’articolo 115 del d.lgs. n. 152/2006
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoApprovazioneProgettoVINCA" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione necessaria all’approvazione del progetto (VINCA)
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento è soggetto a valutazione d’incidenza nelle zone appartenenti alla rete “Natura 2000”
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoDerogafasciaRispettoCimiteriale" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione necessaria per la richiesta di deroga alla fascia di rispetto cimiteriale
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento ricade nella fascia di rispetto cimiteriale e non è consentito ai sensi dell’articolo 338 del testo unico delle leggi sanitarie 1265/1934
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione necessaria alla valutazione del progetto da parte del Comitato Tecnico Regionale per interventi in area di danno da incidente rilevante
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento ricade in area a rischio d’incidente rilevante
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="allegatoAssensoTutelaEcologica">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione necessaria ai fini del rilascio degli atti di assenso relativi ad altri vincoli di tutela ecologica (specificare i vincoli in oggetto)</ccts:Definition>
+                <ccts:UsageRule>(ad es. se l’intervento ricade nella fascia di rispetto dei depuratori)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>       
+        <xs:sequence>
+            <xs:element name="fileAllegato" minOccurs="0" type="suecommon:AllegatoBaseType"/>
+            <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>
+
+    <xs:complexType name="allegatoAssensoTutelaFunzionale">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione necessaria ai fini del rilascio degli atti di assenso relativi ai vincoli di tutela funzionale (specificare i vincoli in oggetto)</ccts:Definition>
+                <ccts:UsageRule>(ad es. se l’intervento ricade nella fascia di rispetto stradale, ferroviario, di elettrodotto, gasdotto, militare, ecc.)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>       
+        <xs:sequence>
+            <xs:element name="fileAllegato" minOccurs="0" type="suecommon:AllegatoBaseType"/>
+            <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>
+
+    <xs:element name="allegatoAttestazioneVersamentoOneriAutorizzazioni" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Attestazione di versamento relativa ad oneri, diritti etc… connessa alla richiesta di rilascio di autorizzazioni
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Ove prevista
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:element name="allegatoAutorizzazioniScarichiIdrici" type="suecommon:AllegatoBaseType">
+            <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                            <ccts:Definition>
+                                    Documentazione necessaria al rilascio delle autorizzazioni relative agli scarichi idrici e agli allacci in fognatura
+                            </ccts:Definition>
+                            <ccts:UsageRule>
+                                    Se l’intervento necessita di autorizzazione per gli scarichi idrici e gli allacci in fognatura
+                            </ccts:UsageRule>
+                    </xs:documentation>
+            </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="allegatoSoggettiCoinvolti">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Soggetti Coinvolti</ccts:Definition>
+                <ccts:UsageRule>-</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>       
+        <xs:sequence>
+                <xs:element name="Titolari">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType" minOccurs="2" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element> 
+                
+                <xs:element name="TecniciIncaricati">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="schedaTecnico" type="suecommon:TecniciIncaricatiType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="ImpreseEsecutrici">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="schedaImpreseEsecutriciType" type="suecommon:ImpreseEsecutriciType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+    </xs:complexType>
+
+    <!-- ENUMERATION -->
+    <xs:simpleType name="TitolaritaInterventoEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Titolare"/>
+            <xs:enumeration value="NonTitolare"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="OperePrevisteEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NoPartiComuni"/>
+            <xs:enumeration value="PartiComuniCondominio"/>
+            <xs:enumeration value="PartiComuniFabbricatoMultiProp"/>
+            <xs:enumeration value="PartiComuniNoAssenso"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="InterventiSoggettiACILAEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NoAttoAssenso"/>
+            <xs:enumeration value="ConAllegatiCila"/>
+            <xs:enumeration value="ContestualeAttoAssensoAllegatoCila"/>
+        </xs:restriction>
+    </xs:simpleType>
+  
 </xs:schema>
