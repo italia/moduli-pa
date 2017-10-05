@@ -1419,7 +1419,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDerogaConformitàRequisitiIgienicoSanitari" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDerogaConformitaRequisitiIgienicoSanitari" type="suecommon:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1604,31 +1604,31 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoAssensoTutelaEcologica" type="suecommon:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria ai fini del rilascio degli atti di assenso relativi ad altri vincoli di tutela ecologica (specificare i vincoli in oggetto)
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    (ad es. se l’intervento ricade nella fascia di rispetto dei depuratori)
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
+    <xs:complexType name="allegatoAssensoTutelaEcologica">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione necessaria ai fini del rilascio degli atti di assenso relativi ad altri vincoli di tutela ecologica (specificare i vincoli in oggetto)</ccts:Definition>
+                <ccts:UsageRule>(ad es. se l’intervento ricade nella fascia di rispetto dei depuratori)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>       
+        <xs:sequence>
+            <xs:element name="fileAllegato" minOccurs="0" type="suecommon:AllegatoBaseType"/>
+            <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>
 
-    <xs:element name="allegatoAssensoTutelaFunzionale" type="suecommon:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria ai fini del rilascio degli atti di assenso relativi ai vincoli di tutela funzionale (specificare i vincoli in oggetto)
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    (ad es. se l’intervento ricade nella fascia di rispetto stradale, ferroviario, di elettrodotto, gasdotto, militare, ecc.)
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
+    <xs:complexType name="allegatoAssensoTutelaFunzionale">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione necessaria ai fini del rilascio degli atti di assenso relativi ai vincoli di tutela funzionale (specificare i vincoli in oggetto)</ccts:Definition>
+                <ccts:UsageRule>(ad es. se l’intervento ricade nella fascia di rispetto stradale, ferroviario, di elettrodotto, gasdotto, militare, ecc.)</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>       
+        <xs:sequence>
+            <xs:element name="fileAllegato" minOccurs="0" type="suecommon:AllegatoBaseType"/>
+            <xs:element name="specifica" minOccurs="0" type="xs:string"/>
+        </xs:sequence>       
+    </xs:complexType>
 
     <xs:element name="allegatoAttestazioneVersamentoOneriAutorizzazioni" type="suecommon:AllegatoBaseType">
             <xs:annotation>
@@ -1655,6 +1655,40 @@
                     </xs:documentation>
             </xs:annotation>
     </xs:element>
+
+    <xs:complexType name="allegatoSoggettiCoinvolti">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Soggetti Coinvolti</ccts:Definition>
+                <ccts:UsageRule>-</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>       
+        <xs:sequence>
+                <xs:element name="Titolari">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="schedaTitolare" type="suecommon:PersonaAnagraficaType" minOccurs="2" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element> 
+                
+                <xs:element name="TecniciIncaricati">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="schedaTecnico" type="suecommon:TecniciIncaricatiType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="ImpreseEsecutrici">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="schedaImpreseEsecutriciType" type="suecommon:ImpreseEsecutriciType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+    </xs:complexType>
 
     <!-- ENUMERATION -->
     <xs:simpleType name="TitolaritaInterventoEnum">

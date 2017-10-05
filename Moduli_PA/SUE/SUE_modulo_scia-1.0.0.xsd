@@ -136,6 +136,7 @@
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element name="soggettiCoinvolti" type="suecommon:allegatoSoggettiCoinvolti"/>
             <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoVersamentoOblazioneInEsecuzione" minOccurs="0"/>
@@ -149,13 +150,32 @@
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <!-- <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/> -->
+            <xs:element ref="suecommon:allegatoDenunciaLavori" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDenunciaLavoriZonaSismica" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDocumentazioneImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDichiarazioneSostitutiva" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoPianoDemolizioneAmianto" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAttestazioneVersamentoOneriAutorizzazioni" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
-            <!-- <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/> -->
+            <xs:element ref="suecommon:allegatoVersamentoImpostaBollo" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDerogaBarriereArchitettoniche" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioParereVigiliFuoro" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoPrevisioneImpattoAcusticoRilascioNullaosta" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDerogaConformitaRequisitiIgienicoSanitari" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAutorizzazioneSismica" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRelazionePaesaggisticaSemplificata" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioParereSoprintendenza" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioNullaOstaAreaProtetta" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioloAutorizzazioneVincoloIdrogeologico" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioAutorizzazioneVincoloIdraulico" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoApprovazioneProgettoVINCA" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDerogafasciaRispettoCimiteriale" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" minOccurs="0"/>
+            <xs:element name="conformitaVincoliEcologica" type="suecommon:allegatoConformitaVincoliEcologica" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
 
