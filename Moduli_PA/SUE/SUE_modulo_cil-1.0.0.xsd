@@ -26,7 +26,7 @@
             
             <!-- SOGGETTI -->
             <xs:element name="schedaTitolare" type="suecommon:TitolareType"/> 
-            
+
             <!-- DICHIARAZIONI -->
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>               
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
