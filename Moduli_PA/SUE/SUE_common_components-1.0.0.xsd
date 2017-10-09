@@ -1665,7 +1665,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:complexType name="allegatoSoggettiCoinvolti">
+    <xs:complexType name="SoggettiCoinvoltiType">
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Soggetti Coinvolti</ccts:Definition>
@@ -1702,7 +1702,7 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:element name="soggettiCoinvolti" type="suecommon:allegatoSoggettiCoinvolti"/>
+    <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:SoggettiCoinvoltiType"/>
     
     <!-- ENUMERATION -->
     <xs:simpleType name="TitolaritaInterventoEnum">

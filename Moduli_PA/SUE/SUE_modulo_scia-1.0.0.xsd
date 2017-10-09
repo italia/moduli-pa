@@ -188,7 +188,7 @@
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suecommon:soggettiCoinvolti" minOccurs="1"/>
+            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
             <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="1"/> 
             <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>            
             <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
