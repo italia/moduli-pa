@@ -26,7 +26,7 @@
 
             <!-- SOGGETTI -->
             <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
-            <xs:element name="schedaDitta" type="suecommon:ImpresaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="aggregate:ImpresaAnagraficaType"/>
             <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType"/>
             
             <!-- DICHIARAZIONI -->
