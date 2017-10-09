@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:cfla="http://www.agid.gov.it/MODULI_PA/SUE/modulo_comunicazione_fine_lavori"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_comunicazione_fine_lavori"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+        schemaLocation="SUE_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+        schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components"
+        schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components"
+        schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration"
+        schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo Comunicazione Fine Lavori - ## internal code ref 06/E // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloFineLavori" type="cfla:ModuloFineLavoriType"/>
+    
+    <xs:complexType name="ModuloFineLavoriType">
+        <xs:annotation>
+            <xs:documentation>
+                schedaTitolare: in caso di più titolari, la sezione è ripetibile nell’allegato “SOGGETTI COINVOLTI”
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="aggregate:ImpresaAnagraficaType" minOccurs="0"/>
+            <xs:element name="schedaDelegati" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
+            <xs:element name="ubicazioneImmobile" type="cfla:UbicazioneImmobileType" minOccurs="0"/>
+            <!-- Comunicazioni -->
+            <xs:element name="titolari" type="cfla:SoggettiCoinvoltiType"/>
+            <xs:element name="tabellaAllegati" type="cfla:TabellaAllegatiType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="UbicazioneImmobileType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:IndirizzoType">
+                <xs:sequence>
+                    <xs:element name="scala" type="xs:string" minOccurs="0"/>
+                    <xs:element name="piano" type="xs:string" minOccurs="0"/>
+                    <xs:element name="interno" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SoggettiCoinvoltiType">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                Compilare solo in caso di più di un Titolare
+                (I seguenti campi sono da compilare solo qualora i dati siano diversi da quelli indicati nei titoli/comunicazioni che hanno legittimato l’intervento)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="2"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Allegati -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1" />
+            <xs:element ref="suecommon:allegatoPlanimetricoVariantiConcluse" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+</xs:schema>
