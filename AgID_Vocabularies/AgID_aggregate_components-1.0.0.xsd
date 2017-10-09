@@ -297,11 +297,11 @@
         <xs:sequence>
             <xs:element name="ragioneSociale" type="isacvbc:LegalEntityLegalNameType"/>
             <xs:element name="pIVA" type="basic:PIVA"/>
-            <xs:element name="formaGiuridica" type="enum:FormaGiuridicaEnum"/> 
-            <xs:element name="iscrizioneRegistroImprese" type="enum:IscrizioneRegistroImpreseEnum"/>
+            <xs:element name="formaGiuridica" type="enum:FormaGiuridicaEnum" minOccurs="0"/> 
+            <xs:element name="iscrizioneRegistroImprese" type="enum:IscrizioneRegistroImpreseEnum" minOccurs="0"/>
             <xs:element name="CCIAA" type="aggregate:CCIAAType" minOccurs="0"/>
-            <xs:element name="sedeLegale" type="aggregate:IndirizzoType"/>
-            <xs:element name="contatti" type="aggregate:ContattiType"/>
+            <xs:element name="sedeLegale" type="aggregate:IndirizzoType" minOccurs="0"/>
+            <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
             <xs:element name="domicilioElettronicoComunicazioni" type="basic:EMailIndirizzoType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
