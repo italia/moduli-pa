@@ -1078,12 +1078,21 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoAltreComunicazioni" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoAltreComunicazioni">
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione necessaria per la presentazione di altre comunicazioni, segnalazioni (specificare)</ccts:Definition>
             </xs:documentation>
-        </xs:annotation>
+        </xs:annotation>      
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="suecommon:AllegatoBaseType">
+                    <xs:sequence>
+                        <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>     
     </xs:element>
     
     <xs:element name="allegatoRilascioAttiAssenso" type="suecommon:AllegatoBaseType" >
