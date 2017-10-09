@@ -32,10 +32,8 @@
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
             <xs:element name="comunicaInzioLavori" type="cil:ComunicaInzioLavoriType"/>
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
-            <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType"/>
-            
-            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutricideiLavoriType"/>
-
+            <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType"/>           
+            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
 
             <!-- ALLEGATI  -->
@@ -65,9 +63,7 @@
     <xs:complexType name="AllegatiCILType">
         <xs:sequence>
             <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
-            
-            <xs:element name="soggettiCoinvolti" type="suecommon:allegatoSoggettiCoinvolti"/>
-            
+            <xs:element ref="suecommon:soggettiCoinvolti" minOccurs="1"/>
             <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
