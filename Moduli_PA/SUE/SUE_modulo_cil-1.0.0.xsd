@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema    
+    xmlns:cil="http://www.agid.gov.it/MODULI_PA/SUE/modulo_cil"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_cil"
+    
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloCIL" type="cil:ModuloCILType" />
+    
+    <xs:complexType name="ModuloCILType">
+        <xs:sequence>    
+            
+            <!-- SOGGETTI -->
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/> 
+            
+            <!-- DICHIARAZIONI -->
+            <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>               
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
+            <xs:element name="comunicaInzioLavori" type="cil:ComunicaInzioLavoriType"/>
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
+            <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType"/>           
+            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>
+            <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
+
+            <!-- ALLEGATI  -->
+            <xs:element name="tabellaAllegati" type="cil:TabellaAllegatiType"/>
+
+        </xs:sequence>    
+    </xs:complexType>
+
+    <!-- BASE TYPE -->
+    <!-- Reference cil:ComunicaInzioLavoriType -->
+    <xs:complexType name="ComunicaInzioLavoriType">
+        <xs:sequence>
+            <xs:element name="dataInizio" minOccurs="0" type="xs:date"/>
+            <xs:element name="dataFine" minOccurs="0" type="xs:date"/>
+            <xs:element name="dettaglioLavori" minOccurs="0" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Reference scia:TabellaAllegatiType -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="cil:AllegatiCILType"/>
+            <xs:element name="allegatiSCIAUnica" type="cil:AllegatiAltreComunicazioniType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiCILType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
+            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoNotificaPreliminare" minOccurs="0"/>            
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltreComunicazioniType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoAltreComunicazioni" minOccurs="0" />            
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
