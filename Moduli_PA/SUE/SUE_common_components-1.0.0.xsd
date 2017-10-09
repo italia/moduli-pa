@@ -1671,29 +1671,30 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:complexType name="SoggettiCoinvoltiType">
+    <xs:complexType name="TitolareType">
+            <xs:complexContent>
+                <xs:extension base="aggregate:PersonaAnagraficaType">
+                    <xs:sequence>
+                        <xs:element name="inQualitaDi" type="xs:string" minOccurs="1"/>
+                        <xs:element name="impresa" type="aggregate:ImpresaAnagraficaType" minOccurs="1"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SoggettiCoinvoltiType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Soggetti Coinvolti</ccts:Definition>
             </xs:documentation>
         </xs:annotation>       
         <xs:sequence>
-            <xs:element name="Titolari"  minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Titolari"  minOccurs="0" maxOccurs="unbounded" type="suecommon:TitolareType">
                 <xs:annotation>
                     <xs:documentation xml:lang="it">
                         Compilare solo in caso di più di un Titolare, seziona ripetibile
                     </xs:documentation>
                 </xs:annotation>
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="aggregate:PersonaAnagraficaType">
-                            <xs:sequence>
-                                <xs:element name="inQualitaDi" type="xs:string" minOccurs="1"/>
-                                <xs:element name="impresa" type="aggregate:ImpresaAnagraficaType" minOccurs="1"/>
-                            </xs:sequence>
-                         </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
             </xs:element> 
             <xs:element name="TecniciIncaricati" type="suecommon:TecniciIncaricatiType" minOccurs="1">
                 <xs:annotation>
