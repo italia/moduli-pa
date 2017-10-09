@@ -26,16 +26,41 @@
     
     <!-- PersonaAnagraficaType portato su aggregate:PersonaAnagraficaType -->
  
-    <!-- ref aggregate:ImpresaAnagraficaType -->
+    <!-- ref aggregate:ImpresaAnagraficaType : start -->
     <xs:complexType name="ImpresaAnagraficaType">
-        <xs:complexContent>
-            <xs:extension base="aggregate:ImpresaAnagraficaType">
-            <xs:sequence>
-                <xs:element name="legaleRappresentante" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
-            </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:annotation>
+            <xs:documentation>Tipo per specificare i dati dell'anagrafica di una Impresa</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ragioneSociale" type="isacvbc:LegalEntityLegalNameType" minOccurs="0"/>
+            <xs:element name="pIVA" type="basic:PIVA" minOccurs="0"/>
+            <xs:element name="formaGiuridica" type="enumeration:FormaGiuridicaEnum" minOccurs="0"/> 
+            <xs:element name="iscrizioneRegistroImprese" type="enumeration:IscrizioneRegistroImpreseEnum" minOccurs="0"/>
+            <xs:element name="CCIAA" type="aggregate:CCIAAType" minOccurs="0"/>
+            <xs:element name="sedeLegale" type="aggregate:IndirizzoType" minOccurs="0"/>
+            <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0" />
+            <xs:element name="domicilioElettronicoComunicazioni" type="basic:EMailIndirizzoType" minOccurs="0"/>
+            <xs:element name="legaleRappresentante" type="suecommon:LegaleRappresentanteType" minOccurs="0"/>
+        </xs:sequence>
     </xs:complexType>
+    
+    <!-- ref aggregate:PersonaAnagraficaType : start -->
+    <xs:complexType name="LegaleRappresentanteType">
+        <xs:annotation>
+            <xs:documentation>Nome Cognome; CFisc; nato A, Prov, Stato, il; Tel, Fax; Cell, E-Mail</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="nome" type="isacvbc:PersonGivenNameType" minOccurs="0"/>
+            <xs:element name="cognome" type="isacvbc:PersonFamilyNameType" minOccurs="0"/>
+            <xs:element name="codiceFiscale" type="basic:CodiceFiscaleType" minOccurs="0"/>
+            <xs:element name="nascitaLuogo" type="aggregate:ComuneType"  minOccurs="0"/>
+            <xs:element name="provincia" type="aggregate:ProvinciaType" minOccurs="0"/>
+            <xs:element name="stato" type="enumeration:NazioniAlpha3Enum" default="ITA" minOccurs="0"/>
+            <xs:element name="nascitaData" type="isacvbc:PersonBirthDateType" minOccurs="0"/>
+            <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- ref aggregate:ImpresaAnagraficaType : end -->
      
     <xs:complexType name="ProfessionistaAnagraficaType">
         <xs:annotation>
