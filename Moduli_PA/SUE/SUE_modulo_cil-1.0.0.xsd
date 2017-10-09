@@ -32,7 +32,7 @@
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
             <xs:element name="comunicaInzioLavori" type="cil:ComunicaInzioLavoriType"/>
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
-            <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType"/>           
+            <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType" minOccurs="0" maxOccurs="unbounded" />           
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
 
