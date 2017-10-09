@@ -39,7 +39,9 @@
             <xs:element name="schedaDelegati" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
             <xs:element name="ubicazioneImmobile" type="cfla:UbicazioneImmobileType" minOccurs="0"/>
             <!-- Comunicazioni -->
+            <!--
             <xs:element name="titolari" type="cfla:SoggettiCoinvoltiType"/>
+            -->
             <xs:element name="tabellaAllegati" type="cfla:TabellaAllegatiType"/>
         </xs:sequence>
     </xs:complexType>
@@ -56,6 +58,7 @@
         </xs:complexContent>
     </xs:complexType>
 
+<!--
     <xs:complexType name="SoggettiCoinvoltiType">
         <xs:annotation>
             <xs:documentation xml:lang="it">
@@ -67,6 +70,7 @@
             <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="2"/>
         </xs:sequence>
     </xs:complexType>
+-->
     
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
