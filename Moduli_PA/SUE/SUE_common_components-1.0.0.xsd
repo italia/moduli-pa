@@ -996,8 +996,8 @@
         <xs:complexContent>
             <xs:extension base="suecommon:AttiAssensoBaseType">
                 <xs:sequence>
-                    <xs:element name="tipoAtto" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
-                    <xs:element name="autoritaCompetente" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                    <xs:element name="tipoAtto" type="xs:string"/>
+                    <xs:element name="autoritaCompetente" type="xs:string"/>
                 </xs:sequence>        
             </xs:extension>
         </xs:complexContent>
