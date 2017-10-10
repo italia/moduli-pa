@@ -44,7 +44,7 @@
             <xs:element name="tabellaAllegati" type="cfla:TabellaAllegatiType"/>
         </xs:sequence>
     </xs:complexType>
-
+    
     <xs:complexType name="FinelavoriType">
         <xs:annotation>
             <xs:documentation xml:lang="it">
@@ -63,8 +63,8 @@
             <xs:element name="attoInterventoData" type="xs:date" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
-
-
+    
+    
     <xs:complexType name="UbicazioneImmobileType">
         <xs:complexContent>
             <xs:extension base="aggregate:IndirizzoType">
@@ -76,7 +76,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+    
     <xs:complexType name="SoggettiCoinvoltiType">
         <xs:annotation>
             <xs:documentation xml:lang="it">
