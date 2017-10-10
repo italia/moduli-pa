@@ -39,10 +39,31 @@
             <xs:element name="schedaDelegati" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
             <xs:element name="ubicazioneImmobile" type="cfla:UbicazioneImmobileType" minOccurs="0"/>
             <!-- Comunicazioni -->
+            <xs:element name="fineLavori" type="cfla:FinelavoriType" minOccurs="1"/>
             <xs:element name="titolari" type="cfla:SoggettiCoinvoltiType"/>
             <xs:element name="tabellaAllegati" type="cfla:TabellaAllegatiType"/>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:complexType name="FinelavoriType">
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                Attenzione: qualora dai controlli successivi il contenuto delle dichiarazioni risulti non corrispondente al vero, oltre alle sanzioni penali, 
+                è prevista la decadenza dai benefici ottenuti sulla base delle dichiarazioni stesse (art. 75 del d.P.R. n. 445/2000).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataFineLavori" type="xs:date" minOccurs="1"/>
+            <xs:choice>
+                <xs:element name="statoLavoriCompletati" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="statoLavoriParziale" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+            <xs:element name="attoInterventoNome" type="xs:string" minOccurs="1"/>
+            <xs:element name="attoInterentoProtocollo" type="xs:string" minOccurs="1"/>
+            <xs:element name="attoInterventoData" type="xs:date" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
 
     <xs:complexType name="UbicazioneImmobileType">
         <xs:complexContent>
@@ -64,7 +85,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="2"/>
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -74,7 +95,6 @@
             <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0" />
             <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0" />
             <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0" />
-            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1" />
             <xs:element ref="suecommon:allegatoPlanimetricoVariantiConcluse" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
