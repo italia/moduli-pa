@@ -23,7 +23,7 @@
     
     <!-- // Modulo Comunicazione Inizio Lavori Asseverata - CILA ## internal code ref 01/A // -->
     
-    <!-- ROOT ELEMENT  -->
+    <!-- ROOT ELEMENT -->
     <xs:element name="ModuloCILA" type="cila:ModuloCILAType"/>
     
     <xs:complexType name="ModuloCILAType">
