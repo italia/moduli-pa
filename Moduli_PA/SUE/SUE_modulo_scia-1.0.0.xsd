@@ -125,12 +125,18 @@
     <xs:complexType name="QualificazioneInterventoType">
         <xs:complexContent>
             <xs:extension base="suecommon:QualificazioneInterventoBaseType">
-                <xs:choice>
-                    <xs:element name="manutenzioneStarordinaria" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="corsoDiEsecuzione" minOccurs="0" type="scia:CorsoDiEsecuzioneType"/>
-                    <xs:element name="sanatoriaIntervento" minOccurs="0" type="scia:SanatoriaInterventoType"/>
-                    <xs:element name="varianteInCorsoDOpera" minOccurs="0" type="aggregate:AttoBaseType"/>
-                </xs:choice>           
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="manutenzioneStarordinaria" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="corsoDiEsecuzione" minOccurs="0" type="scia:CorsoDiEsecuzioneType"/>
+                        <xs:element name="sanatoriaIntervento" minOccurs="0" type="scia:SanatoriaInterventoType"/>
+                        <xs:element name="varianteInCorsoDOpera" minOccurs="0" type="aggregate:AttoBaseType"/>
+                    </xs:choice>  
+                    <xs:choice>
+                        <xs:element name="procedimentoAutomatizzato" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="procedimentoOrdinario" minOccurs="0" type="basic:EmptyType"/>
+                    </xs:choice>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
