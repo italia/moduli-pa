@@ -151,18 +151,6 @@
         </xs:complexContent>
     </xs:complexType>        
     
-    <!-- Reference cila:ComunicazioniSegnalazioniType -->
-    <xs:complexType name="ComunicazioniSegnalazioniBaseType" abstract="true"/>
-    <xs:complexType name="ComunicazioniSegnalazioniType">
-        <xs:complexContent>
-            <xs:extension base="cila:ComunicazioniSegnalazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altreComunicazioni" type="suecommon:ComunicazioniSegnalazioniType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
     <!-- DICHIARAZIONI -->
 
     <!-- 1) Tipologia di intervento e descrizione sintetica delle opere (*) -->
