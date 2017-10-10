@@ -42,10 +42,14 @@
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
             <!-- Comunicazioni -->
             <xs:element name="presentazioneInizioLavori" type="cila:InterventiSoggettiACILABaseType"/>
-            <xs:element name="qualificazioneIntervento" type="cila:QualificazioneInterventoBaseType"/>
+            <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
             <xs:element name="calcoloContributoCostruzione" type="cila:CalcoloContributoBaseType"/>
+            <!--
             <xs:element name="tecniciIncaricati" type="cila:TecniciIncaricatiType"/>
+            -->
+            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriBaseType"/>
+                        
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
             <!-- Dichiarazioni  -->
@@ -58,6 +62,16 @@
         </xs:sequence>
     </xs:complexType>
     
+    
+    
+    <!-- b)	Opere su parti comuni o modifiche esterne (*) ???????????????????????????????? -->
+    <xs:complexType name="OperePrevisteBaseType" abstract="true"/>
+    
+    <xs:complexType name="OperePrevisteType">
+        <xs:simpleContent>
+            <xs:extension base="suecommon:OperePrevisteEnum"/>
+        </xs:simpleContent>
+    </xs:complexType>
     
     <!-- c)	Presentazione della comunicazione di inizio dei lavori asseverata(*) -->
     <xs:complexType name="InterventiSoggettiACILABaseType" abstract="true"/>
@@ -74,15 +88,17 @@
     </xs:complexType>
     
     <!-- d) Qualificazione dell’intervento (*) -->
-    <xs:complexType name="QualificazioneInterventoBaseType" abstract="true"/>
+    <!-- <xs:complexType name="QualificazioneInterventoBaseType" abstract="true"/> -->
     <xs:complexType name="QualificazioneInterventoType">
         <xs:complexContent>
-            <xs:extension base="cila:QualificazioneInterventoBaseType">
+            <xs:extension base="suecommon:QualificazioneInterventoBaseType">
             <xs:sequence>
                 <xs:choice>
                     <xs:element name="interventoDichiarazioneProgettista" minOccurs="0" type="cila:interventoDichiarazioneProgettistaType"/>
-                    <xs:element name="interventoCorsoDiEsecuzione" minOccurs="0" type="cila:CorsoDiEsecuzioneType"/>
-                    <xs:element name="interventoConSanzione" minOccurs="0" type="cila:ConSanzioneType"/>
+                    <!-- <xs:element name="interventoCorsoDiEsecuzione" minOccurs="0" type="cila:CorsoDiEsecuzioneType"/> -->
+                    <xs:element name="interventoCorsoDiEsecuzioneDataInizioLavori"  type="xs:date"/>
+                    <!-- <xs:element name="interventoConSanzione" minOccurs="0" type="cila:ConSanzioneType"/> -->
+                    <xs:element name="interventoConSanzioneDataLavori" type="xs:date"/>
                 </xs:choice>
                 
                 <!-- Presentazione allo SUAP Verifica che ricguarda Procedimento Automatizzato / Ordinario --> 
@@ -95,6 +111,7 @@
         </xs:complexContent>
     </xs:complexType> 
     
+    <!--
     <xs:complexType name="interventoDichiarazioneProgettistaType">
         <xs:sequence>
             <xs:element type="basic:EmptyType" name="DichiarazioneProgettista"/>
@@ -107,26 +124,47 @@
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
+    -->
+    <xs:complexType name="interventoDichiarazioneProgettistaType">
+        <xs:choice>
+            <xs:element type="xs:date" name="dataInizioLavori"/>
+            <xs:element type="basic:EmptyType" name="inizioLavoriComunicazioneSUAP"/>
+        </xs:choice>
+    </xs:complexType>
     
+    <!--
     <xs:complexType name="CorsoDiEsecuzioneType">
         <xs:sequence>
             <xs:element type="basic:EmptyType" name="interventoCorsoDiEsecuzione"/>
             <xs:element type="xs:date" name="dataInizioLavori"/>
         </xs:sequence>
     </xs:complexType>
-  
+    -->
+    <!--
     <xs:complexType name="ConSanzioneType">
         <xs:sequence>
             <xs:element type="basic:EmptyType" name="interventoConSanzioneType"/>
             <xs:element type="xs:date" name="dataLavori"/>
         </xs:sequence>
     </xs:complexType>
-    
+    -->
+    <!--
     <xs:complexType name="TecniciIncaricatiType">
         <xs:choice>
             <xs:element type="basic:EmptyType" name="incaricoAltriTecnici"/>
             <xs:element type="basic:EmptyType" name="incaricoAInizioLavori"/>
         </xs:choice>
+    </xs:complexType>
+    -->
+    
+    <xs:complexType name="TecniciIncaricatiDeiLavoriType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TecniciIncaricatiDeiLavoriBaseType">
+                <xs:sequence>
+                    <xs:element name="individuatiPrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <!-- f) Calcolo del contributo di costruzione (*) -->
@@ -161,6 +199,18 @@
         </xs:complexContent>
     </xs:complexType>        
     
+    
+    
+    <xs:complexType name="ComunicazioniSegnalazioniBaseType" abstract="true"/>"
+    
+    <xs:complexType name="ComunicazioniSegnalazioniType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ComunicazioniSegnalazioniType"></xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    
     <!-- DICHIARAZIONI -->
     <!-- 1) Tipologia di intervento e descrizione sintetica delle opere (*) -->
     <xs:complexType name="TipologiaInterventoBaseType" abstract="true"/>
@@ -176,8 +226,8 @@
                 <xs:element name="serreMobiliStagionali" minOccurs="0" type="basic:EmptyType"/>
                 <xs:element name="pertinenzeMinori" minOccurs="0" type="basic:EmptyType"/>
                 <xs:element name="altriExtraArt6-10-22" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="altriExtraArt6-10-22-specificare" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="dettaglioIntervento" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="altriExtraArt6-10-22-specificare" minOccurs="0" type="xs:string"/>
+                <xs:element name="dettaglioIntervento" minOccurs="0" type="xs:string"/>
             </xs:sequence>        
             </xs:extension>
         </xs:complexContent>
