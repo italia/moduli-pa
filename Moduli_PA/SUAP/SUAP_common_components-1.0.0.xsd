@@ -424,6 +424,63 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="DichiarazioniAcconciatoriRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="abilitazioneProfessionale">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rilasciataDa" type="xs:string"/>
+                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="possessoQualificaProfessionale">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rilasciataDa" type="xs:string"/>
+                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
+            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiarazioniEstetistiRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="possessoQualificaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
+            <xs:element name="abilitazioneProfessionale">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="titolare" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="socio" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="direzione" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="dipendente">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="impresaStudioMedico" type="xs:string"/>
+                                    <xs:element name="periodoDalAl" type="basic:PeriodoDateType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="frequenzaCorso">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="corsoRegionale" type="aggregate:AttoRilasciatoDaType" />
+                        <xs:element name="corsoScuolaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>  
+            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
+            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    
     <xs:complexType name="NotificaSanitariaType">
        <xs:sequence>
            <xs:choice>

@@ -63,7 +63,6 @@
                 <xs:sequence>
                    <xs:element name="superficieSomministrazione" type="xs:integer"/>
                    <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneEnum"/>
-                   <xs:element name="tipoEsercizio" type="somareeserviziostazioni:TipoEsercizioType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
