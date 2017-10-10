@@ -60,17 +60,7 @@
         </xs:choice>
     </xs:complexType>
 
-    <!-- Reference scia:LocalizzazioneInterventoType -->
-    <xs:complexType name="LocalizzazioneInterventoType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:LocalizzazioneInterventoBaseType">
-                <xs:sequence>
-                    <xs:element name="coordinate" type="xs:string"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
+   
     <!-- Reference suecommon:CalcoloContributoBaseType -->
     <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
     

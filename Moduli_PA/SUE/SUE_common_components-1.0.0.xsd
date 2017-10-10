@@ -150,6 +150,16 @@
             <xs:element name="destinazioneDUso" type="xs:string"/>
         </xs:sequence>      
     </xs:complexType>
+    
+    <xs:complexType name="LocalizzazioneInterventoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:LocalizzazioneInterventoBaseType">
+                <xs:sequence>
+                    <xs:element name="coordinate" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <!-- Reference suecommon:QualificazioneInterventoBaseType -->
     <xs:complexType name="QualificazioneInterventoBaseType" abstract="true"/>
