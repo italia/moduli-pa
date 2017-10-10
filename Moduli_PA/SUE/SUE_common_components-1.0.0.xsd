@@ -1050,9 +1050,9 @@
             <xs:element name="amianto" type="suecommon:AmiantoType"/>
             <xs:element name="conformitaSanitaria" type="suecommon:ConformitaSanitariaBaseType"/>
             <xs:element name="interventoZonaSismica" type="suecommon:InterventoZonaSismicaBaseType"/> 
-            <xs:element name="qualitaAmbientaleTerreni" type="suecommon:QualitaAmbientaleTerreniBaseType"/> 
-            <xs:element name="opereUrbanizzazionePrimaria" type="suecommon:OpereUrbanizzazionePrimariaType"/> 
-            <xs:element name="scarichiIdrici" type="suecommon:ScarichiIdriciBaseType"/> 
+            <xs:element name="qualitaAmbientaleTerreni" type="suecommon:QualitaAmbientaleTerreniBaseType" minOccurs="0"/> 
+            <xs:element name="opereUrbanizzazionePrimaria" type="suecommon:OpereUrbanizzazionePrimariaType" minOccurs="0"/> 
+            <xs:element name="scarichiIdrici" type="suecommon:ScarichiIdriciBaseType" minOccurs="0"/> 
             <xs:element name="autorizzazionePaesaggistica" type="suecommon:AutorizzazionePaesaggisticaType"/> 
             <xs:element name="autorizzazioneSoprintendenza" type="suecommon:AutorizzazioneSoprintendenzaType"/> 
             <xs:element name="areaProtetta" type="suecommon:AreaProtettaBaseType"/>   
