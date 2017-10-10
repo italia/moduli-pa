@@ -992,8 +992,8 @@
         <xs:complexContent>
             <xs:extension base="suecommon:ComunicazioniSegnalazioniBaseType">
                 <xs:sequence>
-                    <xs:element name="comunicazioni" type="xs:string"/>
-                    <xs:element name="autoritaCompetente" type="xs:string"/>
+                    <xs:element name="comunicazioni" minOccurs="0"  type="xs:string"/>
+                    <xs:element name="autoritaCompetente" minOccurs="0"  type="xs:string"/>
                 </xs:sequence>        
             </xs:extension>
         </xs:complexContent>
@@ -1006,8 +1006,8 @@
         <xs:complexContent>
             <xs:extension base="suecommon:AttiAssensoBaseType">
                 <xs:sequence>
-                    <xs:element name="tipoAtto" type="xs:string"/>
-                    <xs:element name="autoritaCompetente" type="xs:string"/>
+                    <xs:element name="tipoAtto" minOccurs="0"  type="xs:string"/>
+                    <xs:element name="autoritaCompetente" minOccurs="0" type="xs:string"/>
                 </xs:sequence>        
             </xs:extension>
         </xs:complexContent>
@@ -1150,13 +1150,22 @@
         </xs:complexType>
     </xs:element>
     
-    <xs:element name="allegatoRilascioAttiAssenso" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoRilascioAttiAssenso">
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione necessaria per il rilascio di atti di assenso obbligatori ai sensi delle normative di settore (specificare)</ccts:Definition>
             </xs:documentation>
         </xs:annotation>
-    </xs:element>	
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="suecommon:AllegatoBaseType">
+                    <xs:sequence>
+                        <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>  
+    </xs:element>		
     
     <xs:element name="allegatoDeterminazioneContributoCostruzione" type="suecommon:AllegatoBaseType" >
         <xs:annotation>
