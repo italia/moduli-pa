@@ -1000,17 +1000,11 @@
     </xs:complexType>
 
     <!-- Reference suecommon:AttiAssensoType -->
-    <xs:complexType name="AttiAssensoBaseType" abstract="true"/>
-    
     <xs:complexType name="AttiAssensoType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:AttiAssensoBaseType">
-                <xs:sequence>
-                    <xs:element name="tipoAtto" minOccurs="0"  type="xs:string"/>
-                    <xs:element name="autoritaCompetente" minOccurs="0" type="xs:string"/>
-                </xs:sequence>        
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:element name="tipoAtto" minOccurs="0"  type="xs:string"/>
+            <xs:element name="autoritaCompetente" minOccurs="0" type="xs:string"/>
+        </xs:sequence>        
     </xs:complexType>
 
     <!-- Reference suecommon:AllegatoType -->
