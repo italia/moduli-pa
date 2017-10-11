@@ -112,19 +112,21 @@
     </xs:complexType>
     
     <xs:complexType name="PresentazioneInzioLavoriType">
-        <xs:choice>
-            <xs:element name="SCIAAgibilitaImmobile" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="SCIAAgibilitaParzialeEdifici" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="SCIAAgibilitaParzialeSingoliImmobili" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="SCIAUnicaAgibilitaImmobile" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="SCIAUnicaAgibilitaParzialeEdifici" minOccurs="0" type="basic:EmptyType" />
-            <xs:element name="SCIAUnicaAgibilitaParzialeSingoliImmobili" minOccurs="0" type="basic:EmptyType"/>
-        </xs:choice>
-            <!-- VERIFICARE !!!
-            ED ALLEGA
-            □	SEZIONE B “Attestazione del direttore dei lavori o del professionista abilitato”, sottoscritta dal direttore dei lavori o tecnico abilitato 
-            □	le comunicazioni o segnalazioni di cui alla SEZIONE C “Soggetti Coinvolti” e alla SEZIONE D “Quadro Riepilogativo della documentazione allegata” debitamente firmate sia dal titolare che dal direttore dei lavori o tecnico abilitato 
-            -->
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="SCIAAgibilitaImmobile" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="SCIAAgibilitaParzialeEdifici" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="SCIAAgibilitaParzialeSingoliImmobili" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="SCIAUnicaAgibilitaImmobile" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="SCIAUnicaAgibilitaParzialeEdifici" minOccurs="0" type="basic:EmptyType" />
+                <xs:element name="SCIAUnicaAgibilitaParzialeSingoliImmobili" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+            
+            <xs:choice>
+                <xs:element name="allegaAttestazioneProfessionista" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="allegaComunicazioni" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+        </xs:sequence>
     </xs:complexType>
 
     <!-- DICHIARAZIONE ASSEVERATA -->
