@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:scpa="http://www.agid.gov.it/MODULI_PA/SUE/modulo_segnalazione_certificata_agibilita"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_segnalazione_certificata_agibilita"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+        schemaLocation="SUE_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+        schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components"
+        schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components"
+        schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration"
+        schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo Segnalazione Certificata Agibilita - ## internal code ref 07/F // -->
+    
+    <!-- ROOT ELEMENT  -->
+    <xs:element name="ModuloSCPA" type="scpa:ModuloSCPAType"/>
+    
+    <xs:complexType name="ModuloSCPAType">
+        <xs:annotation>
+            <xs:documentation>
+                schedaTitolare: in caso di più titolari, la sezione è ripetibile nell’allegato “SOGGETTI COINVOLTI”
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>                              <!-- OK -->
+            <xs:element name="schedaDitta" type="aggregate:ImpresaAnagraficaType" minOccurs="0"/>                   <!-- OK -->
+            <xs:element name="schedaDelegati" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>                <!-- OK -->
+           
+            
+            <!-- Dichiarazioni | Sezione A -->
+            <xs:element name="ubicazioneImmobile" type="scpa:UbicazioneImmobileType" minOccurs="0"/>                <!-- OK -->
+            <xs:element name="catastoImmobile" type="scpa:CatastoImmobileType" minOccurs="0"/>                      <!-- OK -->
+            <xs:element name="comunicazioneIntervento" type="scpa:comunicazioneInterventoBaseType" minOccurs="0"/>  <!-- OK -->
+            <xs:element name="fineLavori" type="scpa:FineLavoriBaseType" minOccurs="0"/>                            <!-- OK : da verificare -->
+            
+            <!-- ... ... -->
+            <xs:element name="schedaImmobile" type="scpa:TabellaAllegatiCILAType" minOccurs="0"/>
+            <xs:element name="tabellaAllegatiCILA" type="scpa:TabellaAllegatiCILAType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="UbicazioneImmobileType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:IndirizzoType">
+                <xs:sequence>
+                    <xs:element name="scala" type="xs:string" minOccurs="0"/>
+                    <xs:element name="piano" type="xs:string" minOccurs="0"/>
+                    <xs:element name="interno" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="CatastoImmobileType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:CoordinateCatastaliType">
+                <xs:sequence>
+                    <xs:element name="identificativi" type="aggregate:CoordinateCatastaliType" minOccurs="0"/>
+                    <xs:element name="destinazioneUso" type="xs:string" minOccurs="0"/> 
+                </xs:sequence>
+            </xs:extension> 
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- che il titolo e/o la comunicazione che ha legittimato l’intervento è il seguente (*) -->
+    <xs:complexType name="comunicazioneInterventoBaseType" abstract="true"/>
+    <xs:complexType name="comunicazioneInterventoType">
+        <xs:complexContent>
+            <xs:extension base="scpa:comunicazioneInterventoBaseType">
+                <xs:sequence>
+                    <xs:element name="estremiComunicazione" type="aggregate:ProtocolloStandardType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- da verificare -->
+    <xs:complexType name="FineLavoriBaseType" abstract="true"/> 
+    <xs:complexType name="FinelavoriType">
+        <xs:complexContent>
+            <xs:extension base="scpa:FineLavoriBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="comunicazioneFineLavoriProtocollo" type="aggregate:ProtocolloStandardType" minOccurs="0"/>
+                        <xs:sequence>
+                         <xs:element name="dataFineLavori" type="xs:date" minOccurs="0"/>
+                         <xs:choice>
+                             <xs:element name="statoLavoriCompletati" minOccurs="0" type="basic:EmptyType"/>
+                             <xs:element name="statoLavoriParziale" minOccurs="0" type="basic:EmptyType"/>
+                         </xs:choice>
+                        </xs:sequence>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>            
+    </xs:complexType>
+    
+    
+    <!-- ... ... -->
+    <!-- Allegati  -->
+    <xs:complexType name="TabellaAllegatiCILAType">
+        <xs:sequence>
+            <xs:element name="allegatiCILA"             type="scpa:AllegatiCILAType"/>
+            <xs:element name="allegatiSCIAUnica"        type="scpa:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiRichiestaAssenso" type="scpa:allegatiRichiestaAttiAssensoType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiCILAType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
+            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoVersamentoOblazioneInEsecuzione" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoVersamentoOblazioneSanatoria" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoPreventivoContributoCostruzione" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoRicevutaVersamentoContributoCostruzione" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoNotificaPreliminare" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoElaboratoGrafico" minOccurs="1" />
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoAltreComunicazioni" minOccurs="0" />
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="allegatiRichiestaAttiAssensoType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoRilascioAttiAssenso" minOccurs="0" />
+        </xs:sequence>                                
+    </xs:complexType>
+    
+</xs:schema>
