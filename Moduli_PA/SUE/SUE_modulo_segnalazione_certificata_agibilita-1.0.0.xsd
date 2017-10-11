@@ -43,6 +43,10 @@
             <xs:element name="catastoImmobile" type="scpa:CatastoImmobileType" minOccurs="0"/>                      <!-- OK -->
             <xs:element name="comunicazioneIntervento" type="scpa:comunicazioneInterventoBaseType" minOccurs="0"/>  <!-- OK -->
             <xs:element name="fineLavori" type="scpa:FineLavoriBaseType" minOccurs="0"/>                            <!-- OK : da verificare -->
+            <xs:element name="presentazioneInizioLavori" type="scpa:PresentazioneInzioLavoriType"/>                 <!-- OK -->
+            <!-- Sezione B -->
+            <xs:element name="schedaTecnico" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>               <!-- OK -->
+            <xs:element name="assevera" type="scpa:AsseveraType"/>                                                  <!-- OK -->
             
             <!-- ... ... -->
             <xs:element name="schedaImmobile" type="scpa:TabellaAllegatiCILAType" minOccurs="0"/>
@@ -106,6 +110,32 @@
         </xs:complexContent>            
     </xs:complexType>
     
+    <xs:complexType name="PresentazioneInzioLavoriType">
+        <xs:choice>
+            <xs:element name="SCIAAgibilitaImmobile" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="SCIAAgibilitaParzialeEdifici" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="SCIAAgibilitaParzialeSingoliImmobili" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="SCIAUnicaAgibilitaImmobile" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="SCIAUnicaAgibilitaParzialeEdifici" minOccurs="0" type="basic:EmptyType" />
+            <xs:element name="SCIAUnicaAgibilitaParzialeSingoliImmobili" minOccurs="0" type="basic:EmptyType"/>
+        </xs:choice>
+            <!-- VERIFICARE !!!
+            ED ALLEGA
+            □	SEZIONE B “Attestazione del direttore dei lavori o del professionista abilitato”, sottoscritta dal direttore dei lavori o tecnico abilitato 
+            □	le comunicazioni o segnalazioni di cui alla SEZIONE C “Soggetti Coinvolti” e alla SEZIONE D “Quadro Riepilogativo della documentazione allegata” debitamente firmate sia dal titolare che dal direttore dei lavori o tecnico abilitato 
+            -->
+    </xs:complexType>
+
+    <!-- DICHIARAZIONE ASSEVERATA -->
+    <xs:complexType name="AsseveraType">
+        <xs:choice>
+            <xs:element name="agibilitaImmobile" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="agibilitaParzialeEdifici" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="agibilitaSingoliImmbobili" minOccurs="0" type="basic:EmptyType"/>
+        </xs:choice>
+    </xs:complexType>
+
+
     
     <!-- ... ... -->
     <!-- Allegati  -->
