@@ -88,7 +88,13 @@
             </xs:restriction>
     </xs:simpleType>
     
-    <xs:complexType name="EmptyType"/>
+    <xs:complexType name="AbstractBaseType" abstract="true"/>
+    
+    <xs:complexType name="EmptyType">
+        <xs:complexContent>
+            <xs:extension base="basic:AbstractBaseType"/>
+        </xs:complexContent>
+    </xs:complexType>
     
     <xs:complexType name="PeriodoDateType">
         <xs:sequence>

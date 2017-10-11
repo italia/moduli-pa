@@ -9,7 +9,7 @@
 - Per il 16/10/2017: completamento XML Schema approvati con l'accordo Conferenza unificata del 4 maggio 2017 e del 6 luglio 2017 relativi all'edilizia (SUE)
 
 
-**GdL – Processi: avvio lavori previsto per inizio ottobre 2017.**
+**GdL – Processi: avvio lavori previsto per ottobre 2017.**
 
 
 **GdL – Architetture: avvio lavori previsto per dicembre 2017.**

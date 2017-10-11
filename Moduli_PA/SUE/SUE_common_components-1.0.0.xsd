@@ -150,6 +150,16 @@
             <xs:element name="destinazioneDUso" type="xs:string"/>
         </xs:sequence>      
     </xs:complexType>
+    
+    <xs:complexType name="LocalizzazioneInterventoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:LocalizzazioneInterventoBaseType">
+                <xs:sequence>
+                    <xs:element name="coordinate" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <!-- Reference suecommon:QualificazioneInterventoBaseType -->
     <xs:complexType name="QualificazioneInterventoBaseType" abstract="true"/>
@@ -982,25 +992,19 @@
         <xs:complexContent>
             <xs:extension base="suecommon:ComunicazioniSegnalazioniBaseType">
                 <xs:sequence>
-                    <xs:element name="comunicazioni" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
-                    <xs:element name="autoritaCompetente" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+                    <xs:element name="comunicazioni" minOccurs="0"  type="xs:string"/>
+                    <xs:element name="autoritaCompetente" minOccurs="0"  type="xs:string"/>
                 </xs:sequence>        
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- Reference suecommon:AttiAssensoType -->
-    <xs:complexType name="AttiAssensoBaseType" abstract="true"/>
-    
     <xs:complexType name="AttiAssensoType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:AttiAssensoBaseType">
-                <xs:sequence>
-                    <xs:element name="tipoAtto" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
-                    <xs:element name="autoritaCompetente" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
-                </xs:sequence>        
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:element name="tipoAtto" minOccurs="0"  type="xs:string"/>
+            <xs:element name="autoritaCompetente" minOccurs="0" type="xs:string"/>
+        </xs:sequence>        
     </xs:complexType>
 
     <!-- Reference suecommon:AllegatoType -->
@@ -1123,21 +1127,39 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoAltreComunicazioni" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoAltreComunicazioni" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione necessaria per la presentazione di altre comunicazioni, segnalazioni (specificare)</ccts:Definition>
             </xs:documentation>
         </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="suecommon:AllegatoBaseType">
+                    <xs:sequence>
+                        <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
     </xs:element>
     
-    <xs:element name="allegatoRilascioAttiAssenso" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoRilascioAttiAssenso">
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione necessaria per il rilascio di atti di assenso obbligatori ai sensi delle normative di settore (specificare)</ccts:Definition>
             </xs:documentation>
         </xs:annotation>
-    </xs:element>	
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="suecommon:AllegatoBaseType">
+                    <xs:sequence>
+                        <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>  
+    </xs:element>		
     
     <xs:element name="allegatoDeterminazioneContributoCostruzione" type="suecommon:AllegatoBaseType" >
         <xs:annotation>
