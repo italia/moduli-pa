@@ -64,6 +64,16 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="TecniciIncaricatiDeiLavoriType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TecniciIncaricatiDeiLavoriBaseType">
+                <xs:sequence>
+                    <xs:element name="individuatiPrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="AltriTecniciType">
         <xs:sequence>
             <xs:element name="incaricatoDi" type="xs:string"/>
@@ -133,7 +143,18 @@
             <xs:element name="daSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
         </xs:sequence>
     </xs:complexType>
-    
+
+    <xs:complexType name="ImpreseEsecutriciDeiLavoriType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ImpreseEsecutriciDeiLavoriBaseType">
+                <xs:sequence>
+                    <xs:element name="daImpresePrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+                    <xs:element name="daPrivatiDitteEsterne" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+
     <!-- Reference suecommon:TitoloPossessoType -->
     <xs:complexType name="TitoloPossessoType">
         <xs:sequence>
@@ -170,14 +191,20 @@
     <xs:complexType name="RegolaritaUrbanisticaType">
         <xs:complexContent>
             <xs:extension base="suecommon:RegolaritaUrbanisticaBaseType">
-                <xs:choice>
-                    <xs:element name="pienamenteConforme" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="inDifformita" minOccurs="0" type="suecommon:InDifformitaType"/>
-                    <xs:element name="noTitoliAbilitativi" minOccurs="0"  type="basic:EmptyType"/>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:group ref="suecommon:RegolaritaUrbanisticaOptionGroup" />
                 </xs:choice>        
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType> 
+    </xs:complexType>
+
+    <xs:group name="RegolaritaUrbanisticaOptionGroup">
+        <xs:choice>
+            <xs:element name="pienamenteConforme" type="basic:EmptyType"/>
+            <xs:element name="inDifformita" type="suecommon:InDifformitaType"/>
+            <xs:element name="noTitoliAbilitativi" type="basic:EmptyType"/>
+        </xs:choice>
+    </xs:group>
     
     <xs:complexType name="InDifformitaType">
             <xs:sequence>
@@ -197,7 +224,7 @@
                 </xs:choice> 
             </xs:sequence>
     </xs:complexType> 
-    
+
     <xs:complexType name="AltraPraticaEdiliziaType">
         <xs:sequence>
             <xs:element name="altro" type="xs:string"/>
@@ -206,14 +233,26 @@
     </xs:complexType> 
     
     <!-- Reference suecommon:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaBaseType" abstract="true"/>
+
     <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ObblighiSaluteSicurezzaBaseType">
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:group ref="suecommon:ObblighiSaluteSicurezzaOptionGroup" />
+                    <xs:element name="ricadeConRiserva" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:choice>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:group name="ObblighiSaluteSicurezzaOptionGroup">
         <xs:choice>
             <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
             <xs:element name="ricade" minOccurs="0" type="suecommon:SaluteSicurezzaRicadeType"/>
-            <xs:element name="ricadeConRiserva" minOccurs="0"  type="basic:EmptyType"/>
-        </xs:choice>        
-    </xs:complexType>
-    
+        </xs:choice>
+    </xs:group>
+
     <xs:complexType name="SaluteSicurezzaRicadeType">
         <xs:sequence>
             <xs:choice>
