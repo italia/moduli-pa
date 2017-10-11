@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema    
-    xmlns:cil="http://www.agid.gov.it/MODULI_PA/SUE/modulo_cil"
+    xmlns:cil="http://www.agid.gov.it/MODULI_PA/SUE/modulo_comunicazione_inizio_lavori"
     xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
@@ -8,7 +8,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
-    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_cil"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_comunicazione_inizio_lavori"
     
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
     

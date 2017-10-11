@@ -59,7 +59,7 @@
                 <xs:element name="statoLavoriParziale" minOccurs="0" type="basic:EmptyType"/>
             </xs:choice>
             <xs:element name="attoInterventoNome" type="xs:string" minOccurs="1"/>
-            <xs:element name="attoInterentoProtocollo" type="aggregate:ProtocolloStandardType" minOccurs="1"/>
+            <xs:element name="attoInterventoProtocollo" type="aggregate:ProtocolloStandardType" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
     
