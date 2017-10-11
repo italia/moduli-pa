@@ -46,7 +46,13 @@
             <xs:element name="presentazioneInizioLavori" type="scpa:PresentazioneInzioLavoriType"/>                 <!-- OK -->
             <!-- Sezione B -->
             <xs:element name="schedaTecnico" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>               <!-- OK -->
+            <!-- DICHIARAZIONE ASSEVERATA -->
             <xs:element name="assevera" type="scpa:AsseveraType"/>                                                  <!-- OK -->
+            <xs:element name="sicurezzaImpianti" type="scpa:SicurezzaImpiantiType"/>                                <!-- OK -->
+            <xs:element name="sicurezzaStaticaSismica" type="scpa:SicurezzaStaticaSismicaBaseType"/>                <!-- OK -->
+            <xs:element name="prestazioneEnergetica" type="scpa:PrestazioneEnergeticaBaseType"/>                    <!-- OK -->
+            <xs:element name="barriereArchitettoniche" type="scpa:BarriereArchitettonicheType"/>                    <!-- OK -->
+            <xs:element name="documentazioneCatastale" type="scpa:DocumentazioneCatastaleType"/>                    <!-- OK -->
             
             <!-- ... ... -->
             <xs:element name="schedaImmobile" type="scpa:TabellaAllegatiCILAType" minOccurs="0"/>
@@ -135,7 +141,124 @@
         </xs:choice>
     </xs:complexType>
 
-
+    <!-- Sicurezza Impianti table : start -->
+    <xs:complexType name="SicurezzaImpiantiType">
+        <xs:sequence>
+        <xs:choice>
+            <xs:element name="nessunImpianto" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="impiantiConCertificazione">
+                <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="elettrico" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="radiotel" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="riscaldamento" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="idrico" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="gas" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="ascensori" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="antincendio" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="scariche" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                    <xs:element name="lineevita" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneVitaBaseType"/>
+                    <xs:element name="altro" minOccurs="0" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+                </xs:sequence> 
+                </xs:complexType>
+        </xs:element>
+        </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SicurezzaImpiantiCertificazioneVitaBaseType" abstract="true"/>
+    <xs:complexType name="SicurezzaImpiantiCertificazioneVitaType">
+        <xs:complexContent>
+            <xs:extension base="scpa:SicurezzaImpiantiCertificazioneVitaBaseType">
+            <xs:sequence>
+                <xs:element name="lineeVita" type="scpa:SicurezzaImpiantiCertificazioneType"/>
+            </xs:sequence>     
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SicurezzaImpiantiCertificazioneType">
+        <xs:sequence>
+            <xs:element name="subaltNr" type="xs:string" minOccurs="0"/>
+            <xs:element name="impiantoNome" type="xs:string" minOccurs="0"/>        <!-- richiesto in Impianto____ -->
+            <xs:element name="pg" type="xs:string" minOccurs="0"/>
+            <xs:element name="conformita" type="basic:EmptyType"  minOccurs="0" />
+            <xs:element name="collaudo" type="basic:EmptyType"  minOccurs="0"/>
+            <xs:element name="attoNotorio" type="basic:EmptyType" minOccurs="0" /> <!-- non presente su 2 elementi -->
+        </xs:sequence>       
+    </xs:complexType>
+    <!-- Sicurezza Impianti table : end -->
+    
+    
+    <!-- Sicurezza Statica Sismica -->
+    <xs:complexType name="SicurezzaStaticaSismicaBaseType" abstract="true"/>
+    
+    <xs:complexType name="SicurezzaStaticaSismicaType">
+        <xs:complexContent>
+            <xs:extension base="scpa:SicurezzaStaticaSismicaBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="nonHaInteressatoStrutture" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="haInteressatoStrutture" minOccurs="0">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="certificatoCollaudoStatico" minOccurs="0" type="basic:EmptyType"/>
+                                    <xs:element name="estermiCollaudoStatico" type="aggregate:ProtocolloStandardType"/>
+                                    <xs:element name="dichiarazioneEsecuzioneInterventi" minOccurs="0" type="basic:EmptyType"/>
+                                    <xs:element name="estremiDichiarazioneEsecuzioneInterventi" minOccurs="0">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="estremiLuogoPresentazione" type="xs:string"/>
+                                            <xs:element name="estremiProtocollo" type="aggregate:ProtocolloStandardType"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="noCollaudoStatico" minOccurs="0" type="basic:EmptyType"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+        </xs:extension>
+    </xs:complexContent>            
+    </xs:complexType>
+    
+    
+    <xs:complexType name="PrestazioneEnergeticaBaseType" abstract="true"/>
+    <xs:complexType name="PrestazioneEnergeticaType">
+        <xs:complexContent>
+            <xs:extension base="scpa:PrestazioneEnergeticaBaseType">
+                <xs:sequence>
+                 <xs:choice>
+                     <xs:element name="noSoggettoRequisitiMinimi" minOccurs="0" type="basic:EmptyType"/>
+                     <xs:element name="siSoggettoRequisitiMinimi" minOccurs="0" type="basic:EmptyType"/>
+                 </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="BarriereArchitettonicheType">
+        <xs:choice>
+            <xs:element name="noSoggettoPrescrizioni" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="siSoggettoPrescrizioni" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="siSoggettoPrescrizioniEdificoPubblico" minOccurs="0" type="basic:EmptyType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="DocumentazioneCatastaleType">
+        <xs:choice>
+            <xs:element name="noVariazioneIscizione" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="siVariazioneIscizione" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="estremiAggiornamentoCatastale" type="aggregate:ProtocolloStandardType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    
     
     <!-- ... ... -->
     <!-- Allegati  -->
