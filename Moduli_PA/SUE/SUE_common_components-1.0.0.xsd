@@ -64,6 +64,16 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="TecniciIncaricatiDeiLavoriType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TecniciIncaricatiDeiLavoriBaseType">
+                <xs:sequence>
+                    <xs:element name="individuatiPrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="AltriTecniciType">
         <xs:sequence>
             <xs:element name="incaricatoDi" type="xs:string"/>
@@ -133,7 +143,18 @@
             <xs:element name="daSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
         </xs:sequence>
     </xs:complexType>
-    
+
+    <xs:complexType name="ImpreseEsecutriciDeiLavoriType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ImpreseEsecutriciDeiLavoriBaseType">
+                <xs:sequence>
+                    <xs:element name="daImpresePrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+                    <xs:element name="daPrivatiDitteEsterne" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+
     <!-- Reference suecommon:TitoloPossessoType -->
     <xs:complexType name="TitoloPossessoType">
         <xs:sequence>
@@ -171,13 +192,13 @@
         <xs:complexContent>
             <xs:extension base="suecommon:RegolaritaUrbanisticaBaseType">
                 <xs:choice>
-                    <xs:element name="pienamenteConforme" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="inDifformita" minOccurs="0" type="suecommon:InDifformitaType"/>
-                    <xs:element name="noTitoliAbilitativi" minOccurs="0"  type="basic:EmptyType"/>
+                    <xs:element name="pienamenteConforme" type="basic:EmptyType"/>
+                    <xs:element name="inDifformita" type="suecommon:InDifformitaType"/>
+                    <xs:element name="noTitoliAbilitativi" type="basic:EmptyType"/>
                 </xs:choice>        
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType> 
+    </xs:complexType>
     
     <xs:complexType name="InDifformitaType">
             <xs:sequence>
@@ -197,7 +218,7 @@
                 </xs:choice> 
             </xs:sequence>
     </xs:complexType> 
-    
+
     <xs:complexType name="AltraPraticaEdiliziaType">
         <xs:sequence>
             <xs:element name="altro" type="xs:string"/>
@@ -206,14 +227,26 @@
     </xs:complexType> 
     
     <!-- Reference suecommon:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaBaseType" abstract="true"/>
+
     <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ObblighiSaluteSicurezzaBaseType">
+                <xs:choice>
+                    <xs:group ref="suecommon:ObblighiSaluteSicurezzaOptionGroup" />
+                    <xs:element name="ricadeConRiserva" minOccurs="0"  type="basic:EmptyType"/>
+                </xs:choice>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:group name="ObblighiSaluteSicurezzaOptionGroup">
         <xs:choice>
             <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
             <xs:element name="ricade" minOccurs="0" type="suecommon:SaluteSicurezzaRicadeType"/>
-            <xs:element name="ricadeConRiserva" minOccurs="0"  type="basic:EmptyType"/>
-        </xs:choice>        
-    </xs:complexType> 
-    
+        </xs:choice>
+    </xs:group>
+
     <xs:complexType name="SaluteSicurezzaRicadeType">
         <xs:sequence>
             <xs:choice>
@@ -222,17 +255,25 @@
             </xs:choice>
             <xs:choice>
                 <xs:element name="noInvioNotifica" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="invioNotifica" minOccurs="0">
-                    <xs:complexType>
-                        <xs:complexContent>
-                            <xs:extension base="basic:EmptyType">
-                                <xs:attribute type="xs:boolean" name="allegato"/>
-                            </xs:extension>
-                        </xs:complexContent>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element name="invioNotifica" minOccurs="0" type="suecommon:InvioNotificaBaseType"/>
             </xs:choice>
         </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="InvioNotificaBaseType" abstract="true">
+        <xs:choice>
+            <xs:element name="invieraPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>
+        </xs:choice>        
+    </xs:complexType>
+        
+    <xs:complexType name="InvioNotificaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:InvioNotificaBaseType">
+                <xs:choice>
+                    <xs:element name="allegato" minOccurs="0" type="basic:AbstractBaseType"/>    
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <!-- Reference suecommon:TipoInterventiOpereBaseType -->
@@ -697,6 +738,79 @@
         </xs:complexContent>
     </xs:complexType>    
 
+    <!-- Reference suecommon:QualitaAmbientaleTerreniType -->
+    <xs:complexType name="QualitaAmbientaleTerreniBaseType" abstract="true"/>
+
+    <xs:complexType name="QualitaAmbientaleTerreniType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:QualitaAmbientaleTerreniBaseType">
+                <xs:sequence>
+                    <xs:element name="nonRichiedeIndagini" type="basic:EmptyType"/>
+                    <xs:element name="nonNecessitaBonifica" type="basic:EmptyType"/>
+                    <xs:element name="avvenutaBonifica" type="aggregate:AttoBaseType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:OpereUrbanizzazionePrimariaType -->
+    <xs:complexType name="OpereUrbanizzazionePrimariaBaseType" abstract="true"/>
+
+    <xs:complexType name="OpereUrbanizzazionePrimariaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:OpereUrbanizzazionePrimariaBaseType">
+                <xs:sequence>
+                    <xs:element name="dotata" type="basic:EmptyType"/>
+                    <xs:element name="nonDotata" type="xs:date"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:ScarichiIdriciType -->
+    <xs:complexType name="ScarichiIdriciBaseType" abstract="true"/>
+    
+    <xs:complexType name="ScarichiIdriciType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ScarichiIdriciBaseType">
+                <xs:sequence>
+                    <xs:element name="nonNecessitaAutorizzazione" type="basic:EmptyType"/>
+                    <xs:element name="necessitaAutorizzazioneScarico" type="basic:EmptyType"/>
+                    <xs:element name="necessitaAutorizzazione">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="scaricoInPubblicaFognatura">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="allegaDocumentazione" type="basic:EmptyType"/>
+                                            <xs:element name="autorizzazioneOttenuta" type="aggregate:ProtocolloStandardType"/>                                       
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="scaricoInAcqueSuperficiali">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="allegaDocumentazione" type="basic:EmptyType"/>
+                                            <xs:element name="autorizzazioneOttenuta" type="aggregate:ProtocolloStandardType"/>                                       
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="allaccioInPubblicaFognatura">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="allegaDocumentazione" type="basic:EmptyType"/>
+                                            <xs:element name="autorizzazioneOttenuta" type="aggregate:ProtocolloStandardType"/>                                       
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <!-- Reference suecommon:AutorizzazionePaesaggisticaType -->    
     <xs:complexType name="AutorizzazionePaesaggisticaType">
         <xs:choice>
@@ -968,7 +1082,10 @@
             <xs:element name="prevenzioneIncendi" type="suecommon:PrevenzioneIncendiType"/>
             <xs:element name="amianto" type="suecommon:AmiantoType"/>
             <xs:element name="conformitaSanitaria" type="suecommon:ConformitaSanitariaBaseType"/>
-            <xs:element name="interventoZonaSismica" type="suecommon:InterventoZonaSismicaBaseType"/>            
+            <xs:element name="interventoZonaSismica" type="suecommon:InterventoZonaSismicaBaseType"/> 
+            <xs:element name="qualitaAmbientaleTerreni" type="suecommon:QualitaAmbientaleTerreniBaseType" minOccurs="0"/> 
+            <xs:element name="opereUrbanizzazionePrimaria" type="suecommon:OpereUrbanizzazionePrimariaType" minOccurs="0"/> 
+            <xs:element name="scarichiIdrici" type="suecommon:ScarichiIdriciBaseType" minOccurs="0"/> 
             <xs:element name="autorizzazionePaesaggistica" type="suecommon:AutorizzazionePaesaggisticaType"/> 
             <xs:element name="autorizzazioneSoprintendenza" type="suecommon:AutorizzazioneSoprintendenzaType"/> 
             <xs:element name="areaProtetta" type="suecommon:AreaProtettaBaseType"/>   
