@@ -165,6 +165,21 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    
+  
+    <xs:complexType name="UbicazioneImmobileType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:IndirizzoType">
+                <xs:sequence>
+                    <xs:element name="scala" type="xs:string" minOccurs="0"/>
+                    <xs:element name="piano" type="xs:string" minOccurs="0"/>
+                    <xs:element name="interno" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
 
     <!-- Reference suecommon:QualificazioneInterventoBaseType -->
     <xs:complexType name="QualificazioneInterventoBaseType" abstract="true"/>
