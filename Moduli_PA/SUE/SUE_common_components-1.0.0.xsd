@@ -191,20 +191,14 @@
     <xs:complexType name="RegolaritaUrbanisticaType">
         <xs:complexContent>
             <xs:extension base="suecommon:RegolaritaUrbanisticaBaseType">
-                <xs:choice minOccurs="0" maxOccurs="unbounded">
-                    <xs:group ref="suecommon:RegolaritaUrbanisticaOptionGroup" />
+                <xs:choice>
+                    <xs:element name="pienamenteConforme" type="basic:EmptyType"/>
+                    <xs:element name="inDifformita" type="suecommon:InDifformitaType"/>
+                    <xs:element name="noTitoliAbilitativi" type="basic:EmptyType"/>
                 </xs:choice>        
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <xs:group name="RegolaritaUrbanisticaOptionGroup">
-        <xs:choice>
-            <xs:element name="pienamenteConforme" type="basic:EmptyType"/>
-            <xs:element name="inDifformita" type="suecommon:InDifformitaType"/>
-            <xs:element name="noTitoliAbilitativi" type="basic:EmptyType"/>
-        </xs:choice>
-    </xs:group>
     
     <xs:complexType name="InDifformitaType">
             <xs:sequence>
