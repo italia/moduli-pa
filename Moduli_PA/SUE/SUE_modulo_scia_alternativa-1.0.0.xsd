@@ -128,22 +128,22 @@
                                                 <xs:element name="calcoloSportello" minOccurs="0" type="basic:EmptyType"/>
                                                 <xs:element name="calcoloPreventivo" minOccurs="0" type="basic:EmptyType"/>                                                    
                                             </xs:choice>
+                                            <xs:element name="versamento" minOccurs="0">
+                                                <xs:complexType>
+                                                    <xs:choice>
+                                                        <xs:element name="pagamentoEntro30Giorni" minOccurs="0" type="basic:EmptyType"/>
+                                                        <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>   
+                                                        <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>                   
+                                                    </xs:choice>                              
+                                                </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="oneriUrbanizzazione" minOccurs="0" type="basic:EmptyType"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
                             </xs:sequence>  
                         </xs:complexType>
                     </xs:element>
-                    <xs:element name="versamento" minOccurs="0">
-                           <xs:complexType>
-                               <xs:choice>
-                                   <xs:element name="pagamentoEntro30Giorni" minOccurs="0" type="basic:EmptyType"/>
-                                   <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>   
-                                   <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>                   
-                               </xs:choice>                              
-                           </xs:complexType>
-                    </xs:element>
-                    <xs:element name="oneriUrbanizzazione" minOccurs="0" type="basic:EmptyType"/>
                 </xs:sequence>        
             </xs:extension>
         </xs:complexContent>
