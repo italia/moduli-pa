@@ -37,10 +37,22 @@
             <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
             <xs:element name="schedaDitta" type="aggregate:ImpresaAnagraficaType" minOccurs="0"/>
             <xs:element name="schedaDelegati" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
-            <xs:element name="ubicazioneImmobile" type="cfla:UbicazioneImmobileType" minOccurs="0"/>
+            <xs:element name="ubicazioneImmobile" type="suecommon:UbicazioneImmobileType" minOccurs="0"/>
             <!-- Comunicazioni -->
             <xs:element name="fineLavori" type="cfla:FinelavoriType" minOccurs="1"/>
-            <xs:element name="titolari" type="cfla:SoggettiCoinvoltiType"/>
+            <xs:element name="soggettiCoinvolti">
+                <xs:complexType>
+                    <xs:annotation>
+                        <xs:documentation xml:lang="it">
+                            Compilare solo in caso di più di un Titolare
+                            (I seguenti campi sono da compilare solo qualora i dati siano diversi da quelli indicati nei titoli/comunicazioni che hanno legittimato l’intervento)
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:sequence>
+                        <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="tabellaAllegati" type="cfla:TabellaAllegatiType"/>
         </xs:sequence>
     </xs:complexType>
@@ -64,29 +76,8 @@
     </xs:complexType>
     
     
-    <xs:complexType name="UbicazioneImmobileType">
-        <xs:complexContent>
-            <xs:extension base="aggregate:IndirizzoType">
-                <xs:sequence>
-                    <xs:element name="scala" type="xs:string" minOccurs="0"/>
-                    <xs:element name="piano" type="xs:string" minOccurs="0"/>
-                    <xs:element name="interno" type="xs:string" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
-    <xs:complexType name="SoggettiCoinvoltiType">
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                Compilare solo in caso di più di un Titolare
-                (I seguenti campi sono da compilare solo qualora i dati siano diversi da quelli indicati nei titoli/comunicazioni che hanno legittimato l’intervento)
-            </xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    
     
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
