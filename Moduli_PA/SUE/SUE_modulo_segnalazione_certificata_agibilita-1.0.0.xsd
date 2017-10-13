@@ -30,8 +30,8 @@
     <xs:complexType name="ModuloSCPAType">
         <xs:sequence>
             <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>                              
-            <xs:element name="schedaDitta" type="aggregate:ImpresaAnagraficaType" minOccurs="0"/>                   
-            <xs:element name="schedaDelegati" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>                
+            <xs:element name="schedaDitta" type="suecommon:SchedaDittaType" minOccurs="0"/>                   
+            <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>                
             <!-- Dichiarazioni | Sezione A -->
             <xs:element name="identificativiImmobilie" type="scpa:IdentificativiImmobileBaseType" minOccurs="0"/>  
              

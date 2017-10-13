@@ -35,8 +35,8 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
-            <xs:element name="schedaDitta" type="aggregate:ImpresaAnagraficaType" minOccurs="0"/>
-            <xs:element name="schedaDelegati" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
+            <xs:element name="schedaDitta" type="suecommon:SchedaDittaType" minOccurs="0"/>
+            <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
             <xs:element name="ubicazioneImmobile" type="suecommon:UbicazioneImmobileType" minOccurs="0"/>
             <!-- Comunicazioni -->
             <xs:element name="fineLavori" type="cfla:FinelavoriType" minOccurs="1"/>

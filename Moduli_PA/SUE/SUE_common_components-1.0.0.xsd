@@ -17,6 +17,17 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>  
     
+    
+    <xs:complexType name="SchedaDittaType">
+        <xs:complexContent>
+            <xs:extension base="aggregate:ImpresaAnagraficaType">
+                <xs:sequence>
+                    <xs:element name="InQualitaDi" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="ProfessionistaAnagraficaType">
         <xs:annotation>
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
