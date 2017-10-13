@@ -30,13 +30,13 @@
             <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType"/>
             
             <!-- DICHIARAZIONI -->
-            <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>                       
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>            
+            <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
             <xs:element name="calcoloContributoCostruzione" type="permcostr:CalcoloContributoBaseType"/>
-            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriBaseType"/>
+            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
             
@@ -206,6 +206,7 @@
             <xs:element ref="suecommon:allegatoAutorizzazioneSismica" minOccurs="0"/>                       
             <xs:element ref="suecommon:allegatoRelazioneGeologica" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoRisultatiQualitaTerreni" minOccurs="0"/>    
+            <xs:element ref="suecommon:allegatoAutorizzazioniScarichiIdrici" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoRelazionePaesaggisticaSemplificata" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoRilascioParereSoprintendenza" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoRilascioNullaOstaAreaProtetta" minOccurs="0"/>
