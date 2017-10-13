@@ -52,6 +52,19 @@
     </xs:complexType>
 
     <!-- BASE TYPE -->
+    
+    <!-- Reference scialt:RegolaritaUrbanisticaType -->
+    <xs:complexType name="RegolaritaUrbanisticaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:RegolaritaUrbanisticaBaseType">
+                <xs:choice>
+                    <xs:group ref="suecommon:RegolaritaUrbanisticaOptionGroup"/>
+                </xs:choice>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
     <!-- Reference scia:PresentazioneType -->
     <xs:complexType name="PresentazioneType">
         <xs:choice>
