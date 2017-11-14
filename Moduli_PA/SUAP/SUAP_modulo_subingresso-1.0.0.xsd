@@ -99,8 +99,8 @@
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
             <xs:element name="commercioSomministrazione" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="acconciatori" type="suapcommon:DichiarazioniResponsabileTecnicoAcconciatoriType" />
-            <xs:element name="estetisti" type="suapcommon:DichiarazioniResponsabileTecnicoEstetistiType"/>
+            <xs:element name="acconciatori" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType" />
+            <xs:element name="estetisti" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>
         </xs:choice>
     </xs:complexType>
        
