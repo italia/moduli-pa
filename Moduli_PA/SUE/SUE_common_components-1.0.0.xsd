@@ -122,8 +122,9 @@
                     </xs:complexContent>
                 </xs:complexType>
             </xs:element>
-            <xs:choice minOccurs="0">
-                <xs:element name="cassaEdile">
+            
+            <xs:sequence><!-- scelta multipla -->
+                <xs:element name="cassaEdile" minOccurs="0" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="sede" type="xs:string"/>
@@ -132,7 +133,7 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="Inps">
+                <xs:element name="Inps" minOccurs="0" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="sede" type="xs:string"/>
@@ -140,7 +141,7 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="Inail">
+                <xs:element name="Inail" minOccurs="0" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="sede" type="xs:string"/>
@@ -149,7 +150,8 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-            </xs:choice>
+           </xs:sequence>
+            
         </xs:sequence>
     </xs:complexType>
 
