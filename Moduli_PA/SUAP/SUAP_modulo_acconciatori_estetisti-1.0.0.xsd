@@ -97,8 +97,8 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:group ref="acconcestet:attivitaGroup"/>
-            <xs:element name="superficeComplessiva" type="xs:integer"/>
-            <xs:element name="superficeAdibitaAttivita" type="xs:integer"/>
+            <xs:element name="superficeComplessiva" type="xs:decimal"/>
+            <xs:element name="superficeAdibitaAttivita" type="xs:decimal"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaType"/>
        </xs:sequence>

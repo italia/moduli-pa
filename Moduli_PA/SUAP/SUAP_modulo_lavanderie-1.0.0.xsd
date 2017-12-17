@@ -250,8 +250,8 @@
         <xs:complexContent>
             <xs:extension base="tintolav:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
-                    <xs:element name="tintolavanderia_lavanderia" minOccurs="0" type="xs:integer"/>
-                    <xs:element name="altriusi" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="tintolavanderia_lavanderia" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="altriusi" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
@@ -259,7 +259,7 @@
     
     <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="complessiva" minOccurs="0" type="xs:integer"/>
+            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
     

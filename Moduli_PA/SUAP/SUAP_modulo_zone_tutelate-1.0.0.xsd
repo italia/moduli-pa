@@ -71,7 +71,7 @@
         <xs:complexContent>
             <xs:extension base="tutela:AperturaBaseType">
                 <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="xs:integer"/>
+                    <xs:element name="superficieEsercizio" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -88,7 +88,7 @@
         <xs:complexContent>
             <xs:extension base="tutela:TrasferimentoBaseType">
                 <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="xs:integer"/>        
+                    <xs:element name="superficieEsercizio" type="xs:decimal"/>        
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

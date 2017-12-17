@@ -325,9 +325,9 @@
         <xs:complexContent>
             <xs:extension base="suecommon:DatiGeometriciBaseType">
                 <xs:sequence>
-                    <xs:element name="superficieMq" minOccurs="0" type="xs:integer"/>
-                    <xs:element name="volumetriaMc" minOccurs="0" type="xs:integer"/>
-                    <xs:element name="numeroPianiN" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="superficieMq" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="volumetriaMc" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="numeroPianiN" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence> 
             </xs:extension>
         </xs:complexContent>
