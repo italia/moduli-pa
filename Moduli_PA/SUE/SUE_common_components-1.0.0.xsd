@@ -65,9 +65,9 @@
     
     <xs:complexType name="TecniciIncaricatiType">
         <xs:sequence>
-            <xs:element name="schedaProgettistaOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaDirettoreType"  minOccurs="1"/>
+            <xs:element name="schedaProgettistaOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaDirettoreType"  minOccurs="1"/><!-- CON OPZIONE INCARICATO COME DIRETTORE -->
             <xs:element name="schedaDirettoreOpereArchitettoniche" type="suecommon:ProfessionistaAnagraficaType" minOccurs="0"/>
-            <xs:element name="schedaProgettistaOpereStrutturali" type="suecommon:ProfessionistaAnagraficaDirettoreType" minOccurs="0" />
+            <xs:element name="schedaProgettistaOpereStrutturali" type="suecommon:ProfessionistaAnagraficaDirettoreType" minOccurs="0" /><!-- CON OPZIONE INCARICATO COME DIRETTORE -->
             <xs:element name="schedaDirettoreOpereStrutturali" type="suecommon:ProfessionistaAnagraficaType" minOccurs="0" />
             <xs:element name="schedaAltriTecnici" type="suecommon:AltriTecniciType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
