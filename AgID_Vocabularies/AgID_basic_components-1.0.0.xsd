@@ -59,7 +59,9 @@
     <xs:complexType name="CAPType">
         <xs:simpleContent>
             <xs:restriction base="isacvbc:AddressPostCodeType">
-                <xs:pattern value="[0-9]{6}"/>
+                <!-- <xs:pattern value="[0-9]{6}"/> soluzione attuale -->
+                <!-- <xs:pattern value="[0-9]{5}(-[0-9]{4})?"/> soluzione avanzata -->
+                <xs:pattern value="\d{5}"/> <!-- soluzione proposta -->
             </xs:restriction>
         </xs:simpleContent>
     </xs:complexType>
@@ -82,11 +84,39 @@
         </xs:restriction>
     </xs:simpleType>
         
+    <!--
     <xs:simpleType name="NumeroREAType">
             <xs:restriction base="xs:string">
                 <xs:pattern value="[0-9]{10}"/>
             </xs:restriction>
     </xs:simpleType>
+    -->
+    
+    <!-- REA -->
+    <xs:complexType name="NumeroREAType">
+        <xs:sequence>
+            <xs:element name="sigla-provincia" type="basic:SiglaPro"/>
+            <xs:element name="numero-REA" type="basic:Int9"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="SiglaPro">
+        <xs:restriction base="basic:StringaRestriction">
+            <xs:pattern value="[A-Z]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StringaRestriction">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:pattern value="[ -Z\r\n]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Int9">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="999999999"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     
     <xs:complexType name="AbstractBaseType" abstract="true"/>
     
