@@ -97,7 +97,6 @@
             <xs:enumeration value="text/plain"/>
             <xs:enumeration value="application/x-director"/>
             <xs:enumeration value="application/x-deepv"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="application/x-x509-ca-cert"/>
             <xs:enumeration value="video/x-dv"/>
             <xs:enumeration value="application/x-director"/>
@@ -129,10 +128,6 @@
             <xs:enumeration value="application/envoy"/>
             <xs:enumeration value="application/x-envoy"/>
             <xs:enumeration value="application/octet-stream"/>
-            <xs:enumeration value="text/plain"/>
-            <xs:enumeration value="text/x-fortran"/>
-            <xs:enumeration value="text/x-fortran"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="text/x-fortran"/>
             <xs:enumeration value="application/vnd.fdf"/>
             <xs:enumeration value="application/fractals"/>
@@ -164,7 +159,6 @@
             <xs:enumeration value="application/x-hdf"/>
             <xs:enumeration value="application/x-helpfile"/>
             <xs:enumeration value="application/vnd.hp-hpgl"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="text/x-h"/>
             <xs:enumeration value="text/x-script"/>
             <xs:enumeration value="application/hlp"/>
@@ -184,7 +178,6 @@
             <xs:enumeration value="text/html"/>
             <xs:enumeration value="x-conference/x-cooltalk"/>
             <xs:enumeration value="image/x-icon"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="image/ief"/>
             <xs:enumeration value="application/iges"/>
             <xs:enumeration value="model/iges"/>
@@ -199,9 +192,6 @@
             <xs:enumeration value="i-world/i-vrml"/>
             <xs:enumeration value="application/x-livescreen"/>
             <xs:enumeration value="audio/x-jam"/>
-            <xs:enumeration value="text/plain"/>
-            <xs:enumeration value="text/x-java-source"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="text/x-java-source"/>
             <xs:enumeration value="application/x-java-commerce"/>
             <xs:enumeration value="image/jpeg"/>
@@ -225,13 +215,10 @@
             <xs:enumeration value="application/octet-stream"/>
             <xs:enumeration value="application/x-lha"/>
             <xs:enumeration value="application/octet-stream"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="audio/nspaudio"/>
             <xs:enumeration value="audio/x-nspaudio"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="application/x-lisp"/>
             <xs:enumeration value="text/x-script.lisp"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="text/x-la-asf"/>
             <xs:enumeration value="application/x-latex"/>
             <xs:enumeration value="application/octet-stream"/>
@@ -239,7 +226,6 @@
             <xs:enumeration value="application/lzx"/>
             <xs:enumeration value="application/octet-stream"/>
             <xs:enumeration value="application/x-lzx"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="text/x-m"/>
             <xs:enumeration value="video/mpeg"/>
             <xs:enumeration value="audio/mpeg"/>
@@ -247,7 +233,6 @@
             <xs:enumeration value="audio/x-mpequrl"/>
             <xs:enumeration value="application/x-troff-man"/>
             <xs:enumeration value="application/x-navimap"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="application/mbedlet"/>
             <xs:enumeration value="application/x-magic-cap-package-1.0"/>
             <xs:enumeration value="application/mcad"/>
@@ -353,7 +338,6 @@
             <xs:enumeration value="image/pict"/>
             <xs:enumeration value="application/x-newton-compatible-pkg"/>
             <xs:enumeration value="application/vnd.ms-pki.pko"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="text/x-script.perl"/>
             <xs:enumeration value="application/x-pixclscript"/>
             <xs:enumeration value="image/x-xpixmap"/>
@@ -430,7 +414,6 @@
             <xs:enumeration value="text/x-script.guile"/>
             <xs:enumeration value="text/x-script.scheme"/>
             <xs:enumeration value="video/x-scm"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="application/sdp"/>
             <xs:enumeration value="application/x-sdp"/>
             <xs:enumeration value="application/sounder"/>
@@ -495,7 +478,6 @@
             <xs:enumeration value="application/x-texinfo"/>
             <xs:enumeration value="application/x-texinfo"/>
             <xs:enumeration value="application/plain"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="application/gnutar"/>
             <xs:enumeration value="application/x-compressed"/>
             <xs:enumeration value="image/tiff"/>
@@ -508,7 +490,6 @@
             <xs:enumeration value="audio/tsplayer"/>
             <xs:enumeration value="text/tab-separated-values"/>
             <xs:enumeration value="image/florian"/>
-            <xs:enumeration value="text/plain"/>
             <xs:enumeration value="text/x-uil"/>
             <xs:enumeration value="text/uri-list"/>
             <xs:enumeration value="text/uri-list"/>
