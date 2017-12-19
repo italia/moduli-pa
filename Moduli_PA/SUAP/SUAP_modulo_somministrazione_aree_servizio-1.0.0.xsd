@@ -61,7 +61,7 @@
         <xs:complexContent>
             <xs:extension base="somareeserviziostazioni:AvvioBaseType">
                 <xs:sequence>
-                   <xs:element name="superficieSomministrazione" type="xs:integer"/>
+                    <xs:element name="superficieSomministrazione" type="xs:decimal"/>
                    <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneEnum"/>
                 </xs:sequence>
             </xs:extension>

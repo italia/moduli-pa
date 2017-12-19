@@ -82,7 +82,7 @@
     
     <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="complessiva" minOccurs="0" type="xs:integer"/>
+            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -90,8 +90,8 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
-                    <xs:element name="alimentare" minOccurs="0" type="xs:integer"/>
-                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
@@ -104,16 +104,16 @@
                     <xs:element name="alimentare" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
-                                <xs:element name="da" type="xs:integer"/>
-                                <xs:element name="a" type="xs:integer"/>
+                                <xs:element name="da" type="xs:decimal"/>
+                                <xs:element name="a" type="xs:decimal"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="nonAlimentare" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
-                                <xs:element name="da" type="xs:integer"/>
-                                <xs:element name="a" type="xs:integer"/>
+                                <xs:element name="da" type="xs:decimal"/>
+                                <xs:element name="a" type="xs:decimal"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
@@ -140,9 +140,9 @@
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="generiMonopolio" minOccurs="0" type="xs:integer"/>
-                        <xs:element name="farmacie" minOccurs="0" type="xs:integer"/>
-                        <xs:element name="carburanti" minOccurs="0" type="xs:integer"/>
+                        <xs:element name="generiMonopolio" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="farmacie" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="carburanti" minOccurs="0" type="xs:decimal"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>    
@@ -156,7 +156,7 @@
                     <xs:element name="merciIngombranti">
                         <xs:complexType>
                             <xs:sequence>
-                                <xs:element name="nonAlimentare" minOccurs="0" type="xs:integer"/>                                
+                                <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>                                
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>    
@@ -173,24 +173,24 @@
                         <xs:element name="generiMonopolio" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:integer"/>
-                                    <xs:element name="a" type="xs:integer"/>
+                                    <xs:element name="da" type="xs:decimal"/>
+                                    <xs:element name="a" type="xs:decimal"/>
                                 </xs:sequence>    
                             </xs:complexType>
                         </xs:element>
                         <xs:element name="farmacie" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:integer"/>
-                                    <xs:element name="a" type="xs:integer"/>
+                                    <xs:element name="da" type="xs:decimal"/>
+                                    <xs:element name="a" type="xs:decimal"/>
                                 </xs:sequence>    
                             </xs:complexType>                            
                         </xs:element>
                         <xs:element name="carburanti" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:integer"/>
-                                    <xs:element name="a" type="xs:integer"/>
+                                    <xs:element name="da" type="xs:decimal"/>
+                                    <xs:element name="a" type="xs:decimal"/>
                                 </xs:sequence>    
                             </xs:complexType>
                         </xs:element>
@@ -210,8 +210,8 @@
                                 <xs:element name="nonAlimentari" minOccurs="0">
                                     <xs:complexType>
                                         <xs:sequence>
-                                            <xs:element name="da" type="xs:integer"/>
-                                            <xs:element name="a" type="xs:integer"/>
+                                            <xs:element name="da" type="xs:decimal"/>
+                                            <xs:element name="a" type="xs:decimal"/>
                                         </xs:sequence>    
                                     </xs:complexType>
                                 </xs:element>                                
@@ -232,7 +232,7 @@
                     <xs:element name="superficieMQ">
                         <xs:complexType>
                             <xs:simpleContent>
-                                <xs:extension base="xs:integer">
+                                <xs:extension base="xs:decimal">
                                     <xs:attribute name="modalita" type="suapcommon:ModalitaVenditaEnum"/> 
                                 </xs:extension>
                             </xs:simpleContent>
@@ -267,8 +267,8 @@
     
     <xs:complexType name="AmpliamentoSuperficieVenditaType">
         <xs:sequence>
-            <xs:element name="da" type="xs:integer"/>
-            <xs:element name="a" type="xs:integer"/>
+            <xs:element name="da" type="xs:decimal"/>
+            <xs:element name="a" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -392,9 +392,6 @@
             </xs:element>
         </xs:choice>        
     </xs:complexType>
-    
-   
-    
     
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
         <xs:sequence>

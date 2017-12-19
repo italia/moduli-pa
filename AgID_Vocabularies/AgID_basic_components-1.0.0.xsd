@@ -59,7 +59,7 @@
     <xs:complexType name="CAPType">
         <xs:simpleContent>
             <xs:restriction base="isacvbc:AddressPostCodeType">
-                <xs:pattern value="[0-9]{6}"/>
+                <xs:pattern value="\d{5}"/>
             </xs:restriction>
         </xs:simpleContent>
     </xs:complexType>
@@ -84,7 +84,7 @@
         
     <xs:simpleType name="NumeroREAType">
             <xs:restriction base="xs:string">
-                <xs:pattern value="[0-9]{10}"/>
+                <xs:pattern value="[A-Za-z0-9\-_]{1,10}"/>
             </xs:restriction>
     </xs:simpleType>
     

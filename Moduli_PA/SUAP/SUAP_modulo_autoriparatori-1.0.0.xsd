@@ -45,7 +45,7 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="tipoEsercizio" type="autoriparatori:TipoEsercizioEnum"/>
-            <xs:element name="superficieCoperta" type="xs:integer"/>         
+            <xs:element name="superficieCoperta" type="xs:decimal"/>         
         </xs:sequence>
     </xs:complexType>
 

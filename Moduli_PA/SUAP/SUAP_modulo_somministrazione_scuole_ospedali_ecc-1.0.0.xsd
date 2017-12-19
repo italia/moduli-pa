@@ -53,7 +53,7 @@
     <xs:complexType name="AvvioBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
-            <xs:element name="superficieSomministrazione" type="xs:integer"/>
+            <xs:element name="superficieSomministrazione" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
     
