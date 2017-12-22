@@ -324,7 +324,7 @@
     
     <xs:complexType name="ImpresaREAType">
         <xs:annotation>
-            <xs:documentation>Tipo per specificare il numero REA (Repertorio economico e amministrativo) di un Impersa</xs:documentation>
+            <xs:documentation>Tipo per specificare il numero REA (Repertorio economico e amministrativo) di un Impresa</xs:documentation>
         </xs:annotation>          
         <xs:choice>        
             <xs:sequence>

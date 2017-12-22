@@ -81,13 +81,33 @@
             <xs:pattern value="[A-Za-z0-9\-_]{1,16}"/>
         </xs:restriction>
     </xs:simpleType>
-        
-    <xs:simpleType name="NumeroREAType">
-            <xs:restriction base="xs:string">
-                <xs:pattern value="[A-Za-z0-9\-_]{1,10}"/>
-            </xs:restriction>
+
+
+    <xs:complexType name="NumeroREAType">
+        <xs:annotation>
+            <xs:documentation>Numero REA (Repertorio Economico Amministrativo) Sigla provincia, Progressivo, Data</xs:documentation>
+        </xs:annotation>   
+        <xs:simpleContent>
+            <xs:extension base="basic:NumeroREA">
+                <xs:attribute name="provincia">        
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="[A-Z]{2}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="data-iscrizione" type="xs:date"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="NumeroREA">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,10}"/>
+        </xs:restriction>
     </xs:simpleType>
-    
+
+
     <xs:complexType name="AbstractBaseType" abstract="true"/>
     
     <xs:complexType name="EmptyType">
