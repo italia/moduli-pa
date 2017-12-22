@@ -82,6 +82,7 @@
         </xs:restriction>
     </xs:simpleType>
 
+
     <xs:complexType name="NumeroREAType">
         <xs:annotation>
             <xs:documentation>Numero REA (Repertorio Economico Amministrativo) Sigla provincia, Progressivo, Data</xs:documentation>
