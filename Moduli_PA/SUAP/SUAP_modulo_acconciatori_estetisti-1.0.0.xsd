@@ -170,7 +170,7 @@
     
     <xs:complexType name="AttivitaEsercitaType">
         <xs:complexContent>
-            <xs:extension base="acconcestet:AltreDichiarazioniBaseType">
+            <xs:extension base="acconcestet:AttivitaEsercitaBaseType">
                 <xs:choice>
                     <xs:element name="unicaPrevalente" type="basic:EmptyType"/>
                     <xs:element name="svoltaCongiutamente">
