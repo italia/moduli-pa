@@ -18,6 +18,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
+    <!-- // Modulo modulo_acconciatori_estetisti ## internal code ref 009 // -->
+    
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloAcconciatoriEstetisti" type="acconcestet:ModuloAcconciatoriEstetistiType"/>
     
@@ -100,7 +102,7 @@
             <xs:element name="superficeComplessiva" type="xs:decimal"/>
             <xs:element name="superficeAdibitaAttivita" type="xs:decimal"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
-            <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaType"/>
+            <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaBaseType"/>
        </xs:sequence>
     </xs:complexType>
     
@@ -164,18 +166,24 @@
     </xs:complexType>
     
    
+    <xs:complexType name="AttivitaEsercitaBaseType" abstract="true" />
+    
     <xs:complexType name="AttivitaEsercitaType">
-        <xs:choice>
-            <xs:element name="unicaPrevalente" type="basic:EmptyType"/>
-            <xs:element name="svoltaCongiutamente">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="attivita" type="xs:string"/>
-                        <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:choice>
+        <xs:complexContent>
+            <xs:extension base="acconcestet:AltreDichiarazioniBaseType">
+                <xs:choice>
+                    <xs:element name="unicaPrevalente" type="basic:EmptyType"/>
+                    <xs:element name="svoltaCongiutamente">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="attivita" type="xs:string"/>
+                                <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>                
     </xs:complexType>
     
     <xs:complexType name="AltreDichiarazioniBaseType" abstract="true" >
