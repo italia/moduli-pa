@@ -99,12 +99,38 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:group ref="acconcestet:attivitaGroup"/>
-            <xs:element name="superficeComplessiva" type="xs:decimal"/>
-            <xs:element name="superficeAdibitaAttivita" type="xs:decimal"/>
+            
+            <xs:element name="superficeComplessiva" type="acconcestet:superficeComplessivaBaseType" />
+            <xs:element name="superficeAdibitaAttivita" type="acconcestet:superficeComplessivaBaseType" />
+            
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaBaseType"/>
        </xs:sequence>
     </xs:complexType>
+    
+    
+    <xs:complexType name="superficeComplessivaBaseType" abstract="true" />
+    <xs:complexType name="superficeComplessivaType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:superficeComplessivaBaseType">
+                <xs:sequence>
+                    <xs:element name="superficeComplessivaLocale" type="xs:decimal"/>        
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="superficeAdibitaAttivitaBaseType" abstract="true" />
+    <xs:complexType name="superficeAdibitaAttivitaType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:superficeAdibitaAttivitaBaseType">
+                <xs:sequence>
+                    <xs:element name="superficeAdibitaEservizioAttivita" type="xs:decimal"/>        
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
