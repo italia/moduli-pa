@@ -18,6 +18,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
    
+    <!-- // Modulo modulo_vicianto ## internal code ref 001 // -->
+   
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloVicinato" type="vicinato:ModuloVicinatoType" />
     
@@ -147,19 +149,17 @@
     </xs:complexType>
      
     <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="vicinato:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
-        </xs:sequence>
+            <xs:sequence><!-- scelta multipla -->
+                <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+                <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" />
+                <xs:element name="CarattereTemporaneo" type="suapcommon:CarattereTemporaneoBaseType" />
+            </xs:sequence>
     </xs:complexType>
-         
+    
+   
+    
+    
+    
     <!-- BASIC COMPONENTS TYPE -->
        
     <!-- ENUMERATION -->
@@ -167,15 +167,6 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="vicinato"/>
             <xs:enumeration value="vendita_esclusiva_mediante_apparecchi_automatici"/>            
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>
-          
-            <xs:enumeration value="TEMPORANEO"/>            
         </xs:restriction>
     </xs:simpleType>
 

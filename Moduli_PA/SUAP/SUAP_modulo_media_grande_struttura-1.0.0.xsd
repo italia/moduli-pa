@@ -18,6 +18,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
+    <!-- // Modulo modulo_media_grande_struttura ## internal code ref 002 // -->
+    
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloMediaGrandeStruttura" type="mediagrande:ModuloMediaGrandeStrutturaType"/>
     
@@ -149,18 +151,12 @@
     </xs:complexType>
     
     <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="mediagrande:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
+        <xs:sequence><!-- scelta multipla -->
+            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" />
         </xs:sequence>
     </xs:complexType>
+    
     
     <!-- BASIC COMPONENTS TYPE -->
     
@@ -172,12 +168,6 @@
             <xs:enumeration value="apparecchi_automatici"/>            
         </xs:restriction>
     </xs:simpleType>
-    
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>                    
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>
