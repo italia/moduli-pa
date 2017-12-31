@@ -18,6 +18,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
+    <!-- // Modulo modulo_zone_non_tutelate ## internal code ref 008 // -->
+    
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloZoneNonTutelate" type="nontutela:ModuloZoneNonTutelateType"/>
     
@@ -103,28 +105,14 @@
             <xs:element name="allegatiAltri" type="nontutela:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
-    
+        
     <xs:complexType name="AperturaBaseType">
         <xs:sequence>
             <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
-            <xs:element name="carattereEsercizio" type="nontutela:CarattereEsercizioType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>    
-    
-    <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="nontutela:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-    
+        
     <xs:complexType name="AperturaType">
         <xs:complexContent>
             <xs:extension base="nontutela:AperturaBaseType">
@@ -172,11 +160,6 @@
     <!-- BASIC COMPONENTS TYPE -->
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>                    
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>

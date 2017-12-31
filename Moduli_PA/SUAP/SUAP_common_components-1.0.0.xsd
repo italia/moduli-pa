@@ -827,6 +827,22 @@
         <xs:attribute name="sostituzione" type="xs:boolean" default="false"/>
     </xs:complexType>
     
+    
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence>
+            <xs:element name="tipo" type="suapcommon:TipoCarattereEsercizioEnum"/>
+            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:date"/>
+                        <xs:element name="a" type="xs:date"/>    
+                    </xs:sequence>                        
+                </xs:complexType>                
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
     <!-- BASIC COMPONENTS TYPE -->
     
     
@@ -1210,6 +1226,13 @@
     </xs:element>
 
     <!-- ENUMERATION -->   
+    <xs:simpleType name="TipoCarattereEsercizioEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PERMANENTE"/>
+            <xs:enumeration value="STAGIONALE"/>                    
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="DETTAGLIO"/>
