@@ -9,9 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_aree_servizio"
-    
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0"    
-    >   
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">   
     
     <xs:annotation>
         <xs:documentation>
@@ -25,6 +23,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>    
+    
+    <!-- // Modulo SUAP_modulo_somministrazione_aree_servizio ## internal code ref 017 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloSomministrazioneAlimenti" type="somareeserviziostazioni:ModuloSomministrazioneAlimentiType"/>
@@ -50,22 +50,70 @@
             </xs:element> 
         </xs:sequence>  
     </xs:complexType>    
-
-    <xs:complexType name="AvvioBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="tipoEsercizio" type="somareeserviziostazioni:TipoEsercizioBaseType"/>
-        </xs:sequence>
-    </xs:complexType>
     
     <xs:complexType name="AvvioType">
         <xs:complexContent>
-            <xs:extension base="somareeserviziostazioni:AvvioBaseType">
+            <xs:extension base="somareeserviziostazioni:TipoEsercizioType">
                 <xs:sequence>
-                    <xs:element name="superficieSomministrazione" type="xs:decimal"/>
-                   <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneEnum"/>
+                    <xs:element name="superficieSomministrazione" type="somareeserviziostazioni:SuperficieEsercizioBaseType" />
+                    <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneBaseType"/>
                 </xs:sequence>
             </xs:extension>
-        </xs:complexContent>        
+        </xs:complexContent>       
+    </xs:complexType>
+   
+    <xs:complexType name="TipoEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:TipoEsercizioPostoBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>    
+        </xs:complexContent>
+    </xs:complexType>    
+
+    <xs:complexType name="TipoEsercizioPostoBaseType" abstract="true" />
+    <xs:complexType name="TipoEsercizioPostoType" abstract="true">
+        <xs:choice>
+            <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
+            <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
+            <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
+            <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="TipoEsercizioAltroBaseType" abstract="true" />
+    <xs:complexType name="TipoEsercizioAltroType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:TipoEsercizioAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:SuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="superficieEsercizio" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ModalitaGestioneBaseType" abstract="true"/>
+    <xs:complexType name="ModalitaGestioneType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:ModalitaGestioneBaseType">
+                <xs:sequence>
+                    <xs:element name="GestioneDiretta" type="basic:EmptyType"/>
+                    <xs:element name="GestioneATerzi" type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="AmpliamentoBaseType" abstract="true">
@@ -140,31 +188,9 @@
     </xs:complexType>
 
     <!-- BASIC COMPONENTS TYPE -->  
-    <xs:complexType name="TipoEsercizioBaseType" abstract="true">
-        <xs:choice>
-            <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
-            <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
-            <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
-            <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
-        </xs:choice>
-    </xs:complexType>
-    
-    <xs:complexType name="TipoEsercizioType">
-        <xs:complexContent>
-            <xs:extension base="somareeserviziostazioni:TipoEsercizioBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>    
-        </xs:complexContent>
-    </xs:complexType>
+
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="ModalitaGestioneEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Gestione diretta"/>
-            <xs:enumeration value="Affidamento di gestione a terzi"/> 
-        </xs:restriction>
-    </xs:simpleType>
+
 
 </xs:schema>
