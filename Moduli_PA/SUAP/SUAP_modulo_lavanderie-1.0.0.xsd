@@ -48,7 +48,7 @@
         <xs:sequence>
             <xs:element name="tipoAttivita" type="tintolav:TipoAttivitaEnum"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
-            <xs:element name="settoriMerceologici" type="tintolav:SuperficieEsercizioAttivitaType"/>
+            <xs:element name="settoriMerceologici" type="tintolav:SuperficieEsercizioAttivitaBaseType"/>
             <xs:element name="carattereEsercizio" type="tintolav:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
@@ -249,28 +249,20 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="SuperficieEsercizioAttivitaBaseType" abstract="true"/>
     <xs:complexType name="SuperficieEsercizioAttivitaType">
         <xs:complexContent>
-            <xs:extension base="tintolav:SettoriMerceologiciSuperficieBaseType">
+            <xs:extension base="tintolav:SuperficieEsercizioAttivitaBaseType">
                 <xs:sequence>
                     <xs:element name="tintolavanderia_lavanderia" minOccurs="0" type="xs:decimal"/>
                     <xs:element name="altriusi" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    
     <!-- ENUMERATION -->
-    
-
-    
     <xs:simpleType name="TipoAttivitaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Tintolavanderia"/>
