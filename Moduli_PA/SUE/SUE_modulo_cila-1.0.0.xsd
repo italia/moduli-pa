@@ -59,14 +59,14 @@
     
     <!-- b)	Opere su parti comuni o modifiche esterne (*) -->
     <xs:complexType name="OperePrevisteBaseType" abstract="true"/>
-    <xs:complexType name="OperePrevisteType">
-        <xs:complexContent>
-            <xs:extension base="cila:OperePrevisteBaseType">
-                <xs:sequence>
-                  <xs:element name="OperePreviste" type="suecommon:OperePrevisteEnum"/>
-                </xs:sequence>
-        </xs:extension>
-    </xs:complexContent>
+        <xs:complexType name="OperePrevisteType">
+            <xs:complexContent>
+                <xs:extension base="cila:OperePrevisteBaseType">
+                    <xs:sequence>
+                      <xs:element name="OperePreviste" type="suecommon:OperePrevisteEnum"/>
+                    </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <!-- c)	Presentazione della comunicazione di inizio dei lavori asseverata (*) -->

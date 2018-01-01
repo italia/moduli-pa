@@ -18,6 +18,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
+    <!-- // Modulo modulo_scia ## internal code ref 02/B1 // -->
+    
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloSCIA" type="scia:ModuloSCIAType" />
     
@@ -76,7 +78,6 @@
  
     <!-- Reference suecommon:CalcoloContributoBaseType -->
     <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
-    
     <xs:complexType name="CalcoloContributoType">
         <xs:complexContent>
             <xs:extension base="scia:CalcoloContributoBaseType">
