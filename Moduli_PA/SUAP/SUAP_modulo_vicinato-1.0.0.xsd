@@ -138,10 +138,7 @@
                 <xs:element name="CarattereTemporaneo" type="suapcommon:CarattereTemporaneoBaseType" />
             </xs:sequence>
     </xs:complexType>
-    
-   
-    
-    
+  
     
     <!-- BASIC COMPONENTS TYPE -->
        

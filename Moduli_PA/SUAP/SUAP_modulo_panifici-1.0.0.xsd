@@ -151,18 +151,12 @@
     </xs:complexType>
     
     <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="panifici:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
+        <xs:sequence><!-- scelta multipla -->
+            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" />
         </xs:sequence>
     </xs:complexType>
+    
     <!-- BASIC COMPONENTS TYPE -->
     
     <!-- ENUMERATION -->
@@ -179,13 +173,6 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="MINORE_UGUALE_5_MC"/>
             <xs:enumeration value="MAGGIORE_5_MC"/>           
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>
         </xs:restriction>
     </xs:simpleType>
     
