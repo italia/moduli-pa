@@ -17,6 +17,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>   
+
+    <!-- // Modulo modulo_spacci_interni ## internal code ref 003 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloSpacciInterni" type="spacci:ModuloSpacciInterniType"/>
@@ -31,7 +33,7 @@
                 <xs:element name="trasferimento" type="spacci:TrasferimentoType"/>
                 <xs:element name="ampliamento" type="spacci:AmpliamentoType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="spacci:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
             <xs:element name="tabellaAllegati" type="spacci:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -91,22 +93,6 @@
             <xs:element name="allegatiAltri" type="spacci:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum"/>
-        </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="spacci:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altra" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>  
     
     <xs:complexType name="AperturaType">
         <xs:sequence>

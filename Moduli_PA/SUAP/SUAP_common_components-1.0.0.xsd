@@ -843,6 +843,24 @@
     </xs:complexType>
     
     
+    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum" minOccurs="0"/>
+            <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType" minOccurs="0"/>
+        </xs:sequence>  
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltreDichiarazioniBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <!-- BASIC COMPONENTS TYPE -->
     
     

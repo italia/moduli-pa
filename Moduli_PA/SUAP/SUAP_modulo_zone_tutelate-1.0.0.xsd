@@ -34,7 +34,7 @@
                 <xs:element name="ampliamento" type="tutela:AmpliamentoBaseType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="tutela:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
             <xs:element name="tabellaAllegati" type="tutela:TabellaAllegatiType"/> 
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -46,22 +46,7 @@
             </xs:element> 
         </xs:sequence>
     </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence>
-        </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="tutela:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
+
     <xs:complexType name="AperturaBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
