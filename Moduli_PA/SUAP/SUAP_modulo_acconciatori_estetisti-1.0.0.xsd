@@ -33,7 +33,7 @@
                 <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -99,10 +99,8 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:group ref="acconcestet:attivitaGroup"/>
-            
             <xs:element name="superficeComplessiva" type="acconcestet:superficeComplessivaBaseType" />
             <xs:element name="superficeAdibitaAttivita" type="acconcestet:superficeComplessivaBaseType" />
-            
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaBaseType"/>
        </xs:sequence>
@@ -211,26 +209,7 @@
             </xs:extension>
         </xs:complexContent>                
     </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true" >
-        <xs:sequence>
-            <xs:choice>
-                <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType"/>
-                <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType"/>
-            </xs:choice>         
-        </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="acconcestet:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>  
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
+ 
     
     <!-- BASIC COMPONENTS TYPE -->
     
