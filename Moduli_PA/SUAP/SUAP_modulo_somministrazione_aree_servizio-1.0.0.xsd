@@ -39,7 +39,7 @@
                 <xs:element name="ampliamento" type="somareeserviziostazioni:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="somareeserviziostazioni:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType"/>
             <xs:element name="tabellaAllegati" type="somareeserviziostazioni:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -129,20 +129,6 @@
                     <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>    
-        </xs:complexContent>
-    </xs:complexType>
-
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence/>
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="somareeserviziostazioni:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
