@@ -9,7 +9,6 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_tintolavanderie"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
@@ -212,37 +211,41 @@
     
     <!-- Dichiarazioni -->
     <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="BiancheriaMINORE_UGUALE_100_KG" type="basic:EmptyType"/>
+                <xs:element name="BiancheriaMAGGIORE_100_KG"      type="tintolav:BiancheriaMAGGIORE_100_KGBaseType"/>
+            </xs:choice>
+            <xs:element name="altro" type="tintolav:AltreDichiarazioniAltroBaseType" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="BiancheriaMAGGIORE_100_KGBaseType" abstract="true"/>
+    <xs:complexType name="BiancheriaMAGGIORE_100_KGType">
         <xs:complexContent>
-            <xs:extension base="tintolav:AltreDichiarazioniBaseType">
+            <xs:extension base="tintolav:BiancheriaMAGGIORE_100_KGBaseType">
                 <xs:sequence>
-                    <xs:element name="altro" type="xs:string"/>
-                </xs:sequence> 
+                    <xs:element name="BiancheriaMAGGIORE_100_KG" type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniAltroBaseType" abstract="true"/>
+    <xs:complexType name="AltreDichiarazioniAltroType">
+        <xs:complexContent>
+            <xs:extension base="tintolav:AltreDichiarazioniAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="dicConsumoFarina" type="tintolav:QtaBiancheriaEnum"/>
-       </xs:sequence>        
-    </xs:complexType>
-    
-   
-    
-    
-    
-  
     <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="tintolav:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
+        <xs:sequence><!-- scelta multipla -->
+            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" />
         </xs:sequence>
     </xs:complexType>
     
@@ -266,19 +269,7 @@
     
     <!-- ENUMERATION -->
     
-    <xs:simpleType name="QtaBiancheriaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="MINORE_UGUALE_100_KG"/>
-            <xs:enumeration value="MAGGIORE_100_KG"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
     <xs:simpleType name="TipoAttivitaEnum">
         <xs:restriction base="xs:string">
