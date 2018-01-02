@@ -33,7 +33,7 @@
                 <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
+            <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -209,7 +209,31 @@
             </xs:extension>
         </xs:complexContent>                
     </xs:complexType>
- 
+
+    
+    <xs:complexType name="AltreDichiarazioniAltroBaseType" abstract="true"/>
+    <xs:complexType name="AltreDichiarazioniAltroType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:AltreDichiarazioniAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType"/>
+                <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType"/>
+            </xs:choice> 
+            <xs:element name="altro" type="acconcestet:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+        </xs:sequence>  
+    </xs:complexType>
+    
+    
+    
     
     <!-- BASIC COMPONENTS TYPE -->
     
