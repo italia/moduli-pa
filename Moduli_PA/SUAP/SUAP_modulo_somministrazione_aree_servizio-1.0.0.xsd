@@ -115,23 +115,25 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <xs:complexType name="AmpliamentoBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
-        </xs:sequence>
-    </xs:complexType>
     
-    <xs:complexType name="AmpliamentoType">
+    <xs:complexType name="AmpliamentoSuperficieVenditaBaseType" abstract="true"/>
+    <xs:complexType name="AmpliamentoSuperficieVenditaType">
         <xs:complexContent>
-            <xs:extension base="somareeserviziostazioni:AmpliamentoBaseType">
+            <xs:extension base="somareeserviziostazioni:AmpliamentoSuperficieVenditaBaseType">
                 <xs:sequence>
-                    <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
+                    <xs:element name="SuperficieVenditaSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType"/> 
                 </xs:sequence>
-            </xs:extension>    
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="AmpliamentoType">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="ampliamentoSuperficieSomministrazione" type="somareeserviziostazioni:AmpliamentoSuperficieVenditaBaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="somareeserviziostazioni:AllegatiSCIAUnicaType"/>
