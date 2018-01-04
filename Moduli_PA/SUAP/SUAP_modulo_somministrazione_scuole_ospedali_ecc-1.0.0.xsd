@@ -38,7 +38,7 @@
                 <xs:element name="apertura" type="somscuoleospetc:AvvioType"/>
                 <xs:element name="ampliamento" type="somscuoleospetc:AmpliamentoType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="somscuoleospetc:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -79,6 +79,8 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+
 
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>

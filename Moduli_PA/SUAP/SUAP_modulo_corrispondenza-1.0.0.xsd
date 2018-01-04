@@ -31,7 +31,7 @@
             <xs:element name="apertura" type="corrispondenza:AperturaType"/>
           
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="corrispondenza:TabellaAllegatiType"/>                 
             <xs:element name="Allegati">
                 <xs:complexType>

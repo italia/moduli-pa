@@ -39,7 +39,7 @@
                 <xs:element name="ampliamento" type="somareeserviziostazioni:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="somareeserviziostazioni:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>

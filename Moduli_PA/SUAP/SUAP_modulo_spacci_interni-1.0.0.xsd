@@ -33,7 +33,7 @@
                 <xs:element name="trasferimento" type="spacci:TrasferimentoType"/>
                 <xs:element name="ampliamento" type="spacci:AmpliamentoType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="spacci:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="spacci:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -118,6 +118,15 @@
            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
        </xs:sequence> 
     </xs:complexType>
+    
+       
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaType"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>                    
+        </xs:sequence>
+    </xs:complexType>
+    
     
     <!-- BASIC COMPONENTS TYPE -->
     

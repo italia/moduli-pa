@@ -34,7 +34,7 @@
                 <xs:element name="ampliamento" type="nontutela:AmpliamentoBaseType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="nontutela:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -46,7 +46,7 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-        
+    
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>           

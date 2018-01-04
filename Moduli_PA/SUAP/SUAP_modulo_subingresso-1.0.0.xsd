@@ -108,7 +108,7 @@
         
     <xs:complexType name="AltreDichiarazioniType" >
         <xs:sequence>
-            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum"/>
+            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaType"/>
         </xs:sequence>        
     </xs:complexType>     
         

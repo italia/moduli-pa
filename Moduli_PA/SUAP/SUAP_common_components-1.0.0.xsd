@@ -521,7 +521,6 @@
         </xs:choice>
     </xs:complexType>
     
-    
     <xs:complexType name="NotificaSanitariaType">
        <xs:sequence>
            <xs:choice>
@@ -843,20 +842,33 @@
     </xs:complexType>
     
     
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+    <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
-            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum" minOccurs="0"/>
-        </xs:sequence>  
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>                    
+        </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniType">
+    <xs:complexType name="AltreDichiarazioniAltroBaseType" abstract="true"/>
+    <xs:complexType name="AltreDichiarazioniAltroType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:AltreDichiarazioniBaseType">
+            <xs:extension base="suapcommon:AltreDichiarazioniAltroBaseType">
                 <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>  
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="VenditaEsclusivaType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="DIPENDENTI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="MILITARI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="SOCI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="ACCESSO_SCUOLE" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="ACCESSO_OSPEDALI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+            </xs:choice>
+        </xs:sequence>
     </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
@@ -1279,14 +1291,6 @@
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="VenditaEsclusivaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DIPENDENTI"/>
-            <xs:enumeration value="MILITARI"/>
-            <xs:enumeration value="SOCI"/>
-            <xs:enumeration value="ACCESSO_SCUOLE"/>
-            <xs:enumeration value="ACCESSO_OSPEDALI"/>            
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>

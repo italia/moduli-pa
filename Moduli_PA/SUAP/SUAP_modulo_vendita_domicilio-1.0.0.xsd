@@ -32,7 +32,7 @@
                 <xs:element name="apertura" type="domicilio:AperturaType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="domicilio:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>

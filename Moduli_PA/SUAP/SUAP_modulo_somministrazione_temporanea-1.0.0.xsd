@@ -44,7 +44,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="temporanea:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
