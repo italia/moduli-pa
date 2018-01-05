@@ -304,21 +304,9 @@
     <xs:complexType name="CarattereStagionaleType">
         <xs:complexContent>
             <xs:extension base="suapcommon:CarattereStagionaleBaseType">
-                
                 <xs:sequence>
-                    <xs:element name="Stagionale" minOccurs="0" maxOccurs="1" />
-                    
-                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="da" type="xs:date"/>
-                                <xs:element name="a" type="xs:date"/>    
-                            </xs:sequence>                        
-                        </xs:complexType>                
-                    </xs:element>
-                    
+                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoType" />
                 </xs:sequence>
-                
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -327,23 +315,18 @@
     <xs:complexType name="CarattereTemporaneoType">
         <xs:complexContent>
             <xs:extension base="suapcommon:CarattereTemporaneoBaseType">
-                
                 <xs:sequence>
-                    <xs:element name="Tempporaneo" minOccurs="0" maxOccurs="1" />
-                    
-                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="da" type="xs:date"/>
-                                <xs:element name="a" type="xs:date"/>    
-                            </xs:sequence>                        
-                        </xs:complexType>                
-                    </xs:element>
-                    
+                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoType" />
                 </xs:sequence>
-                
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence><!-- scelta multipla -->
+            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="DichiarazioniType">
@@ -827,19 +810,7 @@
     </xs:complexType>
     
     
-    <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="suapcommon:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
+    
     
     
     <xs:complexType name="AltreDichiarazioniType">
@@ -1254,13 +1225,6 @@
     </xs:element>
 
     <!-- ENUMERATION -->   
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>                    
-        </xs:restriction>
-    </xs:simpleType>
-    
     <xs:simpleType name="ModalitaVenditaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="DETTAGLIO"/>
