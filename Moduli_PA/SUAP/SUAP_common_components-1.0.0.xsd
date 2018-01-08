@@ -80,50 +80,44 @@
        </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
-        </xs:sequence>
-    </xs:complexType>
-    
+    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true" />
     <xs:complexType name="SettoriMerceologiciSuperficieType">
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
-                    <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
-                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:choice>
+                        <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
+                    </xs:choice>
+                    <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
     </xs:complexType>
     
     <xs:complexType name="VariazioneSettoriMerceologiciSuperficieType" >
-        <xs:complexContent>
-            <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
-                <xs:sequence>
-                    <xs:element name="alimentare" minOccurs="0">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="da" type="xs:decimal"/>
-                                <xs:element name="a" type="xs:decimal"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                    <xs:element name="nonAlimentare" minOccurs="0">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="da" type="xs:decimal"/>
-                                <xs:element name="a" type="xs:decimal"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>        
+        <xs:sequence>
+            <xs:element name="alimentare" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:decimal"/>
+                        <xs:element name="a" type="xs:decimal"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="nonAlimentare" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:decimal"/>
+                        <xs:element name="a" type="xs:decimal"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="SettoriMerceologiciBaseType" abstract="true"/>   
-    
     <xs:complexType name="SettoriMerceologiciType">
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciBaseType">
@@ -135,8 +129,15 @@
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="OccupazioneSuperficiBaseType" abstract="true">
+    <xs:complexType name="OccupazioneSuperficiType">
         <xs:sequence>
+            <xs:element name="nonAlimentari">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:SuperficieBaseType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
                     <xs:sequence>
@@ -149,21 +150,16 @@
         </xs:sequence>        
     </xs:complexType>
     
-    <xs:complexType name="OccupazioneSuperficiType">
+    <xs:complexType name="SuperficieBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:OccupazioneSuperficiBaseType">
+            <xs:extension base="suapcommon:SuperficieBaseType">
                 <xs:sequence>
-                    <xs:element name="merciIngombranti">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>                                
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>    
+                   <xs:element name="mq" minOccurs="0" type="xs:decimal"/>                                
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
+    </xs:complexType>   
     
     <xs:complexType name="VariazioneOccupazioneSuperficiBaseType" abstract="true">
         <xs:sequence>

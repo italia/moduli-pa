@@ -49,7 +49,7 @@
             <xs:element name="tipoAttivita" type="tintolav:TipoAttivitaEnum"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
             <xs:element name="settoriMerceologici" type="tintolav:SuperficieEsercizioAttivitaBaseType"/>
-            <xs:element name="carattereEsercizio" type="tintolav:CarattereEsercizioType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -216,7 +216,7 @@
                 <xs:element name="BiancheriaMINORE_UGUALE_100_KG" type="basic:EmptyType"/>
                 <xs:element name="BiancheriaMAGGIORE_100_KG"      type="tintolav:BiancheriaMAGGIORE_100_KGBaseType"/>
             </xs:choice>
-            <xs:element name="altro" type="tintolav:AltreDichiarazioniAltroBaseType" />
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" />
         </xs:sequence>
     </xs:complexType>
     
@@ -231,24 +231,7 @@
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniAltroBaseType" abstract="true"/>
-    <xs:complexType name="AltreDichiarazioniAltroType">
-        <xs:complexContent>
-            <xs:extension base="tintolav:AltreDichiarazioniAltroBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence><!-- scelta multipla -->
-            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
-            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" />
-        </xs:sequence>
-    </xs:complexType>
-    
+  
     <xs:complexType name="SuperficieEsercizioAttivitaBaseType" abstract="true"/>
     <xs:complexType name="SuperficieEsercizioAttivitaType">
         <xs:complexContent>

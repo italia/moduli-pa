@@ -108,7 +108,7 @@
             <xs:element name="carattereEsercizio" type="vicinato:CarattereEsercizioType"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
-            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiBaseType"/>            
+            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>            
         </xs:sequence>
     </xs:complexType>
     
@@ -117,7 +117,7 @@
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
             <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
-            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiBaseType"/>
+            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>
         </xs:sequence>        
     </xs:complexType>
     

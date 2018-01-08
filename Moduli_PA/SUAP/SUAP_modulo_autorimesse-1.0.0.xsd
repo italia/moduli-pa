@@ -29,7 +29,7 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/> 
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="autorimesse:AperturaType"/>       
-            <xs:element name="altreDichiarazioni" type="autorimesse:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="autorimesse:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="autorimesse:TabellaAllegatiType"/>  
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -47,21 +47,12 @@
             <xs:element name="superficieCoperta" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
-
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-            <xs:sequence>
-                <xs:element name="superficieComplessivaCoperta" type="autorimesse:SuperficieComplessivaCopertaEnum"/>
-            </xs:sequence>
-    </xs:complexType>
     
     <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="autorimesse:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/> 
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:element name="superficieComplessivaCoperta" type="autorimesse:SuperficieComplessivaCopertaEnum"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" />
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="TabellaAllegatiType">
@@ -129,7 +120,7 @@
         <xs:complexContent>
             <xs:extension base="autorimesse:TipoEsercizioTypeAltroBaseType">
                 <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/> 
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/> 
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
