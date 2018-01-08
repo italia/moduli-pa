@@ -106,7 +106,7 @@
    
    <!-- BASIC TYPE -->
     
-    <xs:complexType name="TipoQualicaType">
+    <xs:complexType name="TipoQualificaType">
         <xs:choice>
             <xs:element name="lavoratoreSubordinato" minOccurs="0" type="basic:EmptyType"/>
             <xs:element name="collaboratoreFamiliare" minOccurs="0" type="basic:EmptyType"/>
@@ -126,7 +126,7 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
                 <xs:sequence>
-                    <xs:element name="tipoQualifica" type="autoriparatori:TipoQualicaType"/>
+                    <xs:element name="tipoQualifica" type="autoriparatori:TipoQualificaType"/>
                     <xs:element name="dichiarazioni" type="autoriparatori:DichiarazioneRequisitiProfessionaliType"/>
                  </xs:sequence>
             </xs:extension>
