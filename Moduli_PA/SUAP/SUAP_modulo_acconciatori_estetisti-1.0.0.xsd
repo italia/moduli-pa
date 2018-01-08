@@ -32,8 +32,10 @@
                 <xs:element name="apertura" type="acconcestet:AperturaType"/>
                 <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
             </xs:choice>
+            <!-- DICHIARAZIONI -->
             <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
+            <!-- ALLEGATI -->
             <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -112,23 +114,11 @@
         <xs:complexContent>
             <xs:extension base="acconcestet:superficeComplessivaBaseType">
                 <xs:sequence>
-                    <xs:element name="superficeComplessivaLocale" type="xs:decimal"/>        
+                    <xs:element name="mq" type="xs:decimal"/>        
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    <xs:complexType name="superficeAdibitaAttivitaBaseType" abstract="true" />
-    <xs:complexType name="superficeAdibitaAttivitaType">
-        <xs:complexContent>
-            <xs:extension base="acconcestet:superficeAdibitaAttivitaBaseType">
-                <xs:sequence>
-                    <xs:element name="superficeAdibitaEservizioAttivita" type="xs:decimal"/>        
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
     
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
@@ -191,7 +181,6 @@
     
    
     <xs:complexType name="AttivitaEsercitaBaseType" abstract="true" />
-    
     <xs:complexType name="AttivitaEsercitaType">
         <xs:complexContent>
             <xs:extension base="acconcestet:AttivitaEsercitaBaseType">
@@ -210,29 +199,15 @@
         </xs:complexContent>                
     </xs:complexType>
 
-    
-    <xs:complexType name="AltreDichiarazioniAltroBaseType" abstract="true"/>
-    <xs:complexType name="AltreDichiarazioniAltroType">
-        <xs:complexContent>
-            <xs:extension base="acconcestet:AltreDichiarazioniAltroBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>  
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
             <xs:choice>
                 <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType"/>
                 <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType"/>
             </xs:choice> 
-            <xs:element name="altro" type="acconcestet:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
         </xs:sequence>  
     </xs:complexType>
-    
-    
     
     
     <!-- BASIC COMPONENTS TYPE -->

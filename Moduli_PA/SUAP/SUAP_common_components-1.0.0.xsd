@@ -428,10 +428,15 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AltroRequisitoProfessionaleBaseType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string"></xs:extension>
-        </xs:simpleContent>
+    <xs:complexType name="AltroRequisitoProfessionaleBaseType" abstract="true"/>
+    <xs:complexType name="AltroRequisitoProfessionaleType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltroRequisitoProfessionaleBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliBaseType" abstract="true">
@@ -809,10 +814,6 @@
         <xs:attribute name="sostituzione" type="xs:boolean" default="false"/>
     </xs:complexType>
     
-    
-    
-    
-    
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
             <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>                    
@@ -824,7 +825,7 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:AltreDichiarazioniAltroBaseType">
                 <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>  
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>  
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

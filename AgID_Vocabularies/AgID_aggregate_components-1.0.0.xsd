@@ -368,14 +368,8 @@
             <xs:documentation>Definisce un intervallo temporale</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="periodo">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>
-                    </xs:sequence>                        
-                </xs:complexType>  
-            </xs:element>
+           <xs:element name="da" type="xs:date"/>
+           <xs:element name="a" type="xs:date"/>
         </xs:sequence>
     </xs:complexType>
     
