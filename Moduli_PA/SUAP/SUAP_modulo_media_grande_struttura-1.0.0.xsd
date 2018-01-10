@@ -180,7 +180,7 @@
     </xs:complexType>
     
     <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariBaseType" abstract="true"/>
-    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariType">
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariType">
         <xs:complexContent>
             <xs:extension base="mediagrande:OccupazioniMerciIngombrantiNonAlimentariBaseType">
                 <xs:sequence>
