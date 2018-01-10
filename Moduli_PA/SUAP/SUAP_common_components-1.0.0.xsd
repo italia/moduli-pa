@@ -9,7 +9,6 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
@@ -131,7 +130,7 @@
     
     <xs:complexType name="OccupazioneSuperficiType">
         <xs:sequence>
-            <xs:element name="nonAlimentari" type="suapcommon:OccupazioniMerciIngombratiNonAlimentariBaseType " />
+            <xs:element name="nonAlimentari" type="suapcommon:OccupazioniMerciIngombrantiNonAlimentariBaseType" />
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
                     <xs:sequence>
@@ -144,10 +143,10 @@
         </xs:sequence>        
     </xs:complexType>
         
-    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariBaseType" abstract="true"/>
-    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariType">
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariBaseType" abstract="true"/>
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:OccupazioniMerciIngombratiNonAlimentariBaseType">
+            <xs:extension base="suapcommon:OccupazioniMerciIngombrantiNonAlimentariBaseType">
                 <xs:sequence>
                     <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:SuperficieType"/>
                 </xs:sequence>

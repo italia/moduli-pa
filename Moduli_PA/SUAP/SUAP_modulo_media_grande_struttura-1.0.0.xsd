@@ -145,7 +145,7 @@
     
     <xs:complexType name="VariazioneOccupazioneSuperficiType">
         <xs:sequence>
-            <xs:element name="nonAlimentari" type="mediagrande:OccupazioniMerciIngombratiNonAlimentariBaseType " />    
+            <xs:element name="nonAlimentari" type="mediagrande:OccupazioniMerciIngombrantiNonAlimentariBaseType" />    
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
                     <xs:sequence>
@@ -179,10 +179,10 @@
         </xs:sequence>        
     </xs:complexType>
     
-    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariBaseType" abstract="true"/>
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariBaseType" abstract="true"/>
     <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariType">
         <xs:complexContent>
-            <xs:extension base="mediagrande:OccupazioniMerciIngombratiNonAlimentariBaseType">
+            <xs:extension base="mediagrande:OccupazioniMerciIngombrantiNonAlimentariBaseType">
                 <xs:sequence>
                     <xs:element name="merciIngombranti" minOccurs="0" type="mediagrande:SuperficieType"/>
                 </xs:sequence>
