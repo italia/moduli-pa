@@ -140,37 +140,31 @@
     
     <xs:complexType name="VariazioneOccupazioneSuperficiType">
         <xs:sequence>
-            <xs:element name="nonAlimentari">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="merciIngombranti" minOccurs="0" type="mediagrande:SuperficieBaseType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="nonAlimentari" type="mediagrande:OccupazioniMerciIngombratiNonAlimentariBaseType " />    
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="generiMonopolio" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:decimal"/>
-                                    <xs:element name="a" type="xs:decimal"/>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
                         <xs:element name="farmacie" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:decimal"/>
-                                    <xs:element name="a" type="xs:decimal"/>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
                         <xs:element name="carburanti" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:decimal"/>
-                                    <xs:element name="a" type="xs:decimal"/>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
@@ -180,19 +174,25 @@
         </xs:sequence>        
     </xs:complexType>
     
-    <xs:complexType name="SuperficieBaseType" abstract="true"/>
-    <xs:complexType name="SuperficieType">
+    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariBaseType" abstract="true"/>
+    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariType">
         <xs:complexContent>
-            <xs:extension base="mediagrande:SuperficieBaseType">
+            <xs:extension base="mediagrande:OccupazioniMerciIngombratiNonAlimentariBaseType">
                 <xs:sequence>
-                    <xs:element name="da" type="xs:decimal"/>
-                    <xs:element name="a" type="xs:decimal"/>                               
+                    <xs:element name="merciIngombranti" minOccurs="0" type="mediagrande:SuperficieType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="SuperficieType">
+        <xs:sequence>
+            <xs:element name="DaMq" type="xs:decimal"/>
+            <xs:element name="AMq" type="xs:decimal"/>                                 
+        </xs:sequence>
+    </xs:complexType> 
     
+
     <!-- ENUMERATION -->
     <xs:simpleType name="TipoEsercizioEnum">
         <xs:restriction base="xs:string">

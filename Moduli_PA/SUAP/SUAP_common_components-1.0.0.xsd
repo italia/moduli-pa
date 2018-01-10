@@ -131,13 +131,7 @@
     
     <xs:complexType name="OccupazioneSuperficiType">
         <xs:sequence>
-            <xs:element name="nonAlimentari">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:SuperficieBaseType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="nonAlimentari" type="suapcommon:OccupazioniMerciIngombratiNonAlimentariBaseType " />
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
                     <xs:sequence>
@@ -149,17 +143,24 @@
             </xs:element>    
         </xs:sequence>        
     </xs:complexType>
-    
-    <xs:complexType name="SuperficieBaseType" abstract="true"/>
-    <xs:complexType name="SuperficieType">
+        
+    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariBaseType" abstract="true"/>
+    <xs:complexType name="OccupazioniMerciIngombratiNonAlimentariType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:SuperficieBaseType">
+            <xs:extension base="suapcommon:OccupazioniMerciIngombratiNonAlimentariBaseType">
                 <xs:sequence>
-                   <xs:element name="mq" minOccurs="0" type="xs:decimal"/>                                
+                    <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:SuperficieType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>   
+    </xs:complexType>
+    
+    <xs:complexType name="SuperficieType">
+        <xs:sequence>
+            <xs:element name="mq" minOccurs="0" type="xs:decimal"/>                                
+        </xs:sequence>
+    </xs:complexType> 
+    
     
     <xs:complexType name="VariazioneOccupazioneSuperficiBaseType" abstract="true">
         <xs:sequence>
