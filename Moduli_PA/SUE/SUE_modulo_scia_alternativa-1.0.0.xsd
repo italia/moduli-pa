@@ -9,8 +9,16 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_scia_alternativa"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            B2. SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITA’ ALTERNATIVA AL PERMESSO DI COSTRUIRE
+            - SCIA ALTERNATIVA AL PERMESSO DI COSTRUIRE- PARTE DEL TITOLARE 
+            - RELAZIONE DI ASSEVERAZIONE
+            - QUADRO RIEPILOGATIVO DELLA DOCUMENTAZIONE
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>

@@ -9,8 +9,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_zone_non_tutelate"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER BAR, RISTORANTI E ALTRI ESERCIZI DI SOMMINISTRAZIONE DI ALIMENTI E BEVANDE
+            (IN ZONE NON TUTELATE) 
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
