@@ -46,8 +46,8 @@
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
-            <xs:element name="calcoloContributoCostruzione" type="scialt:CalcoloContributoBaseType"/>
-            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriBaseType"/>
+            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
             <xs:element name="note" type="xs:string"/> 
@@ -125,10 +125,9 @@
     </xs:complexType>
 
     <!-- Reference suecommon:CalcoloContributoBaseType -->
-    <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
     <xs:complexType name="CalcoloContributoType">
         <xs:complexContent>
-            <xs:extension base="scialt:CalcoloContributoBaseType">
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
                 <xs:sequence>
                     <xs:element name="contributo" minOccurs="0">
                         <xs:complexType>

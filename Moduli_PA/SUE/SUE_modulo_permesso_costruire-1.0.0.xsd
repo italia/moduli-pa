@@ -41,8 +41,8 @@
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
-            <xs:element name="calcoloContributoCostruzione" type="permcostr:CalcoloContributoBaseType"/>
-            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
+            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="tecniciIncaricati" type="permcostr:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
             
@@ -110,11 +110,9 @@
     </xs:complexType>
 
     <!-- Reference permcostr:CalcoloContributoBaseType -->
-    <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
-    
     <xs:complexType name="CalcoloContributoType">
         <xs:complexContent>
-            <xs:extension base="permcostr:CalcoloContributoBaseType">
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
                 <xs:sequence>
                     <xs:element name="contributo" minOccurs="0">
                         <xs:complexType>
@@ -179,6 +177,15 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
+    
+    <!-- Reference suecommon:TecniciIncaricatiDeiLavoriType -->  
+    <xs:complexType name="TecniciIncaricatiDeiLavoriType">
+        <xs:sequence>
+            <xs:element name="altriTecniciDaSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="altriTecniciIndividuatiPrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
     
     <!-- Reference permcostr:AllegatiPermessoCostruireType -->
     <xs:complexType name="AllegatiPermessoCostruireType">

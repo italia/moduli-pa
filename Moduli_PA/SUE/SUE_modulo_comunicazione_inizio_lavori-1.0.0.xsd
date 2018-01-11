@@ -39,7 +39,7 @@
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>               
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>
             <xs:element name="comunicaInzioLavori" type="cil:ComunicaInzioLavoriType"/>
-            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
+            <xs:element name="localizzazioneIntervento" type="cil:LocalizzazioneInterventoType"/>
             <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType" minOccurs="0" maxOccurs="unbounded" />           
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
@@ -51,6 +51,7 @@
     </xs:complexType>
 
     <!-- BASE TYPE -->
+   
     <!-- Reference cil:ComunicaInzioLavoriType -->
     <xs:complexType name="ComunicaInzioLavoriType">
         <xs:sequence>
@@ -58,6 +59,16 @@
             <xs:element name="dataFine" minOccurs="0" type="xs:date"/>
             <xs:element name="dettaglioLavori" minOccurs="0" type="xs:string" />
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LocalizzazioneInterventoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:LocalizzazioneInterventoBaseType">
+                <xs:sequence>
+                    <xs:group ref="suecommon:LocalizzazioneInterventoGroup"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <!-- Reference scia:TabellaAllegatiType -->
