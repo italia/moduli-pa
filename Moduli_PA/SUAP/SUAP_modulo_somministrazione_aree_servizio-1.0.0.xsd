@@ -63,42 +63,34 @@
     </xs:complexType>
    
     <xs:complexType name="TipoEsercizioType">
-        <xs:complexContent>
-            <xs:extension base="somareeserviziostazioni:TipoEsercizioPostoBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>    
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
+                <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
+                <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
+                <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
+            </xs:choice>
+            <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType" minOccurs="0"/>
+        </xs:sequence>
     </xs:complexType>    
-
-    <xs:complexType name="TipoEsercizioPostoBaseType" abstract="true" />
-    <xs:complexType name="TipoEsercizioPostoType" abstract="true">
-        <xs:choice>
-            <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
-            <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
-            <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
-            <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
-        </xs:choice>
-    </xs:complexType>
     
     <xs:complexType name="TipoEsercizioAltroBaseType" abstract="true" />
     <xs:complexType name="TipoEsercizioAltroType">
         <xs:complexContent>
             <xs:extension base="somareeserviziostazioni:TipoEsercizioAltroBaseType">
                 <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>                    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+    
     <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
     <xs:complexType name="SuperficieEsercizioType">
         <xs:complexContent>
             <xs:extension base="somareeserviziostazioni:SuperficieEsercizioBaseType">
                 <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="xs:decimal"/>
+                    <xs:element name="superficieEsercizio" type="suapcommon:SuperficieType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

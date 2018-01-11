@@ -84,10 +84,8 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
-                    <xs:choice>
                         <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
                         <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
-                    </xs:choice>
                     <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
@@ -153,14 +151,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    <xs:complexType name="SuperficieType">
-        <xs:sequence>
-            <xs:element name="mq" minOccurs="0" type="xs:decimal"/>                                
-        </xs:sequence>
-    </xs:complexType> 
-    
-    
+   
     <xs:complexType name="VariazioneOccupazioneSuperficiBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="tabelleSpeciali">
@@ -195,7 +186,7 @@
             </xs:element>    
         </xs:sequence>        
     </xs:complexType>
-    
+       
     <xs:complexType name="VariazioneOccupazioneSuperficiType">
         <xs:complexContent>
             <xs:extension base="suapcommon:VariazioneOccupazioneSuperficiBaseType">
@@ -263,15 +254,30 @@
     
     <xs:complexType name="AmpliamentoSuperficieVenditaType">
         <xs:sequence>
-            <xs:element name="da" type="xs:decimal"/>
-            <xs:element name="a" type="xs:decimal"/>
+            <xs:element name="DaMq" type="xs:decimal"/>
+            <xs:element name="AMq" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="SuperficieDaABaseType" abstract="true"/>
+    <xs:complexType name="SuperficieDaAType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:SuperficieDaABaseType">
+                <xs:sequence>
+                    <xs:element name="DaMq" type="xs:decimal"/>
+                    <xs:element name="AMq" type="xs:decimal"/>                                 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>                
+    </xs:complexType> 
     
-    <xs:complexType name="RequisitiAntimafiaBaseType" abstract="true">
+    <xs:complexType name="SuperficieType">
+        <xs:sequence>
+            <xs:element name="mq" minOccurs="0" type="xs:decimal"/>                                
+        </xs:sequence>
     </xs:complexType>
-    
+        
+    <xs:complexType name="RequisitiAntimafiaBaseType" abstract="true"/>
     <xs:complexType name="RequisitiAntimafiaType">
         <xs:complexContent>
             <xs:extension base="suapcommon:RequisitiAntimafiaBaseType">

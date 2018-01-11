@@ -92,7 +92,6 @@
             <xs:extension base="vicinato:AllegatiAltriBaseType">
                 <xs:sequence>
                     <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-                   
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -132,8 +131,8 @@
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
             <xs:element name="variazioniTabelleSpeciali" type="suapcommon:VariazioniTabelleSpecialiType" minOccurs="0"/>
-            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType" />
-            <xs:element name="variazioneOccupazioneSuperfici" type="suapcommon:VariazioneOccupazioneSuperficiBaseType"/>
+            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType" />
+            <xs:element name="variazioneOccupazioneSuperfici" type="vicinato:VariazioneOccupazioneSuperficiType"/>
         </xs:sequence>
     </xs:complexType>
      
@@ -145,9 +144,56 @@
             </xs:sequence>
     </xs:complexType>
   
+    <xs:complexType name="VariazioneOccupazioneSuperficiType">
+        <xs:sequence>
+            <xs:element name="nonAlimentari" type="vicinato:OccupazioniMerciIngombrantiNonAlimentariBaseType" />    
+            <xs:element name="tabelleSpeciali">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="generiMonopolio" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="farmacie" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="carburanti" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>    
+        </xs:sequence>        
+    </xs:complexType>
     
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariBaseType" abstract="true"/>
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariType">
+        <xs:complexContent>
+            <xs:extension base="vicinato:OccupazioniMerciIngombrantiNonAlimentariBaseType">
+                <xs:sequence>
+                    <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:AmpliamentoSuperficieVenditaType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <!-- BASIC COMPONENTS TYPE -->
-       
+    
+    
+    
     <!-- ENUMERATION -->
     <xs:simpleType name="TipoEsercizioEnum">
         <xs:restriction base="xs:string">

@@ -184,19 +184,12 @@
         <xs:complexContent>
             <xs:extension base="mediagrande:OccupazioniMerciIngombrantiNonAlimentariBaseType">
                 <xs:sequence>
-                    <xs:element name="merciIngombranti" minOccurs="0" type="mediagrande:SuperficieType"/>
+                    <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:AmpliamentoSuperficieVenditaType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    <xs:complexType name="SuperficieType">
-        <xs:sequence>
-            <xs:element name="DaMq" type="xs:decimal"/>
-            <xs:element name="AMq" type="xs:decimal"/>                                 
-        </xs:sequence>
-    </xs:complexType> 
-    
+
 
     <!-- ENUMERATION -->
     <xs:simpleType name="TipoEsercizioEnum">

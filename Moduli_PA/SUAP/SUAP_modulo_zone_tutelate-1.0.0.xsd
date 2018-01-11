@@ -35,9 +35,9 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
-                <xs:element name="apertura" type="tutela:AperturaBaseType"/>
-                <xs:element name="trasferimento" type="tutela:TrasferimentoBaseType"/>
-                <xs:element name="ampliamento" type="tutela:AmpliamentoBaseType"/>
+                <xs:element name="apertura" type="tutela:AperturaType"/>
+                <xs:element name="trasferimento" type="tutela:TrasferimentoType"/>
+                <xs:element name="ampliamento" type="tutela:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
@@ -53,58 +53,30 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="AperturaBaseType" abstract="true">
+    <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
             <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+            <xs:element name="superficieEsercizio" type="tutela:SuperficieEsercizioBaseType"/>
         </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="AperturaType">
-        <xs:complexContent>
-            <xs:extension base="tutela:AperturaBaseType">
-                <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="xs:decimal"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="TrasferimentoBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>            
-        </xs:sequence>
-    </xs:complexType>
+    </xs:complexType>   
     
     <xs:complexType name="TrasferimentoType">
-        <xs:complexContent>
-            <xs:extension base="tutela:TrasferimentoBaseType">
-                <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="xs:decimal"/>        
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="AmpliamentoBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
+            <xs:element name="superficieEsercizio" type="tutela:SuperficieEsercizioBaseType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
-     
+    
     <xs:complexType name="AmpliamentoType">
-        <xs:complexContent>
-            <xs:extension base="tutela:AmpliamentoBaseType">
-                <xs:sequence>
-                    <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:SuperficieDaABaseType" minOccurs="0"/>
+        </xs:sequence>
     </xs:complexType>
-    
 
-    
+    <!-- ALLEGATI -->    
     <xs:complexType name="AllegatiAutorizzazioneSCIAType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
@@ -155,7 +127,16 @@
     </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
-    
+    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="tutela:SuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="superficieEsercizio" type="suapcommon:SuperficieType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <!-- ENUMERATION -->
 
       

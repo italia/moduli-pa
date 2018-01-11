@@ -49,39 +49,56 @@
             </xs:element> 
         </xs:sequence>  
     </xs:complexType>
-
-    <xs:complexType name="AvvioBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
-            <xs:element name="superficieSomministrazione" type="xs:decimal"/>
-        </xs:sequence>
-    </xs:complexType>
     
     <xs:complexType name="AvvioType">
-        <xs:complexContent>
-            <xs:extension base="somscuoleospetc:AvvioBaseType">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>        
-    </xs:complexType>
-
-    <xs:complexType name="AmpliamentoBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
-        </xs:sequence>
+            <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
+            <xs:element name="superficieSomministrazione" type="somscuoleospetc:SuperficieEsercizioBaseType"/>
+        </xs:sequence>        
     </xs:complexType>
 
     <xs:complexType name="AmpliamentoType">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="superficieAmpliamento" type="suapcommon:SuperficieDaABaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioType">
         <xs:complexContent>
-            <xs:extension base="somscuoleospetc:AmpliamentoBaseType">
-                <xs:sequence/>
+            <xs:extension base="somscuoleospetc:SuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="superficieEsercizio" type="suapcommon:SuperficieType"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
 
+    <!-- BASIC COMPONENTS TYPE -->  
+    <xs:complexType name="TipoEsercizioType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string"/>
+            </xs:choice>
+            <xs:element name="altro" type="somscuoleospetc:TipoEsercizioAltroBaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
 
+    <xs:complexType name="TipoEsercizioAltroBaseType" abstract="true" />
+    <xs:complexType name="TipoEsercizioAltroType">
+        <xs:complexContent>
+            <xs:extension base="somscuoleospetc:TipoEsercizioAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="somscuoleospetc:AllegatiSCIAUnicaType"/>
@@ -89,7 +106,7 @@
             <xs:element name="allegatiAltri" type="somscuoleospetc:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
-
+    
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
@@ -119,21 +136,6 @@
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-
-    <!-- BASIC COMPONENTS TYPE -->  
-    <xs:complexType name="TipoEsercizioType">
-        <xs:choice>
-            <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType">
-                <xs:annotation>
-                    <xs:documentation>nelle scuole, negli ospedali, nelle comunità religiose, in stabilimenti militari delle Forze di polizia e del Corpo nazionale dei vigili del fuoco
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string">
-            </xs:element>
-            <xs:element name="altro" minOccurs="0" type="xs:string"/>
-        </xs:choice>
     </xs:complexType>
 
 </xs:schema>

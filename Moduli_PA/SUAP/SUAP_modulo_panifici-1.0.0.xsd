@@ -40,7 +40,7 @@
             </xs:choice>
             <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
 
-            <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -55,7 +55,7 @@
     <!-- Attività : Apertura -->
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="xs:boolean"/>
+            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="panifici:attivitaCongiuntaVendProdConsPostoBaseType"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
         </xs:sequence>
@@ -65,9 +65,8 @@
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="comuneRilascio" type="xs:string"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="xs:boolean"/>
+            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="panifici:attivitaCongiuntaVendProdConsPostoBaseType"/>
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
         </xs:sequence>        
     </xs:complexType>
@@ -76,13 +75,44 @@
     <xs:complexType name="TrasformazioneType">
         <xs:sequence>
             <xs:element name="protocolloTrasfomazione" type="aggregate:ProtocolloStandardType"/>
-            <xs:choice>
-                <xs:element name="modificheCicloProduttivo"  type="xs:string"/>
-                <xs:element name="trasfCongiuntaVendProdConsPosto" type="panifici:TipoModificaEnum"/>
-                <xs:element name="trasfAltro" type="basic:EmptyType"/>
-            </xs:choice>
+            <xs:element name="modificheCicloProduttivo"  type="panifici:modificheCicloProduttivoBaseType"/>
+            <xs:element name="trasfCongiuntaVendProdConsPosto" type="panifici:TipoModificaEnum"/>
+            <xs:element name="trasfAltro" type="panifici:trasfAltroBaseType"/>
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>    
         </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="attivitaCongiuntaVendProdConsPostoBaseType" abstract="true"/>   
+    <xs:complexType name="attivitaCongiuntaVendProdConsPostoType">
+        <xs:complexContent>
+            <xs:extension base="panifici:attivitaCongiuntaVendProdConsPostoBaseType">
+                <xs:sequence>
+                    <xs:element name="presente" type="xs:boolean" default="false"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="modificheCicloProduttivoBaseType" abstract="true"/>   
+    <xs:complexType name="modificheCicloProduttivoType">
+        <xs:complexContent>
+            <xs:extension base="panifici:modificheCicloProduttivoBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="trasfAltroBaseType" abstract="true"/>   
+    <xs:complexType name="trasfAltroType">
+        <xs:complexContent>
+            <xs:extension base="panifici:trasfAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="presente" type="basic:EmptyType" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <!-- Allegati -->
@@ -133,24 +163,33 @@
     <!-- AGGREGATE SPECIALIZED TYPE -->
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
-            <xs:element name="dichiaranteRequisitiAntimafia" type="suapcommon:RequisitiAntimafiaBaseType"/>
+            <xs:element name="dichiaranteRequisitiAntimafia" type="panifici:RequisitiAntimafiaType"/>
             <xs:element name="responsabileAttivitàProduttiveRequisitiAntimafia" type="suapcommon:ResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
         </xs:choice>  
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
+    <xs:complexType name="RequisitiAntimafiaType">
+        <xs:sequence>
+            <xs:element name="responsabileAttivitaProduttive" type="basic:EmptyType" minOccurs="0" />
+            <xs:element name="altro" type="panifici:AltroStringBaseType"  minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType" abstract="true">
         <xs:sequence>
             <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinaEnum"/>
             <xs:element name="dichConsumoIdrico" type="panifici:ConsumoIdricoEnum"/>
+            <xs:element name="altro" type="panifici:AltroStringBaseType"  minOccurs="0"/>
         </xs:sequence>        
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniType">
+    <xs:complexType name="AltroStringBaseType" abstract="true"/>
+    <xs:complexType name="AltroStringType">
         <xs:complexContent>
-            <xs:extension base="panifici:AltreDichiarazioniBaseType">
+            <xs:extension base="panifici:AltroStringBaseType">
                 <xs:sequence>
-                    <xs:element name="altro" type="xs:string"/>
-                </xs:sequence> 
+                    <xs:element name="descrizione" type="xs:string"  maxOccurs="unbounded"/>  
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

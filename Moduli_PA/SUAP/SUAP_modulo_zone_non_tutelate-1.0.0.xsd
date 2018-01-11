@@ -36,8 +36,8 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="nontutela:AperturaType"/>
-                <xs:element name="trasferimento" type="nontutela:TrasferimentoBaseType"/>
-                <xs:element name="ampliamento" type="nontutela:AmpliamentoBaseType"/>
+                <xs:element name="trasferimento" type="nontutela:TrasferimentoType"/>
+                <xs:element name="ampliamento" type="nontutela:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
@@ -96,59 +96,42 @@
         </xs:sequence>
     </xs:complexType>
         
-    <xs:complexType name="AperturaBaseType">
+    <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
             <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
+            <xs:element name="superficieEsercizio" type="nontutela:SuperficieEsercizioBaseType"/>
         </xs:sequence>
     </xs:complexType>    
-        
-    <xs:complexType name="AperturaType">
-        <xs:complexContent>
-            <xs:extension base="nontutela:AperturaBaseType">
-                <xs:sequence>
-                    <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
-                    <xs:element name="superficieEsercizio" type="xs:decimal"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="TrasferimentoBaseType" abstract="true">
+
+    <xs:complexType name="TrasferimentoType">
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>            
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="TrasferimentoType">
-        <xs:complexContent>
-            <xs:extension base="nontutela:TrasferimentoBaseType">
-                <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="xs:decimal"/>        
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="AmpliamentoBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/> 
+            <xs:element name="superficieEsercizio" type="nontutela:SuperficieEsercizioBaseType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AmpliamentoType">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:SuperficieDaABaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioType">
         <xs:complexContent>
-            <xs:extension base="nontutela:AmpliamentoBaseType">
+            <xs:extension base="nontutela:SuperficieEsercizioBaseType">
                 <xs:sequence>
-                    <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
+                    <xs:element name="superficieEsercizio" type="suapcommon:SuperficieType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    <!-- BASIC COMPONENTS TYPE -->
-    
     <!-- ENUMERATION -->
 
     

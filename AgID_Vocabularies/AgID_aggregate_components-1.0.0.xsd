@@ -134,6 +134,7 @@
             <xs:element name="codiceRegistro" type="xs:string" minOccurs="0"/>
             <xs:element name="numeroProtocollo" type="xs:string"/>
             <xs:element name="dataRegistrazione" type="xs:date"/>
+            <xs:element name="comuneRilascio" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
