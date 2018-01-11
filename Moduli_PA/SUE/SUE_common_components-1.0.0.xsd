@@ -9,7 +9,6 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
@@ -185,23 +184,11 @@
     </xs:complexType>
 
     <!-- Reference suecommon:LocalizzazioneInterventoType -->
-    <xs:complexType name="LocalizzazioneInterventoBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
-            <xs:element name="datiCatastali" type="moduli:DatiCatastaliBaseType"/>
-            <xs:element name="destinazioneDUso" type="xs:string"/>
-        </xs:sequence>      
-    </xs:complexType>
-    
     <xs:complexType name="LocalizzazioneInterventoType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:LocalizzazioneInterventoBaseType">
-                <xs:sequence>
-                    <xs:group ref="suecommon:LocalizzazioneInterventoGroup"/>
-                    <xs:element name="coordinate" type="suecommon:CoordinateBaseType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:group ref="suecommon:LocalizzazioneInterventoGroup"/>
+            <xs:element name="coordinate" type="suecommon:CoordinateBaseType"/>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="CoordinateBaseType" abstract="true"/>
@@ -222,6 +209,7 @@
             <xs:element name="destinazioneDUso" type="xs:string"/>
         </xs:sequence> 
     </xs:group>
+
   
     <xs:complexType name="UbicazioneImmobileType">
         <xs:complexContent>

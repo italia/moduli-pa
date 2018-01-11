@@ -62,13 +62,9 @@
     </xs:complexType>
 
     <xs:complexType name="LocalizzazioneInterventoType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:LocalizzazioneInterventoBaseType">
-                <xs:sequence>
-                    <xs:group ref="suecommon:LocalizzazioneInterventoGroup"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:group ref="suecommon:LocalizzazioneInterventoGroup"/>
+        </xs:sequence>
     </xs:complexType>
 
     <!-- Reference scia:TabellaAllegatiType -->
