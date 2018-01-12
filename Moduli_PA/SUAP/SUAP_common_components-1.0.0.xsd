@@ -146,7 +146,7 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:OccupazioniMerciIngombrantiNonAlimentariBaseType">
                 <xs:sequence>
-                    <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:SuperficieType"/>
+                    <xs:element name="merciIngombranti" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -210,8 +210,18 @@
         </xs:complexContent>
     </xs:complexType>    
     
+    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:SuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="mq" minOccurs="0" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="ModalitaVenditaBaseType" abstract="true"/>
-             
     <xs:complexType name="ModalitaVenditaType">
         <xs:complexContent>
             <xs:extension base="suapcommon:ModalitaVenditaBaseType">
@@ -276,29 +286,29 @@
             <xs:element name="mq" minOccurs="0" type="xs:decimal"/>                                
         </xs:sequence>
     </xs:complexType>
-        
-    <xs:complexType name="RequisitiAntimafiaBaseType" abstract="true"/>
-    <xs:complexType name="RequisitiAntimafiaType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:RequisitiAntimafiaBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
+    <xs:complexType name="RequisitiAntimafiaType">
+        <xs:sequence>
+            <xs:element name="responsabileAttivitaProduttive" type="basic:EmptyType" minOccurs="0" />
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+   
     <xs:complexType name="ResponsabileAttivitàProduttiveRequisitiAntimafiaType">
         <xs:sequence>
             <xs:element name="responsabile" type="aggregate:PersonaAnagraficaType"/>
             <xs:element name="inQualita">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="societa" type="xs:string"/>
+                        <xs:choice>
+                            <xs:element name="societa" type="xs:string"/>
+                            <xs:element name="dittaindividuale" type="xs:string"/>
+                        </xs:choice>
+                        <xs:element name="data" type="xs:date"/> <!-- -->
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="dichiarazione" type="suapcommon:RequisitiAntimafiaBaseType"/>            
+            <xs:element name="dichiarazione" type="suapcommon:AltreDichiarazioniAltroBaseType"/>     <!-- -->        
         </xs:sequence>
     </xs:complexType>
     

@@ -54,7 +54,7 @@
         <xs:sequence>
             <xs:element name="tipoAttivita" type="tintolav:TipoAttivitaEnum"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
-            <xs:element name="settoriMerceologici" type="tintolav:SuperficieEsercizioAttivitaBaseType"/>
+            <xs:element name="superficieEsercizio" type="tintolav:SuperficieEsercizioAttivitaBaseType"/>
             <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>

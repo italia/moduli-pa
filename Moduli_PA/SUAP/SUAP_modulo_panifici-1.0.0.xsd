@@ -76,7 +76,7 @@
         <xs:sequence>
             <xs:element name="protocolloTrasfomazione" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="modificheCicloProduttivo"  type="panifici:modificheCicloProduttivoBaseType"/>
-            <xs:element name="trasfCongiuntaVendProdConsPosto" type="panifici:TipoModificaEnum"/>
+            <xs:element name="trasfCongiuntaVendProdConsPosto" type="panifici:TipoModificaBaseType"/>
             <xs:element name="trasfAltro" type="panifici:trasfAltroBaseType"/>
             <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>    
         </xs:sequence>        
@@ -104,6 +104,20 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="TipoModificaBaseType" abstract="true"/>   
+    <xs:complexType name="TipoModificaType">
+        <xs:complexContent>
+            <xs:extension base="panifici:TipoModificaBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="aggiunta" type="basic:EmptyType" minOccurs="0" />
+                        <xs:element name="eliminata" type="basic:EmptyType" minOccurs="0" />
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="trasfAltroBaseType" abstract="true"/>   
     <xs:complexType name="trasfAltroType">
         <xs:complexContent>
@@ -160,38 +174,20 @@
         </xs:sequence>                                
     </xs:complexType>
     
-    <!-- AGGREGATE SPECIALIZED TYPE -->
+    <!-- BASIC COMPONENTS TYPE -->
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
-            <xs:element name="dichiaranteRequisitiAntimafia" type="panifici:RequisitiAntimafiaType"/>
+            <xs:element name="dichiaranteRequisitiAntimafia" type="suapcommon:RequisitiAntimafiaType"/>
             <xs:element name="responsabileAttivitàProduttiveRequisitiAntimafia" type="suapcommon:ResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
         </xs:choice>  
-    </xs:complexType>
-    
-    <xs:complexType name="RequisitiAntimafiaType">
-        <xs:sequence>
-            <xs:element name="responsabileAttivitaProduttive" type="basic:EmptyType" minOccurs="0" />
-            <xs:element name="altro" type="panifici:AltroStringBaseType"  minOccurs="0"/>
-        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AltreDichiarazioniType" abstract="true">
         <xs:sequence>
             <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinaEnum"/>
             <xs:element name="dichConsumoIdrico" type="panifici:ConsumoIdricoEnum"/>
-            <xs:element name="altro" type="panifici:AltroStringBaseType"  minOccurs="0"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>
         </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltroStringBaseType" abstract="true"/>
-    <xs:complexType name="AltroStringType">
-        <xs:complexContent>
-            <xs:extension base="panifici:AltroStringBaseType">
-                <xs:sequence>
-                    <xs:element name="descrizione" type="xs:string"  maxOccurs="unbounded"/>  
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="CarattereEsercizioType">        
@@ -201,10 +197,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <!-- BASIC COMPONENTS TYPE -->
-    
     <!-- ENUMERATION -->
-    
     <xs:simpleType name="ConsumoFarinaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="MINORE_UGUALE_300_KG"/>
@@ -220,11 +213,6 @@
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="TipoModificaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="AGGIUNTA"/>
-            <xs:enumeration value="ELIMINATA"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>

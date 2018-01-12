@@ -102,7 +102,7 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="presso" type="xs:string"/>
-            <xs:element name="settoriMerceologiciSuperficie" type="spacci:SettoriMerceologiciSuperficieType"/>
+            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieType"/>
         </xs:sequence>        
     </xs:complexType>
     
@@ -111,7 +111,7 @@
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
             <xs:element name="presso" type="xs:string"/>
-            <xs:element name="settoriMerceologiciSuperficie" type="spacci:SettoriMerceologiciSuperficieType"/>    
+            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieType"/>    
         </xs:sequence>        
     </xs:complexType>
     
@@ -123,7 +123,6 @@
            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType"/>
        </xs:sequence> 
     </xs:complexType>
-    
        
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
@@ -132,15 +131,8 @@
         </xs:sequence>
     </xs:complexType>
     
-    
     <!-- BASIC COMPONENTS TYPE -->
-    <xs:complexType name="SettoriMerceologiciSuperficieType">
-        <xs:sequence>
-            <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
-            <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
-            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
-        </xs:sequence>
-    </xs:complexType>
+
     
     <!-- ENUMERATION -->
    

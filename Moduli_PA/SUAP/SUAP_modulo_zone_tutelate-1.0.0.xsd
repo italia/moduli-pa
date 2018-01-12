@@ -65,7 +65,7 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-            <xs:element name="superficieEsercizio" type="tutela:SuperficieEsercizioBaseType" minOccurs="0"/>
+            <xs:element name="superficieEsercizio" type="suapcommon:SuperficieEsercizioBaseType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -127,16 +127,7 @@
     </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
-    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
-    <xs:complexType name="SuperficieEsercizioType">
-        <xs:complexContent>
-            <xs:extension base="tutela:SuperficieEsercizioBaseType">
-                <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="suapcommon:SuperficieType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+
     <!-- ENUMERATION -->
 
       

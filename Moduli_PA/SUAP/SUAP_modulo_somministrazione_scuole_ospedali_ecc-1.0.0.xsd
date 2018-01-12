@@ -53,7 +53,7 @@
     <xs:complexType name="AvvioType">
         <xs:sequence>
             <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
-            <xs:element name="superficieSomministrazione" type="somscuoleospetc:SuperficieEsercizioBaseType"/>
+            <xs:element name="superficieSomministrazione" type="suapcommon:SuperficieEsercizioBaseType"/>
         </xs:sequence>        
     </xs:complexType>
 
@@ -64,38 +64,17 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
-    <xs:complexType name="SuperficieEsercizioType">
-        <xs:complexContent>
-            <xs:extension base="somscuoleospetc:SuperficieEsercizioBaseType">
-                <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="suapcommon:SuperficieType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-
     <!-- BASIC COMPONENTS TYPE -->  
     <xs:complexType name="TipoEsercizioType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string"/>
+                <xs:choice>
+                    <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string"/>
+                </xs:choice>
+                <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
             </xs:choice>
-            <xs:element name="altro" type="somscuoleospetc:TipoEsercizioAltroBaseType" minOccurs="0"/>
         </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="TipoEsercizioAltroBaseType" abstract="true" />
-    <xs:complexType name="TipoEsercizioAltroType">
-        <xs:complexContent>
-            <xs:extension base="somscuoleospetc:TipoEsercizioAltroBaseType">
-                <xs:sequence>
-                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
 
     <!-- ALLEGATI -->

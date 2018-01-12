@@ -52,27 +52,20 @@
     </xs:complexType>    
     
     <xs:complexType name="AvvioType">
-        <xs:complexContent>
-            <xs:extension base="somareeserviziostazioni:TipoEsercizioType">
-                <xs:sequence>
-                    <xs:element name="superficieSomministrazione" type="somareeserviziostazioni:SuperficieEsercizioBaseType" />
-                    <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneBaseType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>       
-    </xs:complexType>
-   
-    <xs:complexType name="TipoEsercizioType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
-                <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
-                <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
-                <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
-            </xs:choice>
-            <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>    
+                <xs:choice>
+                    <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
+                    <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
+                    <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
+                    <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
+                </xs:choice>
+                <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType" minOccurs="0"/>
+            </xs:choice>    
+            <xs:element name="superficieSomministrazione" type="suapcommon:SuperficieEsercizioBaseType" />
+            <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneBaseType"/>
+        </xs:sequence>    
+    </xs:complexType>
     
     <xs:complexType name="TipoEsercizioAltroBaseType" abstract="true" />
     <xs:complexType name="TipoEsercizioAltroType">
@@ -80,17 +73,6 @@
             <xs:extension base="somareeserviziostazioni:TipoEsercizioAltroBaseType">
                 <xs:sequence>
                     <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
-    <xs:complexType name="SuperficieEsercizioType">
-        <xs:complexContent>
-            <xs:extension base="somareeserviziostazioni:SuperficieEsercizioBaseType">
-                <xs:sequence>
-                    <xs:element name="superficieEsercizio" type="suapcommon:SuperficieType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
