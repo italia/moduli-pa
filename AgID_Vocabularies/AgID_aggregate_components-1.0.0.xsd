@@ -134,6 +134,7 @@
             <xs:element name="codiceRegistro" type="xs:string" minOccurs="0"/>
             <xs:element name="numeroProtocollo" type="xs:string"/>
             <xs:element name="dataRegistrazione" type="xs:date"/>
+            <xs:element name="comuneRilascio" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -362,5 +363,15 @@
                 <xs:element name="annoConclusione" type="xs:integer"/>
             </xs:sequence>
     </xs:complexType>  
+    
+    <xs:complexType name="PeriodoType">
+        <xs:annotation>
+            <xs:documentation>Definisce un intervallo temporale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+           <xs:element name="da" type="xs:date"/>
+           <xs:element name="a" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
     
 </xs:schema>

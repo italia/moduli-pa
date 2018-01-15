@@ -9,8 +9,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_a_domicilio"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ 
+            PER L’ESERCIZIO DI VENDITA PRESSO IL DOMICILIO DEI CONSUMATORI
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
@@ -19,8 +25,9 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- // Modulo sommin a domicilio ## internal code ref 016 // -->
-    <xs:element name="ModuloSomministrzioneDomicilio" type="sommdom:ModuloSommaDomicilioType"/>
     
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSomministrzioneDomicilio" type="sommdom:ModuloSommaDomicilioType"/>
     
     <xs:complexType name="ModuloSommaDomicilioType" >
         <xs:sequence>
@@ -28,7 +35,7 @@
             <xs:element name="integrazioneAnagraficaCottura" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="integrazioneAnagraficaMagazzino" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="sommdom:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="sommdom:TabellaAllegatiType"/>                 
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -40,8 +47,7 @@
        </xs:sequence>
     </xs:complexType>
     
-    
-    
+
     
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
@@ -74,18 +80,5 @@
     </xs:complexType>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence />                
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="sommdom:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
 </xs:schema>

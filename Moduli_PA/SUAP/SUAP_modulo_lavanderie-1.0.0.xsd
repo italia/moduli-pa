@@ -9,8 +9,13 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_tintolavanderie"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ DI TINTOLAVANDERIA / LAVANDERIA SELF-SERVICE A GETTONI            
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
@@ -49,8 +54,8 @@
         <xs:sequence>
             <xs:element name="tipoAttivita" type="tintolav:TipoAttivitaEnum"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
-            <xs:element name="settoriMerceologici" type="tintolav:SuperficieEsercizioAttivitaType"/>
-            <xs:element name="carattereEsercizio" type="tintolav:CarattereEsercizioType"/>
+            <xs:element name="superficieEsercizio" type="tintolav:SuperficieEsercizioAttivitaBaseType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -212,74 +217,41 @@
     
     <!-- Dichiarazioni -->
     <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="tintolav:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string"/>
-                </xs:sequence> 
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="dicConsumoFarina" type="tintolav:QtaBiancheriaEnum"/>
-       </xs:sequence>        
-    </xs:complexType>
-    
-   
-    
-    
-    
-  
-    <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence>
-            <xs:element name="tipo" type="tintolav:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
+            <xs:choice>
+                <xs:element name="BiancheriaMINORE_UGUALE_100_KG" type="basic:EmptyType"/>
+                <xs:element name="BiancheriaMAGGIORE_100_KG"      type="tintolav:BiancheriaMAGGIORE_100_KGBaseType"/>
+            </xs:choice>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" />
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="SuperficieEsercizioAttivitaType">
+    <xs:complexType name="BiancheriaMAGGIORE_100_KGBaseType" abstract="true"/>
+    <xs:complexType name="BiancheriaMAGGIORE_100_KGType">
         <xs:complexContent>
-            <xs:extension base="tintolav:SettoriMerceologiciSuperficieBaseType">
+            <xs:extension base="tintolav:BiancheriaMAGGIORE_100_KGBaseType">
                 <xs:sequence>
-                    <xs:element name="tintolavanderia_lavanderia" minOccurs="0" type="xs:decimal"/>
-                    <xs:element name="altriusi" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="BiancheriaMAGGIORE_100_KG" type="basic:EmptyType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
-        </xs:sequence>
+  
+    <xs:complexType name="SuperficieEsercizioAttivitaBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioAttivitaType">
+        <xs:complexContent>
+            <xs:extension base="tintolav:SuperficieEsercizioAttivitaBaseType">
+                <xs:sequence>
+                    <xs:element name="tintolavanderia_lavanderia" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="altriusi" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
     </xs:complexType>
     
-    
     <!-- ENUMERATION -->
-    
-    <xs:simpleType name="QtaBiancheriaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="MINORE_UGUALE_100_KG"/>
-            <xs:enumeration value="MAGGIORE_100_KG"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
     <xs:simpleType name="TipoAttivitaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Tintolavanderia"/>

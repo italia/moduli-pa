@@ -9,14 +9,21 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_acconciatori_estetisti"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DELL’ATTIVITÀ DI ACCONCIATORE E/O ESTETISTA
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo modulo_acconciatori_estetisti ## internal code ref 009 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloAcconciatoriEstetisti" type="acconcestet:ModuloAcconciatoriEstetistiType"/>
@@ -30,8 +37,10 @@
                 <xs:element name="apertura" type="acconcestet:AperturaType"/>
                 <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
             </xs:choice>
+            <!-- DICHIARAZIONI -->
             <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
+            <!-- ALLEGATI -->
             <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -97,11 +106,23 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:group ref="acconcestet:attivitaGroup"/>
-            <xs:element name="superficeComplessiva" type="xs:decimal"/>
-            <xs:element name="superficeAdibitaAttivita" type="xs:decimal"/>
+            <xs:element name="superficeComplessiva" type="acconcestet:superficeComplessivaBaseType" />
+            <xs:element name="superficeAdibitaAttivita" type="acconcestet:superficeComplessivaBaseType" />
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
-            <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaType"/>
+            <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaBaseType"/>
        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="superficeComplessivaBaseType" abstract="true" />
+    <xs:complexType name="superficeComplessivaType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:superficeComplessivaBaseType">
+                <xs:sequence>
+                    <xs:element name="mq" type="xs:decimal"/>        
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="TrasferimentoType">
@@ -164,37 +185,33 @@
     </xs:complexType>
     
    
+    <xs:complexType name="AttivitaEsercitaBaseType" abstract="true" />
     <xs:complexType name="AttivitaEsercitaType">
-        <xs:choice>
-            <xs:element name="unicaPrevalente" type="basic:EmptyType"/>
-            <xs:element name="svoltaCongiutamente">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="attivita" type="xs:string"/>
-                        <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:choice>
+        <xs:complexContent>
+            <xs:extension base="acconcestet:AttivitaEsercitaBaseType">
+                <xs:choice>
+                    <xs:element name="unicaPrevalente" type="basic:EmptyType"/>
+                    <xs:element name="svoltaCongiutamente">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="attivita" type="xs:string"/>
+                                <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>                
     </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true" >
+
+    <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
             <xs:choice>
                 <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType"/>
                 <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType"/>
-            </xs:choice>         
-        </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="acconcestet:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>  
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+            </xs:choice> 
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+        </xs:sequence>  
     </xs:complexType>
     
     

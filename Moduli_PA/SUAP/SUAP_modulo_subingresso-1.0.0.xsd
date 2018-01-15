@@ -9,9 +9,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_subingresso"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
    
+    <xs:annotation>
+        <xs:documentation>
+            COMUNICAZIONE PER IL SUBINGRESSO IN ATTIVITÀ
+        </xs:documentation>
+    </xs:annotation>
+    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
@@ -108,7 +113,7 @@
         
     <xs:complexType name="AltreDichiarazioniType" >
         <xs:sequence>
-            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum"/>
+            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaType"/>
         </xs:sequence>        
     </xs:complexType>     
         

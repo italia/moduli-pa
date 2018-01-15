@@ -9,8 +9,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_permesso_costruire"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            RICHIESTA DI PERMESSO DI COSTRUIRE
+            (art. 20, d.P.R. 6 giugno 2001, n. 380 – artt. 7, d.P.R. 7 settembre 2010, n. 160)
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
@@ -35,8 +41,8 @@
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
-            <xs:element name="calcoloContributoCostruzione" type="permcostr:CalcoloContributoBaseType"/>
-            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
+            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="tecniciIncaricati" type="permcostr:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
             
@@ -104,11 +110,9 @@
     </xs:complexType>
 
     <!-- Reference permcostr:CalcoloContributoBaseType -->
-    <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
-    
     <xs:complexType name="CalcoloContributoType">
         <xs:complexContent>
-            <xs:extension base="permcostr:CalcoloContributoBaseType">
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
                 <xs:sequence>
                     <xs:element name="contributo" minOccurs="0">
                         <xs:complexType>
@@ -173,6 +177,15 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
+    
+    <!-- Reference suecommon:TecniciIncaricatiDeiLavoriType -->  
+    <xs:complexType name="TecniciIncaricatiDeiLavoriType">
+        <xs:sequence>
+            <xs:element name="altriTecniciDaSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="altriTecniciIndividuatiPrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
     
     <!-- Reference permcostr:AllegatiPermessoCostruireType -->
     <xs:complexType name="AllegatiPermessoCostruireType">

@@ -9,14 +9,21 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_apparecchi_automatici"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
-    
+
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI VENDITA MEDIANTE APPARECCHI AUTOMATICI IN ALTRI ESERCIZI COMMERCIALI GIÀ ABILITATI O IN ALTRE STRUTTURE E/O SU AREA PUBBLICA
+        </xs:documentation>
+    </xs:annotation>
+
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/> 
+    
+    <!-- // Modulo modulo_apparecchi_automatici ## internal code ref 004 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloApparecchiAutomatici" type="appauto:ModuloApparecchiAutomaticiType"/>
@@ -30,7 +37,7 @@
                 <xs:element name="apertura" type="appauto:AperturaType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
-            <xs:element name="altreDichiarazioni" type="appauto:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="appauto:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -41,21 +48,6 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence>
-        </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="appauto:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="AperturaType">
