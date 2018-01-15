@@ -38,7 +38,7 @@
             <!-- DICHIARAZIONI -->
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>            
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>
-            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
             <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
