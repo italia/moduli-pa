@@ -43,7 +43,7 @@
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
             <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
             <xs:element name="tecniciIncaricati" type="permcostr:TecniciIncaricatiDeiLavoriType"/>
-            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
+            <xs:element name="impreseEsecutrici" type="permcostr:ImpreseEsecutriciDeiLavoriType"/>           
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
             
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
@@ -186,6 +186,17 @@
         </xs:sequence>
     </xs:complexType>
     
+    <!-- Reference impl of suecommon:ImpreseEsecutriciDeiLavoriBaseType -->  
+    <xs:complexType name="ImpreseEsecutriciDeiLavoriType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ImpreseEsecutriciDeiLavoriBaseType">
+                <xs:choice>
+                    <xs:element name="daSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="primaInizioLavori" type="basic:EmptyType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     <!-- Reference permcostr:AllegatiPermessoCostruireType -->
     <xs:complexType name="AllegatiPermessoCostruireType">
