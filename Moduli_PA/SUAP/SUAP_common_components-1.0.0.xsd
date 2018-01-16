@@ -289,7 +289,6 @@
     
     <xs:complexType name="RequisitiAntimafiaType">
         <xs:sequence>
-            <xs:element name="responsabileAttivitaProduttive" type="basic:EmptyType" minOccurs="0" />
             <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
