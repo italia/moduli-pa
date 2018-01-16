@@ -281,12 +281,6 @@
         </xs:complexContent>                
     </xs:complexType> 
     
-    <xs:complexType name="SuperficieType">
-        <xs:sequence>
-            <xs:element name="mq" minOccurs="0" type="xs:decimal"/>                                
-        </xs:sequence>
-    </xs:complexType>
-    
     <xs:complexType name="RequisitiAntimafiaType">
         <xs:sequence>
             <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>

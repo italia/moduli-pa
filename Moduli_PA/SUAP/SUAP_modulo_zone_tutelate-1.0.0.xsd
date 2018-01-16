@@ -57,7 +57,7 @@
         <xs:sequence>
             <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
             <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
-            <xs:element name="superficieEsercizio" type="tutela:SuperficieEsercizioBaseType"/>
+            <xs:element name="superficieEsercizio" type="suapcommon:SuperficieEsercizioBaseType"/>
         </xs:sequence>
     </xs:complexType>   
     
