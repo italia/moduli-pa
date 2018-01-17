@@ -56,8 +56,8 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="attivitaCongiuntaVendProdConsPosto" type="panifici:attivitaCongiuntaVendProdConsPostoBaseType"/>
-            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
-            <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -67,7 +67,7 @@
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
             <xs:element name="attivitaCongiuntaVendProdConsPosto" type="panifici:attivitaCongiuntaVendProdConsPostoBaseType"/>
-            <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
         </xs:sequence>        
     </xs:complexType>
     
@@ -78,7 +78,7 @@
             <xs:element name="modificheCicloProduttivo"  type="panifici:modificheCicloProduttivoBaseType"/>
             <xs:element name="trasfCongiuntaVendProdConsPosto" type="panifici:TipoModificaBaseType"/>
             <xs:element name="trasfAltro" type="panifici:trasfAltroBaseType"/>
-            <xs:element name="carattereEsercizio" type="panifici:CarattereEsercizioType"/>    
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>    
         </xs:sequence>        
     </xs:complexType>
     
@@ -182,23 +182,12 @@
         </xs:choice>  
     </xs:complexType>
     
-<<<<<<< HEAD
-    <xs:complexType name="AltreDichiarazioniType" abstract="true">
-=======
     <xs:complexType name="AltreDichiarazioniType">
->>>>>>> 46b3450ee68ada5bfaa2f114baf4cf5c4085d615
         <xs:sequence>
             <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinaEnum"/>
             <xs:element name="dichConsumoIdrico" type="panifici:ConsumoIdricoEnum"/>
             <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>
         </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="CarattereEsercizioType">        
-        <xs:sequence><!-- scelta multipla -->
-            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
-            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" />
-        </xs:sequence>
     </xs:complexType>
     
     <!-- ENUMERATION -->

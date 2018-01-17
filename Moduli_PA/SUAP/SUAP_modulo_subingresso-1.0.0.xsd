@@ -81,6 +81,7 @@
         </xs:sequence>
     </xs:complexType>
     
+    <!-- Subingresso -->
     <xs:complexType name="SubingressoType">
         <xs:sequence>
             <xs:element name="attivita" type="xs:string"/>

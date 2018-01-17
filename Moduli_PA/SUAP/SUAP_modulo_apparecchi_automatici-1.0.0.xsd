@@ -52,7 +52,7 @@
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="settoriMerceologici" type="appauto:SettoriMerceologiciEnum"/>
+            <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciType"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -125,11 +125,6 @@
     <!-- BASIC COMPONENTS TYPE -->
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="SettoriMerceologiciEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="ALIMENTARE"/>
-            <xs:enumeration value="NON_ALIMENTARE"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>

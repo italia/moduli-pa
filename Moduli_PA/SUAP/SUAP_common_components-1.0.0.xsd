@@ -67,16 +67,21 @@
     </xs:complexType>
   
     <xs:complexType name="InCentroCommercialeBaseType" abstract="true"/>   
-        
     <xs:complexType name="InCentroCommercialeType">
-       <xs:complexContent>
-           <xs:extension base="suapcommon:InCentroCommercialeBaseType">
-               <xs:sequence>
-                   <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
-               </xs:sequence> 
-               <xs:attribute name="presente" type="xs:boolean" default="false"/>
-           </xs:extension>
-       </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="suapcommon:InCentroCommercialeBaseType">
+                <xs:choice>
+                    <xs:element name="si"  minOccurs="0" maxOccurs="1" >
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="no" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true" />
@@ -84,8 +89,8 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
-                        <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
-                        <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
                     <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
@@ -119,8 +124,8 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciBaseType">
                 <xs:sequence>
-                    <xs:element name="alimentare" type="xs:boolean" default="false"/>
-                    <xs:element name="nonAlimentare" type="xs:boolean" default="false"/>
+                    <xs:element name="alimentare"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="nonAlimentare"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
@@ -221,24 +226,24 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="ModalitaVenditaBaseType" abstract="true"/>
-    <xs:complexType name="ModalitaVenditaType">
+    <xs:complexType name="ModalitaVenditaSuperficieBaseType" abstract="true" />
+    <xs:complexType name="ModalitaVenditaSuperficieType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:ModalitaVenditaBaseType">
-                <xs:sequence>                    
-                    <xs:element name="superficieMQ">
-                        <xs:complexType>
-                            <xs:simpleContent>
-                                <xs:extension base="xs:decimal">
-                                    <xs:attribute name="modalita" type="suapcommon:ModalitaVenditaEnum"/> 
-                                </xs:extension>
-                            </xs:simpleContent>
-                        </xs:complexType>                                                     
-                    </xs:element>                                              
-                </xs:sequence>       
+            <xs:extension base="suapcommon:ModalitaVenditaSuperficieBaseType">
+                <xs:sequence>
+                    <xs:element name="dettaglio" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="dettaglioIngrosso" minOccurs="0" type="xs:decimal"/>
+                </xs:sequence>
             </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>    
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    <xs:complexType name="ModalitaVenditaType">
+        <xs:sequence>
+            <xs:element name="dettaglio"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="dettaglioIngrosso"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
     
     <xs:complexType name="TrasferimentoDaAType">
         <xs:sequence>
@@ -813,9 +818,11 @@
     
     <!-- IMPLEMENTATO NELL'IPOTESI DI SCELTA MULTIPLA, DA VERIFICA SE INVECE SCELTA SINGOLA IN QUESTO CASO SEMPLIFICARE CON ENUMERATION -->
     <xs:complexType name="VariazioniTabelleSpecialiType">
-        <xs:attribute name="aggiunta" type="xs:boolean" default="false"/>
-        <xs:attribute name="eliminazione" type="xs:boolean" default="false"/>
-        <xs:attribute name="sostituzione" type="xs:boolean" default="false"/>
+        <xs:sequence>
+        <xs:element name="aggiunta" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        <xs:element name="eliminazione" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        <xs:element name="sostituzione" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AltreDichiarazioniType">
@@ -1230,12 +1237,7 @@
     </xs:element>
 
     <!-- ENUMERATION -->   
-    <xs:simpleType name="ModalitaVenditaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DETTAGLIO"/>
-            <xs:enumeration value="DETTAGLIO_INGROSSO"/>            
-        </xs:restriction>
-    </xs:simpleType>
+
     
     <xs:simpleType name="InQualitaEnum">
         <xs:restriction base="xs:string">

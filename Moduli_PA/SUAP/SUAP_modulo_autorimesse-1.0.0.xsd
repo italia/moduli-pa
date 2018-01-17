@@ -53,6 +53,7 @@
         </xs:sequence>
     </xs:complexType>
     
+    <!-- Scelta Singola -->
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
             <xs:choice>
@@ -61,7 +62,7 @@
                 <xs:element name="fascia1000mq3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                 <xs:element name="fasciaSuperiore3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             </xs:choice>
-            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" />
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
         </xs:sequence>
     </xs:complexType>
     

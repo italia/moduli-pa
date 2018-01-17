@@ -109,7 +109,7 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="tipoEsercizio" type="vicinato:TipoEsercizioEnum"/>
-            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaBaseType"/>
+            <xs:element name="modalitaVenditaSuperficie" type="suapcommon:ModalitaVenditaSuperficieBaseType"/>
             <xs:element name="carattereEsercizio" type="vicinato:CarattereEsercizioType"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>

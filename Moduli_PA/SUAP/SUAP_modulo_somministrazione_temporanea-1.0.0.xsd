@@ -35,12 +35,12 @@
             <xs:element name="manifestazione">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="tipologia" type="temporanea:TipologiaManifestazioneEnum"/>
+                        <xs:element name="tipologia" type="temporanea:TipologiaManifestazioneType"/>
                         <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
                     </xs:sequence>                   
                 </xs:complexType>                 
             </xs:element>
-            <xs:element name="modalitaSomministrazione" type="temporanea:ModalitaSomministrazioneEnum"/>
+            <xs:element name="modalitaSomministrazione" type="temporanea:ModalitaSomministrazioneType"/>
             <xs:element name="periodoSomministrazione">
                 <xs:complexType>
                     <xs:sequence>
@@ -58,6 +58,25 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="TipologiaManifestazioneType">
+        <xs:choice>
+            <xs:element name="sagra" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="fiera" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="religiosaTradizionaleCulturale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="eventoLocale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:choice>
+   </xs:complexType>
+   
+    <xs:complexType name="ModalitaSomministrazioneType">
+        <xs:sequence>
+            <xs:element name="apertoPrivata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="apertoPubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="internoPrivata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="internoPubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -91,22 +110,6 @@
     <!-- BASIC COMPONENTS TYPE -->
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="TipologiaManifestazioneEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="SAGRA"/>
-            <xs:enumeration value="FIERA"/>                    
-            <xs:enumeration value="RELIGIOSO_TRADIZIONALE"/>
-            <xs:enumeration value="EVENTO_LOCALE"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="ModalitaSomministrazioneEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="APERTO_AREA_PRIVATA"/>
-            <xs:enumeration value="APERTO_AREA_PUBBLICA"/>
-            <xs:enumeration value="EDIFICIO_AREA_PRIVATA"/>
-            <xs:enumeration value="EDIFICIO_AREA_PUBBLICA"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>
