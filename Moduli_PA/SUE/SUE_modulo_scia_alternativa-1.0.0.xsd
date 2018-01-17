@@ -43,13 +43,13 @@
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>            
             <xs:element name="presentazione" type="scialt:PresentazioneBaseType"/>            
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>            
-            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
             <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
             <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
             <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
-            <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
+            <xs:element name="obblighiSaluteSicurezza" type="scialt:ObblighiSaluteSicurezzaType"/>
             <xs:element name="note" type="xs:string"/> 
             
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
@@ -160,6 +160,33 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>    
+    
+    <!-- Reference scialt:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:choice>
+            <xs:element name="nonRicade" type="basic:EmptyType"/>
+            <xs:element name="ricade" >
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="suecommon:ObblighiSaluteSicurezzaEntitaCantiereGroup"/>
+                        <xs:choice>
+                            <xs:element name="noNotifica" minOccurs="0" type="basic:EmptyType"/>
+                            <xs:element name="notifica" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:choice>
+                                        <xs:element name="allega" minOccurs="0" type="basic:AbstractBaseType"/> 
+                                        <xs:element name="invioPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/> 
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricadeRiservaPresentaPrimaInizioLavori" type="basic:AbstractBaseType"/>
+        </xs:choice>        
+    </xs:complexType>
+    
                 
     <!-- Reference scialt:TipoInterventiOpere -->
     <xs:complexType name="TipoInterventiOpere">

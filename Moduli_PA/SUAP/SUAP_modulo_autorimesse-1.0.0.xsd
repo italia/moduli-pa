@@ -55,7 +55,12 @@
     
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
-            <xs:element name="superficieComplessivaCoperta" type="autorimesse:SuperficieComplessivaCopertaEnum"/>
+            <xs:choice>
+                <xs:element name="fascia0mq300mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="fascia300mq1000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="fascia1000mq3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="fasciaSuperiore3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            </xs:choice>
             <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" />
         </xs:sequence>
     </xs:complexType>
@@ -134,14 +139,6 @@
 
 
     <!-- ENUMERATION -->
-    
-    <xs:simpleType name="SuperficieComplessivaCopertaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="non superiore a 300 mq"/>
-            <xs:enumeration value="oltre 300 mq e fino a 1.000 mq"/> 
-            <xs:enumeration value="oltre 1.000 mq e fino a 3.000 mq"/>
-            <xs:enumeration value="superiore a 3.000 mq"/>
-        </xs:restriction>
-    </xs:simpleType>
+
 
 </xs:schema>

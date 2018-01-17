@@ -182,7 +182,11 @@
         </xs:choice>  
     </xs:complexType>
     
+<<<<<<< HEAD
     <xs:complexType name="AltreDichiarazioniType" abstract="true">
+=======
+    <xs:complexType name="AltreDichiarazioniType">
+>>>>>>> 46b3450ee68ada5bfaa2f114baf4cf5c4085d615
         <xs:sequence>
             <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinaEnum"/>
             <xs:element name="dichConsumoIdrico" type="panifici:ConsumoIdricoEnum"/>

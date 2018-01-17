@@ -44,10 +44,10 @@
             <!-- Comunicazioni -->
             <xs:element name="presentazioneInizioLavori" type="cila:InterventiSoggettiACILABaseType"/>
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>
-            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
             <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
             <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
-            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>
+            <xs:element name="impreseEsecutrici" type="suecommon:ComunicazioniImpreseEsecutriciDeiLavoriType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
             <!-- Dichiarazioni  -->
             <xs:element name="tipoDiIntervento" type="cila:TipologiaInterventoBaseType"/>
@@ -58,6 +58,9 @@
             <xs:element name="tabellaAllegatiCILA" type="cila:TabellaAllegatiCILAType"/>
         </xs:sequence>
     </xs:complexType>
+    
+    
+   
     
     <!-- b)	Opere su parti comuni o modifiche esterne (*) -->
     <xs:complexType name="OperePrevisteBaseType" abstract="true"/>
@@ -112,15 +115,7 @@
         </xs:choice>
     </xs:complexType>
 
-    <xs:complexType name="TecniciIncaricatiDeiLavoriType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:TecniciIncaricatiDeiLavoriBaseType">
-                <xs:sequence>
-                    <xs:element name="individuatiPrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+  
     
     <!-- f) Calcolo del contributo di costruzione (*) -->
     <xs:complexType name="CalcoloContributoType">
@@ -141,16 +136,7 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- Reference cila:LocalizzazioneInterventoType -->
-    <xs:complexType name="LocalizzazioneInterventoType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:LocalizzazioneInterventoBaseType">
-                <xs:sequence>
-                    <xs:element name="coordinate" type="xs:string"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>        
+     
     
     <!-- DICHIARAZIONI -->
 
