@@ -40,7 +40,7 @@
             <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
             <!-- Dichiarazioni -->
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType" />
-            <xs:element name="operePreviste" type="cila:OperePrevisteBaseType"/>
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteBaseType"/>
             <!-- Comunicazioni -->
             <xs:element name="presentazioneInizioLavori" type="cila:InterventiSoggettiACILABaseType"/>
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>
@@ -57,21 +57,6 @@
             <xs:element name="dichiarazioniNote" type="xs:string"/>
             <xs:element name="tabellaAllegatiCILA" type="cila:TabellaAllegatiCILAType"/>
         </xs:sequence>
-    </xs:complexType>
-    
-    
-   
-    
-    <!-- b)	Opere su parti comuni o modifiche esterne (*) -->
-    <xs:complexType name="OperePrevisteBaseType" abstract="true"/>
-        <xs:complexType name="OperePrevisteType">
-            <xs:complexContent>
-                <xs:extension base="cila:OperePrevisteBaseType">
-                    <xs:sequence>
-                      <xs:element name="OperePreviste" type="suecommon:OperePrevisteEnum"/>
-                    </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
     
     <!-- c)	Presentazione della comunicazione di inizio dei lavori asseverata (*) -->
