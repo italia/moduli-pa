@@ -54,7 +54,7 @@
     
     <xs:complexType name="CessazioneType">
         <xs:complexContent>
-            <xs:extension base="cessazione:CessazioneSospensioneBaseType">
+            <xs:extension base="cessazione:CessazioneSospensioneType">
                 <xs:sequence>
                         <xs:choice>
                             <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
@@ -67,7 +67,7 @@
     
     <xs:complexType name="SospensioneType">
         <xs:complexContent>
-            <xs:extension base="cessazione:CessazioneSospensioneBaseType">
+            <xs:extension base="cessazione:CessazioneSospensioneType">
                 <xs:sequence>
                     <xs:choice>
                         <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
@@ -78,7 +78,7 @@
         </xs:complexContent>    
     </xs:complexType>
     
-   <xs:complexType name="CessazioneSospensioneBaseType" abstract="true">
+   <xs:complexType name="CessazioneSospensioneType">
        <xs:sequence>
            <xs:element name="attivita" type="xs:string"/>
            <xs:element name="protocolloAvvioEsercizio" type="aggregate:ProtocolloStandardType"/>

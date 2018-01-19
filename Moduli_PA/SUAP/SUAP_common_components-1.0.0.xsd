@@ -334,7 +334,7 @@
     <xs:complexType name="CarattereEsercizioType">        
         <xs:sequence><!-- scelta multipla -->
             <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
-            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" minOccurs="0" maxOccurs="1" />
         </xs:sequence>
     </xs:complexType>
     
@@ -903,7 +903,6 @@
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria in caso di commercio presso il domicilio dei consumatori di prodotti alimentari</ccts:UsageRule>
             </xs:documentation>
-            
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria</ccts:UsageRule>
@@ -1049,13 +1048,6 @@
             </xs:documentation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
-                    ovvero  
-                    Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
-                </ccts:Definition>
-                <ccts:UsageRule>"Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA (SCIA condizionata)</ccts:UsageRule>
-            </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
                     ovvero 
                     Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
                 </ccts:Definition>
@@ -1116,8 +1108,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Relazione descrittiva delle caratteristiche dei locali medesimi, della loro localizzazione e attrezzatura utilizzata per il servizio (*)</ccts:Definition>
-                <ccts:UsageRule>Sempre obbligatoria
-                    (Eccettuato il caso di affitto di poltrona) (*)
+                <ccts:UsageRule>Sempre obbligatoria (Eccettuato il caso di affitto di poltrona) (*)
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
@@ -1136,7 +1127,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione generale o AUA (nel caso di più autorizzazioni) alle emissioni in atmosfera</ccts:Definition>
-                <ccts:UsageRule>Nel caso di panificazione, pasticce-ria e affini con consumo di farina giornaliero >300 kg e ? 1500 kg</ccts:UsageRule>
+                <ccts:UsageRule>Nel caso di panificazione, pasticceria e affini con consumo di farina giornaliero >300 kg e 1500 kg</ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1188,10 +1179,6 @@
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
                 <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi</ccts:UsageRule>
-            </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
-                <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
         

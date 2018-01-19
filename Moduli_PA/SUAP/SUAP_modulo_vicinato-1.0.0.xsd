@@ -121,7 +121,7 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-            <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
+            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
             <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>
         </xs:sequence>        
     </xs:complexType>

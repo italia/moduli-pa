@@ -57,10 +57,10 @@
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="fascia0mq300mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="fascia300mq1000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="fascia1000mq3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="fasciaSuperiore3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="superficeNonSup300mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="superficeOltre300FinoA1000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="superficeOltre1000FinoA3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="superficeOltre3000mq" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             </xs:choice>
             <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
         </xs:sequence>

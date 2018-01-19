@@ -23,7 +23,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
-    <!-- // Modulo modulo_acconciatori_estetisti ## internal code ref 009 // -->
+    <!-- // Modulo modulo_acconciatori_estetisti ## internal code ref 010 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloAcconciatoriEstetisti" type="acconcestet:ModuloAcconciatoriEstetistiType"/>

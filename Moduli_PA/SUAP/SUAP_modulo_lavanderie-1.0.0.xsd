@@ -63,7 +63,7 @@
         <xs:sequence>
             <xs:choice>
                 <xs:element name="Tintolavanderia" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="LavanderiaGettoni" minOccurs="0" type="xs:string"/>
+                <xs:element name="LavanderiaGettoni" minOccurs="0" type="basic:EmptyType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
