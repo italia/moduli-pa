@@ -184,28 +184,26 @@
     
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>
-            <xs:element name="dicConsumoFarina" type="panifici:ConsumoFarinaEnum"/>
-            <xs:element name="dichConsumoIdrico" type="panifici:ConsumoIdricoEnum"/>
+            <xs:element name="dicConsumoFarina" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="minoreuguale300Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="da300a1500Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="maggiore1500Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dichConsumoIdrico" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="minoreuguale5Mc" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="maggiore5Mc" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>
         </xs:sequence>        
     </xs:complexType>
-    
-    <!-- ENUMERATION -->
-    <xs:simpleType name="ConsumoFarinaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="MINORE_UGUALE_300_KG"/>
-            <xs:enumeration value="MAGGIORE_300_MINORE_UGUALE_1500_KG"/>
-            <xs:enumeration value="MAGGIORE_1500_KG"/>            
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="ConsumoIdricoEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="MINORE_UGUALE_5_MC"/>
-            <xs:enumeration value="MAGGIORE_5_MC"/>           
-        </xs:restriction>
-    </xs:simpleType>
-    
 
     
 </xs:schema>

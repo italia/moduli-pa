@@ -184,7 +184,15 @@
             <xs:element name="periodoInserimentoImprese">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="durata" type="tintolav:AnniInInpresaEnum" />                               
+                        <xs:element name="anniInImpresa" minOccurs="0">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="anni1" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="anni2" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="anni3" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
                         <xs:sequence>
                             <xs:element name="attivita" maxOccurs="unbounded">
                                 <xs:complexType>
@@ -263,12 +271,6 @@
     <!-- ENUMERATION -->
 
     
-    <xs:simpleType name="AnniInInpresaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="uno"/>
-            <xs:enumeration value="due"/>
-            <xs:enumeration value="tre"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>
