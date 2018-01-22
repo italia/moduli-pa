@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
-    
+
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
@@ -31,8 +31,17 @@
     <xs:complexType name="DichiaranteType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="inQualita" type="suapcommon:InQualitaEnum" use="required"/>
-                <xs:attribute name="altro" type="xs:string"/>                
+                <xs:sequence> 
+                    <xs:element name="inQualita" minOccurs="1">
+                        <xs:complexType> 
+                            <xs:choice>
+                                <xs:element name="titolare" type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="legaleRappresentante" type="basic:EmptyType"  minOccurs="0"/>
+                                <xs:element name="altro" type="xs:string"  minOccurs="0"/>
+                            </xs:choice> 
+                        </xs:complexType>
+                    </xs:element>
+                    </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -40,8 +49,19 @@
     <xs:complexType name="ProcuratoreType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="tipoProcura" type="suapcommon:TipoProcuraEnum" use="required"/>
-                <xs:attribute name="denominazioneAgenziaImprese" type="xs:string" use="required"/>
+                <xs:sequence> 
+                    <xs:element name="tipoProcura" minOccurs="1">
+                        <xs:complexType> 
+                            <xs:sequence> 
+                                <xs:choice>
+                                    <xs:element name="ProcuraDelega" type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="AgenziaImprese" type="basic:EmptyType"  minOccurs="0"/>
+                                </xs:choice>
+                                <xs:element name="denominazioneAgenziaImprese" type="xs:string"  minOccurs="1"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -378,7 +398,7 @@
                             </xs:complexType>
                         </xs:element>
                         <xs:choice>
-                            <xs:element name="ruolo" type="suapcommon:RuoloInImpresa"/>
+                            <xs:element name="ruolo" type="suapcommon:RuoloInImpresaType"/>
                             <xs:element name="altroRuolo" type="xs:string"/>
                         </xs:choice>
                         <xs:element name="iscrittoINPS">
@@ -1223,9 +1243,18 @@
         </xs:annotation>
     </xs:element>
 
+    <xs:complexType name="RuoloInImpresaType">
+        <xs:choice>
+            <xs:element name="DipendenteQualificato" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="CoadiutoreFamiliare" type="basic:EmptyType"  minOccurs="0"/>
+            <xs:element name="SocioLavoratore" type="xs:string"  minOccurs="0"/>
+        </xs:choice> 
+    </xs:complexType>
+    
+
     <!-- ENUMERATION -->   
 
-    
+    <!--
     <xs:simpleType name="InQualitaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="TITOLARE"/>
@@ -1234,13 +1263,6 @@
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="RuoloInImpresa">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DIPENDENTE_QUALIFICATO"/>
-            <xs:enumeration value="COADIUTORE_FAMILIARE"/>
-            <xs:enumeration value="SOCIO_LAVORATORE"/>
-        </xs:restriction>
-    </xs:simpleType>
        
     <xs:simpleType name="TipoProcuraEnum">
         <xs:restriction base="xs:string">
@@ -1248,7 +1270,7 @@
             <xs:enumeration value="AGENZIA_IMPRESE"/>
         </xs:restriction>
     </xs:simpleType>
-    
+    -->
 
     
 </xs:schema>
