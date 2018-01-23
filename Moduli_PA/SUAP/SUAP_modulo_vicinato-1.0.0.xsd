@@ -108,8 +108,15 @@
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="vicinato:TipoEsercizioEnum"/>
-            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaBaseType"/>
+            <xs:element name="tipoEsercizio" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="vicinato" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="vendita_esclusiva_mediante_apparecchi_automatici" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modalitaVenditaSuperficie" type="suapcommon:ModalitaVenditaSuperficieBaseType"/>
             <xs:element name="carattereEsercizio" type="vicinato:CarattereEsercizioType"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
@@ -121,7 +128,7 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-            <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
+            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
             <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>
         </xs:sequence>        
     </xs:complexType>
@@ -195,11 +202,6 @@
     
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="TipoEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="vicinato"/>
-            <xs:enumeration value="vendita_esclusiva_mediante_apparecchi_automatici"/>            
-        </xs:restriction>
-    </xs:simpleType>
+
 
 </xs:schema>

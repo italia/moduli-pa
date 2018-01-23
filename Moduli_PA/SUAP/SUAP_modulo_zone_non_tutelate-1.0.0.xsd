@@ -53,6 +53,13 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence><!-- scelta multipla -->
+            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>           
@@ -99,7 +106,7 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
-            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+            <xs:element name="carattereEsercizio" type="nontutela:CarattereEsercizioType"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="superficieEsercizio" type="suapcommon:SuperficieEsercizioBaseType"/>
         </xs:sequence>

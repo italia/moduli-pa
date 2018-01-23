@@ -52,10 +52,19 @@
     <!-- Attività : Apertura -->
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="tipoAttivita" type="tintolav:TipoAttivitaEnum"/>
-            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeType"/>
+            <xs:element name="tipoAttivita" type="tintolav:TipoAttivitaType"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="superficieEsercizio" type="tintolav:SuperficieEsercizioAttivitaBaseType"/>
             <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TipoAttivitaType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="Tintolavanderia" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="LavanderiaGettoni" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
         </xs:sequence>
     </xs:complexType>
 
@@ -175,7 +184,15 @@
             <xs:element name="periodoInserimentoImprese">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="durata" type="tintolav:AnniInInpresaEnum" />                               
+                        <xs:element name="anniInImpresa" minOccurs="0">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="anni1" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="anni2" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="anni3" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
                         <xs:sequence>
                             <xs:element name="attivita" maxOccurs="unbounded">
                                 <xs:complexType>
@@ -252,19 +269,8 @@
     </xs:complexType>
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="TipoAttivitaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Tintolavanderia"/>
-            <xs:enumeration value="Lavanderia a gettoni"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
-    <xs:simpleType name="AnniInInpresaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="uno"/>
-            <xs:enumeration value="due"/>
-            <xs:enumeration value="tre"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>

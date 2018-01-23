@@ -16,7 +16,7 @@
             DOMANDA DI AUTORIZZAZIONE PER BAR, RISTORANTI E ALTRI ESERCIZI DI SOMMINISTRAZIONE DI ALIMENTI E BEVANDE
             (IN ZONE TUTELATE)
         </xs:documentation>
-    </xs:annotation>
+    </xs:annotation> 
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
@@ -56,7 +56,7 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="denominazioneInsegna" type="xs:string" minOccurs="0"/>
-            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+            <xs:element name="carattereEsercizio" type="tutela:CarattereEsercizioType"/>
             <xs:element name="superficieEsercizio" type="suapcommon:SuperficieEsercizioBaseType"/>
         </xs:sequence>
     </xs:complexType>   
@@ -75,6 +75,15 @@
             <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:SuperficieDaABaseType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence><!-- scelta multipla -->
+            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+
 
     <!-- ALLEGATI -->    
     <xs:complexType name="AllegatiAutorizzazioneSCIAType">

@@ -191,8 +191,28 @@
     <xs:complexType name="TitoloPossessoType">
         <xs:sequence>
             <xs:element name="titolo" type="xs:string"/>
-            <xs:element name="titolaritaIntervento" type="suecommon:TitolaritaInterventoEnum"/>
+            <xs:choice>
+                <xs:element name="TitolareEsclusivo" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="NonTitolareEsclusivo" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            </xs:choice>
         </xs:sequence>        
+    </xs:complexType>
+
+
+    <xs:complexType name="OperePrevisteBaseType" abstract="true"/>
+    <xs:complexType name="OperePrevisteType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:OperePrevisteBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="NoPartiComuni" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="PartiComuniCondominio" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="PartiComuniFabbricatoMultiProp" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="PartiComuniNoAssenso" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>                
+                    </xs:choice>
+                </xs:sequence>   
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <!-- Reference suecommon:LocalizzazioneInterventoType -->
@@ -1900,21 +1920,9 @@
     <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:SoggettiCoinvoltiType"/>
     
     <!-- ENUMERATION -->
-    <xs:simpleType name="TitolaritaInterventoEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="TitolareEsclusivo"/>
-            <xs:enumeration value="NonTitolareEsclusivo"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
-    <xs:simpleType name="OperePrevisteEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="NoPartiComuni"/>
-            <xs:enumeration value="PartiComuniCondominio"/>
-            <xs:enumeration value="PartiComuniFabbricatoMultiProp"/>
-            <xs:enumeration value="PartiComuniNoAssenso"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
     <xs:simpleType name="InterventiSoggettiACILAEnum">
         <xs:restriction base="xs:string">

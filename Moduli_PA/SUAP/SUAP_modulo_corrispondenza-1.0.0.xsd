@@ -53,7 +53,7 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="tipoEsercizio" type="corrispondenza:TipoEsercizioType"/>
-            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaEnum"/>
+            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaType"/>
             <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciType"/>         
         </xs:sequence>
     </xs:complexType>

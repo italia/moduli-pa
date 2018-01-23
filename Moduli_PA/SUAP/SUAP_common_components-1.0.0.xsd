@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
-    
+
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
@@ -31,8 +31,17 @@
     <xs:complexType name="DichiaranteType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="inQualita" type="suapcommon:InQualitaEnum" use="required"/>
-                <xs:attribute name="altro" type="xs:string"/>                
+                <xs:sequence> 
+                    <xs:element name="inQualita" minOccurs="1">
+                        <xs:complexType> 
+                            <xs:choice>
+                                <xs:element name="titolare" type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="legaleRappresentante" type="basic:EmptyType"  minOccurs="0"/>
+                                <xs:element name="altro" type="xs:string"  minOccurs="0"/>
+                            </xs:choice> 
+                        </xs:complexType>
+                    </xs:element>
+                    </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -40,8 +49,19 @@
     <xs:complexType name="ProcuratoreType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="tipoProcura" type="suapcommon:TipoProcuraEnum" use="required"/>
-                <xs:attribute name="denominazioneAgenziaImprese" type="xs:string" use="required"/>
+                <xs:sequence> 
+                    <xs:element name="tipoProcura" minOccurs="1">
+                        <xs:complexType> 
+                            <xs:sequence> 
+                                <xs:choice>
+                                    <xs:element name="ProcuraDelega" type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="AgenziaImprese" type="basic:EmptyType"  minOccurs="0"/>
+                                </xs:choice>
+                                <xs:element name="denominazioneAgenziaImprese" type="xs:string"  minOccurs="1"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -67,16 +87,21 @@
     </xs:complexType>
   
     <xs:complexType name="InCentroCommercialeBaseType" abstract="true"/>   
-        
     <xs:complexType name="InCentroCommercialeType">
-       <xs:complexContent>
-           <xs:extension base="suapcommon:InCentroCommercialeBaseType">
-               <xs:sequence>
-                   <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
-               </xs:sequence> 
-               <xs:attribute name="presente" type="xs:boolean" default="false"/>
-           </xs:extension>
-       </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="suapcommon:InCentroCommercialeBaseType">
+                <xs:choice>
+                    <xs:element name="si"  minOccurs="0" maxOccurs="1" >
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="no" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true" />
@@ -84,8 +109,8 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
-                        <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
-                        <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
                     <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
@@ -119,8 +144,8 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciBaseType">
                 <xs:sequence>
-                    <xs:element name="alimentare" type="xs:boolean" default="false"/>
-                    <xs:element name="nonAlimentare" type="xs:boolean" default="false"/>
+                    <xs:element name="alimentare"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="nonAlimentare"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
@@ -221,25 +246,24 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="ModalitaVenditaBaseType" abstract="true"/>
-    <xs:complexType name="ModalitaVenditaType">
+    <xs:complexType name="ModalitaVenditaSuperficieBaseType" abstract="true" />
+    <xs:complexType name="ModalitaVenditaSuperficieType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:ModalitaVenditaBaseType">
-                <xs:sequence>                    
-                    <xs:element name="superficieMQ">
-                        <xs:complexType>
-                            <xs:simpleContent>
-                                <xs:extension base="xs:decimal">
-                                    <xs:attribute name="modalita" type="suapcommon:ModalitaVenditaEnum"/> 
-                                </xs:extension>
-                            </xs:simpleContent>
-                        </xs:complexType>                                                     
-                    </xs:element>                                              
-                </xs:sequence>       
-                
+            <xs:extension base="suapcommon:ModalitaVenditaSuperficieBaseType">
+                <xs:sequence>
+                    <xs:element name="dettaglio" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="dettaglioIngrosso" minOccurs="0" type="xs:decimal"/>
+                </xs:sequence>
             </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>    
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    <xs:complexType name="ModalitaVenditaType">
+        <xs:sequence>
+            <xs:element name="dettaglio"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="dettaglioIngrosso"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
     
     <xs:complexType name="TrasferimentoDaAType">
         <xs:sequence>
@@ -326,11 +350,11 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:complexType name="CarattereEsercizioType">        
         <xs:sequence><!-- scelta multipla -->
             <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
-            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" minOccurs="0" maxOccurs="1" />
         </xs:sequence>
     </xs:complexType>
     
@@ -374,7 +398,7 @@
                             </xs:complexType>
                         </xs:element>
                         <xs:choice>
-                            <xs:element name="ruolo" type="suapcommon:RuoloInImpresa"/>
+                            <xs:element name="ruolo" type="suapcommon:RuoloInImpresaType"/>
                             <xs:element name="altroRuolo" type="xs:string"/>
                         </xs:choice>
                         <xs:element name="iscrittoINPS">
@@ -814,9 +838,11 @@
     
     <!-- IMPLEMENTATO NELL'IPOTESI DI SCELTA MULTIPLA, DA VERIFICA SE INVECE SCELTA SINGOLA IN QUESTO CASO SEMPLIFICARE CON ENUMERATION -->
     <xs:complexType name="VariazioniTabelleSpecialiType">
-        <xs:attribute name="aggiunta" type="xs:boolean" default="false"/>
-        <xs:attribute name="eliminazione" type="xs:boolean" default="false"/>
-        <xs:attribute name="sostituzione" type="xs:boolean" default="false"/>
+        <xs:sequence>
+        <xs:element name="aggiunta" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        <xs:element name="eliminazione" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        <xs:element name="sostituzione" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AltreDichiarazioniType">
@@ -897,7 +923,6 @@
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria in caso di commercio presso il domicilio dei consumatori di prodotti alimentari</ccts:UsageRule>
             </xs:documentation>
-            
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria</ccts:UsageRule>
@@ -1043,13 +1068,6 @@
             </xs:documentation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
-                    ovvero  
-                    Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
-                </ccts:Definition>
-                <ccts:UsageRule>"Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA (SCIA condizionata)</ccts:UsageRule>
-            </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
                     ovvero 
                     Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
                 </ccts:Definition>
@@ -1110,8 +1128,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Relazione descrittiva delle caratteristiche dei locali medesimi, della loro localizzazione e attrezzatura utilizzata per il servizio (*)</ccts:Definition>
-                <ccts:UsageRule>Sempre obbligatoria
-                    (Eccettuato il caso di affitto di poltrona) (*)
+                <ccts:UsageRule>Sempre obbligatoria (Eccettuato il caso di affitto di poltrona) (*)
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
@@ -1130,7 +1147,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione generale o AUA (nel caso di più autorizzazioni) alle emissioni in atmosfera</ccts:Definition>
-                <ccts:UsageRule>Nel caso di panificazione, pasticce-ria e affini con consumo di farina giornaliero >300 kg e ? 1500 kg</ccts:UsageRule>
+                <ccts:UsageRule>Nel caso di panificazione, pasticceria e affini con consumo di farina giornaliero >300 kg e 1500 kg</ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1183,10 +1200,6 @@
                 <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
                 <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi</ccts:UsageRule>
             </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
-                <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
-            </xs:documentation>
         </xs:annotation>
         
     </xs:element>
@@ -1230,14 +1243,18 @@
         </xs:annotation>
     </xs:element>
 
-    <!-- ENUMERATION -->   
-    <xs:simpleType name="ModalitaVenditaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DETTAGLIO"/>
-            <xs:enumeration value="DETTAGLIO_INGROSSO"/>            
-        </xs:restriction>
-    </xs:simpleType>
+    <xs:complexType name="RuoloInImpresaType">
+        <xs:choice>
+            <xs:element name="DipendenteQualificato" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="CoadiutoreFamiliare" type="basic:EmptyType"  minOccurs="0"/>
+            <xs:element name="SocioLavoratore" type="xs:string"  minOccurs="0"/>
+        </xs:choice> 
+    </xs:complexType>
     
+
+    <!-- ENUMERATION -->   
+
+    <!--
     <xs:simpleType name="InQualitaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="TITOLARE"/>
@@ -1246,13 +1263,6 @@
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="RuoloInImpresa">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DIPENDENTE_QUALIFICATO"/>
-            <xs:enumeration value="COADIUTORE_FAMILIARE"/>
-            <xs:enumeration value="SOCIO_LAVORATORE"/>
-        </xs:restriction>
-    </xs:simpleType>
        
     <xs:simpleType name="TipoProcuraEnum">
         <xs:restriction base="xs:string">
@@ -1260,7 +1270,7 @@
             <xs:enumeration value="AGENZIA_IMPRESE"/>
         </xs:restriction>
     </xs:simpleType>
-    
+    -->
 
     
 </xs:schema>

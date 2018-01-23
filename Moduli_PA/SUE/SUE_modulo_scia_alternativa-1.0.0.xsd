@@ -44,7 +44,7 @@
             <xs:element name="presentazione" type="scialt:PresentazioneBaseType"/>            
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>            
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
-            <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteType"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
             <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
             <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>

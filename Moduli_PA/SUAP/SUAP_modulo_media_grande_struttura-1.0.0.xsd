@@ -110,8 +110,8 @@
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/>
-            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaBaseType"/>
+            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioType"/>
+            <xs:element name="modalitaVenditaSuperficie" type="suapcommon:ModalitaVenditaSuperficieBaseType"/>
             <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
@@ -121,7 +121,7 @@
     
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/> 
+            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioType"/> 
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
             <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
@@ -131,7 +131,7 @@
     
     <xs:complexType name="AmpliamentoType">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/> 
+            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioType"/> 
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
             <xs:element name="variazioniTabelleSpeciali" type="suapcommon:VariazioniTabelleSpecialiType" minOccurs="0"/>
@@ -140,9 +140,17 @@
         </xs:sequence>
     </xs:complexType>
    
+    <xs:complexType name="TipoEsercizioType" >
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="media_struttura" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="grande_struttura" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="apparecchi_automatici" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+        </xs:sequence>        
+    </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
-    
     <xs:complexType name="VariazioneOccupazioneSuperficiType">
         <xs:sequence>
             <xs:element name="nonAlimentari" type="mediagrande:OccupazioniMerciIngombrantiNonAlimentariBaseType" />    
@@ -192,13 +200,7 @@
 
 
     <!-- ENUMERATION -->
-    <xs:simpleType name="TipoEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="media_struttura"/>
-            <xs:enumeration value="grande_struttura"/>
-            <xs:enumeration value="apparecchi_automatici"/>            
-        </xs:restriction>
-    </xs:simpleType>
+
 
     
 </xs:schema>
