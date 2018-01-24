@@ -8,7 +8,9 @@
 
 - CONCLUSO 13/10/2017: completamento XML Schema approvati con l'accordo Conferenza unificata del 4 maggio 2017 e del 6 luglio 2017 relativi all'edilizia (SUE).
 
-- Per il 22/01/2018: completamento refactoring XML Schema realtivi ai moduli approvati in Conferenza unificata del 4 maggio 2017 e del 6 luglio 2017 relativi all'edilizia.
+- Per il 30/01/2018: definizione dei XML Schema dei moduli in discussione all'URL http://rete.italiasemplice.gov.it/modulistica-standardizzata-e-semplificata-rete-italiasemplice/discussione/area-di-lavoro-sulla#comment-148.
+
+- Per il 28/02/2018: completamento refactoring XML Schema realtivi ai moduli approvati in Conferenza unificata del 4 maggio 2017 e del 6 luglio 2017 relativi all'edilizia.
 
 
 **GdL – Processi: avvio lavori previsto per gennaio 2018.**
