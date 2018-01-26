@@ -1242,6 +1242,24 @@
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    
+    <xs:element name="allegatoTabellaTariffePrestazioni" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Tabella delle tariffe delle prestazioni</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoTimbroSocieta" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Timbro della Società/Ditta individuale</ccts:Definition>
+                <ccts:UsageRule>Nel caso di autovidimazione del registro giornale degli affari</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
 
     <xs:complexType name="RuoloInImpresaType">
         <xs:choice>
