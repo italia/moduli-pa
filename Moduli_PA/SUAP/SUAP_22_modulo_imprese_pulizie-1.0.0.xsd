@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:imppulizie="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_imprese_pulizie"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_imprese_pulizie"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DELL’ATTIVITÀ 
+            DI PULIZIE, DISINFEZIONE, DISINFESTAZIONE, DI DERATTIZZAZIONE E DI SANIFICAZIONE
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo modulo_imprese_pulizie ## internal code ref 022 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloImpresePulizie" type="imppulizie:ModuloImpresePulizie" />
+    
+    <xs:complexType name="ModuloImpresePulizie">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="apertura" type="imppulizie:AperturaType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
+            <xs:element name="tabellaAllegati" type="imppulizie:TabellaAllegatiType"/>  
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AltriSoggetti" type="imppulizie:allegatoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:element name="datiAttivita" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="pulizia" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="disinfezione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="disinfestazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="derattizzazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="sanificazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        </xs:choice>
+                        <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="dichiarazioniRequisiti" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AltriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="1"/>
+                         <xs:choice>
+                             <xs:element name="prepostoGestioneTecnica">
+                                 <xs:complexType>
+                                     <xs:sequence>
+                                          <xs:choice>
+                                              <xs:element name="UeTitoloProfessionale">
+                                                  <xs:complexType>
+                                                      <xs:sequence>
+                                                          <xs:element name="obbligoScolastico" type="imppulizie:esperienzaQualificataType" minOccurs="0" maxOccurs="unbounded"/>
+                                                          <xs:element name="attestatoqualificaTecnica" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                                          <xs:element name="diplomaSecondario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                                          <xs:element name="diplomaSeconlaureadario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                                      </xs:sequence>
+                                                   </xs:complexType>
+                                              </xs:element>                        
+                                               <xs:element name="ExtraUETitoloProfessionale" type="xs:date" minOccurs="0" maxOccurs="1"/>
+                                          </xs:choice>
+                                     </xs:sequence>
+                                 </xs:complexType>
+                             </xs:element>
+                             <xs:element name="NomeCognomePreposto" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                         </xs:choice>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="esperienzaQualificataType">
+        <xs:sequence>
+            <xs:element name="ruolo" type="xs:string"/>
+            <xs:element name="istituto" type="xs:string"/>
+            <xs:element name="istitutoIndirizzo" type="aggregate:IndirizzoType"/>
+            <xs:element name="annoScolastico" type="xs:integer"/>
+            <xs:element name="da" type="xs:date"/>
+            <xs:element name="a" type="xs:date"/>
+            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- ALLEGATI -->
+    <xs:complexType name="allegatoRequisitiAltriSoggettiType">
+        <xs:sequence>
+            <xs:element name="AltriSoggetti" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+   
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="imppulizie:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="imppulizie:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="imppulizie:AllegatiSCIACondizionataType"/>      
+            <xs:element name="allegatiAltri" type="imppulizie:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoIndustriaInsalubre" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaAUA" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType">
+        <xs:sequence>
+            <xs:element name="bollo" type="imppulizie:allegatoImpostaDiBolloBaseType" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaAUA" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+   
+    <xs:complexType name="allegatoImpostaDiBolloBaseType" abstract="true"/>
+    <xs:complexType name="allegatoImpostaDiBolloType">
+        <xs:complexContent>
+            <xs:extension base="imppulizie:allegatoImpostaDiBolloBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <!-- BASIC COMPONENTS TYPE -->
+    <!-- ENUMERATION -->
+    
+</xs:schema>
