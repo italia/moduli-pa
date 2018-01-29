@@ -149,7 +149,7 @@
     
     <xs:complexType name="AllegatiAltriBaseType">
         <xs:sequence>
-            <xs:element name="bollo" type="imppulizie:allegatoVersamentoOneriBaseType" minOccurs="0"/>
+            <xs:element name="AttestazioneVersamentoOneri" type="imppulizie:allegatoVersamentoOneriBaseType" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
             
         </xs:sequence>                                
@@ -159,7 +159,7 @@
     <xs:complexType name="allegatoVersamentoOneriBaseType" abstract="true"/>
     <xs:complexType name="allegatoVersamentoOneriType">
         <xs:complexContent>
-            <xs:extension base="commingrosso:allegatoVersamentoOneriBaseType">
+            <xs:extension base="imppulizie:allegatoVersamentoOneriBaseType">
                 <xs:sequence>
                     <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
                 </xs:sequence>
