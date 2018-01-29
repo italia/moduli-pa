@@ -34,7 +34,8 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="imppulizie:AperturaType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
+            <xs:element name="Dichiarazioni" type="imppulizie:DichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="imppulizie:TabellaAllegatiType"/>  
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -62,36 +63,34 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            
-            <xs:element name="dichiarazioniRequisiti" minOccurs="0">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="AltriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="1"/>
-                         <xs:choice>
-                             <xs:element name="prepostoGestioneTecnica">
-                                 <xs:complexType>
-                                     <xs:sequence>
-                                          <xs:choice>
-                                              <xs:element name="UeTitoloProfessionale">
-                                                  <xs:complexType>
-                                                      <xs:sequence>
-                                                          <xs:element name="obbligoScolastico" type="imppulizie:esperienzaQualificataType" minOccurs="0" maxOccurs="unbounded"/>
-                                                          <xs:element name="attestatoqualificaTecnica" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
-                                                          <xs:element name="diplomaSecondario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
-                                                          <xs:element name="diplomaSeconlaureadario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
-                                                      </xs:sequence>
-                                                   </xs:complexType>
-                                              </xs:element>                        
-                                               <xs:element name="ExtraUETitoloProfessionale" type="xs:date" minOccurs="0" maxOccurs="1"/>
-                                          </xs:choice>
-                                     </xs:sequence>
-                                 </xs:complexType>
-                             </xs:element>
-                             <xs:element name="NomeCognomePreposto" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                         </xs:choice>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiarazioniType">
+        <xs:sequence>
+            <xs:element name="AltriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="1"/>
+             <xs:choice>
+                 <xs:element name="prepostoGestioneTecnica">
+                     <xs:complexType>
+                         <xs:sequence>
+                              <xs:choice>
+                                  <xs:element name="UeTitoloProfessionale">
+                                      <xs:complexType>
+                                          <xs:sequence>
+                                              <xs:element name="obbligoScolastico" type="imppulizie:esperienzaQualificataType" minOccurs="0" maxOccurs="unbounded"/>
+                                              <xs:element name="attestatoqualificaTecnica" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                              <xs:element name="diplomaSecondario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                              <xs:element name="diplomaSeconlaureadario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                          </xs:sequence>
+                                       </xs:complexType>
+                                  </xs:element>                        
+                                   <xs:element name="ExtraUETitoloProfessionale" type="xs:date" minOccurs="0" maxOccurs="1"/>
+                              </xs:choice>
+                         </xs:sequence>
+                     </xs:complexType>
+                 </xs:element>
+                 <xs:element name="NomeCognomePreposto" type="xs:string" minOccurs="0" maxOccurs="1"/>
+             </xs:choice>
         </xs:sequence>
     </xs:complexType>
     

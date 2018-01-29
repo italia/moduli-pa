@@ -13,7 +13,7 @@
    
     <xs:annotation>
         <xs:documentation>
-            COMUNICAZIONE PER L’ESERCIZIO DELL’ATTIVITÀ DELLE AGENZIE D’AFFARI 
+            COMUNICAZIONE PER L’ESERCIZIO DELL’ATTIVITÀ DELLE AGENZIE D’AFFARI DI COMPETENZA DEL COMUNE
         </xs:documentation>
     </xs:annotation>
    
@@ -36,6 +36,7 @@
                 <xs:element name="apertura" type="ageaffari:AperturaType"/>
                 <xs:element name="trasferimento" type="ageaffari:TrasferimentoType"/>
                 <xs:element name="cessazione" type="ageaffari:CessazioneType"/>
+                <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             </xs:choice>
             
             <xs:element name="tabellaAllegati" type="ageaffari:TabellaAllegatiType"/>                 
@@ -44,6 +45,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="AltriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -83,28 +85,36 @@
                 </xs:complexType>
             </xs:element>
         
-            <xs:element name="RegistroGiornaleAffari" minOccurs="0">
+        
+            <xs:element name="Dichiarazioni" minOccurs="0">
                 <xs:complexType>
-                    <xs:choice>
-                        <xs:element name="cartaceo" minOccurs="0" maxOccurs="1">
+                    <xs:sequence>
+                        <xs:element name="RegistroGiornaleAffari" minOccurs="0">
                             <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="registroGiornaleVidimazione" type="ageaffari:GiornaleAffariType" minOccurs="1" maxOccurs="1"/>
-                                    <xs:element name="registroVidimatoComune" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                                </xs:sequence>
+                                <xs:choice>
+                                    <xs:element name="cartaceo" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="registroGiornaleVidimazione" type="ageaffari:GiornaleAffariType" minOccurs="1" maxOccurs="1"/>
+                                                <xs:element name="registroVidimatoComune" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="informatico" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                </xs:choice>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="informatico" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                    </xs:choice>
+                    </xs:sequence>
                 </xs:complexType>
-            </xs:element>
+            </xs:element>         
+                        
         </xs:sequence>
     </xs:complexType>
    
     <xs:complexType name="GiornaleAffariType">
         <xs:sequence>
             <xs:element name="registroPagine" type="xs:integer" minOccurs="0" maxOccurs="1"/> 
-            <xs:element name="registroNumerateD" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="registroNumerateDa" type="xs:integer" minOccurs="0" maxOccurs="1"/>
             <xs:element name="registroNumerateA" type="xs:integer" minOccurs="0" maxOccurs="1"/>
             <xs:element name="registroNumero" type="xs:integer" minOccurs="0" maxOccurs="1"/>
             <xs:element name="registroAnno" type="xs:integer" minOccurs="0" maxOccurs="1"/>
@@ -115,11 +125,11 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-        
+       
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -133,7 +143,7 @@
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -152,6 +162,13 @@
     </xs:complexType>
     
     <xs:complexType name="AutoVidimazioneRegistroAffariType"><!-- ALLEGATO B -->
+        <xs:annotation>
+            <xs:documentation>
+                Dichiarazione di  auto vidimazione del Registro giornale degli affari
+                (da utilizzare in casi diversi dall’avvio dell’attività)  
+            </xs:documentation>
+        </xs:annotation>
+        
         <xs:sequence>
             <xs:element name="dichiarante" type="aggregate:PersonaAnagraficaType"/><!-- include doc. socggiorno -->
             <xs:element name="inQualita">
