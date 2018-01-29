@@ -37,7 +37,7 @@
             <xs:element name="subingresso" type="commingrosso:SubingressoType"/>
             <xs:element name="trasferimento" type="commingrosso:TrasferimentoType"/>
             <xs:element name="ampliamento" type="commingrosso:AmpliamentoType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="commingrosso:TabellaAllegatiType"/>  
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -52,7 +52,7 @@
     <!-- BASIC COMPONENTS TYPE -->
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="ModalitaVenditaSuperficie" type="suapcommon:ModalitaVenditaIngrossoSuperficieBaseType" />
+            <xs:element name="ModalitaVenditaSuperficie" type="commingrosso:ModalitaVenditaIngrossoSuperficieBaseType" />
             <xs:element name="CarattereEsercizio" type="commingrosso:CarattereEsercizioType"/>
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
         </xs:sequence>
@@ -92,7 +92,7 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-            <xs:element name="ModalitaVenditaSuperficie" type="suapcommon:ModalitaVenditaIngrossoSuperficieBaseType" />
+            <xs:element name="ModalitaVenditaSuperficie" type="commingrosso:ModalitaVenditaIngrossoSuperficieBaseType" />
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>    
         </xs:sequence>        
     </xs:complexType>
@@ -116,6 +116,28 @@
             </xs:choice>
             <xs:element name="variazioniSettorivendita" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType"/>
         </xs:sequence> 
+    </xs:complexType>
+    
+    <xs:complexType name="ModalitaVenditaIngrossoSuperficieBaseType" abstract="true" />
+    <xs:complexType name="ModalitaVenditaIngrossoSuperficieType">
+        <xs:complexContent>
+            <xs:extension base="commingrosso:ModalitaVenditaIngrossoSuperficieBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="IngrossoSupercificie" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="DettaglioIngrosso">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="superficie" minOccurs="0" type="xs:decimal"/>
+                                    <xs:element name="IngrossoSuperficie" minOccurs="0" type="xs:decimal"/>
+                                    <xs:element name="DettaglioSuperficie" minOccurs="0" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
     </xs:complexType>
     
     <!-- ALLEGATI -->

@@ -34,6 +34,7 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="facchinaggio:AperturaType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="facchinaggio:TabellaAllegatiType"/> 
         
             <xs:element name="Allegati">
@@ -51,7 +52,7 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="SuperficieComplessiva" minOccurs="0" type="xs:decimal"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
+            
         </xs:sequence>
     </xs:complexType>
     
