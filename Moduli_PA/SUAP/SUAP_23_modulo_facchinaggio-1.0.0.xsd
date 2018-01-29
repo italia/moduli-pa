@@ -87,7 +87,7 @@
     
     <xs:complexType name="AllegatiAltriBaseType">
         <xs:sequence>
-            <xs:element name="AttestazioneVersamentoOneri" type="facchinaggio:allegatoVersamentoOneriType" minOccurs="0"/>
+            <xs:element name="AttestazioneVersamentoOneri" type="facchinaggio:allegatoVersamentoOneriBaseType" minOccurs="0"/>
             <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
