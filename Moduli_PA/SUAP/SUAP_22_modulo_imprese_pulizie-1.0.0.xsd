@@ -149,19 +149,19 @@
     
     <xs:complexType name="AllegatiAltriBaseType">
         <xs:sequence>
-            <xs:element name="bollo" type="imppulizie:allegatoImpostaDiBolloBaseType" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaAUA" minOccurs="0"/>
+            <xs:element name="bollo" type="imppulizie:allegatoVersamentoOneriBaseType" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+            
         </xs:sequence>                                
     </xs:complexType>
     
    
-    <xs:complexType name="allegatoImpostaDiBolloBaseType" abstract="true"/>
-    <xs:complexType name="allegatoImpostaDiBolloType">
+    <xs:complexType name="allegatoVersamentoOneriBaseType" abstract="true"/>
+    <xs:complexType name="allegatoVersamentoOneriType">
         <xs:complexContent>
-            <xs:extension base="imppulizie:allegatoImpostaDiBolloBaseType">
+            <xs:extension base="commingrosso:allegatoVersamentoOneriBaseType">
                 <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
