@@ -58,7 +58,7 @@
                             <xs:element name="derattizzazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="sanificazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         </xs:choice>
-                        <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="SuperficieComplessiva" minOccurs="0" type="xs:decimal"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
