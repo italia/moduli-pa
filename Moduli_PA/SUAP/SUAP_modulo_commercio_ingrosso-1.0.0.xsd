@@ -42,7 +42,7 @@
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="AltriSoggetti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="altriSoggetti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

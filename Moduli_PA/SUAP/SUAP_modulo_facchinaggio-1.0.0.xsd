@@ -40,7 +40,7 @@
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="AltriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="altriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -51,7 +51,7 @@
     <!-- BASIC COMPONENTS TYPE -->
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="SuperficieComplessiva" minOccurs="0" type="xs:decimal"/>
+            <xs:element name="superficieComplessiva" minOccurs="0" type="xs:decimal"/>
             
         </xs:sequence>
     </xs:complexType>

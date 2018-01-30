@@ -44,8 +44,8 @@
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="AltriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
+                        <xs:element name="altriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -125,28 +125,12 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
-       
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
         </xs:sequence> 
     </xs:complexType>
    
     <xs:complexType name="CessazioneType">
         <xs:sequence>
             <xs:element name="protocolloCessazione" type="aggregate:ProtocolloStandardType"/>
-            
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="AutoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
@@ -181,7 +165,7 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="impresa" type="aggregate:ImpresaAnagraficaType"/>
-            <xs:element name="impresalAltroEmail" type="xs:string"/>
+            <xs:element name="impresaAltroEmail" type="xs:string"/>
             <xs:element name="registroGiornaleVidimazione" type="ageaffari:GiornaleAffariType" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
