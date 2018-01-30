@@ -59,7 +59,7 @@
                             <xs:element name="derattizzazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="sanificazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         </xs:choice>
-                        <xs:element name="SuperficieComplessiva" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="superficieComplessiva" minOccurs="0" type="xs:decimal"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -75,7 +75,7 @@
     
     <xs:complexType name="DichiaranteRequisitiType">  
         <xs:sequence>
-            <xs:element name="AltriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+            <xs:element name="altriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
             <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
         </xs:sequence>
     </xs:complexType>
@@ -133,7 +133,7 @@
     <!-- ALLEGATI -->
     <xs:complexType name="allegatoRequisitiAltriSoggettiType">
         <xs:sequence>
-            <xs:element name="AltriSoggetti" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="altriSoggetti" type="aggregate:PersonaAnagraficaType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
         </xs:sequence>
     </xs:complexType>
