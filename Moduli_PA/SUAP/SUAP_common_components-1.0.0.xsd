@@ -1285,24 +1285,5 @@
     
 
     <!-- ENUMERATION -->   
-
-    <!--
-    <xs:simpleType name="InQualitaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="TITOLARE"/>
-            <xs:enumeration value="LEGALE_RAPPRESENTATE"/>
-            <xs:enumeration value="ALTRO"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-       
-    <xs:simpleType name="TipoProcuraEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PROCURA_DELEGA"/>
-            <xs:enumeration value="AGENZIA_IMPRESE"/>
-        </xs:restriction>
-    </xs:simpleType>
-    -->
-
     
 </xs:schema>

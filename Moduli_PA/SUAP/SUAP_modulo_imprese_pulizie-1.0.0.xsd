@@ -67,30 +67,51 @@
     </xs:complexType>
     
     <xs:complexType name="DichiarazioniType">
+        <xs:choice>
+            <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
+            <xs:element name="resposabileTecnicoRequisitiProfessionali" type="imppulizie:ResponsabileTecnicoImpresePulizieRequisitiProfessionaliType" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiarazioniImpresePulizieRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="prepostoGestioneTecnica">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="UeTitoloProfessionale">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="obbligoScolastico" type="imppulizie:esperienzaQualificataType" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="attestatoqualificaTecnica" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                        <xs:element name="diplomaSecondario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                        <xs:element name="diplomaSeconlaureadario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>                        
+                            <xs:element name="ExtraUETitoloProfessionale" type="xs:date" minOccurs="0" maxOccurs="1"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NomeCognomePreposto" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="ResponsabileTecnicoImpresePulizieRequisitiProfessionaliType">
         <xs:sequence>
-            <xs:element name="AltriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="1"/>
-             <xs:choice>
-                 <xs:element name="prepostoGestioneTecnica">
-                     <xs:complexType>
-                         <xs:sequence>
-                              <xs:choice>
-                                  <xs:element name="UeTitoloProfessionale">
-                                      <xs:complexType>
-                                          <xs:sequence>
-                                              <xs:element name="obbligoScolastico" type="imppulizie:esperienzaQualificataType" minOccurs="0" maxOccurs="unbounded"/>
-                                              <xs:element name="attestatoqualificaTecnica" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
-                                              <xs:element name="diplomaSecondario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
-                                              <xs:element name="diplomaSeconlaureadario" type="aggregate:IstitutoType" minOccurs="0" maxOccurs="1"/>
-                                          </xs:sequence>
-                                       </xs:complexType>
-                                  </xs:element>                        
-                                   <xs:element name="ExtraUETitoloProfessionale" type="xs:date" minOccurs="0" maxOccurs="1"/>
-                              </xs:choice>
-                         </xs:sequence>
-                     </xs:complexType>
-                 </xs:element>
-                 <xs:element name="NomeCognomePreposto" type="xs:string" minOccurs="0" maxOccurs="1"/>
-             </xs:choice>
+            <xs:element name="responsabileTecnicoRequisiti" type="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType"/>
+            <xs:element name="qualifica">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="lavoratoreSubordinato" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="collaboratore" type="basic:EmptyType"  minOccurs="0"/>
+                        <xs:element name="socio" type="xs:string"  minOccurs="0"/>
+                        <xs:element name="altro" type="xs:string"  minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="responsabileTecnicoDichiarazioni" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
         </xs:sequence>
     </xs:complexType>
     
