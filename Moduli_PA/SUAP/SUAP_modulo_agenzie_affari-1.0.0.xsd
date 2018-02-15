@@ -56,7 +56,7 @@
         <xs:sequence>
             <xs:element name="tipoAttivita" minOccurs="0">
                 <xs:complexType>
-                    <xs:choice>
+                    <xs:sequence>
                         <xs:element name="organizzazioneeventi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="abbonamentimedia" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="infocommerciali" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
@@ -69,7 +69,7 @@
                         <xs:element name="assicurazioni" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="trasporti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="altro" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                    </xs:choice>
+                    </xs:sequence>
                 </xs:complexType>
             </xs:element>
             
