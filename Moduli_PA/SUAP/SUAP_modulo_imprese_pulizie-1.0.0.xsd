@@ -52,17 +52,15 @@
             <xs:element name="datiAttivita" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:choice>
                             <xs:element name="pulizia" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="disinfezione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="disinfestazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="derattizzazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                             <xs:element name="sanificazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        </xs:choice>
-                        <xs:element name="superficieComplessiva" minOccurs="0" type="xs:decimal"/>
-                    </xs:sequence>
+                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="superficieComplessiva" minOccurs="0" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
     
