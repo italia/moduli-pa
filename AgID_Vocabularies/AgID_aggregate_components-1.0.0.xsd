@@ -359,7 +359,7 @@
             <xs:sequence>
                 <xs:element name="istituto" type="xs:string"/>
                 <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
-                <xs:element name="oggettoCorso" type="xs:string"/>
+                <xs:element name="oggettoCorso" type="xs:string" minOccurs="0"/>
                 <xs:element name="annoConclusione" type="xs:integer"/>
             </xs:sequence>
     </xs:complexType>  
