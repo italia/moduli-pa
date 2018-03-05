@@ -329,7 +329,6 @@
             <xs:element ref="suecommon:allegatoCertificatoCollaudoStatico" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoAQE" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoAggiornamentoNumerazioneCivica" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
         </xs:sequence>                                
     </xs:complexType>
     
