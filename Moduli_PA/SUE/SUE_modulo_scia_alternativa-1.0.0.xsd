@@ -131,7 +131,7 @@
                 <xs:sequence>
                     <xs:element name="contributo" minOccurs="0">
                         <xs:complexType>
-                            <xs:sequence>
+                            <xs:choice>
                                 <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
                                 <xs:element name="titoloOneroso" minOccurs="0">
                                     <xs:complexType>
@@ -153,7 +153,7 @@
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
-                            </xs:sequence>  
+                            </xs:choice>  
                         </xs:complexType>
                     </xs:element>
                 </xs:sequence>        
