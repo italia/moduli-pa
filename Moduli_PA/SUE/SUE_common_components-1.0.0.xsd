@@ -718,18 +718,19 @@
     <!-- Reference suecommon:AmiantoType -->
     <xs:complexType name="AmiantoType">
         <xs:choice>
-            <xs:element name="interessano" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="nonInteressano" minOccurs="0">
+            <xs:element name="nonInteressano" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="interessano" minOccurs="0">
                 <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="basic:EmptyType">
-                            <xs:attribute type="xs:boolean" name="allegato"/>
-                        </xs:extension>
-                    </xs:complexContent>                   
+                    <xs:choice>
+                        <xs:element name="PianodiLavoroAllegato" minOccurs="0" type="basic:AbstractBaseType"/>
+                        <xs:element name="PianodiLavoroPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>
+                    </xs:choice>       
                 </xs:complexType>
             </xs:element>
         </xs:choice>
     </xs:complexType>
+
+    
 
     <!-- Reference suecommon:ConformitaSanitariaType -->
     <xs:complexType name="ConformitaSanitariaBaseType" abstract="true"/>
