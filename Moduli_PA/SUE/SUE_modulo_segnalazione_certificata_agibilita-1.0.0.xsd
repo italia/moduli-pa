@@ -267,8 +267,8 @@
     
     <xs:complexType name="ToponomasticaType">
         <xs:choice>
-            <xs:element name="comportaVariazioneCivici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="nonComportaVariazioneCivici" >
+            <xs:element name="nonComportaVariazioneCivici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="comportaVariazioneCivici">
                 <xs:complexType>
                     <xs:choice>
                         <xs:element name="allegaRichiestaNumerazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
