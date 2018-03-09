@@ -51,6 +51,27 @@
     </xs:complexType>
 
     <!-- BASE TYPE -->
+    <xs:element name="allegatoSoggettiCoinvolti" type="cil:SoggettiCoinvoltiType"/>
+    
+    <xs:complexType name="SoggettiCoinvoltiType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">Soggetti Coinvolti</xs:documentation>
+        </xs:annotation>       
+        <xs:sequence>
+            <xs:element name="Titolari"  minOccurs="0" maxOccurs="unbounded" type="suecommon:TitolareType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="it">
+                        Compilare solo in caso di più di un Titolare, seziona ripetibile
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element> 
+            <xs:element name="ImpreseEsecutrici" minOccurs="0" maxOccurs="unbounded" type="suecommon:ImpreseEsecutriciType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="it">Compilare in caso di affidamento dei lavori ad una o più imprese – sezione ripetibile</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
    
     <!-- Reference cil:ComunicaInzioLavoriType -->
     <xs:complexType name="ComunicaInzioLavoriType">
@@ -78,7 +99,7 @@
     <xs:complexType name="AllegatiCILType">
         <xs:sequence>
             <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
+            <xs:element ref="cil:allegatoSoggettiCoinvolti" minOccurs="1"/>
             <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
