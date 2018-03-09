@@ -559,8 +559,10 @@
                             <xs:annotation><xs:documentation>non rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995</xs:documentation></xs:annotation>
                         </xs:element>
                         <xs:element name="rientraArt8" minOccurs="0">
-                            <xs:annotation><xs:documentation>rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995, integrato con i 
-                                contenuti dell’articolo 4 del d.P.R. n. 227/2011</xs:documentation></xs:annotation>
+                            <xs:annotation>
+                                <xs:documentation>rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995, integrato con i 
+                                contenuti dell’articolo 4 del d.P.R. n. 227/2011</xs:documentation>
+                            </xs:annotation>
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="documentazioneImpattoAcustico" minOccurs="0" type="basic:EmptyType">
@@ -615,26 +617,35 @@
                             184-bis, comma 1, del d.lgs. n. 152/2006 o dell’articolo 41-bis, comma 1, d.l. n. 69 del 2013 e del d.m. 
                             n. 161/2012</xs:documentation></xs:annotation>
                         <xs:complexType>
-                            <xs:sequence>
+                            <xs:choice>
                                 <xs:element name="volInfUgu6000" type="basic:EmptyType">
-                                    <xs:annotation><xs:documentation>le opere comportano la produzione di materiali da scavo per un volume inferiore o 
-                                        uguale a 6000 mc ovvero (pur superando tale soglia) non sono soggette a VIA o AIA</xs:documentation></xs:annotation>                                    
+                                    <xs:annotation>
+                                        <xs:documentation>le opere comportano la produzione di materiali da scavo per un volume inferiore o 
+                                        uguale a 6000 mc ovvero (pur superando tale soglia) non sono soggette a VIA o AIA
+                                        </xs:documentation>
+                                    </xs:annotation>                                    
                                 </xs:element>
                                 <xs:element name="volSup6000" minOccurs="0">
-                                    <xs:annotation><xs:documentation>le opere comportano la produzione di materiali da scavo per un volume superiore a 6000 mc 
+                                    <xs:annotation>
+                                        <xs:documentation>le opere comportano la produzione di materiali da scavo per un volume superiore a 6000 mc 
                                         e sono soggette a VIA o AIA, e pertanto, ai sensi dell’art. 184-bis, comma 2-bis del d.lgs. n. 152/2006, 
-                                        e del d.m. n. 161/2012  si prevede la presentazione del Piano di Utilizzo.</xs:documentation></xs:annotation>
+                                        e del d.m. n. 161/2012  si prevede la presentazione del Piano di Utilizzo.
+                                        </xs:documentation>
+                                    </xs:annotation>
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element name="estremiProvvedimento" minOccurs="0" type="aggregate:ProtocolloStandardType">
-                                                <xs:annotation><xs:documentation>si comunicano gli estremi del provvedimento di VIA o AIA, comprensivo dell’assenso 
+                                                <xs:annotation>
+                                                    <xs:documentation>si comunicano gli estremi del provvedimento di VIA o AIA, comprensivo dell’assenso 
                                                     al Piano di Utilizzo dei materiali da scavo, rilasciato da__________________________con 
-                                                    prot. _____________ in data  |__|__|__|__|__|__|__|__</xs:documentation></xs:annotation>
+                                                    prot. _____________ in data  |__|__|__|__|__|__|__|__
+                                                    </xs:documentation>
+                                                </xs:annotation>
                                             </xs:element>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
-                            </xs:sequence>
+                            </xs:choice>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="produzioneRiutilizzataInLuogo" minOccurs="0" type="basic:EmptyType">
@@ -707,18 +718,19 @@
     <!-- Reference suecommon:AmiantoType -->
     <xs:complexType name="AmiantoType">
         <xs:choice>
-            <xs:element name="interessano" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="nonInteressano" minOccurs="0">
+            <xs:element name="nonInteressano" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="interessano" minOccurs="0">
                 <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="basic:EmptyType">
-                            <xs:attribute type="xs:boolean" name="allegato"/>
-                        </xs:extension>
-                    </xs:complexContent>                   
+                    <xs:choice>
+                        <xs:element name="PianodiLavoroAllegato" minOccurs="0" type="basic:AbstractBaseType"/>
+                        <xs:element name="PianodiLavoroPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>
+                    </xs:choice>       
                 </xs:complexType>
             </xs:element>
         </xs:choice>
     </xs:complexType>
+
+    
 
     <!-- Reference suecommon:ConformitaSanitariaType -->
     <xs:complexType name="ConformitaSanitariaBaseType" abstract="true"/>
