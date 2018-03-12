@@ -8,9 +8,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     
     targetNamespace="http://www.agid.gov.it/AgID_aggregate_components"  
-    
     elementFormDefault="qualified"
-    
     version="1.0.0" xml:lang="it">
     
     <xs:import namespace="http://www.w3.org/ns/corevocabulary/BasicComponents" schemaLocation="ISA_Core_Vocabularies/CoreVocabularies-BasicComponents-1.1.xsd"/>
@@ -245,7 +243,10 @@
             <xs:element name="stato" type="isacvbc:AddressAdminUnitLocationOneType" default="it_IT" />
             <xs:element name="regione" type="aggregate:RegioneType" minOccurs="0"/>
             <xs:element name="provincia" type="aggregate:ProvinciaType" minOccurs="0"/>
-            <xs:element name="comune" type="aggregate:ComuneType"/>			
+            <xs:choice>
+                <xs:element name="comune" type="aggregate:ComuneType"/>
+                <xs:element name="localitaEstera" type="xs:string"/>
+            </xs:choice>
         </xs:sequence>
     </xs:group>  
     

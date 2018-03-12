@@ -387,7 +387,7 @@
 
     <!-- Reference suecommon:BarriereArchitettonicheType -->
     <xs:complexType name="BarriereArchitettonicheType">
-        <xs:choice>
+        <xs:sequence>
             <xs:element name="nonSoggetto" minOccurs="0" type="basic:EmptyType"/>
             <xs:element name="edificioPrivatoApertoAlPubblico" minOccurs="0" type="basic:EmptyType"/>
             <xs:element name="soggetto" minOccurs="0">
@@ -406,7 +406,7 @@
                     </xs:sequence>
                 </xs:complexType>                
             </xs:element>
-        </xs:choice>        
+        </xs:sequence>        
     </xs:complexType> 
 
     <!-- Reference suecommon:SicurezzaImpiantiType -->

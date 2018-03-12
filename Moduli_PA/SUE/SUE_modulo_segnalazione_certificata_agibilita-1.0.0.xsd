@@ -245,11 +245,11 @@
     </xs:complexType>
     
     <xs:complexType name="BarriereArchitettonicheType">
-        <xs:choice>
+        <xs:sequence>
             <xs:element name="nonSoggettoPrescrizioni" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="soggettoPrescrizioni" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="soggettoPrescrizioniEdificoPubblico" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-        </xs:choice>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="DocumentazioneCatastaleType">
