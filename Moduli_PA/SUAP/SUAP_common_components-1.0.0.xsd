@@ -336,7 +336,7 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:CarattereStagionaleBaseType">
                 <xs:sequence>
-                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoType" />
+                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoStagionaleType" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

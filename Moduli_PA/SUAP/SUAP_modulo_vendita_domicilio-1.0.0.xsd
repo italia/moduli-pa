@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:domicilio="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_vendita_domicilio"
+    xmlns:venddom="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_vendita_domicilio"
     xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
@@ -27,7 +27,7 @@
     <!-- // Modulo modulo_vendita_domicilio ## internal code ref 006 // -->
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloVenditaDomicilio" type="domicilio:ModuloVenditaDomicilioType" />
+    <xs:element name="ModuloVenditaDomicilio" type="venddom:ModuloVenditaDomicilioType" />
         
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloVenditaDomicilioType">
@@ -35,11 +35,11 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
-                <xs:element name="apertura" type="domicilio:AperturaType"/>
+                <xs:element name="apertura" type="venddom:AperturaType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
-            <xs:element name="tabellaAllegati" type="domicilio:TabellaAllegatiType"/>
+            <xs:element name="tabellaAllegati" type="venddom:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
@@ -88,7 +88,7 @@
     
     <xs:complexType name="AllegatiAltriType">
         <xs:complexContent>
-            <xs:extension base="domicilio:AllegatiAltriBaseType">
+            <xs:extension base="venddom:AllegatiAltriBaseType">
                 <xs:sequence>
                     <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
                 </xs:sequence>
@@ -98,10 +98,10 @@
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIA" type="domicilio:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIAUnica" type="domicilio:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiSCIACondizionata" type="domicilio:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="domicilio:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiSCIA" type="venddom:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="venddom:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="venddom:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="venddom:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
     

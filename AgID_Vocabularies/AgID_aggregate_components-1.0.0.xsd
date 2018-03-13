@@ -111,6 +111,7 @@
         </xs:complexContent>
     </xs:complexType>
     
+    
     <xs:complexType name="CoordinateCatastaliType">
         <xs:annotation>
             <xs:documentation>Tipo per definire le coordinate catastali da utilizzare</xs:documentation>
@@ -372,6 +373,36 @@
         <xs:sequence>
            <xs:element name="da" type="xs:date"/>
            <xs:element name="a" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PeriodoStagionaleType">
+        <xs:annotation>
+            <xs:documentation>Definisce un intervallo temporale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="da" type="aggregate:MeseAnno"/>
+            <xs:element name="a" type="aggregate:MeseAnno"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MeseAnno">
+        <xs:sequence>
+            <xs:element name="mese">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:totalDigits value="4"/>
+                    </xs:restriction>
+                </xs:simpleType>  
+            </xs:element>
+            <xs:element name="anno">
+              <xs:simpleType>
+                  <xs:restriction base="xs:integer">
+                      <xs:minInclusive value="1"/>
+                      <xs:maxInclusive value="12"/>
+                  </xs:restriction>
+              </xs:simpleType>  
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     

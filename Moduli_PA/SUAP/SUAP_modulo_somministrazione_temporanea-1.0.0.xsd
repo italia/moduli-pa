@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:temporanea="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_temporanea"
+    xmlns:sommtemp="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_temporanea"
     xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
@@ -26,7 +26,7 @@
     <!-- // Modulo modulo_somministrazione_temporanea ## internal code ref 009 // -->
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloSomministrazioneTemporanea" type="temporanea:ModuloSomministrazioneTemporaneaType"/>
+    <xs:element name="ModuloSomministrazioneTemporanea" type="sommtemp:ModuloSomministrazioneTemporaneaType"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSomministrazioneTemporaneaType">
@@ -35,12 +35,12 @@
             <xs:element name="manifestazione">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="tipologia" type="temporanea:TipologiaManifestazioneType"/>
+                        <xs:element name="tipologia" type="sommtemp:TipologiaManifestazioneType"/>
                         <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
                     </xs:sequence>                   
                 </xs:complexType>                 
             </xs:element>
-            <xs:element name="modalitaSomministrazione" type="temporanea:ModalitaSomministrazioneType"/>
+            <xs:element name="modalitaSomministrazione" type="sommtemp:ModalitaSomministrazioneType"/>
             <xs:element name="periodoSomministrazione">
                 <xs:complexType>
                     <xs:sequence>
@@ -50,7 +50,7 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
-            <xs:element name="tabellaAllegati" type="temporanea:TabellaAllegatiType"/>
+            <xs:element name="tabellaAllegati" type="sommtemp:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
@@ -92,7 +92,7 @@
     
     <xs:complexType name="AllegatiAltriType">
         <xs:complexContent>
-            <xs:extension base="temporanea:AllegatiAltriBaseType">
+            <xs:extension base="sommtemp:AllegatiAltriBaseType">
                 <xs:sequence>
                     <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/> 
                 </xs:sequence>
@@ -102,8 +102,8 @@
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatSCIA" type="temporanea:AllegatiSCIAType"/>                        
-            <xs:element name="allegatAltri" type="temporanea:AllegatiAltriBaseType"/>
+            <xs:element name="allegatSCIA" type="sommtemp:AllegatiSCIAType"/>                        
+            <xs:element name="allegatAltri" type="sommtemp:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
     

@@ -49,12 +49,22 @@
             <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ComunicazioniImpreseEsecutriciDeiLavoriType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
-            <!-- Dichiarazioni  -->
-            <xs:element name="tipoDiIntervento" type="cila:TipologiaInterventoBaseType"/>
-            <!-- 2)	Altre comunicazioni, segnalazioni, asseverazioni etc. (*) -->
-            <xs:element name="altreComunicazioni" type="suecommon:ComunicazioniSegnalazioniBaseType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="attiDiAssenso" type="suecommon:AttiAssensoType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="dichiarazioniNote" type="xs:string"/>
+            <!-- Dichiarazioni del progettista -->
+            <xs:element name="dichiarazioniProgettista">
+                <xs:complexType>
+                    <xs:annotation>
+                        <xs:documentation>I dati anagrafici del progettista sono presente nell'allegato obbligatorio "Soggetti Coinvolti"</xs:documentation>
+                    </xs:annotation>
+                    <xs:sequence>
+                        <xs:element name="tipoDiIntervento" type="cila:TipologiaInterventoBaseType"/>
+                        <!-- 2)	Altre comunicazioni, segnalazioni, asseverazioni etc. (*) -->
+                        <xs:element name="altreComunicazioni" type="suecommon:ComunicazioniSegnalazioniBaseType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="attiDiAssenso" type="suecommon:AttiAssensoType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="dichiarazioniNote" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
             <xs:element name="tabellaAllegatiCILA" type="cila:TabellaAllegatiCILAType"/>
         </xs:sequence>
     </xs:complexType>

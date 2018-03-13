@@ -38,7 +38,7 @@
             <!-- DICHIARAZIONI -->
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>               
             <xs:element name="operePreviste" type="suecommon:OperePrevisteType"/>
-            <xs:element name="comunicaInzioLavori" type="cil:ComunicaInzioLavoriType"/>
+            <xs:element name="comunicaInizioLavori" type="cil:ComunicaInzioLavoriType"/>
             <xs:element name="localizzazioneIntervento" type="cil:LocalizzazioneInterventoType"/>
             <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType" minOccurs="0" maxOccurs="unbounded" />           
             <xs:element name="impreseEsecutrici" type="suecommon:ComunicazioniImpreseEsecutriciDeiLavoriType"/>
