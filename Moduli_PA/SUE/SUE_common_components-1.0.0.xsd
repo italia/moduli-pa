@@ -371,6 +371,7 @@
                     <xs:element name="pianoRecupero" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
                     <xs:element name="pip" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
                     <xs:element name="peep" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
+                    <xs:element name="convenzione" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
                     <xs:element name="altro" minOccurs="0" type="suecommon:TabellaStrumentazioneUrbanisticaType"/>
                 </xs:sequence> 
             </xs:extension>
@@ -413,46 +414,44 @@
     <xs:complexType name="SicurezzaImpiantiType">
         <xs:choice>
             <xs:element name="nonComportaImpianti" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="comportaImpianti" type="suecommon:ComportaImpiantiBaseType"/>
+            <xs:element name="comportaImpianti" type="suecommon:ComportaImpiantiType"/>
         </xs:choice>
     </xs:complexType>                
 
-    <xs:complexType name="ComportaImpiantiBaseType" abstract="true">
+    <xs:complexType name="ComportaImpiantiType" >
         <xs:sequence>
+            <xs:element name="elettronica" minOccurs="0" type="basic:EmptyType"/>
             <xs:element name="elettronici" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="climatizzazione" minOccurs="0" type="basic:EmptyType"/>                        
+            <xs:element name="climatizzazione" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="idriciSanitari" minOccurs="0" type="basic:EmptyType"/>    
             <xs:element name="gas" minOccurs="0" type="basic:EmptyType"/>    
             <xs:element name="sollevamento" minOccurs="0" type="basic:EmptyType"/> 
             <xs:element name="antincendio" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="altro" minOccurs="0" type="suecommon:ComportaImpiantiAltroBaseType"/>
         </xs:sequence>    
     </xs:complexType>
+    
+    <xs:complexType name="ComportaImpiantiAltroBaseType" abstract="true"/>
 
-    <xs:complexType name="ComportaImpiantiType">
+    <xs:complexType name="ComportaImpiantiAltroType">
         <xs:complexContent>
-            <xs:extension base="suecommon:ComportaImpiantiBaseType">
-                <xs:sequence>
-                    <xs:element name="altro">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="specifica" type="xs:string"/>
-                                <xs:choice>
-                                    <xs:element name="nonSoggetto" minOccurs="0" type="basic:EmptyType"/>
-                                    <xs:element name="soggetto" minOccurs="0">
-                                        <xs:complexType>
-                                            <xs:complexContent>
-                                                <xs:extension base="basic:EmptyType">
-                                                    <xs:attribute type="xs:boolean" name="allegataElaborati"/>
-                                                </xs:extension>
-                                            </xs:complexContent>                   
-                                        </xs:complexType>                                                                                  
-                                    </xs:element>
-                                </xs:choice>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
+            <xs:extension base="suecommon:ComportaImpiantiAltroBaseType">
+               <xs:sequence>
+                    <xs:element name="specifica" type="xs:string"/>
+                    <xs:choice>
+                        <xs:element name="nonSoggetto" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="soggetto" minOccurs="0">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="basic:EmptyType">
+                                        <xs:attribute type="xs:boolean" name="allegataElaborati"/>
+                                    </xs:extension>
+                                </xs:complexContent>                   
+                            </xs:complexType>                                                                                  
+                        </xs:element>
+                    </xs:choice>
                 </xs:sequence>
             </xs:extension>
-            
         </xs:complexContent>
     </xs:complexType>
 
@@ -485,7 +484,7 @@
                             <xs:annotation><xs:documentation>non è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005
                                 che l’intervento, in relazione agli obblighi in materia di fonti rinnovabili</xs:documentation></xs:annotation>
                         </xs:element>                       
-                        <xs:element name="soggettoApplicazione" minOccurs="0">
+                        <xs:element name="soggettoFontiRinnovabili" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="prescrizioniInRelTecnica" minOccurs="0" type="basic:EmptyType">
@@ -1104,6 +1103,7 @@
             <xs:extension base="suecommon:TutelaEcologicaBaseType">
                 <xs:sequence>
                     <xs:element name="fasciaRispettoDepuratori" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="fasciaRispettoPozzi" minOccurs="0" type="basic:EmptyType"/>
                     <xs:element name="altro" minOccurs="0" type="xs:string"/>
                     <xs:element name="allegatiPerVincoli">
                         <xs:complexType>
