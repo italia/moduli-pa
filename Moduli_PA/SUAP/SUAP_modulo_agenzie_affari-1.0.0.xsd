@@ -37,6 +37,7 @@
                 <xs:element name="trasferimento" type="ageaffari:TrasferimentoType"/>
                 <xs:element name="cessazione" type="ageaffari:CessazioneType"/>
             </xs:choice>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             
             <xs:element name="tabellaAllegati" type="ageaffari:TabellaAllegatiType"/>                 
             
