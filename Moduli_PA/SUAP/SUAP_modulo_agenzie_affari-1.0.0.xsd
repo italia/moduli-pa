@@ -53,7 +53,7 @@
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="tipoAttivita" minOccurs="0">
+            <xs:element name="tipoAttivita" >
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="organizzazioneeventi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
@@ -84,7 +84,7 @@
             </xs:element>
         
         
-            <xs:element name="Dichiarazioni" minOccurs="0">
+            <xs:element name="Dichiarazioni" >
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="RegistroGiornaleAffari" minOccurs="0">
