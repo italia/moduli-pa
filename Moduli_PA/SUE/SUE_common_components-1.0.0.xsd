@@ -218,8 +218,10 @@
     <!-- Reference suecommon:LocalizzazioneInterventoType -->
     <xs:complexType name="LocalizzazioneInterventoType">
         <xs:sequence>
-            <xs:group ref="suecommon:LocalizzazioneInterventoGroup"/>
-            <xs:element name="coordinate" type="suecommon:CoordinateBaseType"/>
+            <xs:element name="ubicazioneImmobile" type="suecommon:UbicazioneImmobileType"/>
+            <xs:element name="datiCatastali" type="moduli:DatiCatastaliType"/>
+            <xs:element name="destinazioneDUso" type="xs:string"/>
+            <xs:element name="coordinate" type="suecommon:CoordinateBaseType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -234,15 +236,6 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:group name="LocalizzazioneInterventoGroup">
-        <xs:sequence>
-            <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
-            <xs:element name="datiCatastali" type="moduli:DatiCatastaliBaseType"/>
-            <xs:element name="destinazioneDUso" type="xs:string"/>
-        </xs:sequence> 
-    </xs:group>
-
-  
     <xs:complexType name="UbicazioneImmobileType">
         <xs:complexContent>
             <xs:extension base="aggregate:IndirizzoType">
@@ -500,8 +493,8 @@
                             </xs:complexType>
                         </xs:element>                        
                     </xs:choice>
-                    <xs:choice>
-                        <xs:element name="ricadeSpessoriDistanze" minOccurs="0">
+                    <xs:choice minOccurs="0">
+                        <xs:element name="ricadeSpessoriDistanze" >
                             <xs:annotation><xs:documentation>ricade nell’articolo 14, comma 6,  del d.lgs. n. 102/2014 in merito al computo degli spessori delle murature, nonché alla deroga alle 
                                 distanze minime e alle altezze massime degli edifici</xs:documentation></xs:annotation>
                             <xs:complexType>
@@ -514,7 +507,7 @@
                                 </xs:complexContent>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="ricadeDistanze" minOccurs="0">
+                        <xs:element name="ricadeDistanze" >
                             <xs:annotation><xs:documentation>ricade nell’articolo 14, comma 7, del d.lgs. n. 102/2014 in merito alle deroga alle distanze minime e alle altezze 
                                 massime degli edifici</xs:documentation></xs:annotation>
                             <xs:complexType>
@@ -527,7 +520,7 @@
                                 </xs:complexContent>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="ricadeBonusVolumetrico" minOccurs="0">
+                        <xs:element name="ricadeBonusVolumetrico" >
                             <xs:annotation><xs:documentation>ricade nell’articolo 12, comma 1, del d.lgs. n. 28/2011 in merito al bonus volumetrico del 5 per cento</xs:documentation></xs:annotation>
                             <xs:complexType>
                                 <xs:complexContent>
