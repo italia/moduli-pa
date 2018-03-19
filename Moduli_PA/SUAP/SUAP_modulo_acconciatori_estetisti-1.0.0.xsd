@@ -38,7 +38,6 @@
                 <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
             </xs:choice>
             <!-- DICHIARAZIONI -->
-            <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
             <!-- ALLEGATI -->
             <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
@@ -110,6 +109,7 @@
             <xs:element name="superficeAdibitaAttivita" type="acconcestet:superficeComplessivaBaseType" />
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaBaseType"/>
+            <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
        </xs:sequence>
     </xs:complexType>
     
