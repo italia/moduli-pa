@@ -96,7 +96,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="data-iscrizione" type="xs:date"/>
+                <xs:attribute name="dataIscrizione" type="xs:date"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
