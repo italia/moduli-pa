@@ -120,12 +120,20 @@
         <xs:sequence>
             <xs:element name="inQualitaDi" type="xs:string"/>
             <xs:element name="istituto" type="xs:string"/>
-            <xs:element name="tipoAttivita" type="xs:string"/>
             <xs:element name="istitutoIndirizzo" type="aggregate:IndirizzoType"/>
             <xs:element name="annoScolastico" type="xs:integer"/>
-            <xs:element name="da" type="xs:date"/>
-            <xs:element name="a" type="xs:date"/>
-            <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"/>
+            
+            <xs:element name="esperienziaPressoImpresa" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tipoAttivita" type="xs:string"/>
+                        <xs:element name="da" type="xs:date"/>
+                        <xs:element name="a" type="xs:date"/>
+                        <xs:element name="iscrizioneRegistroImprese" type="aggregate:CCIAAType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+           
         </xs:sequence>
     </xs:complexType>
     
