@@ -213,7 +213,7 @@
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
                 <xs:sequence>
-                    <xs:element name="cittadinanza" type="enum:NazioniAlpha3Enum" default="ITA" minOccurs="0"/>
+                    <xs:element name="cittadinanza" type="enum:CountryISO31661Alpha2Enum" default="IT" minOccurs="0"/>
                     <xs:element name="documentoSoggiorno" type="aggregate:DocumentoSoggiornoType" minOccurs="0"/>
                     <xs:element name="residente" type="aggregate:IndirizzoType"/>
                     <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
@@ -241,7 +241,7 @@
             <xs:documentation>Gruppo di proprietà associate al luogo</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="stato" type="isacvbc:AddressAdminUnitLocationOneType" default="it_IT" />
+            <xs:element name="stato" type="enum:CountryISO31661Alpha2Enum" default="IT" />
             <xs:element name="regione" type="aggregate:RegioneType" minOccurs="0"/>
             <xs:element name="provincia" type="aggregate:ProvinciaType" minOccurs="0"/>
             <xs:choice>
