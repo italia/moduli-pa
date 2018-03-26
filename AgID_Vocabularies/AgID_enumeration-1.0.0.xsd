@@ -988,7 +988,7 @@
             <xs:enumeration value="PERMESSO_SOGGIORNO"/>
             <xs:enumeration value="DOCUMENTO_IDENTITA"/>
             <xs:enumeration value="PASSAPORTO"/>
-            <xs:enumeration value="DICHIRAZIONE_PRESENZA"/>            
+            <xs:enumeration value="DICHIARAZIONE_PRESENZA"/>            
             <xs:enumeration value="ATTESTAZIONE_REGOLARITA_SOGGIORNO_UE"/>
             <xs:enumeration value="ALTRO"/>
         </xs:restriction>
