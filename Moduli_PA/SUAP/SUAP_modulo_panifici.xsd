@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:panifici="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ DI PANIFICAZIONE
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    <!-- // Modulo panifici ## internal code ref 015 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloPanifici" type="panifici:ModuloPanificiType"/>
+    
+    <xs:complexType name="ModuloPanificiType" >
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            
+            <xs:choice>
+                <xs:element name="apertura" type="panifici:AperturaType"/>
+                <xs:element name="trasferimento" type="panifici:TrasferimentoType"/>
+                <xs:element name="trasformazione" type="panifici:TrasformazioneType"/>
+            </xs:choice>
+            <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
+
+            <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniType" />
+            <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Attività : Apertura -->
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="panifici:attivitaCongiuntaVendProdConsPostoBaseType"/>
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Attività : Trasferimento -->
+    <xs:complexType name="TrasferimentoType">
+        <xs:sequence>
+            <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
+            <xs:element name="attivitaCongiuntaVendProdConsPosto" type="panifici:attivitaCongiuntaVendProdConsPostoBaseType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <!-- Attività : Trasformazione -->  
+    <xs:complexType name="TrasformazioneType">
+        <xs:sequence>
+            <xs:element name="protocolloTrasfomazione" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="modificheCicloProduttivo"  type="panifici:modificheCicloProduttivoBaseType"/>
+            <xs:element name="trasfCongiuntaVendProdConsPosto" type="panifici:TipoModificaBaseType"/>
+            <xs:element name="trasfAltro" type="panifici:trasfAltroBaseType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>    
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="attivitaCongiuntaVendProdConsPostoBaseType" abstract="true"/>   
+    <xs:complexType name="attivitaCongiuntaVendProdConsPostoType">
+        <xs:complexContent>
+            <xs:extension base="panifici:attivitaCongiuntaVendProdConsPostoBaseType">
+                <xs:sequence>
+                    <xs:element name="presente" type="xs:boolean" default="false"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="modificheCicloProduttivoBaseType" abstract="true"/>   
+    <xs:complexType name="modificheCicloProduttivoType">
+        <xs:complexContent>
+            <xs:extension base="panifici:modificheCicloProduttivoBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="TipoModificaBaseType" abstract="true"/>   
+    <xs:complexType name="TipoModificaType">
+        <xs:complexContent>
+            <xs:extension base="panifici:TipoModificaBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="aggiunta" type="basic:EmptyType" minOccurs="0" />
+                        <xs:element name="eliminata" type="basic:EmptyType" minOccurs="0" />
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="trasfAltroBaseType" abstract="true"/>   
+    <xs:complexType name="trasfAltroType">
+        <xs:complexContent>
+            <xs:extension base="panifici:trasfAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="presente" type="basic:EmptyType" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- Allegati -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIAUnica" type="panifici:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="panifici:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="panifici:AllegatiAltriType"/>      
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="1"/>
+            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoRichiestaAutorizAUA"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoEmissAtmosferaAUA"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga"  minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="panifici:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    <xs:complexType name="DichiarazioniType">
+        <xs:choice>
+            <xs:element name="dichiaranteRequisitiAntimafia" type="suapcommon:RequisitiAntimafiaType"/>
+            <xs:element name="responsabileAttivitàProduttiveRequisitiAntimafia" type="suapcommon:ResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
+        </xs:choice>  
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:element name="dicConsumoFarina" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="minoreuguale300Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="da300a1500Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="maggiore1500Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dichConsumoIdrico" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="minoreuguale5Mc" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="maggiore5Mc" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>
+        </xs:sequence>        
+    </xs:complexType>
+
+    
+</xs:schema>

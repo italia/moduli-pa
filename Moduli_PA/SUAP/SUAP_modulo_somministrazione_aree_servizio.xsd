@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:somareeserviziostazioni="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_aree_servizio"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_aree_servizio"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">   
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI ATTIVITÀ DI SOMMINISTRAZIONE DI ALIMENTI E BEVANDE IN ESERCIZI POSTI NELLE AREE DI SERVIZIO 
+            E/O NELLE STAZIONI
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>    
+    
+    <!-- // Modulo SUAP_modulo_somministrazione_aree_servizio ## internal code ref 017 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSomministrazioneAlimenti" type="somareeserviziostazioni:ModuloSomministrazioneAlimentiType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloSomministrazioneAlimentiType">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="apertura" type="somareeserviziostazioni:AvvioType"/>
+                <xs:element name="ampliamento" type="somareeserviziostazioni:AmpliamentoType"/>
+            </xs:choice>
+            <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="tabellaAllegati" type="somareeserviziostazioni:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+        </xs:sequence>  
+    </xs:complexType>    
+    
+    <xs:complexType name="AvvioType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:choice>
+                    <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
+                    <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
+                    <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
+                    <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
+                </xs:choice>
+                <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType" minOccurs="0"/>
+            </xs:choice>    
+            <xs:element name="superficieSomministrazione" type="suapcommon:SuperficieEsercizioBaseType" />
+            <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneBaseType"/>
+        </xs:sequence>    
+    </xs:complexType>
+    
+    <xs:complexType name="TipoEsercizioAltroBaseType" abstract="true" />
+    <xs:complexType name="TipoEsercizioAltroType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:TipoEsercizioAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ModalitaGestioneBaseType" abstract="true"/>
+    <xs:complexType name="ModalitaGestioneType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:ModalitaGestioneBaseType">
+                <xs:sequence>
+                    <xs:element name="GestioneDiretta" type="basic:EmptyType"/>
+                    <xs:element name="GestioneATerzi" type="basic:EmptyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AmpliamentoSuperficieVenditaBaseType" abstract="true"/>
+    <xs:complexType name="AmpliamentoSuperficieVenditaType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:AmpliamentoSuperficieVenditaBaseType">
+                <xs:sequence>
+                    <xs:element name="SuperficieVenditaSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AmpliamentoType">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="ampliamentoSuperficieSomministrazione" type="somareeserviziostazioni:AmpliamentoSuperficieVenditaBaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIAUnica" type="somareeserviziostazioni:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="somareeserviziostazioni:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="somareeserviziostazioni:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="somareeserviziostazioni:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- BASIC COMPONENTS TYPE -->  
+
+    
+    <!-- ENUMERATION -->
+
+
+</xs:schema>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:sommtemp="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_temporanea"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_temporanea"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER ESERCIZI DI SOMMINISTRAZIONE TEMPORANEA DI ALIMENTI E BEVANDE
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    <!-- // Modulo modulo_somministrazione_temporanea ## internal code ref 009 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSomministrazioneTemporanea" type="sommtemp:ModuloSomministrazioneTemporaneaType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloSomministrazioneTemporaneaType">
+        <xs:sequence>
+            <xs:element name="denominazioneManifestazione" type="xs:string"/>
+            <xs:element name="manifestazione">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tipologia" type="sommtemp:TipologiaManifestazioneType"/>
+                        <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+                    </xs:sequence>                   
+                </xs:complexType>                 
+            </xs:element>
+            <xs:element name="modalitaSomministrazione" type="sommtemp:ModalitaSomministrazioneType"/>
+            <xs:element name="periodoSomministrazione">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:date"/>
+                        <xs:element name="a" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
+            <xs:element name="tabellaAllegati" type="sommtemp:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="TipologiaManifestazioneType">
+        <xs:choice>
+            <xs:element name="sagra" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="fiera" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="religiosaTradizionaleCulturale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="eventoLocale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:choice>
+   </xs:complexType>
+   
+    <xs:complexType name="ModalitaSomministrazioneType">
+        <xs:sequence>
+            <xs:element name="apertoPrivata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="apertoPubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="internoPrivata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="internoPubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoNotificaSanitaria" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true"/>                                
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="sommtemp:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatSCIA" type="sommtemp:AllegatiSCIAType"/>                        
+            <xs:element name="allegatAltri" type="sommtemp:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+
+    
+</xs:schema>

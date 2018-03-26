@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:scialt="http://www.agid.gov.it/MODULI_PA/SUE/modulo_scia_alternativa"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_scia_alternativa"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            B2. SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITA’ ALTERNATIVA AL PERMESSO DI COSTRUIRE
+            - SCIA ALTERNATIVA AL PERMESSO DI COSTRUIRE- PARTE DEL TITOLARE 
+            - RELAZIONE DI ASSEVERAZIONE
+            - QUADRO RIEPILOGATIVO DELLA DOCUMENTAZIONE
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    <!-- // Modulo modulo_scia_alternativa ## internal code ref 03/B2 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSCIAAlt" type="scialt:ModuloSCIAAltType" />
+    
+    <xs:complexType name="ModuloSCIAAltType">
+        <xs:sequence>
+            
+            <!-- SOGGETTI -->
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="suecommon:SchedaDittaType"/>
+            <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType"/>
+            
+            <!-- DICHIARAZIONI -->
+            <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>            
+            <xs:element name="presentazione" type="scialt:PresentazioneBaseType"/>            
+            <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>            
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteType"/>           
+            <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
+            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
+            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
+            <xs:element name="obblighiSaluteSicurezza" type="scialt:ObblighiSaluteSicurezzaType"/>
+            <xs:element name="note" type="xs:string"/> 
+            
+            <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
+            <xs:element ref="suecommon:relazioneTecnicaAsseverazione"/>
+            
+            <!-- ALLEGATI  -->
+            <xs:element name="tabellaAllegati" type="scialt:TabellaAllegatiType"/>
+            
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- BASE TYPE -->
+    <xs:complexType name="PresentazioneBaseType" abstract="true"/>
+    <xs:complexType name="PresentazioneType">
+        <xs:complexContent>
+            <xs:extension base="scialt:PresentazioneBaseType">
+                    <xs:choice>
+                        <xs:element name="SCIAAlternativa" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="SCIAUnica" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="SCIACondizionata" minOccurs="0" type="basic:EmptyType" />
+                    </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference scialt:QualificazioneInterventoType -->
+    <xs:complexType name="QualificazioneInterventoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:QualificazioneInterventoBaseType">
+                <xs:sequence>
+                    <xs:element name="interventiSCIAAlternativa" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:choice>
+                        <xs:element name="procedimentoAutomatizzato" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="procedimentoOrdinario" minOccurs="0" type="basic:EmptyType"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+
+    <xs:complexType name="CorsoDiEsecuzioneType">
+        <xs:complexContent>
+            <xs:extension base="basic:EmptyType">
+                <xs:attribute type="xs:boolean" name="ricevuta"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SanatoriaInterventoType">
+        <xs:sequence>
+            <xs:element type="xs:date" name="data"/>
+        </xs:sequence>
+        <xs:attribute type="xs:boolean" name="ricevuta"/>
+    </xs:complexType>      
+
+    <!-- Reference scialt:RegolaritaUrbanisticaType -->
+    <xs:complexType name="RegolaritaUrbanisticaType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:RegolaritaUrbanisticaBaseType">
+                <xs:choice>
+                    <xs:group ref="suecommon:RegolaritaUrbanisticaOptionGroup"/>
+                    <xs:element name="praticheStessoImmobile">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="specifica" type="xs:string"/>
+                                <xs:element name="pratica" type="aggregate:AttoBaseType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Reference suecommon:CalcoloContributoBaseType -->
+    <xs:complexType name="CalcoloContributoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
+            <xs:choice>
+                <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
+                <xs:element name="titoloOneroso" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:choice>
+                                <xs:element name="calcoloSportello" minOccurs="0" type="basic:EmptyType"/>
+                                <xs:element name="calcoloPreventivo" minOccurs="0" type="basic:EmptyType"/>                                                    
+                            </xs:choice>
+                            <xs:element name="versamento" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:choice>
+                                        <xs:element name="pagamentoEntro30Giorni" minOccurs="0" type="basic:EmptyType"/>
+                                        <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>   
+                                        <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>                   
+                                    </xs:choice>                              
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="oneriUrbanizzazione" minOccurs="0" type="basic:EmptyType"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>  
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    
+    <!-- Reference scialt:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:choice>
+            <xs:element name="nonRicade" type="basic:EmptyType"/>
+            <xs:element name="ricade" >
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="suecommon:ObblighiSaluteSicurezzaEntitaCantiereGroup"/>
+                        <xs:choice>
+                            <xs:element name="noNotifica" minOccurs="0" type="basic:EmptyType"/>
+                            <xs:element name="notifica" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:choice>
+                                        <xs:element name="allega" minOccurs="0" type="basic:AbstractBaseType"/> 
+                                        <xs:element name="invioPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/> 
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricadeRiservaPresentaPrimaInizioLavori" type="basic:AbstractBaseType"/>
+        </xs:choice>        
+    </xs:complexType>
+    
+                
+    <!-- Reference scialt:TipoInterventiOpere -->
+    <xs:complexType name="TipoInterventiOpere">
+        <xs:complexContent>
+            <xs:extension base="suecommon:TipoInterventiOpereBaseType">
+                <xs:sequence>
+                    <xs:element name="ristrutturazioneEdilizia" minOccurs="0" type="basic:EmptyType"/>                    
+                    <xs:element name="nuovaCostruzioneRistrutturazioneUrbanistica" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="nuovaCostruzione" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="altriInterventi" minOccurs="0" type="xs:string"/>
+                    <xs:element name="dettagliOpere" minOccurs="0" type="xs:string"/>
+                </xs:sequence>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <!-- Reference scialt:TabellaAllegatiType -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIAAlterntiva" type="scialt:AllegatiSCIAAlterntivaType"/>
+            <xs:element name="allegatiSCIAUnica" type="scialt:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="scialt:AllegatiSCIACondizionataType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAAlterntivaType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
+            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="1"/> 
+            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>            
+            <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoModelloISTAT" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDeterminazioneContributoCostruzione" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoPreventivoContributoCostruzione" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoProgettoUrbanizzazione" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoNotificaPreliminare" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoElaboratoGrafico" minOccurs="1"/>
+            <xs:element ref="suecommon:allegatoDocumentazioneFotografica" minOccurs="1"/>               
+            <xs:element ref="suecommon:allegatoRelazioneGeologica" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoSuperamentoBarriereArch" minOccurs="0"/>     
+            <xs:element ref="suecommon:allegatoProgettoImpianti" minOccurs="0"/> 
+            <xs:element ref="suecommon:allegatoRelazioneConsumiEnergetici" minOccurs="0"/> 
+            <xs:element ref="suecommon:allegatoAssensoTutelaEcologica" minOccurs="0"/> 
+            <xs:element ref="suecommon:allegatoAssensoTutelaFunzionale" minOccurs="0"/>             
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoDocumentazioneImpattoAcustico" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDichiarazioneSostitutiva" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoPianoDemolizioneAmianto" minOccurs="0"/>            
+            <xs:element ref="suecommon:allegatoDenunciaLavori" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDenunciaLavoriZonaSismica" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRisultatiQualitaTerreni" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAttestazioneVersamentoOneriAutorizzazioni" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoVersamentoImpostaBollo" minOccurs="0"/>           
+            <xs:element ref="suecommon:allegatoDerogaBarriereArchitettoniche" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioParereVigiliFuoco" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDerogaPrevenzioneIncendi" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoPrevisioneImpattoAcusticoRilascioNullaosta" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDerogaConformitaRequisitiIgienicoSanitari" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAutorizzazioneSismica" minOccurs="0"/>            
+            <xs:element ref="suecommon:allegatoAutorizzazioniScarichiIdrici" minOccurs="0"/>             
+            <xs:element ref="suecommon:allegatoRelazionePaesaggisticaSemplificata" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioParereSoprintendenza" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioNullaOstaAreaProtetta" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioloAutorizzazioneVincoloIdrogeologico" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoRilascioAutorizzazioneVincoloIdraulico" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoApprovazioneProgettoVINCA" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoDerogafasciaRispettoCimiteriale" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoConformitaVincoliEcologica" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAssensoTutelaFunzionale" minOccurs="0"/>
+            <xs:element ref="suecommon:allegatoAttestazioneVersamentoOneriAutorizzazioni" minOccurs="0"/>           
+        </xs:sequence>                                
+    </xs:complexType>
+    
+</xs:schema>

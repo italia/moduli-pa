@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:somscuoleospetc="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_scuole_ospedali_ecc"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_scuole_ospedali_ecc"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">   
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI ATTIVITÀ DI SOMMINISTRAZIONE DI ALIMENTI E BEVANDE NELLE SCUOLE, 
+            NEGLI OSPEDALI, NELLE COMUNITÀ RELIGIOSE, IN STABILIMENTI MILITARI O NEI MEZZI DI TRASPORTO PUBBLICO
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    <!-- // Modulo SUAP_modulo_somministrazione_scuole_ospedali_ecc ## internal code ref 018 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSomministrazioneAlimenti" type="somscuoleospetc:ModuloSomministrazioneAlimentiType"/>
+
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloSomministrazioneAlimentiType">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="apertura" type="somscuoleospetc:AvvioType"/>
+                <xs:element name="ampliamento" type="somscuoleospetc:AmpliamentoType"/>
+            </xs:choice>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="tabellaAllegati" type="somscuoleospetc:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> 
+        </xs:sequence>  
+    </xs:complexType>
+    
+    <xs:complexType name="AvvioType">
+        <xs:sequence>
+            <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
+            <xs:element name="superficieSomministrazione" type="suapcommon:SuperficieEsercizioBaseType"/>
+        </xs:sequence>        
+    </xs:complexType>
+
+    <xs:complexType name="AmpliamentoType">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="superficieAmpliamento" type="suapcommon:SuperficieDaABaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- BASIC COMPONENTS TYPE -->  
+    <xs:complexType name="TipoEsercizioType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string"/>
+                <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ALLEGATI -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIAUnica" type="somscuoleospetc:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="somscuoleospetc:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="somscuoleospetc:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="somscuoleospetc:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>

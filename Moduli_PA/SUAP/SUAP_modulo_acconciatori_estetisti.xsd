@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:acconcestet="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_acconciatori_estetisti"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_acconciatori_estetisti"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DELL’ATTIVITÀ DI ACCONCIATORE E/O ESTETISTA
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    <!-- // Modulo modulo_acconciatori_estetisti ## internal code ref 010 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloAcconciatoriEstetisti" type="acconcestet:ModuloAcconciatoriEstetistiType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloAcconciatoriEstetistiType">
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="apertura" type="acconcestet:AperturaType"/>
+                <xs:element name="trasferimento" type="acconcestet:TrasferimentoType"/>
+            </xs:choice>
+            <!-- DICHIARAZIONI -->
+            <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
+            <!-- ALLEGATI -->
+            <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
+            <xs:element name="Allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
+                        <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO ACCONCIATORI/ESTETISTI  INCLUSO IN DICHIARAZIONI -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>  
+    </xs:complexType>
+       
+    <xs:complexType name="AllegatiType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoPlanimetrieLocali"  minOccurs="0"/>
+            <xs:element ref="suapcommon:allegatoRelazioneLocali"  minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+   
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/> 
+            <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+ 
+ 
+    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>                                                                                                                                      
+        </xs:sequence>  
+    </xs:complexType>  
+    
+    <xs:complexType name="AllegatiAltriType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:AllegatiAltriBaseType">
+                <xs:sequence>
+                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                </xs:sequence>  
+            </xs:extension>
+        </xs:complexContent>
+        
+    </xs:complexType>  
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegati" type="acconcestet:AllegatiType"/>
+            <xs:element name="allegatiSCIA_SCIAUnica" type="acconcestet:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiAutorizzazione" type="acconcestet:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AperturaType">
+        <xs:sequence>
+            <xs:group ref="acconcestet:attivitaGroup"/>
+            <xs:element name="superficeComplessiva" type="acconcestet:superficeComplessivaBaseType" />
+            <xs:element name="superficeAdibitaAttivita" type="acconcestet:superficeComplessivaBaseType" />
+            <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
+            <xs:element name="attivitaEsercitata" type="acconcestet:AttivitaEsercitaBaseType"/>
+            <xs:element name="dichiarazioni" type="acconcestet:DichiarazioniType"/>
+       </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="superficeComplessivaBaseType" abstract="true" />
+    <xs:complexType name="superficeComplessivaType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:superficeComplessivaBaseType">
+                <xs:sequence>
+                    <xs:element name="mq" type="xs:decimal"/>        
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="TrasferimentoType">
+        <xs:sequence>
+            <xs:group ref="acconcestet:attivitaGroup"/>
+            <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <!-- AGGREGATE SPECIALIZED TYPE -->
+    
+    <xs:group name="attivitaGroup">
+        <xs:sequence>
+            <xs:element name="acconciatore" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="estetista" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="DichiarazioniType">
+        <xs:sequence>
+            <xs:element name="acconciatori" minOccurs="0"  >
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType"/>
+                        <xs:element name="resposabileTecnicoRequisitiProfessionali" type="acconcestet:ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType" maxOccurs="unbounded"/>
+                    </xs:choice> 
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="estetisti"  minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>
+                        <xs:element name="resposabileTecnicoRequisitiProfessionali" type="acconcestet:ResponsabileTecnicoEstetistiRequisitiProfessionaliType" maxOccurs="unbounded"/>
+                    </xs:choice> 
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
+                <xs:sequence>
+                    <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+ 
+    <xs:complexType name="ResponsabileTecnicoEstetistiRequisitiProfessionaliType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
+                <xs:sequence>
+                    <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+   
+    <xs:complexType name="AttivitaEsercitaBaseType" abstract="true" />
+    <xs:complexType name="AttivitaEsercitaType">
+        <xs:complexContent>
+            <xs:extension base="acconcestet:AttivitaEsercitaBaseType">
+                <xs:choice>
+                    <xs:element name="unicaPrevalente" type="basic:EmptyType"/>
+                    <xs:element name="svoltaCongiutamente">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="attivita" type="xs:string"/>
+                                <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>                
+    </xs:complexType>
+
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="regolamentoIgieneSanita" type="basic:EmptyType"/>
+                <xs:element name="regolamentoComunaleAcconciatoriEstetisti" type="basic:EmptyType"/>
+            </xs:choice> 
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+        </xs:sequence>  
+    </xs:complexType>
+    
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+    
+    
+</xs:schema>

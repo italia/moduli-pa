@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:cessazione="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_cessazione"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_cessazione"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+
+    <xs:annotation>
+        <xs:documentation>
+            COMUNICAZIONE DI CESSAZIONE O SOSPENSIONE TEMPORANEA DI ATTIVITÀ 
+        </xs:documentation>
+    </xs:annotation>
+
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+   
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloCessazione" type="cessazione:ModuloCessazioneType" />
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloCessazioneType" >
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:choice>
+                <xs:element name="cessazione" type="cessazione:CessazioneType"/>
+                <xs:element name="sospensione" type="cessazione:SospensioneType"/>
+            </xs:choice>
+            <xs:element name="tabellaAllegati" type="cessazione:TabellaAllegatiType"/>                 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="AllegatiType">
+        <xs:sequence>
+            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
+        </xs:sequence>                                
+    </xs:complexType>
+        
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegati" type="cessazione:AllegatiType"/>      
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CessazioneType">
+        <xs:complexContent>
+            <xs:extension base="cessazione:CessazioneSospensioneType">
+                <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="decorrenzaDal" type="xs:date" minOccurs="0" maxOccurs="1"/>
+                        </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SospensioneType">
+        <xs:complexContent>
+            <xs:extension base="cessazione:CessazioneSospensioneType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="decorrenza" type="basic:PeriodoDateType" minOccurs="0" maxOccurs="1"/>
+                    </xs:choice>
+                 </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>    
+    </xs:complexType>
+    
+   <xs:complexType name="CessazioneSospensioneType">
+       <xs:sequence>
+           <xs:element name="attivita" type="xs:string"/>
+           <xs:element name="protocolloAvvioEsercizio" type="aggregate:ProtocolloStandardType"/>
+       </xs:sequence>
+    </xs:complexType>
+       
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <!-- ENUMERATION -->
+        
+</xs:schema>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:cila="http://www.agid.gov.it/MODULI_PA/SUE/modulo_cila"
+    xmlns:suecommon="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_cila"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            A. COMUNICAZIONE INIZIO LAVORI ASSEVERATA - CILA
+        </xs:documentation>
+    </xs:annotation>
+    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    <!-- // Modulo Comunicazione Inizio Lavori Asseverata - CILA ## internal code ref 01/A // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloCILA" type="cila:ModuloCILAType"/>
+    
+    <xs:complexType name="ModuloCILAType">
+        <xs:annotation>
+            <xs:documentation>
+                schedaTitolare: in caso di più titolari, la sezione è ripetibile nell’allegato “SOGGETTI COINVOLTI”
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="suecommon:SchedaDittaType" minOccurs="0"/>
+            <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
+            <!-- Dichiarazioni -->
+            <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType" />
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteBaseType"/>
+            <!-- Comunicazioni -->
+            <xs:element name="presentazioneInizioLavori" type="cila:InterventiSoggettiACILABaseType"/>
+            <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
+            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
+            <xs:element name="impreseEsecutrici" type="suecommon:ComunicazioniImpreseEsecutriciDeiLavoriType"/>
+            <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
+            <!-- Dichiarazioni del progettista -->
+            <xs:element name="dichiarazioniProgettista">
+                <xs:complexType>
+                    <xs:annotation>
+                        <xs:documentation>I dati anagrafici del progettista sono presente nell'allegato obbligatorio "Soggetti Coinvolti"</xs:documentation>
+                    </xs:annotation>
+                    <xs:sequence>
+                        <xs:element name="tipoDiIntervento" type="cila:TipologiaInterventoBaseType"/>
+                        <!-- 2)	Altre comunicazioni, segnalazioni, asseverazioni etc. (*) -->
+                        <xs:element name="altreComunicazioni" type="suecommon:ComunicazioniSegnalazioniBaseType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="attiDiAssenso" type="suecommon:AttiAssensoType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="dichiarazioniNote" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="tabellaAllegatiCILA" type="cila:TabellaAllegatiCILAType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- c)	Presentazione della comunicazione di inizio dei lavori asseverata (*) -->
+    <xs:complexType name="InterventiSoggettiACILABaseType" abstract="true"/>
+    <xs:complexType name="InterventiSoggettiACILAType">
+        <xs:complexContent>
+            <xs:extension base="cila:InterventiSoggettiACILABaseType">
+            <xs:choice>
+                <xs:element name="noAltriAtti" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="comunicazioniCertificate" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="domandaContestualeCila" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- d) Qualificazione dell’intervento (*) -->
+    <xs:complexType name="QualificazioneInterventoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:QualificazioneInterventoBaseType">
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element name="interventoDichiarazioneProgettista" minOccurs="0" type="cila:interventoDichiarazioneProgettistaType"/>
+                    <xs:element name="interventoCorsoDiEsecuzioneDataInizioLavori"  type="xs:date"/>
+                    <xs:element name="interventoConSanzioneDataLavori" type="xs:date"/>
+                </xs:choice>
+                <!-- Presentazione allo SUAP Verifica che ricguarda Procedimento Automatizzato / Ordinario --> 
+                <xs:choice>
+                    <xs:element name="procedimentoAutomatizzato" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="procedimentoOrdinario" minOccurs="0" type="basic:EmptyType"/>
+                </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+
+    <xs:complexType name="interventoDichiarazioneProgettistaType">
+        <xs:choice>
+            <xs:element type="xs:date" name="dataInizioLavori"/>
+            <xs:element type="basic:EmptyType" name="inizioLavoriComunicazioneSUAP"/>
+        </xs:choice>
+    </xs:complexType>
+
+  
+    
+    <!-- f) Calcolo del contributo di costruzione (*) -->
+    <xs:complexType name="CalcoloContributoType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
+                <xs:choice>        
+                    <xs:element name="titoloGratuito" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="titoloOneroso" minOccurs="0">
+                        <xs:complexType>
+                            <xs:choice>
+                                <xs:element name="ricVersamento" minOccurs="0" type="basic:EmptyType"/>
+                                <xs:element name="versamentoInizioLavori" minOccurs="0" type="basic:EmptyType"/>                                                   
+                            </xs:choice>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+     
+    
+    <!-- DICHIARAZIONI -->
+
+    <!-- 1) Tipologia di intervento e descrizione sintetica delle opere (*) -->
+    <xs:complexType name="TipologiaInterventoBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaInterventoType">
+        <xs:complexContent>
+            <xs:extension base="cila:TipologiaInterventoBaseType">
+            <xs:sequence>
+                <xs:element name="manStraordDPR380-2001"  minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="restauroRisanamentoDPR380-2001"  minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="barriereArchitettoniche" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="sottosuoloCentroEdificato" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="movimentiTerra" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="serreMobiliStagionali" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="pertinenzeMinori" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="altriExtraArt6-10-22" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="altriExtraArt6-10-22-specificare" minOccurs="0" type="xs:string"/>
+                <xs:element name="dettaglioIntervento" minOccurs="0" type="xs:string"/>
+            </xs:sequence>        
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <!-- Allegati  -->
+    <xs:complexType name="TabellaAllegatiCILAType">
+        <xs:sequence>
+            <xs:element name="allegatiCILA"             type="cila:AllegatiCILAType"/>
+            <xs:element name="allegatiSCIAUnica"        type="cila:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiRichiestaAssenso" type="cila:allegatiRichiestaAttiAssensoType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiCILAType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
+            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoVersamentoOblazioneInEsecuzione" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoVersamentoOblazioneSanatoria" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoPreventivoContributoCostruzione" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoRicevutaVersamentoContributoCostruzione" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoNotificaPreliminare" minOccurs="0" />
+            <xs:element ref="suecommon:allegatoElaboratoGrafico" minOccurs="1" />
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoAltreComunicazioni" minOccurs="0" />
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="allegatiRichiestaAttiAssensoType">
+        <xs:sequence>
+            <xs:element ref="suecommon:allegatoRilascioAttiAssenso" minOccurs="0" />
+        </xs:sequence>                                
+    </xs:complexType>
+    
+</xs:schema>
