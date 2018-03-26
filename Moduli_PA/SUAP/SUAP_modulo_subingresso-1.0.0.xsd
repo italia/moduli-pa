@@ -9,14 +9,21 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_subingresso"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
    
+    <xs:annotation>
+        <xs:documentation>
+            COMUNICAZIONE PER IL SUBINGRESSO IN ATTIVITÀ
+        </xs:documentation>
+    </xs:annotation>
+    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo modulo_subingresso ## internal code ref 011 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloSubingresso" type="subingresso:ModuloSubingressoType" />
@@ -76,6 +83,7 @@
         </xs:sequence>
     </xs:complexType>
     
+    <!-- Subingresso -->
     <xs:complexType name="SubingressoType">
         <xs:sequence>
             <xs:element name="attivita" type="xs:string"/>
@@ -85,22 +93,25 @@
                 <xs:element name="decorrenzaDa" type="xs:date"/>
             </xs:choice>
             <xs:choice>
-                <xs:element name="motivazioneStd" type="subingresso:MotivazioneSubingressoEnum"/>
-                <xs:element name="altraMotivazione" type="xs:string" />
+                <xs:element name="compravendita" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="affittoAzienda" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="donazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="fusione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="fallimento" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="successione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="altraMotivazione" type="xs:string" minOccurs="0" maxOccurs="1"/>
             </xs:choice>
             <xs:element name="attoRegistrazione" type="aggregate:AttoBaseType"/>
             <xs:element name="nuovoSitoWeb" type="xs:anyURI" minOccurs="0"/>
         </xs:sequence>
-        
     </xs:complexType>    
     
     <!-- AGGREGATE SPECIALIZED TYPE -->
-    
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
             <xs:element name="commercioSomministrazione" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="acconciatori" type="suapcommon:DichiarazioniResponsabileTecnicoAcconciatoriType" />
-            <xs:element name="estetisti" type="suapcommon:DichiarazioniResponsabileTecnicoEstetistiType"/>
+            <xs:element name="acconciatori" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType" />
+            <xs:element name="estetisti" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>
         </xs:choice>
     </xs:complexType>
        
@@ -108,20 +119,11 @@
         
     <xs:complexType name="AltreDichiarazioniType" >
         <xs:sequence>
-            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum"/>
+            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaType"/>
         </xs:sequence>        
     </xs:complexType>     
         
     <!-- ENUMERATION -->
-    <xs:simpleType name="MotivazioneSubingressoEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="COMPRAVENDITA"/>
-            <xs:enumeration value="AFFITTO_AZIENDA"/>
-            <xs:enumeration value="DONAZIONE"/>  
-            <xs:enumeration value="FUSIONE"/>
-            <xs:enumeration value="FALLIMENTO"/>
-            <xs:enumeration value="SUCCESSIONE"/> 
-        </xs:restriction>
-    </xs:simpleType>
+
         
 </xs:schema>

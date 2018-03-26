@@ -9,8 +9,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_permesso_costruire"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            RICHIESTA DI PERMESSO DI COSTRUIRE
+            (art. 20, d.P.R. 6 giugno 2001, n. 380 – artt. 7, d.P.R. 7 settembre 2010, n. 160)
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
@@ -32,13 +38,13 @@
             <!-- DICHIARAZIONI -->
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>            
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>
-            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
-            <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteType"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
-            <xs:element name="calcoloContributoCostruzione" type="permcostr:CalcoloContributoBaseType"/>
-            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
-            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
-            <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
+            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="tecniciIncaricati" type="permcostr:TecniciIncaricatiDeiLavoriType"/>
+            <xs:element name="impreseEsecutrici" type="permcostr:ImpreseEsecutriciDeiLavoriType"/>           
+            <xs:element name="obblighiSaluteSicurezza" type="permcostr:ObblighiSaluteSicurezzaType"/>
             
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
             <xs:element ref="suecommon:relazioneTecnicaAsseverazione"/>
@@ -55,28 +61,32 @@
         <xs:complexContent>
             <xs:extension base="suecommon:QualificazioneInterventoBaseType">
                 <xs:sequence>
-                    <xs:element name="articolo10" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="assoggettatoSCIA" minOccurs="0" type="xs:string"/>
-                    <xs:element name="conformeDisciplinaUrbanistica" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="derogaPianificazioneUrbanistica" minOccurs="0">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="densitaEdilizia" minOccurs="0" type="xs:string"/>
-                                <xs:element name="altezza" minOccurs="0" type="xs:string"/>
-                                <xs:element name="distanzaFabbricati" minOccurs="0" type="xs:string"/>
-                                <xs:element name="destinazioneDUso" minOccurs="0" type="xs:string"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                    <xs:element name="variazioneSostanziale">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="titoloUnico" type="aggregate:AttoBaseType"/>
-                                <xs:element name="permessoCostruire" type="aggregate:AttoBaseType"/>
-                                <xs:element name="segnalazioneCertificata" type="aggregate:AttoBaseType"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="articolo10" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="assoggettatoSCIA" minOccurs="0" type="xs:string"/>
+                        <xs:element name="conformeDisciplinaUrbanistica" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="derogaPianificazioneUrbanistica" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="densitaEdilizia" minOccurs="0" type="xs:string"/>
+                                    <xs:element name="altezza" minOccurs="0" type="xs:string"/>
+                                    <xs:element name="distanzaFabbricati" minOccurs="0" type="xs:string"/>
+                                    <xs:element name="destinazioneDUso" minOccurs="0" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="variazioneSostanziale">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:choice>
+                                        <xs:element name="titoloUnico" type="aggregate:AttoBaseType"/>
+                                        <xs:element name="permessoCostruire" type="aggregate:AttoBaseType"/>
+                                        <xs:element name="segnalazioneCertificata" type="aggregate:AttoBaseType"/>
+                                     </xs:choice>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
                     <xs:element name="procedimentoOrdinario" type="basic:EmptyType"/>
                 </xs:sequence>
             </xs:extension>
@@ -104,43 +114,66 @@
     </xs:complexType>
 
     <!-- Reference permcostr:CalcoloContributoBaseType -->
-    <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
-    
     <xs:complexType name="CalcoloContributoType">
         <xs:complexContent>
-            <xs:extension base="permcostr:CalcoloContributoBaseType">
-                <xs:sequence>
-                    <xs:element name="contributo" minOccurs="0">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
-                                <xs:element name="titoloOneroso" minOccurs="0">
-                                    <xs:complexType>
-                                        <xs:sequence>
-                                            <xs:choice>
-                                                <xs:element name="calcoloSportello" minOccurs="0" type="basic:EmptyType"/>
-                                                <xs:element name="calcoloPreventivo" minOccurs="0" type="basic:EmptyType"/>                                                    
-                                            </xs:choice>
-                                            <xs:element name="versamento" minOccurs="0">
-                                                <xs:complexType>
-                                                    <xs:choice>
-                                                        <xs:element name="momentoRitiro" minOccurs="0" type="basic:EmptyType"/>
-                                                        <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>   
-                                                        <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>                   
-                                                    </xs:choice>                              
-                                                </xs:complexType>
-                                            </xs:element>
-                                            <xs:element name="oneriUrbanizzazione" minOccurs="0" type="basic:EmptyType"/>
-                                        </xs:sequence>
-                                    </xs:complexType>
-                                </xs:element>
-                            </xs:sequence>  
-                        </xs:complexType>
-                    </xs:element>
-                </xs:sequence>        
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
+            <xs:choice>
+                <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
+                <xs:element name="titoloOneroso" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:choice>
+                                <xs:element name="calcoloSportello" minOccurs="0" type="basic:EmptyType"/>
+                                <xs:element name="calcoloPreventivo" minOccurs="0" type="basic:EmptyType"/>                                                    
+                            </xs:choice>
+                            <xs:element name="versamento" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:choice>
+                                        <xs:element name="momentoRitiro" minOccurs="0" type="basic:EmptyType"/>
+                                        <xs:element name="chiedeRateizzazione" minOccurs="0">   
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:choice>                              
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="oneriUrbanizzazione" minOccurs="0" type="basic:EmptyType"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
+    
+    <!-- Reference permcostr:ObblighiSaluteSicurezzaType -->
+    <xs:complexType name="ObblighiSaluteSicurezzaType">
+        <xs:choice>
+            <xs:element name="nonRicade" type="basic:EmptyType"/>
+            <xs:element name="ricade" >
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="suecommon:ObblighiSaluteSicurezzaEntitaCantiereGroup"/>
+                        <xs:choice>
+                            <xs:element name="noNotifica" minOccurs="0" type="basic:EmptyType"/>
+                            <xs:element name="notifica" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:choice>
+                                        <xs:element name="allega" minOccurs="0" type="basic:AbstractBaseType"/> 
+                                        <xs:element name="invioPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/> 
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ricadeRiservaPresentaPrimaInizioLavori" type="basic:AbstractBaseType"/>
+        </xs:choice>        
+    </xs:complexType>
                 
     <!-- Reference permcostr:TipoInterventiOpere -->
     <xs:complexType name="TipoInterventiOpere">
@@ -173,6 +206,26 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
+    
+    <!-- Reference suecommon:TecniciIncaricatiDeiLavoriType -->  
+    <xs:complexType name="TecniciIncaricatiDeiLavoriType">
+        <xs:sequence>
+            <xs:element name="altriTecniciDaSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="altriTecniciIndividuatiPrimaInizioLavori" minOccurs="0"  type="basic:EmptyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Reference impl of suecommon:ImpreseEsecutriciDeiLavoriBaseType -->  
+    <xs:complexType name="ImpreseEsecutriciDeiLavoriType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ImpreseEsecutriciDeiLavoriBaseType">
+                <xs:choice>
+                    <xs:element name="daSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="primaInizioLavori" type="basic:EmptyType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     <!-- Reference permcostr:AllegatiPermessoCostruireType -->
     <xs:complexType name="AllegatiPermessoCostruireType">

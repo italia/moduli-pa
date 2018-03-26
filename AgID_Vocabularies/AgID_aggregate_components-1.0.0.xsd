@@ -8,9 +8,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     
     targetNamespace="http://www.agid.gov.it/AgID_aggregate_components"  
-    
     elementFormDefault="qualified"
-    
     version="1.0.0" xml:lang="it">
     
     <xs:import namespace="http://www.w3.org/ns/corevocabulary/BasicComponents" schemaLocation="ISA_Core_Vocabularies/CoreVocabularies-BasicComponents-1.1.xsd"/>
@@ -113,6 +111,7 @@
         </xs:complexContent>
     </xs:complexType>
     
+    
     <xs:complexType name="CoordinateCatastaliType">
         <xs:annotation>
             <xs:documentation>Tipo per definire le coordinate catastali da utilizzare</xs:documentation>
@@ -134,6 +133,7 @@
             <xs:element name="codiceRegistro" type="xs:string" minOccurs="0"/>
             <xs:element name="numeroProtocollo" type="xs:string"/>
             <xs:element name="dataRegistrazione" type="xs:date"/>
+            <xs:element name="comuneRilascio" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -213,7 +213,7 @@
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
                 <xs:sequence>
-                    <xs:element name="cittadinanza" type="enum:NazioniAlpha3Enum" default="ITA" minOccurs="0"/>
+                    <xs:element name="cittadinanza" type="enum:CountryISO31661Alpha2Enum" default="IT" minOccurs="0"/>
                     <xs:element name="documentoSoggiorno" type="aggregate:DocumentoSoggiornoType" minOccurs="0"/>
                     <xs:element name="residente" type="aggregate:IndirizzoType"/>
                     <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
@@ -241,10 +241,13 @@
             <xs:documentation>Gruppo di proprietà associate al luogo</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="stato" type="isacvbc:AddressAdminUnitLocationOneType" default="it_IT" />
+            <xs:element name="stato" type="enum:CountryISO31661Alpha2Enum" default="IT" />
             <xs:element name="regione" type="aggregate:RegioneType" minOccurs="0"/>
             <xs:element name="provincia" type="aggregate:ProvinciaType" minOccurs="0"/>
-            <xs:element name="comune" type="aggregate:ComuneType"/>			
+            <xs:choice>
+                <xs:element name="comune" type="aggregate:ComuneType"/>
+                <xs:element name="localitaEstera" type="xs:string"/>
+            </xs:choice>
         </xs:sequence>
     </xs:group>  
     
@@ -324,7 +327,7 @@
     
     <xs:complexType name="ImpresaREAType">
         <xs:annotation>
-            <xs:documentation>Tipo per specificare il numero REA (Repertorio economico e amministrativo) di un Impersa</xs:documentation>
+            <xs:documentation>Tipo per specificare il numero REA (Repertorio economico e amministrativo) di un Impresa</xs:documentation>
         </xs:annotation>          
         <xs:choice>        
             <xs:sequence>
@@ -358,9 +361,49 @@
             <xs:sequence>
                 <xs:element name="istituto" type="xs:string"/>
                 <xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
-                <xs:element name="oggettoCorso" type="xs:string"/>
+                <xs:element name="oggettoCorso" type="xs:string" minOccurs="0"/>
                 <xs:element name="annoConclusione" type="xs:integer"/>
             </xs:sequence>
     </xs:complexType>  
+    
+    <xs:complexType name="PeriodoType">
+        <xs:annotation>
+            <xs:documentation>Definisce un intervallo temporale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+           <xs:element name="da" type="xs:date"/>
+           <xs:element name="a" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PeriodoStagionaleType">
+        <xs:annotation>
+            <xs:documentation>Definisce un intervallo temporale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="da" type="aggregate:GiornoMese"/>
+            <xs:element name="a" type="aggregate:GiornoMese"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="GiornoMese">
+        <xs:sequence>
+            <xs:element name="giorno">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="1"/>
+                        <xs:maxInclusive value="31"/>
+                    </xs:restriction>
+                </xs:simpleType>  
+            </xs:element>
+            <xs:element name="mese">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:totalDigits value="4"/>
+                    </xs:restriction>
+                </xs:simpleType>  
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
     
 </xs:schema>

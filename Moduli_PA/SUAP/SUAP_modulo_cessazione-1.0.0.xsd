@@ -9,9 +9,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_cessazione"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
-   
+
+    <xs:annotation>
+        <xs:documentation>
+            COMUNICAZIONE DI CESSAZIONE O SOSPENSIONE TEMPORANEA DI ATTIVITÀ 
+        </xs:documentation>
+    </xs:annotation>
+
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
@@ -49,11 +54,11 @@
     
     <xs:complexType name="CessazioneType">
         <xs:complexContent>
-            <xs:extension base="cessazione:CessazioneSospensioneBaseType">
+            <xs:extension base="cessazione:CessazioneSospensioneType">
                 <xs:sequence>
                         <xs:choice>
-                            <xs:element name="contestuale" type="basic:EmptyType"/>
-                            <xs:element name="decorrenzaDal" type="xs:date"/>
+                            <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="decorrenzaDal" type="xs:date" minOccurs="0" maxOccurs="1"/>
                         </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -62,18 +67,18 @@
     
     <xs:complexType name="SospensioneType">
         <xs:complexContent>
-            <xs:extension base="cessazione:CessazioneSospensioneBaseType">
+            <xs:extension base="cessazione:CessazioneSospensioneType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="contestuale" type="basic:EmptyType"/>
-                        <xs:element name="decorrenza" type="basic:PeriodoDateType"/>
+                        <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="decorrenza" type="basic:PeriodoDateType" minOccurs="0" maxOccurs="1"/>
                     </xs:choice>
                  </xs:sequence>
             </xs:extension>
         </xs:complexContent>    
     </xs:complexType>
     
-   <xs:complexType name="CessazioneSospensioneBaseType" abstract="true">
+   <xs:complexType name="CessazioneSospensioneType">
        <xs:sequence>
            <xs:element name="attivita" type="xs:string"/>
            <xs:element name="protocolloAvvioEsercizio" type="aggregate:ProtocolloStandardType"/>

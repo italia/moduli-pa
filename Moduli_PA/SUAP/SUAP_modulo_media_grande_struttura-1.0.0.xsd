@@ -9,14 +9,21 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_media_grande_struttura"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+
+    <xs:annotation>
+        <xs:documentation>
+            DOMANDA DI AUTORIZZAZIONE PER L’ESERCIZIO DI MEDIA O GRANDE STRUTTURA DI VENDITA            
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo modulo_media_grande_struttura ## internal code ref 002 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloMediaGrandeStruttura" type="mediagrande:ModuloMediaGrandeStrutturaType"/>
@@ -32,7 +39,7 @@
                 <xs:element name="ampliamento" type="mediagrande:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="mediagrande:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="mediagrande:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -43,21 +50,6 @@
                 </xs:complexType>
             </xs:element> 
         </xs:sequence>  
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence>
-        </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="mediagrande:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="AllegatiType" >
@@ -118,66 +110,97 @@
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/>
-            <xs:element name="modalitaVendita" type="suapcommon:ModalitaVenditaBaseType"/>
-            <xs:element name="carattereEsercizio" type="mediagrande:CarattereEsercizioType"/>
+            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioType"/>
+            <xs:element name="modalitaVenditaSuperficie" type="suapcommon:ModalitaVenditaSuperficieBaseType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
             <xs:element name="inCentroCommerciale" type="suapcommon:InCentroCommercialeBaseType"/>
             <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
-            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiBaseType"/>            
+            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>            
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="TrasferimentoType">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/> 
+            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioType"/> 
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
             <xs:element name="settoriMerceologici" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
-            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiBaseType"/>
+            <xs:element name="occupazioneSuperfici" type="suapcommon:OccupazioneSuperficiType"/>
         </xs:sequence>        
     </xs:complexType>
     
     <xs:complexType name="AmpliamentoType">
         <xs:sequence>
-            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioEnum"/> 
+            <xs:element name="tipoEsercizio" type="mediagrande:TipoEsercizioType"/> 
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
             <xs:element name="variazioniTabelleSpeciali" type="suapcommon:VariazioniTabelleSpecialiType" minOccurs="0"/>
-            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType" />
-            <xs:element name="variazioneOccupazioneSuperfici" type="suapcommon:VariazioneOccupazioneSuperficiBaseType"/>
+            <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType" />
+            <xs:element name="variazioneOccupazioneSuperfici" type="mediagrande:VariazioneOccupazioneSuperficiType"/>
         </xs:sequence>
     </xs:complexType>
-    
-    <xs:complexType name="CarattereEsercizioType">        
+   
+    <xs:complexType name="TipoEsercizioType" >
         <xs:sequence>
-            <xs:element name="tipo" type="mediagrande:TipoCarattereEsercizioEnum"/>
-            <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="da" type="xs:date"/>
-                        <xs:element name="a" type="xs:date"/>    
-                    </xs:sequence>                        
-                </xs:complexType>                
-            </xs:element>
-        </xs:sequence>
+            <xs:choice>
+                <xs:element name="media_struttura" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="grande_struttura" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="apparecchi_automatici" minOccurs="0" type="basic:EmptyType"/>
+            </xs:choice>
+        </xs:sequence>        
     </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
+    <xs:complexType name="VariazioneOccupazioneSuperficiType">
+        <xs:sequence>
+            <xs:element name="nonAlimentari" type="mediagrande:OccupazioniMerciIngombrantiNonAlimentariBaseType" />    
+            <xs:element name="tabelleSpeciali">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="generiMonopolio" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="farmacie" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="carburanti" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DaMq" type="xs:decimal"/>
+                                    <xs:element name="AMq" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>    
+        </xs:sequence>        
+    </xs:complexType>
     
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariBaseType" abstract="true"/>
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariType">
+        <xs:complexContent>
+            <xs:extension base="mediagrande:OccupazioniMerciIngombrantiNonAlimentariBaseType">
+                <xs:sequence>
+                    <xs:element name="merciIngombranti" minOccurs="0" type="suapcommon:AmpliamentoSuperficieVenditaType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
     <!-- ENUMERATION -->
-    <xs:simpleType name="TipoEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="media_struttura"/>
-            <xs:enumeration value="grande_struttura"/>
-            <xs:enumeration value="apparecchi_automatici"/>            
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="TipoCarattereEsercizioEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PERMANENTE"/>
-            <xs:enumeration value="STAGIONALE"/>                    
-        </xs:restriction>
-    </xs:simpleType>
+
+
     
 </xs:schema>

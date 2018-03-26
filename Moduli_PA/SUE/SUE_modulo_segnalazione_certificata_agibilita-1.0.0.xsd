@@ -7,20 +7,21 @@
     xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_segnalazione_certificata_agibilita"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
     
+    <xs:annotation>
+        <xs:documentation>
+            F. SEGNALAZIONE CERTIFICATA PER L’AGIBILITÀ
+        </xs:documentation>
+    </xs:annotation>
     
-    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
-        schemaLocation="SUE_common_components-1.0.0.xsd"/>
-    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
-        schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
-    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components"
-        schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
-    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components"
-        schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
-    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration"
-        schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"  schemaLocation="SUE_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components"  schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
     <!-- // Modulo Segnalazione Certificata Agibilita - ## internal code ref 07/F  // -->
     
@@ -142,9 +143,9 @@
     <!-- DICHIARAZIONE ASSEVERATA -->
     <xs:complexType name="AsseveraType">
         <xs:choice>
-            <xs:element name="agibilitaImmobile" type="basic:EmptyType"/>
-            <xs:element name="agibilitaParzialeEdifici"  type="basic:EmptyType"/>
-            <xs:element name="agibilitaSingoliImmbobili"  type="basic:EmptyType"/>
+            <xs:element name="agibilitaImmobile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="agibilitaParzialeEdifici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="agibilitaSingoliImmbobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
         </xs:choice>
     </xs:complexType>
 
@@ -205,21 +206,20 @@
     
     <!-- Sicurezza Statica Sismica -->
     <xs:complexType name="SicurezzaStaticaSismicaBaseType" abstract="true"/>
-    
     <xs:complexType name="SicurezzaStaticaSismicaType">
         <xs:complexContent>
             <xs:extension base="scpa:SicurezzaStaticaSismicaBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="nonHaInteressatoStrutture"  type="basic:EmptyType"/>
+                        <xs:element name="nonHaInteressatoStrutture"  type="basic:EmptyType"  minOccurs="0"/>
                         <xs:element name="haInteressatoStrutture" >
                             <xs:complexType>
                                 <xs:choice>
-                                    <xs:element name="certificatoCollaudoStatico"  type="basic:EmptyType"/>
-                                    <xs:element name="estremiCollaudoStatico" type="scpa:ProtocolloType" />
-                                    <xs:element name="dichiarazioneEsecuzioneInterventi" type="basic:EmptyType"/>
-                                    <xs:element name="estremiDichiarazioneEsecuzioneInterventi" type="scpa:ProtocolloType" />
-                                    <xs:element name="noCollaudoStatico"  type="basic:EmptyType"/>
+                                    <xs:element name="certificatoCollaudoStatico"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="estremiCollaudoStatico" type="scpa:ProtocolloType"  minOccurs="0"/>
+                                    <xs:element name="dichiarazioneEsecuzioneInterventi" type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="estremiDichiarazioneEsecuzioneInterventi" type="scpa:ProtocolloType"  minOccurs="0"/>
+                                    <xs:element name="noCollaudoStatico"  type="basic:EmptyType" minOccurs="0"/>
                                 </xs:choice>
                             </xs:complexType>
                         </xs:element>
@@ -236,8 +236,8 @@
             <xs:extension base="scpa:PrestazioneEnergeticaBaseType">
                 <xs:sequence>
                  <xs:choice>
-                     <xs:element name="nonSoggettoRequisitiMinimi"  type="basic:EmptyType"/>
-                     <xs:element name="soggettoRequisitiMinimi" type="basic:EmptyType"/>
+                     <xs:element name="nonSoggettoRequisitiMinimi"  type="basic:EmptyType" minOccurs="0" maxOccurs="1" />
+                     <xs:element name="soggettoRequisitiMinimi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                  </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -245,11 +245,11 @@
     </xs:complexType>
     
     <xs:complexType name="BarriereArchitettonicheType">
-        <xs:choice>
-            <xs:element name="nonSoggettoPrescrizioni" type="basic:EmptyType"/>
-            <xs:element name="soggettoPrescrizioni" type="basic:EmptyType"/>
-            <xs:element name="soggettoPrescrizioniEdificoPubblico" type="basic:EmptyType"/>
-        </xs:choice>
+        <xs:sequence>
+            <xs:element name="nonSoggettoPrescrizioni" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="soggettoPrescrizioni" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="soggettoPrescrizioniEdificoPubblico" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="DocumentazioneCatastaleType">
@@ -267,12 +267,12 @@
     
     <xs:complexType name="ToponomasticaType">
         <xs:choice>
-            <xs:element name="comportaVariazioneCivici"  type="basic:EmptyType"/>
-            <xs:element name="nonComportaVariazioneCivici" >
+            <xs:element name="nonComportaVariazioneCivici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="comportaVariazioneCivici">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="allegaRichiestaNumerazione" type="basic:EmptyType"/>
-                        <xs:element name="protocolloVariazioneNumerazione" type="aggregate:ProtocolloStandardType"/>
+                        <xs:element name="allegaRichiestaNumerazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="protocolloVariazioneNumerazione" type="aggregate:ProtocolloStandardType" minOccurs="0" maxOccurs="1"/>
                     </xs:choice>
                 </xs:complexType>
             </xs:element>
@@ -285,8 +285,8 @@
         <xs:complexContent>
             <xs:extension base="scpa:PrevenzioneIncendiBaseType">
                     <xs:choice>
-                        <xs:element name="nonComportatoVariazioniSicurezza"  type="basic:EmptyType"/>
-                        <xs:element name="comportatoVariazioniSicurezza"  type="basic:EmptyType"/>
+                        <xs:element name="nonComportatoVariazioniSicurezza"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="comportatoVariazioniSicurezza"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                     </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -311,7 +311,7 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- Allegati  -->
+    <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCPA"  type="scpa:AllegatiSCPAType"/>
@@ -329,7 +329,6 @@
             <xs:element ref="suecommon:allegatoCertificatoCollaudoStatico" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoAQE" minOccurs="0"/>
             <xs:element ref="suecommon:allegatoAggiornamentoNumerazioneCivica" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
         </xs:sequence>                                
     </xs:complexType>
     

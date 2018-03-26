@@ -9,14 +9,21 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_spacci_interni"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI VENDITA IN SPACCI INTERNI (ESERCIZIO COMMERCIALE IN LOCALE NON APERTO AL PUBBLICO)
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>   
+
+    <!-- // Modulo modulo_spacci_interni ## internal code ref 003 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloSpacciInterni" type="spacci:ModuloSpacciInterniType"/>
@@ -31,7 +38,7 @@
                 <xs:element name="trasferimento" type="spacci:TrasferimentoType"/>
                 <xs:element name="ampliamento" type="spacci:AmpliamentoType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="spacci:AltreDichiarazioniBaseType" />
+            <xs:element name="altreDichiarazioni" type="spacci:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="spacci:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -92,26 +99,10 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaEnum"/>
-        </xs:sequence>        
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="spacci:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altra" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>  
-    
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="presso" type="xs:string"/>
-            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
+            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieType"/>
         </xs:sequence>        
     </xs:complexType>
     
@@ -120,7 +111,7 @@
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
             <xs:element name="presso" type="xs:string"/>
-            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>    
+            <xs:element name="settoriMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieType"/>    
         </xs:sequence>        
     </xs:complexType>
     
@@ -129,12 +120,19 @@
            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
            <xs:element name="ampliamentoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
            <xs:element name="variazioniTabelleSpeciali" type="suapcommon:VariazioniTabelleSpecialiType" minOccurs="0"/>
-           <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:SettoriMerceologiciSuperficieBaseType"/>
+           <xs:element name="variazioniMerceologiciSuperficie" type="suapcommon:VariazioneSettoriMerceologiciSuperficieType"/>
        </xs:sequence> 
+    </xs:complexType>
+       
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:element name="venditaEsclusiva" type="suapcommon:VenditaEsclusivaType"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>                    
+        </xs:sequence>
     </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
-    
+
     
     <!-- ENUMERATION -->
    

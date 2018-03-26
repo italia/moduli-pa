@@ -9,14 +9,21 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_scia"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    
+    <xs:annotation>
+        <xs:documentation>
+            B. SCIA E SCIA ALTERNATIVA AL PERMESSO DI COSTRUIRE
+        </xs:documentation>
+    </xs:annotation>
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components-1.0.0.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
+    
+    <!-- // Modulo modulo_scia ## internal code ref 02/B1 // -->
     
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloSCIA" type="scia:ModuloSCIAType" />
@@ -33,14 +40,14 @@
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>            
             <xs:element name="presentazione" type="scia:PresentazioneType"/>            
             <xs:element name="qualificazioneIntervento" type="suecommon:QualificazioneInterventoBaseType"/>            
-            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoBaseType"/>
-            <xs:element name="operePreviste" type="suecommon:OperePrevisteEnum"/>           
+            <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
+            <xs:element name="operePreviste" type="suecommon:OperePrevisteType"/>           
             <xs:element name="regolaritaUrbanistica" type="suecommon:RegolaritaUrbanisticaBaseType"/>
-            <xs:element name="calcoloContributoCostruzione" type="scia:CalcoloContributoBaseType"/>
-            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriBaseType"/>
-            <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/>           
+            <xs:element name="calcoloContributoCostruzione" type="suecommon:CalcoloContributoBaseType"/>
+            <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
+            <xs:element name="impreseEsecutrici" type="suecommon:SciaImpreseEsecutriciDeiLavoriType"/>           
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
-            <xs:element name="note" type="xs:string"/> 
+            <xs:element name="note" type="xs:string" minOccurs="0"/> 
             
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
             <xs:element ref="suecommon:relazioneTecnicaAsseverazione"/>
@@ -75,12 +82,10 @@
     </xs:complexType>
  
     <!-- Reference suecommon:CalcoloContributoBaseType -->
-    <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
-    
     <xs:complexType name="CalcoloContributoType">
         <xs:complexContent>
-            <xs:extension base="scia:CalcoloContributoBaseType">
-                <xs:sequence>
+            <xs:extension base="suecommon:CalcoloContributoBaseType">
+                <xs:choice>
                     <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
                     <xs:element name="titoloOneroso" minOccurs="0">
                         <xs:complexType>
@@ -106,7 +111,7 @@
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
-                </xs:sequence>     
+                </xs:choice>     
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>    
@@ -118,8 +123,25 @@
                 <xs:sequence>
                     <xs:choice>
                         <xs:element name="manutenzioneStarordinaria" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="corsoDiEsecuzione" minOccurs="0" type="scia:CorsoDiEsecuzioneType"/>
-                        <xs:element name="sanatoriaIntervento" minOccurs="0" type="scia:SanatoriaInterventoType"/>
+                        <xs:element name="corsoDiEsecuzione" minOccurs="0">
+                            <xs:complexType>
+                            <xs:sequence>
+                                <xs:choice>
+                                    <xs:element name="ricevutaVersamento" minOccurs="0" type="basic:EmptyType"/>
+                                </xs:choice>
+                            </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="sanatoriaIntervento" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element type="xs:date" name="data"/>
+                                    <xs:choice>
+                                        <xs:element name="ricevutaVersamento" minOccurs="0" type="basic:EmptyType"/>
+                                    </xs:choice>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                         <xs:element name="varianteInCorsoDOpera" minOccurs="0" type="aggregate:AttoBaseType"/>
                     </xs:choice>  
                     <xs:choice>
@@ -130,21 +152,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
-    
-    <xs:complexType name="CorsoDiEsecuzioneType">
-        <xs:complexContent>
-            <xs:extension base="basic:EmptyType">
-                <xs:attribute type="xs:boolean" name="ricevuta"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="SanatoriaInterventoType">
-        <xs:sequence>
-            <xs:element type="xs:date" name="data"/>
-        </xs:sequence>
-        <xs:attribute type="xs:boolean" name="ricevuta"/>
-    </xs:complexType>      
+   
 
     <!-- Reference scia:TipoInterventiOpere -->
     <xs:complexType name="TipoInterventiOpere">

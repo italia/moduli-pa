@@ -9,9 +9,8 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
-    
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
-    
+
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
@@ -32,8 +31,17 @@
     <xs:complexType name="DichiaranteType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="inQualita" type="suapcommon:InQualitaEnum" use="required"/>
-                <xs:attribute name="altro" type="xs:string"/>                
+                <xs:sequence> 
+                    <xs:element name="inQualita" minOccurs="1">
+                        <xs:complexType> 
+                            <xs:choice>
+                                <xs:element name="titolare" type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="legaleRappresentante" type="basic:EmptyType"  minOccurs="0"/>
+                                <xs:element name="altro" type="xs:string"  minOccurs="0"/>
+                            </xs:choice> 
+                        </xs:complexType>
+                    </xs:element>
+                    </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -41,8 +49,19 @@
     <xs:complexType name="ProcuratoreType">
         <xs:complexContent>
             <xs:extension base="aggregate:PersonaAnagraficaType">
-                <xs:attribute name="tipoProcura" type="suapcommon:TipoProcuraEnum" use="required"/>
-                <xs:attribute name="denominazioneAgenziaImprese" type="xs:string" use="required"/>
+                <xs:sequence> 
+                    <xs:element name="tipoProcura" minOccurs="1">
+                        <xs:complexType> 
+                            <xs:sequence> 
+                                <xs:choice>
+                                    <xs:element name="ProcuraDelega" type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="AgenziaImprese" type="basic:EmptyType"  minOccurs="0"/>
+                                </xs:choice>
+                                <xs:element name="denominazioneAgenziaImprese" type="xs:string"  minOccurs="1"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -68,103 +87,96 @@
     </xs:complexType>
   
     <xs:complexType name="InCentroCommercialeBaseType" abstract="true"/>   
-        
     <xs:complexType name="InCentroCommercialeType">
-       <xs:complexContent>
-           <xs:extension base="suapcommon:InCentroCommercialeBaseType">
-               <xs:sequence>
-                   <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
-               </xs:sequence> 
-               <xs:attribute name="presente" type="xs:boolean" default="false"/>
-           </xs:extension>
-       </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="suapcommon:InCentroCommercialeBaseType">
+                <xs:choice>
+                    <xs:element name="si"  minOccurs="0" maxOccurs="1" >
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="no" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="complessiva" minOccurs="0" type="xs:integer"/>
-        </xs:sequence>
-    </xs:complexType>
-    
+    <xs:complexType name="SettoriMerceologiciSuperficieBaseType" abstract="true" />
     <xs:complexType name="SettoriMerceologiciSuperficieType">
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
                 <xs:sequence>
-                    <xs:element name="alimentare" minOccurs="0" type="xs:integer"/>
-                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:integer"/>
+                    <xs:element name="alimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="nonAlimentare" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
     </xs:complexType>
     
     <xs:complexType name="VariazioneSettoriMerceologiciSuperficieType" >
-        <xs:complexContent>
-            <xs:extension base="suapcommon:SettoriMerceologiciSuperficieBaseType">
-                <xs:sequence>
-                    <xs:element name="alimentare" minOccurs="0">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="da" type="xs:integer"/>
-                                <xs:element name="a" type="xs:integer"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                    <xs:element name="nonAlimentare" minOccurs="0">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="da" type="xs:integer"/>
-                                <xs:element name="a" type="xs:integer"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>        
+        <xs:sequence>
+            <xs:element name="alimentare" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:decimal"/>
+                        <xs:element name="a" type="xs:decimal"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="nonAlimentare" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="da" type="xs:decimal"/>
+                        <xs:element name="a" type="xs:decimal"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="complessiva" minOccurs="0" type="xs:decimal"/>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="SettoriMerceologiciBaseType" abstract="true"/>   
-    
     <xs:complexType name="SettoriMerceologiciType">
         <xs:complexContent>
             <xs:extension base="suapcommon:SettoriMerceologiciBaseType">
                 <xs:sequence>
-                    <xs:element name="alimentare" type="xs:boolean" default="false"/>
-                    <xs:element name="nonAlimentare" type="xs:boolean" default="false"/>
+                    <xs:element name="alimentare"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="nonAlimentare"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>        
     </xs:complexType>
     
-    <xs:complexType name="OccupazioneSuperficiBaseType" abstract="true">
+    <xs:complexType name="OccupazioneSuperficiType">
         <xs:sequence>
+            <xs:element name="nonAlimentari" type="suapcommon:OccupazioniMerciIngombrantiNonAlimentariBaseType" />
             <xs:element name="tabelleSpeciali">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="generiMonopolio" minOccurs="0" type="xs:integer"/>
-                        <xs:element name="farmacie" minOccurs="0" type="xs:integer"/>
-                        <xs:element name="carburanti" minOccurs="0" type="xs:integer"/>
+                        <xs:element name="generiMonopolio" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="farmacie" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="carburanti" minOccurs="0" type="xs:decimal"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>    
         </xs:sequence>        
     </xs:complexType>
-    
-    <xs:complexType name="OccupazioneSuperficiType">
+        
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariBaseType" abstract="true"/>
+    <xs:complexType name="OccupazioniMerciIngombrantiNonAlimentariType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:OccupazioneSuperficiBaseType">
+            <xs:extension base="suapcommon:OccupazioniMerciIngombrantiNonAlimentariBaseType">
                 <xs:sequence>
-                    <xs:element name="merciIngombranti">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="nonAlimentare" minOccurs="0" type="xs:integer"/>                                
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>    
+                    <xs:element name="merciIngombranti" minOccurs="0" type="xs:decimal"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
-    
+    </xs:complexType>
+   
     <xs:complexType name="VariazioneOccupazioneSuperficiBaseType" abstract="true">
         <xs:sequence>
             <xs:element name="tabelleSpeciali">
@@ -173,24 +185,24 @@
                         <xs:element name="generiMonopolio" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:integer"/>
-                                    <xs:element name="a" type="xs:integer"/>
+                                    <xs:element name="da" type="xs:decimal"/>
+                                    <xs:element name="a" type="xs:decimal"/>
                                 </xs:sequence>    
                             </xs:complexType>
                         </xs:element>
                         <xs:element name="farmacie" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:integer"/>
-                                    <xs:element name="a" type="xs:integer"/>
+                                    <xs:element name="da" type="xs:decimal"/>
+                                    <xs:element name="a" type="xs:decimal"/>
                                 </xs:sequence>    
                             </xs:complexType>                            
                         </xs:element>
                         <xs:element name="carburanti" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="da" type="xs:integer"/>
-                                    <xs:element name="a" type="xs:integer"/>
+                                    <xs:element name="da" type="xs:decimal"/>
+                                    <xs:element name="a" type="xs:decimal"/>
                                 </xs:sequence>    
                             </xs:complexType>
                         </xs:element>
@@ -199,7 +211,7 @@
             </xs:element>    
         </xs:sequence>        
     </xs:complexType>
-    
+       
     <xs:complexType name="VariazioneOccupazioneSuperficiType">
         <xs:complexContent>
             <xs:extension base="suapcommon:VariazioneOccupazioneSuperficiBaseType">
@@ -210,8 +222,8 @@
                                 <xs:element name="nonAlimentari" minOccurs="0">
                                     <xs:complexType>
                                         <xs:sequence>
-                                            <xs:element name="da" type="xs:integer"/>
-                                            <xs:element name="a" type="xs:integer"/>
+                                            <xs:element name="da" type="xs:decimal"/>
+                                            <xs:element name="a" type="xs:decimal"/>
                                         </xs:sequence>    
                                     </xs:complexType>
                                 </xs:element>                                
@@ -223,26 +235,37 @@
         </xs:complexContent>
     </xs:complexType>    
     
-    <xs:complexType name="ModalitaVenditaBaseType" abstract="true"/>
-             
-    <xs:complexType name="ModalitaVenditaType">
+    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:ModalitaVenditaBaseType">
-                <xs:sequence>                    
-                    <xs:element name="superficieMQ">
-                        <xs:complexType>
-                            <xs:simpleContent>
-                                <xs:extension base="xs:integer">
-                                    <xs:attribute name="modalita" type="suapcommon:ModalitaVenditaEnum"/> 
-                                </xs:extension>
-                            </xs:simpleContent>
-                        </xs:complexType>                                                     
-                    </xs:element>                                              
-                </xs:sequence>       
-                
+            <xs:extension base="suapcommon:SuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="mq" minOccurs="0" type="xs:decimal"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
+    </xs:complexType>
+    
+    <xs:complexType name="ModalitaVenditaSuperficieBaseType" abstract="true" />
+    <xs:complexType name="ModalitaVenditaSuperficieType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ModalitaVenditaSuperficieBaseType">
+                <xs:sequence>
+                    <xs:element name="dettaglio" minOccurs="0" type="xs:decimal"/>
+                    <xs:element name="dettaglioIngrosso" minOccurs="0" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>        
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="ModalitaVenditaType">
+        <xs:sequence>
+            <xs:element name="dettaglio"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="dettaglioIngrosso"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
     
     <xs:complexType name="TrasferimentoDaAType">
         <xs:sequence>
@@ -267,40 +290,75 @@
     
     <xs:complexType name="AmpliamentoSuperficieVenditaType">
         <xs:sequence>
-            <xs:element name="da" type="xs:integer"/>
-            <xs:element name="a" type="xs:integer"/>
+            <xs:element name="DaMq" type="xs:decimal"/>
+            <xs:element name="AMq" type="xs:decimal"/>
         </xs:sequence>
     </xs:complexType>
     
-    
-    <xs:complexType name="RequisitiAntimafiaBaseType" abstract="true">
-    </xs:complexType>
-    
-    <xs:complexType name="RequisitiAntimafiaType">
+    <xs:complexType name="SuperficieDaABaseType" abstract="true"/>
+    <xs:complexType name="SuperficieDaAType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:RequisitiAntimafiaBaseType">
+            <xs:extension base="suapcommon:SuperficieDaABaseType">
                 <xs:sequence>
-                    <xs:element name="altro" type="xs:string"/>
+                    <xs:element name="DaMq" type="xs:decimal"/>
+                    <xs:element name="AMq" type="xs:decimal"/>                                 
                 </xs:sequence>
             </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+        </xs:complexContent>                
+    </xs:complexType> 
     
+    <xs:complexType name="RequisitiAntimafiaType">
+        <xs:sequence>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"  minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+   
     <xs:complexType name="ResponsabileAttivitàProduttiveRequisitiAntimafiaType">
         <xs:sequence>
             <xs:element name="responsabile" type="aggregate:PersonaAnagraficaType"/>
             <xs:element name="inQualita">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="societa" type="xs:string"/>
+                        <xs:choice>
+                            <xs:element name="societa" type="xs:string"/>
+                            <xs:element name="dittaindividuale" type="xs:string"/>
+                        </xs:choice>
+                        <xs:element name="data" type="xs:date"/> <!-- -->
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="dichiarazione" type="suapcommon:RequisitiAntimafiaBaseType"/>            
+            <xs:element name="dichiarazione" type="suapcommon:AltreDichiarazioniAltroBaseType"/>     <!-- -->        
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="CarattereStagionaleBaseType" abstract="true"/>
+    <xs:complexType name="CarattereStagionaleType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:CarattereStagionaleBaseType">
+                <xs:sequence>
+                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoStagionaleType" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
+    <xs:complexType name="CarattereTemporaneoBaseType" abstract="true"/>
+    <xs:complexType name="CarattereTemporaneoType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:CarattereTemporaneoBaseType">
+                <xs:sequence>
+                    <xs:element name="periodo" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoType" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="CarattereEsercizioType">        
+        <xs:sequence><!-- scelta multipla -->
+            <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
+            <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
     
     <xs:complexType name="DichiarazioniType">
         <xs:sequence>
@@ -342,7 +400,7 @@
                             </xs:complexType>
                         </xs:element>
                         <xs:choice>
-                            <xs:element name="ruolo" type="suapcommon:RuoloInImpresa"/>
+                            <xs:element name="ruolo" type="suapcommon:RuoloInImpresaType"/>
                             <xs:element name="altroRuolo" type="xs:string"/>
                         </xs:choice>
                         <xs:element name="iscrittoINPS">
@@ -393,9 +451,6 @@
         </xs:choice>        
     </xs:complexType>
     
-   
-    
-    
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
@@ -404,10 +459,15 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AltroRequisitoProfessionaleBaseType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string"></xs:extension>
-        </xs:simpleContent>
+    <xs:complexType name="AltroRequisitoProfessionaleBaseType" abstract="true"/>
+    <xs:complexType name="AltroRequisitoProfessionaleType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltroRequisitoProfessionaleBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliBaseType" abstract="true">
@@ -422,6 +482,62 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiarazioniAcconciatoriRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="abilitazioneProfessionale">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rilasciataDa" type="xs:string"/>
+                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="possessoQualificaProfessionale">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rilasciataDa" type="xs:string"/>
+                        <xs:element name="atto" type="aggregate:AttoBaseType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
+            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="DichiarazioniEstetistiRequisitiProfessionaliType">
+        <xs:choice>
+            <xs:element name="possessoQualificaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
+            <xs:element name="abilitazioneProfessionale">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="titolare" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="socio" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="direzione" type="aggregate:ImpresaREAType"/>
+                        <xs:element name="dipendente">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="impresaStudioMedico" type="xs:string"/>
+                                    <xs:element name="periodoDalAl" type="basic:PeriodoDateType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="frequenzaCorso">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="corsoRegionale" type="aggregate:AttoRilasciatoDaType" />
+                        <xs:element name="corsoScuolaProfessionale" type="aggregate:AttoRilasciatoDaType"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>  
+            <xs:element name="riconoscimentoQualificaEsteraAutoritaItaliana" type="aggregate:AttoBaseType"/>
+            <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
+        </xs:choice>
     </xs:complexType>
     
     <xs:complexType name="NotificaSanitariaType">
@@ -724,9 +840,40 @@
     
     <!-- IMPLEMENTATO NELL'IPOTESI DI SCELTA MULTIPLA, DA VERIFICA SE INVECE SCELTA SINGOLA IN QUESTO CASO SEMPLIFICARE CON ENUMERATION -->
     <xs:complexType name="VariazioniTabelleSpecialiType">
-        <xs:attribute name="aggiunta" type="xs:boolean" default="false"/>
-        <xs:attribute name="eliminazione" type="xs:boolean" default="false"/>
-        <xs:attribute name="sostituzione" type="xs:boolean" default="false"/>
+        <xs:sequence>
+        <xs:element name="aggiunta" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        <xs:element name="eliminazione" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        <xs:element name="sostituzione" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>                    
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniAltroBaseType" abstract="true"/>
+    <xs:complexType name="AltreDichiarazioniAltroType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltreDichiarazioniAltroBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" maxOccurs="unbounded"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="VenditaEsclusivaType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="DIPENDENTI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="MILITARI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="SOCI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="ACCESSO_SCUOLE" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="ACCESSO_OSPEDALI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+            </xs:choice>
+        </xs:sequence>
     </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
@@ -778,7 +925,6 @@
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria in caso di commercio presso il domicilio dei consumatori di prodotti alimentari</ccts:UsageRule>
             </xs:documentation>
-            
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Notifica sanitaria (art. 6, Reg.CE n. 852/2004)</ccts:Definition>
                 <ccts:UsageRule>Sempre obbligatoria</ccts:UsageRule>
@@ -895,6 +1041,18 @@
         </xs:annotation>
     </xs:element>
     
+    <xs:element name="allegatoVenditaIngrossoFarmaciBanco" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Documentazione per la richiesta dell’autorizzazione alla vendita all’ingrosso di farmaci (e farmaci da banco)</ccts:Definition>
+                <ccts:UsageRule>In caso di vendita di farmaci (e farmaci da banco)
+                    Si ricorda che, a seguito dell’avvenuta autorizzazione da parte della regione o dell’autorità competente, per l’avvio dell’attività di vendita all’ingrosso dei farmaci occorrerà procedere alla registrazione del locale e ottenere il “codice identificativo univoco” da parte del Ministero della Salute  
+                </ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    
     <xs:element name="allegatoVenditaArmi" type="suapcommon:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
@@ -921,13 +1079,6 @@
                     Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
                 </ccts:Definition>
                 <ccts:UsageRule>Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA (SCIA condizionata)</ccts:UsageRule>
-            </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
-                    ovvero  
-                    Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite bollo
-                </ccts:Definition>
-                <ccts:UsageRule>"Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA (SCIA condizionata)</ccts:UsageRule>
             </xs:documentation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
@@ -991,8 +1142,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Relazione descrittiva delle caratteristiche dei locali medesimi, della loro localizzazione e attrezzatura utilizzata per il servizio (*)</ccts:Definition>
-                <ccts:UsageRule>Sempre obbligatoria
-                    (Eccettuato il caso di affitto di poltrona) (*)
+                <ccts:UsageRule>Sempre obbligatoria (Eccettuato il caso di affitto di poltrona) (*)
                 </ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
@@ -1011,7 +1161,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione generale o AUA (nel caso di più autorizzazioni) alle emissioni in atmosfera</ccts:Definition>
-                <ccts:UsageRule>Nel caso di panificazione, pasticce-ria e affini con consumo di farina giornaliero >300 kg e ? 1500 kg</ccts:UsageRule>
+                <ccts:UsageRule>Nel caso di panificazione, pasticceria e affini con consumo di farina giornaliero >300 kg e 1500 kg</ccts:UsageRule>
             </xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1064,10 +1214,6 @@
                 <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
                 <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi</ccts:UsageRule>
             </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
-                <ccts:UsageRule>Nel caso di attività ubicata in locali sotterranei o semisotterranei che non dia luogo a emissioni di agenti nocivi/giorno</ccts:UsageRule>
-            </xs:documentation>
         </xs:annotation>
         
     </xs:element>
@@ -1110,46 +1256,34 @@
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    
+    <xs:element name="allegatoTabellaTariffePrestazioni" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Tabella delle tariffe delle prestazioni</ccts:Definition>
+                <ccts:UsageRule>Sempre obbligatoria</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="allegatoTimbroSocieta" type="suapcommon:AllegatoBaseType" >
+        <xs:annotation>
+            <xs:documentation xml:lang="it">
+                <ccts:Definition>Timbro della Società/Ditta individuale</ccts:Definition>
+                <ccts:UsageRule>Nel caso di autovidimazione del registro giornale degli affari</ccts:UsageRule>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="RuoloInImpresaType">
+        <xs:choice>
+            <xs:element name="DipendenteQualificato" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="CoadiutoreFamiliare" type="basic:EmptyType"  minOccurs="0"/>
+            <xs:element name="SocioLavoratore" type="xs:string"  minOccurs="0"/>
+        </xs:choice> 
+    </xs:complexType>
+    
 
     <!-- ENUMERATION -->   
-    <xs:simpleType name="ModalitaVenditaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DETTAGLIO"/>
-            <xs:enumeration value="DETTAGLIO_INGROSSO"/>            
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="InQualitaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="TITOLARE"/>
-            <xs:enumeration value="LEGALE_RAPPRESENTATE"/>
-            <xs:enumeration value="ALTRO"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="RuoloInImpresa">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DIPENDENTE_QUALIFICATO"/>
-            <xs:enumeration value="COADIUTORE_FAMILIARE"/>
-            <xs:enumeration value="SOCIO_LAVORATORE"/>
-        </xs:restriction>
-    </xs:simpleType>
-       
-    <xs:simpleType name="TipoProcuraEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="PROCURA_DELEGA"/>
-            <xs:enumeration value="AGENZIA_IMPRESE"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="VenditaEsclusivaEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DIPENDENTI"/>
-            <xs:enumeration value="MILITARI"/>
-            <xs:enumeration value="SOCI"/>
-            <xs:enumeration value="ACCESSO_SCUOLE"/>
-            <xs:enumeration value="ACCESSO_OSPEDALI"/>            
-        </xs:restriction>
-    </xs:simpleType>
     
 </xs:schema>

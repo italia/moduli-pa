@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:somscuoleospetc="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_scuole_ospedali_ecc"
+    xmlns:somscuoleospetc="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_scuole_ospedali_ecc"
     xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
@@ -8,10 +8,8 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
-    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_scuole_ospedali_ecc"
-    
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0"    
-    >   
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_scuole_ospedali_ecc"
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">   
     
     <xs:annotation>
         <xs:documentation>
@@ -26,6 +24,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration-1.0.0.xsd"/>
     
+    <!-- // Modulo SUAP_modulo_somministrazione_scuole_ospedali_ecc ## internal code ref 018 // -->
+    
     <!-- ROOT ELEMENT -->
     <xs:element name="ModuloSomministrazioneAlimenti" type="somscuoleospetc:ModuloSomministrazioneAlimentiType"/>
 
@@ -38,7 +38,7 @@
                 <xs:element name="apertura" type="somscuoleospetc:AvvioType"/>
                 <xs:element name="ampliamento" type="somscuoleospetc:AmpliamentoType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="somscuoleospetc:AltreDichiarazioniBaseType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="somscuoleospetc:TabellaAllegatiType"/>
             <xs:element name="Allegati">
                 <xs:complexType>
@@ -49,51 +49,33 @@
             </xs:element> 
         </xs:sequence>  
     </xs:complexType>
-
-    <xs:complexType name="AvvioBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
-            <xs:element name="superficieSomministrazione" type="xs:integer"/>
-        </xs:sequence>
-    </xs:complexType>
     
     <xs:complexType name="AvvioType">
-        <xs:complexContent>
-            <xs:extension base="somscuoleospetc:AvvioBaseType">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>        
-    </xs:complexType>
-
-    <xs:complexType name="AmpliamentoBaseType" abstract="true">
         <xs:sequence>
-            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="ampliamentoSuperficieSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
-        </xs:sequence>
+            <xs:element name="tipoEsercizio" type="somscuoleospetc:TipoEsercizioType"/>
+            <xs:element name="superficieSomministrazione" type="suapcommon:SuperficieEsercizioBaseType"/>
+        </xs:sequence>        
     </xs:complexType>
 
     <xs:complexType name="AmpliamentoType">
-        <xs:complexContent>
-            <xs:extension base="somscuoleospetc:AmpliamentoBaseType">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="superficieAmpliamento" type="suapcommon:SuperficieDaABaseType" minOccurs="0"/>
+        </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="AltreDichiarazioniBaseType" abstract="true">
-        <xs:sequence/>
-    </xs:complexType>
-    
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="somscuoleospetc:AltreDichiarazioniBaseType">
-                <xs:sequence>
-                    <xs:element name="altro" type="xs:string" maxOccurs="unbounded"/>                    
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+    <!-- BASIC COMPONENTS TYPE -->  
+    <xs:complexType name="TipoEsercizioType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string"/>
+                <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+            </xs:choice>
+        </xs:sequence>
     </xs:complexType>
 
+    <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="somscuoleospetc:AllegatiSCIAUnicaType"/>
@@ -101,7 +83,7 @@
             <xs:element name="allegatiAltri" type="somscuoleospetc:AllegatiAltriBaseType"/>
         </xs:sequence>
     </xs:complexType>
-
+    
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
             <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
@@ -131,21 +113,6 @@
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-
-    <!-- BASIC COMPONENTS TYPE -->  
-    <xs:complexType name="TipoEsercizioType">
-        <xs:choice>
-            <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType">
-                <xs:annotation>
-                    <xs:documentation>nelle scuole, negli ospedali, nelle comunità religiose, in stabilimenti militari delle Forze di polizia e del Corpo nazionale dei vigili del fuoco
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string">
-            </xs:element>
-            <xs:element name="altro" minOccurs="0" type="xs:string"/>
-        </xs:choice>
     </xs:complexType>
 
 </xs:schema>
