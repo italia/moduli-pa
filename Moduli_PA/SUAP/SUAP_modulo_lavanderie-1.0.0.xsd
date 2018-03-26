@@ -9,7 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_tintolavanderie"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
     
     <xs:annotation>
         <xs:documentation>

@@ -10,7 +10,7 @@
     
     elementFormDefault="qualified"
     
-    version="1.0.0" xml:lang="it">
+    version="1.1.0" xml:lang="it">
     
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../AgID_Vocabularies/AgID_basic_components-1.0.0.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../AgID_Vocabularies/AgID_aggregate_components-1.0.0.xsd"/>
