@@ -53,12 +53,18 @@
         <xs:sequence>
             <xs:group ref="aggregate:LuogoGroup"/>
             <xs:element name="localita" type="isacvbc:AddressAddressAreaType" minOccurs="0"/>
-            <xs:element name="toponimo" type="isacvbc:AddressThoroughfareType" minOccurs="0"/>
-            <xs:element name="indirizzo" type="isacvbc:AddressLocatorNameType"/>
+            <xs:element name="toponimo" type="aggregate:ToponimoType" minOccurs="0"/>
             <xs:element name="civico" type="isacvbc:AddressLocatorDesignatorType" minOccurs="0"/>
             <xs:element name="CAP" type="basic:CAPType" minOccurs="0"/>
         </xs:sequence>
     </xs:group>
+    
+    <xs:complexType name="ToponimoType">
+        <xs:sequence>
+            <xs:element name="specie" type="isacvbc:AddressLocatorNameType"/>
+            <xs:element name="indirizzo" type="isacvbc:AddressLocatorNameType"/>
+        </xs:sequence>
+    </xs:complexType>
     
     <xs:complexType name="IndirizzoType">
         <xs:annotation>
