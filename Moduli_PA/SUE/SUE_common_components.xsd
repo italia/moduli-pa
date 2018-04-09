@@ -1923,17 +1923,6 @@
 
     <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:SoggettiCoinvoltiType"/>
     
-    <!-- ENUMERATION -->
-
-    
-
-    
-    <xs:simpleType name="InterventiSoggettiACILAEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="NoAttoAssenso"/>
-            <xs:enumeration value="ConAllegatiCila"/>
-            <xs:enumeration value="ContestualeAttoAssensoAllegatoCila"/>
-        </xs:restriction>
-    </xs:simpleType>
+   
   
 </xs:schema>
