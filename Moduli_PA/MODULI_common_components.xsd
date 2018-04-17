@@ -28,4 +28,43 @@
         </xs:complexContent>
     </xs:complexType>
     
+    
+    <xs:complexType name="AllegatoBaseType" abstract="true"/>
+    
+    <xs:complexType name="AllegatoType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoBaseType">
+                <xs:choice>
+                    <xs:element name="genericoBinario" type="moduli:AllegatoGenericoBinarioType"/>
+                    <xs:element name="riferimentoGenerico" type="moduli:RiferimentoGenericoAllegatoType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoGenericoBinarioType">
+        <xs:complexContent>
+            <xs:extension base="moduli:RiferimentoGenericoAllegatoType">
+                <xs:sequence>
+                    <xs:element name="contenuto" type="xs:base64Binary"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="RiferimentoGenericoAllegatoType" >
+        <xs:annotation>
+            <xs:documentation>Descrive un riferimento generico ad un file allegato.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="nomeFile" type="xs:string" />
+            <xs:element name="descrizione" type="xs:string" minOccurs="0"/>
+            <xs:element name="nomeFileAlt" type="xs:string" minOccurs="0"/>  
+            <xs:element name="mime" type="enumeration:MimeTypeEnum" />  
+            <xs:element name="dimensione" type="xs:positiveInteger" minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    
 </xs:schema>

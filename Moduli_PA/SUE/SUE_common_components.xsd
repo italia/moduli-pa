@@ -1197,28 +1197,10 @@
     <!-- Reference suecommon:CalcoloContributoBaseType -->
     <xs:complexType name="CalcoloContributoBaseType" abstract="true"/>
 
-    <!-- Reference suecommon:AllegatoType -->
-    <xs:complexType name="FileAttachmentType">
-        <xs:sequence>
-            <xs:element name="contenuto" type="xs:base64Binary"/>
-            <xs:element name="mimeType" type="enumeration:MimeTypeEnum"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatoBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="file" type="suecommon:FileAttachmentType"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatoType">
-        <xs:complexContent>
-            <xs:extension base="suecommon:AllegatoBaseType"/>
-        </xs:complexContent>
-    </xs:complexType>
+   
     
     <!-- ELEMENTI ALLEGATI --> 
-    <xs:element name="allegatoProcuraDelega" type="suecommon:AllegatoBaseType"  >
+    <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoBaseType"  >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Procura/delega</ccts:Definition>
@@ -1227,7 +1209,7 @@
         </xs:annotation>
     </xs:element> 
     
-    <xs:element name="allegatoVersamentoDirittiSegreteria" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Ricevuta di versamento dei diritti di segreteria(*)</ccts:Definition>
@@ -1236,7 +1218,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoDocumentiIdentita" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoDocumentiIdentita" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Copia del documento di identità del/i titolare/i e/o del tecnico</ccts:Definition>
@@ -1245,7 +1227,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoAssensoTerzi" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoAssensoTerzi" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Dichiarazione di assenso dei terzi titolari di altri diritti reali o obbligatori (allegato soggetti coinvolti)</ccts:Definition>
@@ -1254,7 +1236,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoModelloISTAT" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoModelloISTAT" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Modello ISTAT</ccts:Definition>
@@ -1263,7 +1245,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVersamentoOblazioneInEsecuzione" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoVersamentoOblazioneInEsecuzione" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Ricevuta di versamento a titolo di oblazione  (intervento in corso di esecuzione)</ccts:Definition>
@@ -1272,7 +1254,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVersamentoOblazioneSanatoria" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoVersamentoOblazioneSanatoria" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Ricevuta di versamento a titolo di oblazione  (intervento in sanatoria)</ccts:Definition>
@@ -1281,7 +1263,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoPreventivoContributoCostruzione" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoPreventivoContributoCostruzione" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Prospetto di calcolo preventivo del contributo di costruzione</ccts:Definition>
@@ -1290,7 +1272,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoRicevutaVersamentoContributoCostruzione" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoRicevutaVersamentoContributoCostruzione" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Ricevuta di versamento del contributo di costruzione</ccts:Definition>
@@ -1299,7 +1281,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoNotificaPreliminare" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoNotificaPreliminare" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Notifica preliminare (articolo 99 del d.lgs. n. 81/2008)</ccts:Definition>
@@ -1308,7 +1290,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoElaboratoGrafico" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoElaboratoGrafico" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Elaborati grafici dello stato di fatto e progetto</ccts:Definition>
@@ -1325,7 +1307,7 @@
         </xs:annotation>
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="suecommon:AllegatoBaseType">
+                <xs:extension base="moduli:AllegatoBaseType">
                     <xs:sequence>
                         <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
                     </xs:sequence>
@@ -1342,7 +1324,7 @@
         </xs:annotation>
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="suecommon:AllegatoBaseType">
+                <xs:extension base="moduli:AllegatoBaseType">
                     <xs:sequence>
                         <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
                     </xs:sequence>
@@ -1351,7 +1333,7 @@
         </xs:complexType>  
     </xs:element>		
     
-    <xs:element name="allegatoDeterminazioneContributoCostruzione" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoDeterminazioneContributoCostruzione" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione tecnica necessaria alla determinazione del contributo di costruzione</ccts:Definition>
@@ -1359,7 +1341,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoProgettoUrbanizzazione" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoProgettoUrbanizzazione" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Proposta di progetto per la realizzazione delle opere di urbanizzazione</ccts:Definition>
@@ -1368,7 +1350,7 @@
         </xs:annotation>
     </xs:element>		
     
-    <xs:element name="allegatoVersamentoContributoCostruzione" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoVersamentoContributoCostruzione" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento del contributo di costruzione</ccts:Definition>
@@ -1376,7 +1358,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoDocumentazioneFotografica" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoDocumentazioneFotografica" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione fotografica dello stato di fatto (*)</ccts:Definition>
@@ -1384,7 +1366,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoRelazioneGeologica" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoRelazioneGeologica" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Relazione geologica/geotecnica</ccts:Definition>
@@ -1393,7 +1375,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoSuperamentoBarriereArch" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoSuperamentoBarriereArch" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Elaborati relativi al superamento delle barriere architettoniche</ccts:Definition>
@@ -1402,7 +1384,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoProgettoImpianti" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoProgettoImpianti" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Progetto degli impianti</ccts:Definition>
@@ -1411,7 +1393,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoRelazioneConsumiEnergetici" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoRelazioneConsumiEnergetici" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Relazione tecnica sui consumi energetici</ccts:Definition>
@@ -1429,7 +1411,7 @@
         </xs:annotation> 
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="suecommon:AllegatoBaseType">
+                <xs:extension base="moduli:AllegatoBaseType">
                     <xs:sequence>
                         <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
                     </xs:sequence>
@@ -1447,7 +1429,7 @@
         </xs:annotation>
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="suecommon:AllegatoBaseType">
+                <xs:extension base="moduli:AllegatoBaseType">
                     <xs:sequence>
                         <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
                     </xs:sequence>
@@ -1456,7 +1438,7 @@
         </xs:complexType>
     </xs:element>
     
-    <xs:element name="allegatoPlanimetricoVariantiConcluse" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoPlanimetricoVariantiConcluse" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Copia di elaborato planimetrico del progetto con eventuali varianti depositato in Comune con individuazione delle opere parzialmente concluse</ccts:Definition>
@@ -1465,7 +1447,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoConformitaImpianti" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoConformitaImpianti" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Dichiarazione di conformità degli impianti o dichiarazione di rispondenza, ex art. 7 d.m. n. 37/2008</ccts:Definition>
@@ -1474,7 +1456,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoCertificatoCollaudo" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoCertificatoCollaudo" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Certificato di collaudo ove previsto, degli impianti installati (art. 9 d.m. n. 37/2008)</ccts:Definition>
@@ -1483,7 +1465,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoCertificatoCollaudoStatico" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoCertificatoCollaudoStatico" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Certificato di collaudo statico o dichiarazione di regolare esecuzione</ccts:Definition>
@@ -1492,7 +1474,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoAQE" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoAQE" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestato di qualificazione energetica (AQE)</ccts:Definition>
@@ -1501,7 +1483,7 @@
         </xs:annotation>
     </xs:element>	
     
-    <xs:element name="allegatoAggiornamentoNumerazioneCivica" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoAggiornamentoNumerazioneCivica" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione necessaria per l’assegnazione o aggiornamento di numerazione civica</ccts:Definition>
@@ -1509,7 +1491,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoElaboratiProgetto" type="suecommon:AllegatoBaseType" >
+    <xs:element name="allegatoElaboratiProgetto" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Elaborati grafici dello stato di fatto, di progetto e comparativi</ccts:Definition>
@@ -1517,7 +1499,7 @@
         </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDenunciaLavori" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDenunciaLavori" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1530,7 +1512,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDenunciaLavoriZonaSismica" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDenunciaLavoriZonaSismica" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1543,7 +1525,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDocumentazioneImpattoAcustico" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDocumentazioneImpattoAcustico" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1557,7 +1539,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDichiarazioneSostitutiva" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDichiarazioneSostitutiva" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1571,7 +1553,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoPianoDemolizioneAmianto" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoPianoDemolizioneAmianto" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1584,7 +1566,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoAttestazioneVersamentoOneriDiritti" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoAttestazioneVersamentoOneriDiritti" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1597,7 +1579,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoRisultatiQualitaTerreni" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoRisultatiQualitaTerreni" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1610,7 +1592,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoSCIAart4DPR1512011" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoSCIAart4DPR1512011" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1623,7 +1605,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoAutorizzazioneSismica" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoAutorizzazioneSismica" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1636,7 +1618,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDerogaConformitaRequisitiIgienicoSanitari" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDerogaConformitaRequisitiIgienicoSanitari" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1649,7 +1631,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoPrevisioneImpattoAcusticoRilascioNullaosta" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoPrevisioneImpattoAcusticoRilascioNullaosta" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1662,7 +1644,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDerogaPrevenzioneIncendi" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDerogaPrevenzioneIncendi" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1675,7 +1657,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoRilascioParereVigiliFuoco" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoRilascioParereVigiliFuoco" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1688,7 +1670,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoVersamentoImpostaBollo" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoVersamentoImpostaBollo" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1702,7 +1684,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDerogaBarriereArchitettoniche" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDerogaBarriereArchitettoniche" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1715,7 +1697,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoRelazionePaesaggisticaSemplificata" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoRelazionePaesaggisticaSemplificata" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1730,7 +1712,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoRilascioParereSoprintendenza" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoRilascioParereSoprintendenza" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1743,7 +1725,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoRilascioNullaOstaAreaProtetta" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoRilascioNullaOstaAreaProtetta" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1756,7 +1738,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoRilascioloAutorizzazioneVincoloIdrogeologico" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoRilascioloAutorizzazioneVincoloIdrogeologico" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1769,7 +1751,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoRilascioAutorizzazioneVincoloIdraulico" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoRilascioAutorizzazioneVincoloIdraulico" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1782,7 +1764,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoApprovazioneProgettoVINCA" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoApprovazioneProgettoVINCA" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1795,7 +1777,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoDerogafasciaRispettoCimiteriale" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoDerogafasciaRispettoCimiteriale" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1808,7 +1790,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1830,7 +1812,7 @@
         </xs:annotation>       
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="suecommon:AllegatoBaseType">
+                <xs:extension base="moduli:AllegatoBaseType">
                     <xs:sequence>
                         <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
                     </xs:sequence>
@@ -1848,7 +1830,7 @@
         </xs:annotation>       
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="suecommon:AllegatoBaseType">
+                <xs:extension base="moduli:AllegatoBaseType">
                     <xs:sequence>
                         <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
                     </xs:sequence>
@@ -1857,7 +1839,7 @@
         </xs:complexType>     
     </xs:element>
 
-    <xs:element name="allegatoAttestazioneVersamentoOneriAutorizzazioni" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoAttestazioneVersamentoOneriAutorizzazioni" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>
@@ -1870,7 +1852,7 @@
             </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoAutorizzazioniScarichiIdrici" type="suecommon:AllegatoBaseType">
+    <xs:element name="allegatoAutorizzazioniScarichiIdrici" type="moduli:AllegatoBaseType">
             <xs:annotation>
                     <xs:documentation xml:lang="it">
                             <ccts:Definition>

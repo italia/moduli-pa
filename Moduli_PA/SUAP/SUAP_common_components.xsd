@@ -454,6 +454,7 @@
     <xs:complexType name="PrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="allegatoDocumentoIdentitaPreposto" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="inData" type="xs:date"/>
             <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>            
         </xs:sequence>
@@ -539,6 +540,9 @@
             <xs:element name="altro" type="suapcommon:AltroRequisitoProfessionaleBaseType"/>
         </xs:choice>
     </xs:complexType>
+    
+    
+    
     
     <xs:complexType name="NotificaSanitariaType">
        <xs:sequence>
@@ -819,25 +823,7 @@
         </xs:sequence>
     </xs:complexType>
    
-    <xs:complexType name="FileAttachmentType">
-        <xs:sequence>
-            <xs:element name="contenuto" type="xs:base64Binary"/>
-            <xs:element name="mimeType" type="enumeration:MimeTypeEnum"/>
-        </xs:sequence>
-    </xs:complexType>
-        
-    <xs:complexType name="AllegatoBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element name="file" type="suapcommon:FileAttachmentType"/>
-        </xs:sequence>
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatoType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:AllegatoBaseType"/>
-        </xs:complexContent>
-    </xs:complexType>
-    
+   
     <!-- IMPLEMENTATO NELL'IPOTESI DI SCELTA MULTIPLA, DA VERIFICA SE INVECE SCELTA SINGOLA IN QUESTO CASO SEMPLIFICARE CON ENUMERATION -->
     <xs:complexType name="VariazioniTabelleSpecialiType">
         <xs:sequence>
@@ -879,8 +865,22 @@
     <!-- BASIC COMPONENTS TYPE -->
     
     
-    <!-- ELEMENTI ALLEGATI -->     
-    <xs:element name="allegatoProcuraDelega" type="suapcommon:AllegatoBaseType"  >
+    <!-- TYPE ALLEGATI  -->     
+    <xs:complexType name="AllegatoNotificaSanitariaType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="notificaSanitaria" type="suapcommon:NotificaSanitariaType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    
+    
+    
+    <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoBaseType"  >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                <ccts:Definition>Procura/delega</ccts:Definition>
@@ -889,7 +889,7 @@
         </xs:annotation>
     </xs:element> 
     
-    <xs:element name="allegatoDocumentoIdentitaTitolare" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Copia del documento di identità del/i titolare/i</ccts:Definition>
@@ -897,6 +897,7 @@
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    
     
     
     <xs:element name="allegatoNotificaSanitaria"  >
@@ -937,17 +938,16 @@
         
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="suapcommon:AllegatoBaseType">
+                <xs:extension base="moduli:AllegatoBaseType">
                     <xs:sequence>
                         <xs:element name="notificaSanitaria" type="suapcommon:NotificaSanitariaType"/>                        
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
-            
         </xs:complexType>
     </xs:element>
     
-    <xs:element name="allegatoVenditaProdottiAlimentazioneAnimale" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaProdottiAlimentazioneAnimale" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>SCIA per la vendita di prodotti agricoli e zootecnici, mangimi, prodotti di origine minerale e chimico industriale</ccts:Definition>
@@ -956,7 +956,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoComunicazioneAlcolici" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoComunicazioneAlcolici" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione, che vale quale denuncia ai sensi del D.Lgs. n. 504/1995 per la vendita di alcolici</ccts:Definition>
@@ -965,7 +965,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoPrevenzioniIncendi" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoPrevenzioniIncendi" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>SCIA prevenzione incendi</ccts:Definition>
@@ -978,7 +978,7 @@
         </xs:annotation>
      </xs:element>
     
-    <xs:element name="allegatoVenditaFarmaciBanco" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaFarmaciBanco" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione per la vendita di farmaci da banco e medicinali veterinari</ccts:Definition>
@@ -987,7 +987,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaGPL" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaGPL" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione per la vendita di gas di petrolio liquefatto (GPL) per combustione</ccts:Definition>
@@ -996,7 +996,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaGASInfiammabile" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaGASInfiammabile" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione, che vale quale denuncia per la vendita di gas infiammabili in recipienti mobili compressi (D.Lgs. n. 504/1995)</ccts:Definition>
@@ -1005,7 +1005,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoInsegnaEsercizio" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoInsegnaEsercizio" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Autorizzazione per insegna di esercizio</ccts:Definition>
@@ -1023,7 +1023,7 @@
         
     </xs:element>
     
-    <xs:element name="allegatoVenditaFitosanitari" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaFitosanitari" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per il rilascio dell’autorizzazione per la vendita di prodotti fitosanitari</ccts:Definition>
@@ -1032,7 +1032,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaPreziosi" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaPreziosi" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione di Pubblica Sicurezza per la vendita di oggetti preziosi</ccts:Definition>
@@ -1041,7 +1041,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoVenditaIngrossoFarmaciBanco" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaIngrossoFarmaciBanco" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione alla vendita all’ingrosso di farmaci (e farmaci da banco)</ccts:Definition>
@@ -1053,7 +1053,7 @@
     </xs:element>
     
     
-    <xs:element name="allegatoVenditaArmi" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVenditaArmi" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione di Pubblica Sicurezza per la vendita di armi diverse da quelle da guerra</ccts:Definition>
@@ -1062,7 +1062,7 @@
         </xs:annotation>       
     </xs:element>    
     
-    <xs:element name="allegatoVersamentoOneri" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoVersamentoOneri" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento di oneri, di diritti, ecc.(*)</ccts:Definition>
@@ -1071,7 +1071,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoImpostaDiBollo" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoImpostaDiBollo" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato;
@@ -1097,24 +1097,9 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoAltraDocumentazioneRegionale" type="suapcommon:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Altra documentazione prevista dalla normativa regionale (*) Esempi: Piano parcheggi, viabilità, ecc.</ccts:Definition>
-                <ccts:UsageRule>Se espressamente prevista dalla normativa regionale di settore</ccts:UsageRule>
-            </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Altre comunicazioni o segnalazioni previste dalla normativa regionale (*)</ccts:Definition>
-                <ccts:UsageRule>Se espressamente prevista dalla normativa regionale di settore</ccts:UsageRule>
-            </xs:documentation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Altre domande previste dalla normativa regionale (*)</ccts:Definition>
-                <ccts:UsageRule>Se espressamente prevista dalla normativa regionale di settore</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
+    
           
-    <xs:element name="allegatoProdottiOrigineAnimale" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoProdottiOrigineAnimale" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di Riconoscimento per la produzione e la commercializzazione dei prodotti di origine animale (Reg.CE n. 853/2004) o non animale (Reg.CE n. 852/2004)</ccts:Definition>
@@ -1123,7 +1108,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoPlanimetrieLocali" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoPlanimetrieLocali" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Planimetria quotata dei locali</ccts:Definition>
@@ -1138,7 +1123,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoRelazioneLocali" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoRelazioneLocali" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Relazione descrittiva delle caratteristiche dei locali medesimi, della loro localizzazione e attrezzatura utilizzata per il servizio (*)</ccts:Definition>
@@ -1148,7 +1133,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoScaricoAcqueAUA" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoScaricoAcqueAUA" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per il rilascio dell’Autorizzazione Unica Ambientale (AUA) per scarico delle acque</ccts:Definition>
@@ -1157,7 +1142,7 @@
         </xs:annotation> 
     </xs:element>
     
-    <xs:element name="allegatoRichiestaAutorizAUA" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoRichiestaAutorizAUA" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione generale o AUA (nel caso di più autorizzazioni) alle emissioni in atmosfera</ccts:Definition>
@@ -1166,7 +1151,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoEmissAtmosferaAUA" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoEmissAtmosferaAUA" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di AUA per l’autorizzazione ordinaria alle emissioni in atmosfera</ccts:Definition>
@@ -1177,7 +1162,7 @@
     
 
     
-    <xs:element name="allegatoImpattoAcustico" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoImpattoAcustico" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione di impatto acustico</ccts:Definition>
@@ -1190,7 +1175,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoDichiarazioneNotaio" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoDichiarazioneNotaio" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Dichiarazione da parte del notaio</ccts:Definition>
@@ -1208,7 +1193,7 @@
         </xs:complexType>        
     </xs:element>
 
-    <xs:element name="allegatoAutorizzazioneInDeroga" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoAutorizzazioneInDeroga" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di autorizzazione in deroga</ccts:Definition>
@@ -1218,7 +1203,7 @@
         
     </xs:element>
     
-    <xs:element name="allegatoIndustriaInsalubre" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoIndustriaInsalubre" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Comunicazione al Sindaco per industria insalubre</ccts:Definition>
@@ -1228,7 +1213,7 @@
         </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoEmissioneAtmosferaGenerale" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoEmissioneAtmosferaGenerale" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta dell’autorizzazione generale o AUA (nel caso di più autorizzazioni) alle emissioni in atmosfera</ccts:Definition>
@@ -1238,7 +1223,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoEmissioneAtmosferaAUA" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoEmissioneAtmosferaAUA" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di AUA per emissioni in atmosfera</ccts:Definition>
@@ -1248,7 +1233,7 @@
         </xs:annotation>
     </xs:element>
 
-    <xs:element name="allegatoScarichiAcqueReflueAUA" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoScarichiAcqueReflueAUA" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Documentazione per la richiesta di AUA per gli scarichi di acque reflue </ccts:Definition>
@@ -1257,7 +1242,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoTabellaTariffePrestazioni" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoTabellaTariffePrestazioni" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Tabella delle tariffe delle prestazioni</ccts:Definition>
@@ -1266,7 +1251,7 @@
         </xs:annotation>
     </xs:element>
     
-    <xs:element name="allegatoTimbroSocieta" type="suapcommon:AllegatoBaseType" >
+    <xs:element name="allegatoTimbroSocieta" type="moduli:AllegatoBaseType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Timbro della Società/Ditta individuale</ccts:Definition>
