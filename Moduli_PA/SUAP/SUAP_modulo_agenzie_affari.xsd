@@ -11,11 +11,7 @@
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_ageaffari"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
    
-    <xs:annotation>
-        <xs:documentation>
-            COMUNICAZIONE PER L’ESERCIZIO DELL’ATTIVITÀ DELLE AGENZIE D’AFFARI DI COMPETENZA DEL COMUNE
-        </xs:documentation>
-    </xs:annotation>
+    
    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -29,6 +25,11 @@
     <xs:element name="ModuloAgenzieAffari" type="ageaffari:ModuloAgenzieAffari" />
     
     <xs:complexType name="ModuloAgenzieAffari">
+        <xs:annotation>
+            <xs:documentation>
+                COMUNICAZIONE PER L’ESERCIZIO DELL’ATTIVITÀ DELLE AGENZIE D’AFFARI DI COMPETENZA DEL COMUNE
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -44,7 +45,7 @@
             <xs:element name="Allegati">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="altriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
+                        <!-- Allegati non referenziati nella tabella allegati -->
                         <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
                     </xs:sequence>
                 </xs:complexType>
@@ -136,11 +137,27 @@
     <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoTabellaTariffePrestazioni" minOccurs="1" />
-            <xs:element ref="suapcommon:allegatoTimbroSocieta" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0" maxOccurs="2" />
+            <xs:element name="allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0" />
+                        <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0" />
+                        <xs:element name="allegatoPossessoRequisitiAltriSoggetti" minOccurs="0" maxOccurs="unbounded" >
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" minOccurs="1" maxOccurs="1"/>
+                                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" maxOccurs="1"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        
+                        <xs:element name="allegatoTabellaTariffePrestazioni" type="moduli:AllegatoType"  minOccurs="1" />
+                        <xs:element name="allegatoTimbroSocieta" type="moduli:AllegatoType" minOccurs="0" />
+                        <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
+                        <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     
