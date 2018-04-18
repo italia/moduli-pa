@@ -82,7 +82,7 @@
     <xs:complexType name="IntegrazioneAnagraficaType">
         <xs:sequence>
             <xs:element name="indirizzoAttivita" type="suapcommon:IndirizzoContattiFoniaAttivitaType" />
-            <xs:element name="datiCastali" type="moduli:DatiCatastaliBaseType"/>
+            <xs:element name="datiCatastali" type="moduli:DatiCatastaliBaseType"/>
         </xs:sequence>        
     </xs:complexType>
   
