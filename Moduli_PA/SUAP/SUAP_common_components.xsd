@@ -927,6 +927,13 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="AllegatiAltriType_BolloObbligatorio">
+        <xs:sequence>
+            <xs:element name="allegatoVersamentoOneri"  type="moduli:AllegatoBaseType" minOccurs="0" />
+            <xs:element name="allegatoImpostaDiBollo"  type="moduli:AllegatoType" />
+        </xs:sequence>
+    </xs:complexType>
+    
     
     <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoBaseType"  >
         <xs:annotation>

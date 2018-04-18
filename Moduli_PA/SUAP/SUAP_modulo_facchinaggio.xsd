@@ -11,11 +11,7 @@
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_facchinaggio"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DELL’ATTIVITÀ DI FACCHINAGGIO
-        </xs:documentation>
-    </xs:annotation>
+   
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -30,20 +26,17 @@
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloFacchinaggioType">
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DELL’ATTIVITÀ DI FACCHINAGGIO
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="facchinaggio:AperturaType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="facchinaggio:TabellaAllegatiType"/> 
-        
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="altriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
         </xs:sequence>        
     </xs:complexType>
     
@@ -52,7 +45,6 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:element name="superficieComplessiva" minOccurs="0" type="xs:decimal"/>
-            
         </xs:sequence>
     </xs:complexType>
     
@@ -62,49 +54,29 @@
             <xs:element name="allegatiSCIA" type="facchinaggio:AllegatiSCIAType"/>
             <xs:element name="allegatiSCIAUnica" type="facchinaggio:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiSCIACondizionata" type="facchinaggio:AllegatiSCIACondizionataType"/> 
-            <xs:element name="allegatiAltri" type="facchinaggio:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
             
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
-    
-    <xs:complexType name="AllegatiAltriBaseType">
-        <xs:sequence>
-            <xs:element name="AttestazioneVersamentoOneri" type="facchinaggio:allegatoVersamentoOneriBaseType" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
-        </xs:sequence>                                
-    </xs:complexType>
-    
-    <xs:complexType name="allegatoVersamentoOneriBaseType" abstract="true"/>
-    <xs:complexType name="allegatoVersamentoOneriType">
-        <xs:complexContent>
-            <xs:extension base="facchinaggio:allegatoVersamentoOneriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <!-- ENUMERATION -->
-    
     
 </xs:schema>    
