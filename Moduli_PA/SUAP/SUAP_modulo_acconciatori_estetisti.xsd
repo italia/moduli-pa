@@ -61,7 +61,7 @@
     <xs:complexType name="AllegatiType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
             <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO ACCONCIATORI/ESTETISTI  INCLUSO IN DICHIARAZIONI -->
             <xs:element name="allegatoPlanimetrieLocali" type="moduli:AllegatoType"  minOccurs="0"/>
             <xs:element  name="allegatoRelazioneCaratteristicheLocali" type="moduli:AllegatoBaseType"  minOccurs="0"/>
