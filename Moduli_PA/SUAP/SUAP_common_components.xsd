@@ -876,8 +876,56 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="AllegatoPossessoRequisitiAltriSociType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
+                    <xs:element name="inQualitaDiSocioDella" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="societa" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
+                    <xs:element name="documentoIdentitaSocio" type="moduli:AllegatoType" minOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoPossessoRequisitiAltriSoggettiType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
+                    <xs:element name="inQualita" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="di" type="xs:string" minOccurs="0"/>
+                                <xs:element name="della">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="societa" type="xs:string" minOccurs="0"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     
+    <xs:complexType name="AllegatiAltriType">
+        <xs:sequence>
+            <xs:element name="allegatoVersamentoOneri"  type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="allegatoImpostaDiBollo"  type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
     
     
     <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoBaseType"  >

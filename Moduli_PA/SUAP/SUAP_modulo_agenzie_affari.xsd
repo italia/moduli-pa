@@ -142,15 +142,7 @@
                     <xs:sequence>
                         <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0" />
                         <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
-                        <xs:element name="allegatoPossessoRequisitiAltriSoggetti" minOccurs="0" maxOccurs="unbounded" >
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" minOccurs="1" maxOccurs="1"/>
-                                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" maxOccurs="1"/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                        
+                        <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
                         <xs:element name="allegatoTabellaTariffePrestazioni" type="moduli:AllegatoType"  minOccurs="1" />
                         <xs:element name="allegatoTimbroSocieta" type="moduli:AllegatoType" minOccurs="0" />
                         <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />

@@ -11,11 +11,7 @@
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_autorimesse"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
 
-    <xs:annotation>
-        <xs:documentation>
-            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DELL’ATTIVITÀ DI AUTORIMESSA 
-        </xs:documentation>
-    </xs:annotation>
+    
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -30,19 +26,18 @@
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloAutorimesseType">
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DELL’ATTIVITÀ DI AUTORIMESSA 
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/> 
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="autorimesse:AperturaType"/>       
             <xs:element name="altreDichiarazioni" type="autorimesse:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="autorimesse:TabellaAllegatiType"/>  
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element> 
+           
         </xs:sequence>
     </xs:complexType>
 
@@ -70,52 +65,30 @@
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="autorimesse:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiSCIACondizionata" type="autorimesse:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="autorimesse:AllegatiAltriBaseType"/>      
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>      
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>                               
-        </xs:sequence>                                
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiSCIACondizionataBaseType">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoScaricoAcqueAUA" minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0" />
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
-        <xs:complexContent>
-            <xs:extension base="autorimesse:AllegatiSCIACondizionataBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
-                </xs:sequence>  
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
-        </xs:sequence>                                
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" /> 
+            <xs:element name="allegatoScaricoAcqueAUA" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoAutorizzazioneInDeroga" type="moduli:AllegatoBaseType" minOccurs="0"/>
+        </xs:sequence>  
     </xs:complexType>
 
-    <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="autorimesse:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+  
     
     <!-- BASIC COMPONENTS TYPE -->  
     <xs:complexType name="TipoEsercizioType">

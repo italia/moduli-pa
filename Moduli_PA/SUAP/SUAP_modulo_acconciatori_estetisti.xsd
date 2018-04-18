@@ -48,7 +48,14 @@
                         <xs:element name="allegatoPossessoRequisitiAltriSoci" minOccurs="0" maxOccurs="unbounded" >
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" minOccurs="1" maxOccurs="1"/>
+                                    <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
+                                    <xs:element name="inQualitaDiSocioDella" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="societa" type="xs:string" minOccurs="0"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element> 
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
@@ -81,19 +88,12 @@
         </xs:sequence>
     </xs:complexType>
  
-    <xs:complexType name="AllegatiAltriType">
-        <xs:sequence>
-            <xs:element name="allegatoVersamentoOneri" type="moduli:AllegatoBaseType" minOccurs="0"/>
-            <xs:element name="allegatoImpostaDiBollo" type="moduli:AllegatoType" minOccurs="0"/> 
-        </xs:sequence>  
-    </xs:complexType>  
-    
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegati" type="acconcestet:AllegatiType"/>
             <xs:element name="allegatiSCIA_SCIAUnica" type="acconcestet:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiAutorizzazione" type="acconcestet:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="acconcestet:AllegatiAltriType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
     
