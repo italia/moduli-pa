@@ -51,13 +51,6 @@
             </xs:element>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="sommtemp:TabellaAllegatiType"/>
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
         </xs:sequence>
     </xs:complexType>
     
@@ -82,28 +75,25 @@
     
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoNotificaSanitaria" />
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
+            
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true"/>                                
-    
     <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="sommtemp:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/> 
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:element name="allegatoVersamentoOneri"  type="moduli:AllegatoBaseType" minOccurs="0"/>                                                                                                                                                 
+        </xs:sequence>  
     </xs:complexType>
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatSCIA" type="sommtemp:AllegatiSCIAType"/>                        
-            <xs:element name="allegatAltri" type="sommtemp:AllegatiAltriBaseType"/>
+            <xs:element name="allegatAltri" type="sommtemp:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
     

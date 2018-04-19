@@ -328,6 +328,7 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="dichiarazione" type="suapcommon:AltreDichiarazioniAltroBaseType"/>     <!-- -->        
+            <xs:element name="allegatoDocumentoIdentitaResposabileeAttivitàProduttive" type="moduli:AllegatoType" />
         </xs:sequence>
     </xs:complexType>
     
@@ -456,7 +457,8 @@
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
             <xs:element name="allegatoDocumentoIdentitaPreposto" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="inData" type="xs:date"/>
-            <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>            
+            <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>
+            <xs:element name="allegatoDocumentoIdentitaPreposto" type="moduli:AllegatoType" />            
         </xs:sequence>
     </xs:complexType>
     
