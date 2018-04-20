@@ -45,20 +45,7 @@
                 <!-- Allegati non referenziati nella tabella allegati -->
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="allegatoPossessoRequisitiAltriSoci" minOccurs="0" maxOccurs="unbounded" >
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
-                                    <xs:element name="inQualitaDiSocioDella" minOccurs="0">
-                                        <xs:complexType>
-                                            <xs:sequence>
-                                                <xs:element name="societa" type="xs:string" minOccurs="0"/>
-                                            </xs:sequence>
-                                        </xs:complexType>
-                                    </xs:element> 
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
+                        <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -71,7 +58,7 @@
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
             <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO ACCONCIATORI/ESTETISTI  INCLUSO IN DICHIARAZIONI -->
             <xs:element name="allegatoPlanimetrieLocali" type="moduli:AllegatoType"  minOccurs="0"/>
-            <xs:element  name="allegatoRelazioneCaratteristicheLocali" type="moduli:AllegatoBaseType"  minOccurs="0"/>
+            <xs:element  name="allegatoRelazioneCaratteristicheLocali" type="moduli:AllegatoBaseType" />
         </xs:sequence>
     </xs:complexType>
    

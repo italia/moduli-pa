@@ -11,12 +11,7 @@
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_vicinato"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
    
-    <xs:annotation>
-        <xs:documentation>
-            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI VICINATO 
-            (ESERCIZIO COMMERCIALE FINO A 150 / 250 MQ(*)) 
-        </xs:documentation>
-    </xs:annotation>
+    
    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -30,6 +25,12 @@
     <xs:element name="ModuloVicinato" type="vicinato:ModuloVicinatoType" />
     
     <xs:complexType name="ModuloVicinatoType">
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI VICINATO 
+                (ESERCIZIO COMMERCIALE FINO A 150 / 250 MQ(*)) 
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -41,14 +42,7 @@
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="vicinato:TabellaAllegatiType"/>                 
-            <!--<xs:element name="Allegati">
-                <xs:complexType>
-                   <xs:sequence>
-                       <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                       
-                   </xs:sequence>
-                </xs:complexType>
-            </xs:element> -->
+
         </xs:sequence>
     </xs:complexType>  
     
