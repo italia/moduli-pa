@@ -11,12 +11,7 @@
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_permesso_costruire"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            RICHIESTA DI PERMESSO DI COSTRUIRE
-            (art. 20, d.P.R. 6 giugno 2001, n. 380 – artt. 7, d.P.R. 7 settembre 2010, n. 160)
-        </xs:documentation>
-    </xs:annotation>
+    
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -28,10 +23,22 @@
     <xs:element name="ModuloPermessoCostruire" type="permcostr:ModuloPermessoCostruireType" />
     
     <xs:complexType name="ModuloPermessoCostruireType">
+        <xs:annotation>
+            <xs:documentation>
+                RICHIESTA DI PERMESSO DI COSTRUIRE
+                (art. 20, d.P.R. 6 giugno 2001, n. 380 – artt. 7, d.P.R. 7 settembre 2010, n. 160)
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             
             <!-- SOGGETTI -->
-            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType">
+                <xs:annotation>
+                    <xs:documentation>
+                        schedaTitolare: in caso di più titolari, la sezione è ripetibile nell’allegato “SOGGETTI COINVOLTI”
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="schedaDitta" type="suecommon:SchedaDittaType"/>
             <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType"/>
             
@@ -50,7 +57,7 @@
             <xs:element ref="suecommon:relazioneTecnicaAsseverazione"/>
             
             <!-- ALLEGATI  -->
-            <xs:element name="allegati" type="permcostr:AllegatiPermessoCostruireType"/>
+            <xs:element name="tabellaAllegati" type="permcostr:TabellaAllegatiType"/>
             
         </xs:sequence>
     </xs:complexType>
@@ -228,51 +235,62 @@
     </xs:complexType>
     
     <!-- Reference permcostr:AllegatiPermessoCostruireType -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiPermessoCostruire" type="permcostr:AllegatiPermessoCostruireType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    
     <xs:complexType name="AllegatiPermessoCostruireType">
         <xs:sequence>
-            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoSoggettiCoinvolti" minOccurs="1"/>
-            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="1"/> 
-            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>            
-            <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoModelloISTAT" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDeterminazioneContributoCostruzione" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoPreventivoContributoCostruzione" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoProgettoUrbanizzazione" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoNotificaPreliminare" minOccurs="0"/>            
-            <xs:element ref="suecommon:allegatoVersamentoImpostaBollo" minOccurs="1"/>
-            <xs:element ref="suecommon:allegatoElaboratoGrafico" minOccurs="1"/>
-            <xs:element ref="suecommon:allegatoDocumentazioneFotografica" minOccurs="1"/>             
-            <xs:element ref="suecommon:allegatoSuperamentoBarriereArch" minOccurs="0"/>             
-            <xs:element ref="suecommon:allegatoDerogaBarriereArchitettoniche" minOccurs="0"/>              
-            <xs:element ref="suecommon:allegatoProgettoImpianti" minOccurs="0"/> 
-            <xs:element ref="suecommon:allegatoRelazioneConsumiEnergetici" minOccurs="0"/> 
-            <xs:element ref="suecommon:allegatoDocumentazioneImpattoAcustico" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDichiarazioneSostitutiva" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoPrevisioneImpattoAcusticoRilascioNullaosta" minOccurs="0"/>            
-            <xs:element ref="suecommon:allegatoRilascioParereVigiliFuoco" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDerogaPrevenzioneIncendi" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoPianoDemolizioneAmianto" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDerogaConformitaRequisitiIgienicoSanitari" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDenunciaLavori" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDenunciaLavoriZonaSismica" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoAutorizzazioneSismica" minOccurs="0"/>                       
-            <xs:element ref="suecommon:allegatoRelazioneGeologica" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoRisultatiQualitaTerreni" minOccurs="0"/>    
-            <xs:element ref="suecommon:allegatoAutorizzazioniScarichiIdrici" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoRelazionePaesaggisticaSemplificata" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoRilascioParereSoprintendenza" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoRilascioNullaOstaAreaProtetta" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoRilascioloAutorizzazioneVincoloIdrogeologico" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoRilascioAutorizzazioneVincoloIdraulico" minOccurs="0"/>            
-            <xs:element ref="suecommon:allegatoApprovazioneProgettoVINCA" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDerogafasciaRispettoCimiteriale" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" minOccurs="0"/>            
-            <xs:element ref="suecommon:allegatoConformitaVincoliEcologica" minOccurs="0"/>                       
-            <xs:element ref="suecommon:allegatoAssensoTutelaEcologica" minOccurs="0"/> 
-            <xs:element ref="suecommon:allegatoConformitaVincoliFunzionale" minOccurs="0"/>            
-            <xs:element ref="suecommon:allegatoAssensoTutelaFunzionale" minOccurs="0"/>   
-            <xs:element ref="suecommon:allegatoAttestazioneVersamentoOneriDiritti" minOccurs="0"/>          
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:SoggettiCoinvoltiType"/>
+            <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoType" />
+            <xs:element name="allegatoDocumentoIdentita" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoAssensoTerzi" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoModelloISTAT"   type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDeterminazioneContributoCostruzione"   type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoPreventivoContributoCostruzione" type="moduli:AllegatoType" minOccurs="0" />              
+            <xs:element name="allegatoProgettoUrbanizzazione" type="moduli:AllegatoType" minOccurs="0" />              
+            <xs:element name="allegatoNotificaPreliminare" type="moduli:AllegatoType" minOccurs="0" /> 
+            <xs:element name="allegatoVersamentoImpostaBollo" type="moduli:AllegatoType" /> 
+            <xs:element name="allegatoElaboratiGraficiStatoDiFatto" type="moduli:AllegatoType" />
+            <xs:element name="allegatoDocumentazioneFotograficaStatoDiFatto" type="moduli:AllegatoBaseType" />
+            <xs:element name="allegatoElaboratiSuperamentoBarriereArchitettoniche" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDerogaBarriereArchitettoniche" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoProgettoImpianti" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRelazioneConsumiEnergetici" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoValitazionePrevisionaleClimaAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDichiarazioneSostitutiva" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocImpattoAcusticoPerNullaOsta" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocRilascioParereVigiliFuoco" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDerogaPrevenzioneIncendi" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoPianoDemolizioneAmianto" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDerogaConformitaRequisitiIgienicoSanitari" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDenunciaLavori" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDenunciaLavoriZonaSismica" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneSismica" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRelazioneGeologica" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRisultatiQualitaTerreni" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioniScarichiIdrici" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRelazionePaesaggistica" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRilascioParereSoprintendenza" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRilascioNullaOstaAreaProtetta" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRilascioAutorizzazioneVincoloIdrogeologico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoRilascioAutorizzazioneVincoloIdraulico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoApprovazioneProgettoVINCA" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDerogaFasciaRispettoCimiteriale" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" type="moduli:AllegatoType" minOccurs="0"/>
+            
+            <xs:element name="allegatoConformitaVincoliEcologica" type="suecommon:AllegatoConformitaVincoliEcologicaType" minOccurs="0"/>
+            <xs:element name="allegatoAssensoTutelaEcologica" type="suecommon:AllegatoAssensoTutelaEcologicaType" minOccurs="0"/>
+            <xs:element name="allegatoConformitaVincoliFunzionale" type="suecommon:AllegatoConformitaVincoliFunzionaleType" minOccurs="0"/>
+            <xs:element name="allegatoAssensoTutelaFunzionale" type="suecommon:AllegatoAssensoTutelaFunzionaleType" minOccurs="0"/>
+            
+            <xs:element name="allegatoAttestazioneVersamentoOneriDiritti" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     

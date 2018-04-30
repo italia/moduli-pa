@@ -11,11 +11,7 @@
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_comunicazione_fine_lavori"
     elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            E. COMUNICAZIONE DI FINE LAVORI
-        </xs:documentation>
-    </xs:annotation>
+    
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"  schemaLocation="SUE_common_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"    schemaLocation="../MODULI_common_components.xsd"/>
@@ -31,11 +27,17 @@
     <xs:complexType name="ModuloFineLavoriType">
         <xs:annotation>
             <xs:documentation>
-                schedaTitolare: in caso di più titolari, la sezione è ripetibile nell’allegato “SOGGETTI COINVOLTI”
+                E. COMUNICAZIONE DI FINE LAVORI
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType">
+                <xs:annotation>
+                    <xs:documentation>
+                        schedaTitolare: in caso di più titolari, la sezione è ripetibile nell’allegato “SOGGETTI COINVOLTI”
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="schedaDitta" type="suecommon:SchedaDittaType" minOccurs="0"/>
             <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
             <xs:element name="ubicazioneImmobile" type="suecommon:UbicazioneImmobileType" minOccurs="0"/>
@@ -83,10 +85,10 @@
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0" />
-            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0" />
-            <xs:element ref="suecommon:allegatoPlanimetricoVariantiConcluse" minOccurs="0" />
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoBaseType" minOccurs="0" />
+            <xs:element name="allegatoDocumentoIdentita" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoPlanimetricoVarianti" type="moduli:AllegatoType" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     
