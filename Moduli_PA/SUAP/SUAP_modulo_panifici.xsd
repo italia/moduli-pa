@@ -160,9 +160,29 @@
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
             <xs:element name="dichiaranteRequisitiAntimafia" type="suapcommon:RequisitiAntimafiaType"/>
-            <xs:element name="responsabileAttivitàProduttiveRequisitiAntimafia" type="suapcommon:ResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
+            <xs:element name="allegatoResponsabileAttivitàProduttiveRequisitiAntimafia" type="panifici:AllegatoResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
         </xs:choice>  
     </xs:complexType>
+    
+    <xs:complexType name="AllegatoResponsabileAttivitàProduttiveRequisitiAntimafiaType">
+        <xs:sequence>
+            <xs:element name="responsabile" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="inQualita">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="societa" type="xs:string"/>
+                            <xs:element name="dittaindividuale" type="xs:string"/>
+                        </xs:choice>
+                        <xs:element name="data" type="xs:date"/> <!-- -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dichiarazione" type="suapcommon:AltreDichiarazioniAltroBaseType"/>     <!-- -->        
+            <xs:element name="allegatoDocumentoIdentitaResposabileeAttivitàProduttive" type="moduli:AllegatoType" />
+        </xs:sequence>
+    </xs:complexType>
+    
     
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>

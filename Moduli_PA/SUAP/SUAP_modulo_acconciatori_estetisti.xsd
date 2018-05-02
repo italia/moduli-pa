@@ -130,7 +130,7 @@
                 <xs:complexType>
                     <xs:choice>
                         <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType"/>
-                        <xs:element name="resposabileTecnicoRequisitiProfessionali" type="acconcestet:ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType" maxOccurs="unbounded"/>
+                        <xs:element name="allegatoResposabileTecnicoRequisitiProfessionali" type="suapcommon:AllegatoResponsabileTecnicoAcconciatoriRequisitiProfessionaliType" maxOccurs="unbounded"/>
                     </xs:choice> 
                 </xs:complexType>
             </xs:element>
@@ -138,37 +138,14 @@
                 <xs:complexType>
                     <xs:choice>
                         <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>
-                        <xs:element name="resposabileTecnicoRequisitiProfessionali" type="acconcestet:ResponsabileTecnicoEstetistiRequisitiProfessionaliType" maxOccurs="unbounded"/>
+                        <xs:element name="allegatoResposabileTecnicoRequisitiProfessionali" type="suapcommon:AllegatoResponsabileTecnicoEstetistiRequisitiProfessionaliType" maxOccurs="unbounded"/>
                     </xs:choice> 
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="ResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
-                <xs:sequence>
-                    <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType"/>
-                    <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
-                    <xs:element name="allegatoAccettazioneResposabileTecnico" type="moduli:AllegatoBaseType" />
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
- 
-    <xs:complexType name="ResponsabileTecnicoEstetistiRequisitiProfessionaliType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
-                <xs:sequence>
-                    <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>
-                    <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
-                    <xs:element name="allegatoAccettazioneResposabileTecnico" type="moduli:AllegatoBaseType" />
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
    
     <xs:complexType name="AttivitaEsercitaBaseType" abstract="true" />

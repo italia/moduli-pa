@@ -38,7 +38,7 @@
             <xs:element name="schedaAnagrafica"         type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica"   type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura"                 type="tintolav:AperturaType"/>            
-            <xs:element name="dichiarazioni"            type="tintolav:DichiarazioniType"/>
+            <xs:element name="dichiarazioni"            type="tintolav:DichiarazioniType" minOccurs="0"/><!-- presente solo per tintolavanderie -->
             <xs:element name="altreDichiarazioni"       type="tintolav:AltreDichiarazioniType"/>
             <xs:choice>
                 <xs:element name="tabellaAllegatiTintoLavanderie"     type="tintolav:TabellaAllegatiTintoLavanderieType"/>    
@@ -92,7 +92,7 @@
         <xs:sequence>
             <xs:choice>
                 <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="tintolav:DichiarazioniRespTecnLavaRequisitiProfessionaliType"/>
-                <xs:element name="resposabileTecnicoRequisitiProfessionali" type="tintolav:ResponsabileTecnicoRequisitiProfessionaliType" maxOccurs="unbounded"/>
+                <xs:element name="allegatoResposabileTecnicoRequisitiProfessionali" type="tintolav:AllegatoResponsabileTecnicoRequisitiProfessionaliType" maxOccurs="unbounded"/>
             </xs:choice>      
         </xs:sequence>
     </xs:complexType>
@@ -157,7 +157,7 @@
         </xs:choice>        
     </xs:complexType>
     
-    <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliType" >
+    <xs:complexType name="AllegatoResponsabileTecnicoRequisitiProfessionaliType" >
         <xs:complexContent>
             <xs:extension base="tintolav:ResponsabileTecnicoRequisitiProfessionaliBaseType">
                 <xs:sequence>

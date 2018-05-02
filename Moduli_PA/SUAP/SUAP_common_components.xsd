@@ -313,24 +313,7 @@
         </xs:sequence>
     </xs:complexType>
    
-    <xs:complexType name="ResponsabileAttivitàProduttiveRequisitiAntimafiaType">
-        <xs:sequence>
-            <xs:element name="responsabile" type="aggregate:PersonaAnagraficaType"/>
-            <xs:element name="inQualita">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:choice>
-                            <xs:element name="societa" type="xs:string"/>
-                            <xs:element name="dittaindividuale" type="xs:string"/>
-                        </xs:choice>
-                        <xs:element name="data" type="xs:date"/> <!-- -->
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="dichiarazione" type="suapcommon:AltreDichiarazioniAltroBaseType"/>     <!-- -->        
-            <xs:element name="allegatoDocumentoIdentitaResposabileeAttivitàProduttive" type="moduli:AllegatoType" />
-        </xs:sequence>
-    </xs:complexType>
+    
     
     <xs:complexType name="CarattereStagionaleBaseType" abstract="true"/>
     <xs:complexType name="CarattereStagionaleType">
@@ -365,7 +348,7 @@
         <xs:sequence>
             <xs:choice>
                 <xs:element name="dichiaranteRequisitiProfessionali" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>
-                <xs:element name="prepostoRequisitiProfessionali" type="suapcommon:PrepostoRequisitiProfessionaliType"/>
+                <xs:element name="allegatoPrepostoRequisitiProfessionali" type="suapcommon:AllegatoPrepostoRequisitiProfessionaliType"/>
             </xs:choice>      
         </xs:sequence>
     </xs:complexType>
@@ -452,7 +435,7 @@
         </xs:choice>        
     </xs:complexType>
     
-    <xs:complexType name="PrepostoRequisitiProfessionaliType">
+    <xs:complexType name="AllegatoPrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
             <xs:element name="allegatoDocumentoIdentitaPreposto" type="moduli:AllegatoType" minOccurs="0"/>
@@ -922,6 +905,32 @@
                         </xs:complexType>
                     </xs:element> 
                     <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatoResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
+                <xs:sequence>
+                    <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType"/>
+                    <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
+                    <xs:element name="allegatoAccettazioneResposabileTecnico" type="moduli:AllegatoBaseType" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatoResponsabileTecnicoEstetistiRequisitiProfessionaliType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
+                <xs:sequence>
+                    <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>
+                    <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
+                    <xs:element name="allegatoAccettazioneResposabileTecnico" type="moduli:AllegatoBaseType" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
