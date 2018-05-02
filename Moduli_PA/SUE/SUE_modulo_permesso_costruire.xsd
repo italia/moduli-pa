@@ -54,7 +54,7 @@
             <xs:element name="obblighiSaluteSicurezza" type="permcostr:ObblighiSaluteSicurezzaType"/>
             
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
-            <xs:element ref="suecommon:relazioneTecnicaAsseverazione"/>
+            <xs:element name="relazioneTecnicaAsseverazione" type="suecommon:RelazioneTecnicaAsseverazioneType"/>
             
             <!-- ALLEGATI  -->
             <xs:element name="tabellaAllegati" type="permcostr:TabellaAllegatiType"/>
@@ -246,7 +246,7 @@
     <xs:complexType name="AllegatiPermessoCostruireType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:SoggettiCoinvoltiType"/>
+            <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:AllegatoSoggettiCoinvoltiType"/>
             <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoType" />
             <xs:element name="allegatoDocumentoIdentita" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="allegatoAssensoTerzi" type="moduli:AllegatoType" minOccurs="0" />

@@ -170,7 +170,7 @@
     <xs:complexType name="AllegatiCILAType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:SoggettiCoinvoltiType"/>
+            <xs:element name="allegatoSoggettiCoinvolti" type="suecommon:AllegatoSoggettiCoinvoltiType"/>
             <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoBaseType" minOccurs="0" />
             <xs:element name="allegatoDocumentoIdentita" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="allegatoAssensoTerzi" type="moduli:AllegatoType" minOccurs="0" />

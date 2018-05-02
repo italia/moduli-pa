@@ -60,7 +60,7 @@
     <!-- BASE TYPE -->
    
    
-    <xs:complexType name="SoggettiCoinvoltiType" >
+    <xs:complexType name="AllegatoSoggettiCoinvoltiType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">Soggetti Coinvolti</xs:documentation>
         </xs:annotation>       
@@ -100,7 +100,7 @@
     <xs:complexType name="AllegatiCILType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSoggettiCoinvolti" type="cil:SoggettiCoinvoltiType" minOccurs="1"/>
+            <xs:element name="allegatoSoggettiCoinvolti" type="cil:AllegatoSoggettiCoinvoltiType" minOccurs="1"/>
             <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoBaseType" minOccurs="0" />
             <xs:element name="allegatoDocumentoIdentita" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="allegatoAssensoTerzi" type="moduli:AllegatoType" minOccurs="0" />

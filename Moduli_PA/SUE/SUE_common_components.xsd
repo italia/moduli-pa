@@ -76,14 +76,14 @@
     <xs:complexType name="TecniciIncaricatiDeiLavoriType">
         <xs:sequence>
             <xs:element name="altriTecniciDaSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="altriTecnici" minOccurs="0"  type="suecommon:individuatiPrimaInizioLavoriBaseType"/>
+            <xs:element name="altriTecnici" minOccurs="0"  type="suecommon:IndividuatiPrimaInizioLavoriBaseType"/>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="individuatiPrimaInizioLavoriBaseType" abstract="true"/>
-    <xs:complexType name="individuatiPrimaInizioLavoriType">
+    <xs:complexType name="IndividuatiPrimaInizioLavoriBaseType" abstract="true"/>
+    <xs:complexType name="IndividuatiPrimaInizioLavoriType">
         <xs:complexContent>
-            <xs:extension base="suecommon:individuatiPrimaInizioLavoriBaseType">
+            <xs:extension base="suecommon:IndividuatiPrimaInizioLavoriBaseType">
                 <xs:sequence>
                     <xs:element name="individuatiPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>
                 </xs:sequence>
@@ -125,36 +125,39 @@
                 </xs:complexType>
             </xs:element>
             
-            <xs:sequence><!-- scelta multipla -->
-                <xs:element name="cassaEdile" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="sede" type="xs:string"/>
-                            <xs:element name="codiceImpres" type="xs:string"/>
-                            <xs:element name="codiceCassa" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Inps" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="sede" type="xs:string"/>
-                            <xs:element name="codiceMatrPos" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Inail" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="sede" type="xs:string"/>
-                            <xs:element name="codiceImpres" type="xs:string"/>
-                            <xs:element name="podAssicurativa" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-           </xs:sequence>
-            
-        </xs:sequence>
+            <xs:element name="verificaRegolaritaContributiva">
+                <xs:complexType>
+                    <xs:sequence><!-- scelta multipla -->
+                        <xs:element name="cassaEdile" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="sede" type="xs:string"/>
+                                    <xs:element name="codiceImpresa" type="xs:string"/>
+                                    <xs:element name="codiceCassa" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Inps" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="sede" type="xs:string"/>
+                                    <xs:element name="codiceMatrPos" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Inail" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="sede" type="xs:string"/>
+                                    <xs:element name="codiceImpresa" type="xs:string"/>
+                                    <xs:element name="posizioneAssicurativa" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+         </xs:sequence>
     </xs:complexType>
 
     <!-- Reference suecommon:ImpreseEsecutriciLavoriBaseType -->  
@@ -1199,7 +1202,7 @@
 
    
     <!-- TYPE ALLEGATI --> 
-    <xs:complexType name="SoggettiCoinvoltiType" >
+    <xs:complexType name="AllegatoSoggettiCoinvoltiType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">
                 <ccts:Definition>Soggetti Coinvolti</ccts:Definition>
@@ -1325,584 +1328,8 @@
         </xs:complexContent>
     </xs:complexType>
     
-    
-    
    
     <!-- END TYPE ALLEGATI --> 
-   
-   
-    <!-- ELEMENTI ALLEGATI --> 
-    
-    <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoBaseType"  >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Procura/delega</ccts:Definition>
-                <ccts:UsageRule>Nel caso di procura/delega a presentare la segnalazione/domanda/comunicazione</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element> 
-    
-    <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Ricevuta di versamento dei diritti di segreteria(*)</ccts:Definition>
-                <ccts:UsageRule>Se previsto dal Comune</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoDocumentiIdentita" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Copia del documento di identità del/i titolare/i e/o del tecnico</ccts:Definition>
-                <ccts:UsageRule>Solo se i soggetti coinvolti non hanno sottoscritto digitalmente e/o in assenza di procura/delega</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoAssensoTerzi" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Dichiarazione di assenso dei terzi titolari di altri diritti reali o obbligatori (allegato soggetti coinvolti)</ccts:Definition>
-                <ccts:UsageRule>Se non si ha titolarità esclusiva all’esecuzione dell’intervento</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoModelloISTAT" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Modello ISTAT</ccts:Definition>
-                <ccts:UsageRule>Per interventi di nuova costruzione e di ampliamento di volume di fabbricati esistenti (art. 7 d.lgs. n. 322/1989)</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoVersamentoOblazioneInEsecuzione" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Ricevuta di versamento a titolo di oblazione  (intervento in corso di esecuzione)</ccts:Definition>
-                <ccts:UsageRule>Se, ai sensi dell’art. 6-bis, comma 5 del d.P.R. n. 380/2001, la comunicazione è presentata spontaneamente quando l'intervento è in corso di esecuzione.</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoVersamentoOblazioneSanatoria" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Ricevuta di versamento a titolo di oblazione  (intervento in sanatoria)</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento, ai sensi dell’art. 6-bis, comma 5 del d.P.R. n. 380/2001 è stato realizzato in assenza di comunicazione asseverata di inizio lavori.</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoPreventivoContributoCostruzione" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Prospetto di calcolo preventivo del contributo di costruzione</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento da realizzare è a titolo oneroso ed il contributo di costruzione è calcolato dal tecnico abilitato.</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoRicevutaVersamentoContributoCostruzione" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Ricevuta di versamento del contributo di costruzione</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento da realizzare è a titolo oneroso.</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoNotificaPreliminare" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Notifica preliminare (articolo 99 del d.lgs. n. 81/2008)</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento ricade nell’ambito di applicazione del d.lgs. n. 81/2008, fatte salve le specifiche modalità tecniche adottate dai sistemi informativi regionali.</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoElaboratoGrafico" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Elaborati grafici dello stato di fatto e progetto</ccts:Definition>
-                <ccts:UsageRule>Sempre obbligatori</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-   
-    
-    
-    
-    <xs:element name="allegatoDeterminazioneContributoCostruzione" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Documentazione tecnica necessaria alla determinazione del contributo di costruzione</ccts:Definition>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoProgettoUrbanizzazione" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Proposta di progetto per la realizzazione delle opere di urbanizzazione</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento da realizzare è a titolo oneroso e viene richiesto lo scomputo degli onere di urbanizzazione</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>		
-    
-    <xs:element name="allegatoVersamentoContributoCostruzione" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Attestazione del versamento del contributo di costruzione</ccts:Definition>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoDocumentazioneFotografica" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Documentazione fotografica dello stato di fatto (*)</ccts:Definition>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoRelazioneGeologica" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Relazione geologica/geotecnica</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento comporta opere elencate nelle NTC 14/01/2008 per cui è necessaria la progettazione geotecnica</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoSuperamentoBarriereArch" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Elaborati relativi al superamento delle barriere architettoniche</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento è soggetto alle prescrizioni dell’art. 82 e seguenti (edifici privati aperti al pubblico) ovvero degli artt. 77 e seguenti (nuova costruzione e ristrutturazione di interi edifici residenziali) del d.P.R. n. 380/2001</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoProgettoImpianti" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Progetto degli impianti</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento comporta installazione, trasformazione o ampliamento di impianti tecnologici, ai sensi del d.m. n. 37/2008</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoRelazioneConsumiEnergetici" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Relazione tecnica sui consumi energetici</ccts:Definition>
-                <ccts:UsageRule>Se intervento è soggetto all’applicazione del d.lgs. n. 192/2005 e/o del d.lgs. n. 28/2011</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    	
- 
-   
-    
-    <xs:element name="allegatoPlanimetricoVariantiConcluse" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Copia di elaborato planimetrico del progetto con eventuali varianti depositato in Comune con individuazione delle opere parzialmente concluse</ccts:Definition>
-                <ccts:UsageRule>Sempre obbligatorio in caso di lavori ultimati</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoConformitaImpianti" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Dichiarazione di conformità degli impianti o dichiarazione di rispondenza, ex art. 7 d.m. n. 37/2008</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento ha comportato installazione, trasformazione o ampliamento di impianti tecnologici, ai sensi del d.m. n. 37/2008</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoCertificatoCollaudo" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Certificato di collaudo ove previsto, degli impianti installati (art. 9 d.m. n. 37/2008)</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento ha comportato installazione, trasformazione o ampliamento di impianti tecnologici, ai sensi del d.m. n. 37/2008</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoCertificatoCollaudoStatico" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Certificato di collaudo statico o dichiarazione di regolare esecuzione</ccts:Definition>
-                <ccts:UsageRule>Se i lavori hanno interessato le strutture e se l’intervento prevede la realizzazione di opere in conglomerato cementizio armato, normale e precompresso ed a struttura metallica ai sensi degli artt. 65 e 67 del d.P.R. n. 380/2001</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoAQE" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Attestato di qualificazione energetica (AQE)</ccts:Definition>
-                <ccts:UsageRule>Se l’intervento è soggetto all'osservanza dei requisiti minimi di prestazione energetica dell’edificio o dell’unità immobiliare ai sensi dell’art. 6 del d.lgs n. 192/2005</ccts:UsageRule>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>	
-    
-    <xs:element name="allegatoAggiornamentoNumerazioneCivica" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Documentazione necessaria per l’assegnazione o aggiornamento di numerazione civica</ccts:Definition>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    
-    <xs:element name="allegatoElaboratiProgetto" type="moduli:AllegatoBaseType" >
-        <xs:annotation>
-            <xs:documentation xml:lang="it">
-                <ccts:Definition>Elaborati grafici dello stato di fatto, di progetto e comparativi</ccts:Definition>
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDenunciaLavori" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Denuncia dei lavori
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento prevede la realizzazione di opere in conglomerato cementizio armato, normale e precompresso ed a struttura metallica da denunciare ai sensi dell’art. 65 del d.P.R. n. 380/2001
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDenunciaLavoriZonaSismica" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Denuncia dei lavori in zona sismica
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento prevede opere da denunciare ai sensi dell’art. 93 del d.P.R. n. 380/2001
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDocumentazioneImpattoAcustico" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione di impatto acustico
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento rientra nell’ambito di applicazione dell’art. 8, commi 2 e 4 della l. n. 447/1995, integrato con il contenuto dell’art. 4 del d.P.R. n. 227/2011.
-                                    Valutazione previsionale di clima acustico        Se l’intervento rientra nell’ambito di applicazione dell’art. 8, comma 3, della l. n. 447/1995.
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDichiarazioneSostitutiva" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Dichiarazione sostitutivao
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    "Se l’intervento, rientra nelle attività “a bassa rumorosità”, di cui all’allegato B del d.P.R. n. 227/2011, che utilizzano impianti di diffusione sonora ovvero svolgono manifestazioni ed eventi con diffusione di musica o utilizzo di strumenti musicali,ma rispettano i limiti di rumore individuati dal d.P.C.M. n. 14 novembre 1997 (assoluti e differenziali): art.4, comma 1, d.P.R. n. 227/2011; 
-                                     ovvero se l’interventononrientra nelle attività “a bassa rumorosità”, di cui all’allegato B del d.P.R. n. 227/2011, e rispetta i limiti di rumore individuati dal d.P.C.M. 14 novembre 1997 (assoluti e differenziali): art.4, comma 2, d.P.R. n. 227/2011"
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoPianoDemolizioneAmianto" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Piano di lavoro di demolizione o rimozione dell’amianto
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se le opere interessano parti di edifici con presenza di fibre di amianto, ai sensi dell’art. 256 del D.lgs. 81/2008
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoAttestazioneVersamentoOneriDiritti" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Attestazione di versamento relativa ad oneri, diritti etc… connessa alla ulteriore segnalazione presentata
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Ove prevista
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoRisultatiQualitaTerreni" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Risultati delle analisi ambientali sulla qualità dei terreni
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento richiede indagini ambientali preventive sulla qualità dei terreni
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoSCIAart4DPR1512011" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    SCIA ai sensi dell’art. 4 comma 1 del d.P.R. n. 151/2011 per le attività indicate nell’allegato I
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    In caso di presentazione contestuale di SCIA ai sensi dell’art. 4 comma 1 del d.P.R. n. 151/2011
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoAutorizzazioneSismica" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria per il rilascio dell’autorizzazione sismica
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento prevede opere da autorizzare ai sensi dell’art. 94 del d.P.R. n. 380/2001
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDerogaConformitaRequisitiIgienicoSanitari" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione per la richiesta di deroga alla conformità ai requisiti igienico sanitari
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento non rispetta le prescrizioni di cui al d.m. 5 luglio 1975 e/o del d.lgs. n. 81/2008 e/o del Regolamento Edilizio
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoPrevisioneImpattoAcusticoRilascioNullaosta" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione di previsione di impatto acustico ai fini del rilascio del nulla-osta
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento rientra nell’ambito di applicazione dell’art. 8, comma 6, della l. n. 447/1995, integrato con il contenuto dell’art. 4 del d.P.R. n. 227/2011.
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDerogaPrevenzioneIncendi" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione per la  all’integrale osservanza delle regole tecniche di prevenzione incendi
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Qualora le attività soggette ai controlli di prevenzione incendi, presentino caratteristiche tali da non consentire l'integrale osservanza delle regole tecniche, di cui all’art. 7 del d.P.R. n. 151/2011
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoRilascioParereVigiliFuoco" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria al rilascio del parere progetto da parte dei Vigili del Fuoco
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento è soggetto a valutazione di conformità ai sensi dell’art. 3 e dell’art. 8 del d.P.R. n. 151/2011
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoVersamentoImpostaBollo" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    "Attestazione del versamento dell’imposta di bollo: estremi del codice identificativo della marca da bollo, che deve essere annullata e conservata dall’interessato ovvero Assolvimento dell’imposta di bollo con le altre modalità previste, anche in modalità virtuale o tramite @bollo"
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Obbligatoria in caso di presentazione di un’istanza contestuale alla SCIA
-                                     (SCIA condizionata)
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDerogaBarriereArchitettoniche" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione per la richiesta di deroga alla normativa per l’abbattimento delle barriere architettoniche
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento è soggetto alle prescrizioni dell’art. 82 e seguenti (edifici privati aperti al pubblico) ovvero degli artt. 77 e seguenti (nuova costruzione e ristrutturazione di interi edifici residenziali) del d.P.R. n. 380/2001
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoRelazionePaesaggisticaSemplificata" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    "Relazione paesaggistica semplificata e documentazione per il rilascio per l’autorizzazione paesaggistica semplificata
-                                    Relazione paesaggistica e documentazione per il rilascio per l’autorizzazione paesaggistica"
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    "Se l’intervento è assoggettato ad autorizzazione paesaggistica di lieve entità (d.P.R. n. 31/2017)
-                                    Se l’intervento è soggetto al procedimento ordinario di autorizzazione paesaggistica"
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoRilascioParereSoprintendenza" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione per il rilascio del parere/nulla osta da parte della Soprintendenza
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’immobile oggetto dei lavori è sottoposto a tutela ai sensi del Titolo I, Capo I, Parte II del d.lgs. n. 42/2004
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoRilascioNullaOstaAreaProtetta" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione per il rilascio del parere/nulla osta dell’ente competente per bene in area protetta
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’immobile oggetto dei lavori ricade in area tutelata e le opere comportano alterazione dei luoghi ai sensi della l. n. 394/1991
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoRilascioloAutorizzazioneVincoloIdrogeologico" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione per il rilascio dell’autorizzazione relativa al vincolo idrogeologico
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’area oggetto di intervento è sottoposta a tutela ai sensi dell’articolo 61 del d.lgs. n. 152/2006
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoRilascioAutorizzazioneVincoloIdraulico" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione per il rilascio dell’autorizzazione relativa al vincolo idraulico
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’area oggetto di intervento è sottoposta a tutela ai sensi dell’articolo 115 del d.lgs. n. 152/2006
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoApprovazioneProgettoVINCA" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria all’approvazione del progetto (VINCA)
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento è soggetto a valutazione d’incidenza nelle zone appartenenti alla rete “Natura 2000”
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoDerogafasciaRispettoCimiteriale" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria per la richiesta di deroga alla fascia di rispetto cimiteriale
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento ricade nella fascia di rispetto cimiteriale e non è consentito ai sensi dell’articolo 338 del testo unico delle leggi sanitarie 1265/1934
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoValutazioneComitatoTecnicoRegionaleIncidenteRilevante" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria alla valutazione del progetto da parte del Comitato Tecnico Regionale per interventi in area di danno da incidente rilevante
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento ricade in area a rischio d’incidente rilevante
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    
-
-   
-
-    <xs:element name="allegatoAttestazioneVersamentoOneriAutorizzazioni" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Attestazione di versamento relativa ad oneri, diritti etc… connessa alla richiesta di rilascio di autorizzazioni
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Ove prevista
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
-
-    <xs:element name="allegatoAutorizzazioniScarichiIdrici" type="moduli:AllegatoBaseType">
-            <xs:annotation>
-                    <xs:documentation xml:lang="it">
-                            <ccts:Definition>
-                                    Documentazione necessaria al rilascio delle autorizzazioni relative agli scarichi idrici e agli allacci in fognatura
-                            </ccts:Definition>
-                            <ccts:UsageRule>
-                                    Se l’intervento necessita di autorizzazione per gli scarichi idrici e gli allacci in fognatura
-                            </ccts:UsageRule>
-                    </xs:documentation>
-            </xs:annotation>
-    </xs:element>
 
     <xs:complexType name="TitolareType">
             <xs:complexContent>
