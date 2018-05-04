@@ -37,9 +37,7 @@
             <xs:element name="dichiarazioni" type="autoriparatori:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="autoriparatori:TabellaAllegatiType"/>
-            <xs:element name="Allegati">
-                
-            </xs:element> 
+           
         </xs:sequence>  
     </xs:complexType>
 

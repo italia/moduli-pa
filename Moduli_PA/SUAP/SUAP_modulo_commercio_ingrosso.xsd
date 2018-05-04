@@ -42,13 +42,7 @@
             </xs:choice>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="commingrosso:TabellaAllegatiType"/>  
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="altriSoggetti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+           
         </xs:sequence>        
     </xs:complexType>
     
