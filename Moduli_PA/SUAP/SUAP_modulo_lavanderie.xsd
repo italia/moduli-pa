@@ -44,13 +44,7 @@
                 <xs:element name="tabellaAllegatiTintoLavanderie"     type="tintolav:TabellaAllegatiTintoLavanderieType"/>    
                 <xs:element name="tabellaAllegatiLavanderieGettoni"   type="tintolav:TabellaAllegatiLavanderieGettoniType"/>
              </xs:choice>
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element> 
+            
         </xs:sequence>
     </xs:complexType>
 
