@@ -42,14 +42,7 @@
             
             <xs:element name="tabellaAllegati" type="ageaffari:TabellaAllegatiType"/>                 
             
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <!-- Allegati non referenziati nella tabella allegati -->
-                        <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+           
         </xs:sequence>
     </xs:complexType>  
     
@@ -125,12 +118,26 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
+            <xs:element name="dichiarazioni" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence> 
     </xs:complexType>
    
-    <xs:complexType name="CessazioneType">
+    <xs:complexType name="CessazioneType" >
         <xs:sequence>
             <xs:element name="protocolloCessazione" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="dichiarazioni" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
@@ -153,7 +160,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AutoVidimazioneRegistroAffariType"><!-- ALLEGATO B -->
+    <xs:complexType name="AutoVidimazioneRegistroAffariType">
         <xs:annotation>
             <xs:documentation>
                 Dichiarazione di  auto vidimazione del Registro giornale degli affari
