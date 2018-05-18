@@ -162,7 +162,7 @@
             <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoComunicazioneVenditaGPL" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoVenditaGASInfiammabile" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoComunicazioneVenditaGASInfiammabile" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
