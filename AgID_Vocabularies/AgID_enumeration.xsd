@@ -1085,5 +1085,221 @@
             <xs:enumeration value="TERRENI"/>            
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="DUGEnum">
+        <xs:annotation>
+            <xs:documentation>
+                Fonte Dati: Progetto ANNCSU
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <!-- Nazionali  -->
+            <xs:enumeration value="ARCO"/>
+            <xs:enumeration value="AUTOSTRADA" />
+            <xs:enumeration value="BELVEDERE" />
+            <xs:enumeration value="CALATA" />
+            <xs:enumeration value="CALLE" />
+            <xs:enumeration value="CAVALCAVIA" />
+            <xs:enumeration value="CIRCONVALLAZIONE" />
+            <xs:enumeration value="CORSO" />
+            <xs:enumeration value="CORTE" />
+            <xs:enumeration value="CORTILE" />
+            <xs:enumeration value="DISCESA" />
+            <xs:enumeration value="GALLERIA" />
+            <xs:enumeration value="GRADINATA" />
+            <xs:enumeration value="LARGHETTO" />
+            <xs:enumeration value="LARGO" />
+            <xs:enumeration value="LITORANEA" />
+            <xs:enumeration value="LUNGARGINE" />
+            <xs:enumeration value="LUNGOFIUME" />
+            <xs:enumeration value="LUNGOLAGO" />
+            <xs:enumeration value="LUNGOMARE" />
+            <xs:enumeration value="LUNGOPARCO" />
+            <xs:enumeration value="LUNGOTORRENTE" />
+            <xs:enumeration value="MOLO" />
+            <xs:enumeration value="PARCHEGGIO" />
+            <xs:enumeration value="PASSAGGIO" />
+            <xs:enumeration value="PASSEGGIATA" />
+            <xs:enumeration value="PERCORSO CICLABILE " />
+            <xs:enumeration value="PERCORSO CICLOPEDONALE" />
+            <xs:enumeration value="PERCORSO PEDONALE" />
+            <xs:enumeration value="PIAZZA" />
+            <xs:enumeration value="PIAZZALE" />
+            <xs:enumeration value="PIAZZETTA" />
+            <xs:enumeration value="PISTA CICLABILE" />
+            <xs:enumeration value="PONTE" />
+            <xs:enumeration value="RACCORDO" />
+            <xs:enumeration value="RAMPA" />
+            <xs:enumeration value="RONCO" />
+            <xs:enumeration value="ROTATORIA" />
+            <xs:enumeration value="ROTONDA" />
+            <xs:enumeration value="SALITA" />
+            <xs:enumeration value="SCALINATA" />
+            <xs:enumeration value="SCESA" />
+            <xs:enumeration value="SENTIERO" />
+            <xs:enumeration value="SLARGO" />
+            <xs:enumeration value="SOTTOPASSO" />
+            <xs:enumeration value="SOVRAPPASSO" />
+            <xs:enumeration value="SPIAZZO" />
+            <xs:enumeration value="STRADA" />
+            <xs:enumeration value="STRADA ANTICA" />
+            <xs:enumeration value="STRADA COMUNALE" />
+            <xs:enumeration value="STRADA CONSORTILE" />
+            <xs:enumeration value="STRADA NUOVA" />
+            <xs:enumeration value="STRADA PANORAMICA" />
+            <xs:enumeration value="STRADA PODERALE" />
+            <xs:enumeration value="STRADA PRIVATA" />
+            <xs:enumeration value="STRADA PROVINCIALE" />
+            <xs:enumeration value="STRADA REGIONALE" />
+            <xs:enumeration value="STRADA STATALE" />
+            <xs:enumeration value="STRADA VECCHIA" />
+            <xs:enumeration value="STRADA VICINALE" />
+            <xs:enumeration value="STRADELLA" />
+            <xs:enumeration value="STRADELLO" />
+            <xs:enumeration value="STRADONE" />
+            <xs:enumeration value="TANGENZIALE" />
+            <xs:enumeration value="TRAVERSA" />
+            <xs:enumeration value="VIA" />
+            <xs:enumeration value="VIA ANTICA" />
+            <xs:enumeration value="VIA COMUNALE" />
+            <xs:enumeration value="VIA NAZIONALE" />
+            <xs:enumeration value="VIA NUOVA" />
+            <xs:enumeration value="VIA PANORAMICA" />
+            <xs:enumeration value="VIA PRIVATA" />
+            <xs:enumeration value="VIA PROVINCIALE" />
+            <xs:enumeration value="VIA VECCHIA" />
+            <xs:enumeration value="VIALE" />
+            <xs:enumeration value="VIALETTO" />
+            <xs:enumeration value="VICO" />
+            <xs:enumeration value="VICO CHIUSO" />
+            <xs:enumeration value="VICO CIECO" />
+            <xs:enumeration value="VICO PRIVATO" />
+            <xs:enumeration value="VICOLETTO" />
+            <xs:enumeration value="VICOLO" />
+            <xs:enumeration value="VICOLO CHIUSO" />
+            <xs:enumeration value="VICOLO CIECO" />
+            <xs:enumeration value="VICOLO PRIVATO" />
+            <xs:enumeration value="VIOTTOLO" />
+            
+            <!-- Locali -->
+            <xs:enumeration value="ACCESSO" />
+            <xs:enumeration value="ACCORCIATOIA" />
+            <xs:enumeration value="AIA" />
+            <xs:enumeration value="ANDRONE" />
+            <xs:enumeration value="ARZERE" />
+            <xs:enumeration value="ATRIO" />
+            <xs:enumeration value="BAGLIO" />
+            <xs:enumeration value="BANCHINA" />
+            <xs:enumeration value="BASTIONE" />
+            <xs:enumeration value="BASTIONI" />
+            <xs:enumeration value="BROLO" />
+            <xs:enumeration value="CAPO DI PIAZZA" />
+            <xs:enumeration value="CARRAIA" />
+            <xs:enumeration value="CARRARA" />
+            <xs:enumeration value="CARRARETTO" />
+            <xs:enumeration value="CARRARO" />
+            <xs:enumeration value="CARRARONE" />
+            <xs:enumeration value="CASA SPARSA" />
+            <xs:enumeration value="CAVALCAFERROVIA" />
+            <xs:enumeration value="CHIASSO" />
+            <xs:enumeration value="CHIOSTRA" />
+            <xs:enumeration value="CHIOSTRO" />
+            <xs:enumeration value="CLAUSTRO" />
+            <xs:enumeration value="CLIVO" />
+            <xs:enumeration value="CONTRADELLA" />
+            <xs:enumeration value="CROSA" />
+            <xs:enumeration value="CROSINO" />
+            <xs:enumeration value="DIGA" />
+            <xs:enumeration value="DISTACCO" />
+            <xs:enumeration value="ERTA" />
+            <xs:enumeration value="FORESE" />
+            <xs:enumeration value="GRADINATE" />
+            <xs:enumeration value="GRANVIALE" />
+            <xs:enumeration value="INTERRATO" />
+            <xs:enumeration value="ISOLA" />
+            <xs:enumeration value="ISOLATO" />
+            <xs:enumeration value="LOGGIA" />
+            <xs:enumeration value="LUNGO" />
+            <xs:enumeration value="LUNGOCANALE" />
+            <xs:enumeration value="LUNGOMOLO" />
+            <xs:enumeration value="LUNGOPORTO" />
+            <xs:enumeration value="OTTAGONO" />
+            <xs:enumeration value="PASSERELLA" />
+            <xs:enumeration value="PASSETTO" />
+            <xs:enumeration value="PASSO" />
+            <xs:enumeration value="PASSO DI PIAZZA" />
+            <xs:enumeration value="PENDICE" />
+            <xs:enumeration value="PENDINO" />
+            <xs:enumeration value="PERCORSO" />
+            <xs:enumeration value="PIAGGIA" />
+            <xs:enumeration value="PIAZZA INFERIORE" />
+            <xs:enumeration value="PIAZZA SUPERIORE" />
+            <xs:enumeration value="POGGIO" />
+            <xs:enumeration value="PONTE LONGO" />
+            <xs:enumeration value="PONTILE" />
+            <xs:enumeration value="PRATO" />
+            <xs:enumeration value="PROLUNGAMENTO" />
+            <xs:enumeration value="PUNTA" />
+            <xs:enumeration value="QUADRATO" />
+            <xs:enumeration value="RATTO" />
+            <xs:enumeration value="RIO TERA'" />
+            <xs:enumeration value="RIVALE" />
+            <xs:enumeration value="RIVETTA" />
+            <xs:enumeration value="RONDO'" />
+            <xs:enumeration value="ROTTA" />
+            <xs:enumeration value="SACCA" />
+            <xs:enumeration value="SAIA" />
+            <xs:enumeration value="SALITA INFERIORE" />
+            <xs:enumeration value="SALITA SUPERIORE" />
+            <xs:enumeration value="SCALEA" />
+            <xs:enumeration value="SCALETTO" />
+            <xs:enumeration value="SCALO" />
+            <xs:enumeration value="SCIVOLA" />
+            <xs:enumeration value="SESTIERE" />
+            <xs:enumeration value="SORTITA" />
+            <xs:enumeration value="SOTOPORTEGO" />
+            <xs:enumeration value="SPIANATA" />
+            <xs:enumeration value="STRADA ESTERNA" />
+            <xs:enumeration value="STRADALE" />
+            <xs:enumeration value="SVINCOLO" />
+            <xs:enumeration value="TERRAZZA" />
+            <xs:enumeration value="TRAVERSA A MARE" />
+            <xs:enumeration value="TRAVERSALE" />
+            <xs:enumeration value="TRONCO" />
+            <xs:enumeration value="TROZO" />
+            <xs:enumeration value="VALLONE" />
+            <xs:enumeration value="VARCO" />
+            <xs:enumeration value="VENULA" />
+            <xs:enumeration value="VIA CARRARA" />
+            <xs:enumeration value="VIA ESTERNA" />
+            <xs:enumeration value="VIA INFERIORE" />
+            <xs:enumeration value="VIA SUPERIORE" />
+            <xs:enumeration value="VIA VICINALE" />
+            <xs:enumeration value="VIAZZA" />
+            <xs:enumeration value="VIAZZOLA" />
+            <xs:enumeration value="VIAZZOLO" />
+            <xs:enumeration value="VICO DRITTO" />
+            <xs:enumeration value="VICO INFERIORE" />
+            <xs:enumeration value="VICO STRETTO" />
+            <xs:enumeration value="VICO SUPERIORE" />
+            <xs:enumeration value="VICOLOZZO" />
+            <xs:enumeration value="VIELLA" />
+            <xs:enumeration value="VIETTA" />
+            <xs:enumeration value="VIONE" />
+            <xs:enumeration value="VIOTTOLA" />
+            <xs:enumeration value="VIOTTOLONE" />
+            <xs:enumeration value="VIUCCIOLO" />
+            <xs:enumeration value="VIUZZO" />
+            
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    
+    
+    
+    
+    
+    
 </xs:schema>
 
