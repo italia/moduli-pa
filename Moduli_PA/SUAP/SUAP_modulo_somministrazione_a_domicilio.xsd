@@ -59,7 +59,7 @@
             <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
             <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
-            <xs:element name="allegatoComunicazioneAlcolici"  type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoComunicazioneVenditaAlcolici"  type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
       
