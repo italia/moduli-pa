@@ -61,7 +61,7 @@
     
     <xs:complexType name="ToponimoType">
         <xs:sequence>
-            <xs:element name="specie" type="isacvbc:AddressLocatorNameType"/>
+            <xs:element name="specie" type="enum:DUGEnum"/>
             <xs:element name="indirizzo" type="isacvbc:AddressLocatorNameType"/>
         </xs:sequence>
     </xs:complexType>
