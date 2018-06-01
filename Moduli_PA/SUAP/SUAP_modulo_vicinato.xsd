@@ -36,8 +36,10 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="vicinato:AperturaType"/>
-                <xs:element name="trasferimento" type="vicinato:TrasferimentoType"/>
-                <xs:element name="ampliamento" type="vicinato:AmpliamentoType"/>
+                <xs:sequence>
+                    <xs:element name="trasferimento" type="vicinato:TrasferimentoType" minOccurs="0"/>
+                    <xs:element name="ampliamento" type="vicinato:AmpliamentoType" minOccurs="0"/>
+                </xs:sequence>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>

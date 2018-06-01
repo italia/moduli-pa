@@ -35,9 +35,12 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="ageaffari:AperturaType"/>
-                <xs:element name="trasferimento" type="ageaffari:TrasferimentoType"/>
-                <xs:element name="cessazione" type="ageaffari:CessazioneType"/>
+                <xs:sequence>
+                    <xs:element name="trasferimento" type="ageaffari:TrasferimentoType" minOccurs="0"/>
+                    <xs:element name="cessazione" type="ageaffari:CessazioneType" minOccurs="0"/>
+                </xs:sequence>
             </xs:choice>
+            
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             
             <xs:element name="tabellaAllegati" type="ageaffari:TabellaAllegatiType"/>                 
