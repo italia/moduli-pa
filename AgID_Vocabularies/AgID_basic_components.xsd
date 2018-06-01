@@ -123,4 +123,14 @@
         </xs:sequence>
     </xs:complexType>
     
+    
+    <xs:simpleType name="SHA256Type">
+        <xs:annotation>
+            <xs:documentation>Un hash SHA-256 viene rappresentato con 32 byte, ovvero con una stringa in esadecimale di 64 caratteri</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:hexBinary">
+            <xs:length value="32" />
+        </xs:restriction>
+    </xs:simpleType>
+    
 </xs:schema>
