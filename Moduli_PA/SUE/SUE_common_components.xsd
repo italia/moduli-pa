@@ -440,7 +440,7 @@
                             <xs:complexType>
                                 <xs:complexContent>
                                     <xs:extension base="basic:EmptyType">
-                                        <xs:attribute type="xs:boolean" name="allegataElaborati"/>
+                                        <xs:attribute type="xs:boolean" name="allegaElaborati"/>
                                     </xs:extension>
                                 </xs:complexContent>                   
                             </xs:complexType>                                                                                  

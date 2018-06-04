@@ -41,11 +41,11 @@
             <xs:element name="schedaDitta" type="suecommon:SchedaDittaType" minOccurs="0"/>                   
             <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>                
             <!-- Dichiarazioni | Sezione A -->
-            <xs:element name="identificativiImmobilie" type="scpa:IdentificativiImmobileBaseType" minOccurs="0"/>  
+            <xs:element name="identificativiImmobile" type="scpa:IdentificativiImmobileBaseType" minOccurs="0"/>  
              
             <xs:element name="comunicazioneInterventoLeggitimato" type="scpa:ComunicazioneInterventoLeggitimatoBaseType" minOccurs="0"/>  
             <xs:element name="comunicazionefineLavori" type="scpa:ComunicazioneFineLavoriBaseType" minOccurs="0"/>                            
-            <xs:element name="presentazioneInizioLavori" type="scpa:PresentazioneInzioLavoriType"/>                 
+            <xs:element name="presentazioneInizioLavori" type="scpa:PresentazioneInizioLavoriType"/>                 
            
             
             <xs:element name="Allegati">
@@ -115,7 +115,7 @@
         </xs:complexContent>            
     </xs:complexType>
     
-    <xs:complexType name="PresentazioneInzioLavoriType">
+    <xs:complexType name="PresentazioneInizioLavoriType">
         <xs:sequence>
             <xs:choice>
                 <xs:element name="SCIAAgibilitaImmobile"  type="basic:EmptyType"/>
@@ -207,7 +207,7 @@
             <xs:element name="prestazioneEnergetica" type="scpa:PrestazioneEnergeticaBaseType"/>                    
             <xs:element name="barriereArchitettoniche" type="scpa:BarriereArchitettonicheType"/>                    
             <xs:element name="documentazioneCatastale" type="scpa:DocumentazioneCatastaleType"/>                    
-            <xs:element name="toponomastrica" type="scpa:ToponomasticaType"/>                                      
+            <xs:element name="toponomastica" type="scpa:ToponomasticaType"/>                                      
             <xs:element name="prevenzioneIncendi" type="scpa:PrevenzioneIncendiBaseType" minOccurs="0"/>
             <xs:element name="montacarichi" type="scpa:MontacarichiBaseType" minOccurs="0"/>    
         </xs:sequence>
