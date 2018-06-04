@@ -78,7 +78,6 @@
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             
         </xs:sequence>

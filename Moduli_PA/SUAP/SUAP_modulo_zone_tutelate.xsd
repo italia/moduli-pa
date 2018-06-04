@@ -99,7 +99,6 @@
     
     <xs:complexType name="AllegatiAutorizzazioneSCIAUnicaType">
         <xs:sequence>
-            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                

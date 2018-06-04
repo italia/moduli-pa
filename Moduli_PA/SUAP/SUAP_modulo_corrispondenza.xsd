@@ -72,7 +72,6 @@
         <xs:sequence>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
             <xs:element name="allegatoSCIAVenditaProdottiAlimentazioneAnimale" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoComunicazioneVenditaFarmaciBanco" type="moduli:AllegatoType" minOccurs="0"/>                                
         </xs:sequence>                                
     </xs:complexType>

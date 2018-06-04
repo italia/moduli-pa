@@ -61,12 +61,12 @@
         <xs:sequence>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
-            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType"  minOccurs="0"/> 
             <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType"   minOccurs="0"/>
             <xs:element name="allegatoComunicazioneVenditaFarmaciBanco" type="moduli:AllegatoType" minOccurs="0"/> 
             <xs:element name="allegatoComunicazioneVenditaGPL" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoVenditaGASInfiammabile" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>                                 
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/> 
+            <xs:element name="allegatoComunicazioneVenditaIngrosso" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     

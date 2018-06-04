@@ -63,7 +63,6 @@
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>            
-            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoBaseType" minOccurs="0"/>  
             <xs:element name="allegatoSemestraleApparecchiAutomatici" type="appauto:AllegatoSemestraleApparecchiAutomaticiType" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
