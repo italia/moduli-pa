@@ -121,7 +121,7 @@
             <xs:extension base="commingrosso:ModalitaVenditaIngrossoSuperficieBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="IngrossoSupercificie" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="IngrossoSuperficie" minOccurs="0" type="xs:decimal"/>
                         <xs:element name="DettaglioIngrosso">
                             <xs:complexType>
                                 <xs:sequence>
