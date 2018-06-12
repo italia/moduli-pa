@@ -9,7 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_permesso_costruire"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
     
     

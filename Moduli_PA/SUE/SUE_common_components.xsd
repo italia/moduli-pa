@@ -9,7 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>

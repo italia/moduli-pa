@@ -5,7 +5,7 @@
 
     targetNamespace="http://www.agid.gov.it/AgID_enumeration"  
     
-    elementFormDefault="qualified"
+    elementFormDefault="qualified" attributeFormDefault="qualified"
     
     version="1.1.0" xml:lang="it">
     
