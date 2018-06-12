@@ -59,19 +59,15 @@
     </xs:complexType>
     
     <xs:complexType name="DichiarazioniType">
-        <xs:choice>
-            <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiaranteRequisitiType"/>
-            <xs:element name="allegatoResposabileTecnicoRequisitiProfessionali" type="imppulizie:AllegatoResponsabileTecnicoImpresePulizieRequisitiProfessionaliType" maxOccurs="unbounded"/>
-        </xs:choice>
-    </xs:complexType>
-    
-    <xs:complexType name="DichiaranteRequisitiType">  
         <xs:sequence>
-            <xs:element name="altriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
-            <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+            <xs:choice minOccurs="0">
+                <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
+                <xs:element name="allegatoResposabileTecnicoRequisitiProfessionali" type="imppulizie:AllegatoResponsabileTecnicoImpresePulizieRequisitiProfessionaliType" maxOccurs="unbounded"/>
+            </xs:choice>
         </xs:sequence>
     </xs:complexType>
-    
+      
     <xs:complexType name="DichiarazioniImpresePulizieRequisitiProfessionaliType">
         <xs:sequence>
             <xs:choice>
