@@ -55,9 +55,14 @@
                             <xs:sequence> 
                                 <xs:choice>
                                     <xs:element name="ProcuraDelega" type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="AgenziaImprese" type="basic:EmptyType"  minOccurs="0"/>
+                                    <xs:element name="AgenziaImprese"   minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                              <xs:element name="denominazione" type="xs:string"  minOccurs="1"/>
+                                          </xs:sequence>  
+                                        </xs:complexType>
+                                    </xs:element>
                                 </xs:choice>
-                                <xs:element name="denominazioneAgenziaImprese" type="xs:string"  minOccurs="1"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
