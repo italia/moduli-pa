@@ -118,7 +118,17 @@
                     <xs:complexContent>
                         <xs:extension base="aggregate:ImpresaAnagraficaType">
                             <xs:sequence>
-                                <xs:element name="legaleRappresentante" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
+                                <xs:element name="legaleRappresentante" minOccurs="0">
+                                    <xs:complexType>
+                                        <xs:complexContent>
+                                            <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
+                                                <xs:sequence>
+                                                    <xs:element name="contatti" type="aggregate:ContattiType" minOccurs="0"/>
+                                                </xs:sequence>    
+                                            </xs:extension>
+                                        </xs:complexContent>
+                                    </xs:complexType>
+                                </xs:element>
                             </xs:sequence>
                         </xs:extension>
                     </xs:complexContent>
