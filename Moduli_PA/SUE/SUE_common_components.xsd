@@ -270,7 +270,7 @@
     
     <xs:group name="RegolaritaUrbanisticaOptionGroup">
         <xs:choice>
-            <xs:element name="pienamenteConforme" type="suecommon:InDifformitaType"/>
+            <xs:element name="pienamenteConforme" type="basic:EmptyType"/>
             <xs:element name="inDifformita" type="suecommon:InDifformitaType"/>
             <xs:element name="noTitoliAbilitativi" type="basic:EmptyType"/>
         </xs:choice>
