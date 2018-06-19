@@ -43,8 +43,8 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="schedaDitta" type="suecommon:SchedaDittaType"/>
-            <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="schedaDitta" type="suecommon:SchedaDittaType" minOccurs="0"/>
+            <xs:element name="schedaDelegato" type="aggregate:PersonaAnagraficaType" minOccurs="0"/>
             
             <!-- DICHIARAZIONI -->
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>            
