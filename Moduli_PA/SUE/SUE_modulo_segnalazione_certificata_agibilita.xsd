@@ -126,10 +126,10 @@
                 <xs:element name="SCIAUnicaAgibilitaParzialeSingoliImmobili"  type="basic:EmptyType"/>
             </xs:choice>
             
-            <xs:choice>
-                <xs:element name="allegaAttestazioneProfessionista"  type="basic:EmptyType"/>
-                <xs:element name="allegaComunicazioni" type="basic:EmptyType"/>
-            </xs:choice>
+            
+            <xs:element name="allegaAttestazioneProfessionista"  type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="allegaComunicazioni" type="basic:EmptyType" minOccurs="0"/>
+            
         </xs:sequence>
     </xs:complexType>
 
