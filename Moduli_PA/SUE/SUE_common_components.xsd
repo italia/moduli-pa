@@ -826,11 +826,11 @@
     <xs:complexType name="QualitaAmbientaleTerreniType">
         <xs:complexContent>
             <xs:extension base="suecommon:QualitaAmbientaleTerreniBaseType">
-                <xs:sequence>
+                <xs:choice>
                     <xs:element name="nonRichiedeIndagini" type="basic:EmptyType"/>
                     <xs:element name="nonNecessitaBonifica" type="basic:EmptyType"/>
                     <xs:element name="avvenutaBonifica" type="aggregate:AttoBaseType"/>
-                </xs:sequence>
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -841,10 +841,10 @@
     <xs:complexType name="OpereUrbanizzazionePrimariaType">
         <xs:complexContent>
             <xs:extension base="suecommon:OpereUrbanizzazionePrimariaBaseType">
-                <xs:sequence>
+                <xs:choice>
                     <xs:element name="dotata" type="basic:EmptyType"/>
                     <xs:element name="nonDotata" type="xs:date"/>
-                </xs:sequence>
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
