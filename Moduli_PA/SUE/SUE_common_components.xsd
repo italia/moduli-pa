@@ -855,7 +855,7 @@
     <xs:complexType name="ScarichiIdriciType">
         <xs:complexContent>
             <xs:extension base="suecommon:ScarichiIdriciBaseType">
-                <xs:sequence>
+                <xs:choice>
                     <xs:element name="nonNecessitaAutorizzazione" type="basic:EmptyType"/>
                     <xs:element name="necessitaAutorizzazioneScarico" type="basic:EmptyType"/>
                     <xs:element name="necessitaAutorizzazione">
@@ -888,7 +888,7 @@
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
-                </xs:sequence>
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
