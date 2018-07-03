@@ -9,13 +9,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ DI PANIFICAZIONE
-        </xs:documentation>
-    </xs:annotation>
+    
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -29,6 +25,11 @@
     <xs:element name="ModuloPanifici" type="panifici:ModuloPanificiType"/>
     
     <xs:complexType name="ModuloPanificiType" >
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ DI PANIFICAZIONE
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -42,13 +43,6 @@
 
             <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element> 
         </xs:sequence>
     </xs:complexType>
 
@@ -134,53 +128,61 @@
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="panifici:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiSCIACondizionata" type="panifici:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="panifici:AllegatiAltriType"/>      
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>      
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="1"/>
-            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <!-- ALLEGATO DICHIARAZIONE RESPONSABILE ATTIVITA PRODUTTIVE INCLUSO IN DICHIARAZIONI -->
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio"  minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoRichiestaAutorizAUA"  minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissAtmosferaAUA"  minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoScaricoAcqueAUA"  minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga"  minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoEmissioneAtmosferaGeneraleAUA" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoEmissioneAtmosferaAUA" type="moduli:AllegatoType"  minOccurs="0"/>
+            <xs:element name="allegatoScaricoAcqueAUA" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoAutorizzazioneInDeroga" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="panifici:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
-        </xs:sequence>                                
-    </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
             <xs:element name="dichiaranteRequisitiAntimafia" type="suapcommon:RequisitiAntimafiaType"/>
-            <xs:element name="responsabileAttivitàProduttiveRequisitiAntimafia" type="suapcommon:ResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
+            <xs:element name="allegatoResponsabileAttivitàProduttiveRequisitiAntimafia" type="panifici:AllegatoResponsabileAttivitàProduttiveRequisitiAntimafiaType"/>
         </xs:choice>  
     </xs:complexType>
+    
+    <xs:complexType name="AllegatoResponsabileAttivitàProduttiveRequisitiAntimafiaType">
+        <xs:sequence>
+            <xs:element name="responsabile" type="aggregate:PersonaAnagraficaType"/>
+            <xs:element name="inQualita">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="societa" type="xs:string"/>
+                            <xs:element name="dittaindividuale" type="xs:string"/>
+                        </xs:choice>
+                        <xs:element name="data" type="xs:date"/> <!-- -->
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dichiarazione" type="suapcommon:AltreDichiarazioniAltroBaseType"/>     <!-- -->        
+            <xs:element name="allegatoDocumentoIdentitaResposabileeAttivitàProduttive" type="moduli:AllegatoType" />
+        </xs:sequence>
+    </xs:complexType>
+    
     
     <xs:complexType name="AltreDichiarazioniType">
         <xs:sequence>

@@ -7,10 +7,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"  
-    
-    elementFormDefault="qualified"
-    
-    version="1.1.0" xml:lang="it">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0" xml:lang="it">
     
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../AgID_Vocabularies/AgID_basic_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
@@ -27,5 +24,55 @@
             </xs:extension>               
         </xs:complexContent>
     </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatoBaseType" abstract="true"/>
+    
+    <xs:complexType name="AllegatoType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoBaseType">
+                <xs:choice>
+                    <xs:element name="binario" type="moduli:AllegatoBinarioType"/>
+                    <xs:element name="riferimento" type="moduli:AllegatoRiferimentoType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoBinarioType">
+        <xs:complexContent>
+            <xs:extension base="moduli:RiferimentoGenericoAllegatoType">
+                <xs:sequence>
+                    <xs:element name="contenuto" type="xs:base64Binary"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoRiferimentoType">
+        <xs:complexContent>
+            <xs:extension base="moduli:RiferimentoGenericoAllegatoType">
+                <xs:sequence>
+                    <xs:element name="hash" type="basic:SHA256Type" minOccurs="0"/>
+                </xs:sequence>
+                <xs:attribute name="href" type="xs:anyURI" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="RiferimentoGenericoAllegatoType" >
+        <xs:annotation>
+            <xs:documentation>Descrive un riferimento generico ad un file allegato.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="nomeFile" type="xs:string" />
+            <xs:element name="descrizione" type="xs:string" minOccurs="0"/>
+            <xs:element name="nomeFileAlt" type="xs:string" minOccurs="0"/>  
+            <xs:element name="mime" type="enumeration:MimeTypeEnum" />  
+            <xs:element name="dimensione" type="xs:positiveInteger" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
     
 </xs:schema>

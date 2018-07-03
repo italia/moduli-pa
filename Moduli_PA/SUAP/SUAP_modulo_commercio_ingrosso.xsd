@@ -9,13 +9,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_commercio_ingrosso"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            COMUNICAZIONE PER L’AVVIO DI ATTIVITÀ DI COMMERCIO ALL’INGROSSO
-        </xs:documentation>
-    </xs:annotation>
+    
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -30,6 +26,11 @@
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloCommercioIngrossoType">
+        <xs:annotation>
+            <xs:documentation>
+                COMUNICAZIONE PER L’AVVIO DI ATTIVITÀ DI COMMERCIO ALL’INGROSSO
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -41,13 +42,7 @@
             </xs:choice>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="commingrosso:TabellaAllegatiType"/>  
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="altriSoggetti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+           
         </xs:sequence>        
     </xs:complexType>
     
@@ -126,7 +121,7 @@
             <xs:extension base="commingrosso:ModalitaVenditaIngrossoSuperficieBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="IngrossoSupercificie" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="IngrossoSuperficie" minOccurs="0" type="xs:decimal"/>
                         <xs:element name="DettaglioIngrosso">
                             <xs:complexType>
                                 <xs:sequence>
@@ -145,61 +140,44 @@
     <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIA" type="commingrosso:AllegatiSCIAType"/>
+            <xs:element name="allegatiComunicazione" type="commingrosso:AllegatiComunicazioneType"/>
             <xs:element name="allegatiSCIAUnica" type="commingrosso:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiSCIACondizionata" type="commingrosso:AllegatiSCIACondizionataType"/>      
-            <xs:element name="allegatiAltri" type="commingrosso:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIAType">
+    <xs:complexType name="AllegatiComunicazioneType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaProdottiAlimentazioneAnimale" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaGPL" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaGASInfiammabile" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAVenditaProdottiAlimentazioneAnimale" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoComunicazioneVenditaGPL" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoComunicazioneVenditaGASInfiammabile" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVenditaFitosanitari" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaPreziosi" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaIngrossoFarmaciBanco" minOccurs="0"/> 
-            
-            <xs:element ref="suapcommon:allegatoVenditaArmi" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaFitosanitari" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaPreziosi"  type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaIngrossoFarmaciBanco" type="moduli:AllegatoType" minOccurs="0"/> 
+            <xs:element name="allegatoVenditaArmiNoGuerra" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriBaseType">
-        <xs:sequence>
-            <xs:element name="AttestazioneVersamentoOneri" type="commingrosso:allegatoVersamentoOneriBaseType" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
-            
-        </xs:sequence>                                
-    </xs:complexType>
     
-    <xs:complexType name="allegatoVersamentoOneriBaseType" abstract="true"/>
-    <xs:complexType name="allegatoVersamentoOneriType">
-        <xs:complexContent>
-            <xs:extension base="commingrosso:allegatoVersamentoOneriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
     <!-- ENUMERATION -->
     

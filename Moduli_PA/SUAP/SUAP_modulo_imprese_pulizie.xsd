@@ -9,7 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_imprese_pulizie"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
     <xs:annotation>
         <xs:documentation>
@@ -37,13 +37,7 @@
             <xs:element name="dichiarazioni" type="imppulizie:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="imppulizie:TabellaAllegatiType"/>  
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="altriSoggetti" type="imppulizie:allegatoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+           
         </xs:sequence>
     </xs:complexType>  
     
@@ -65,19 +59,15 @@
     </xs:complexType>
     
     <xs:complexType name="DichiarazioniType">
-        <xs:choice>
-            <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiaranteRequisitiType"/>
-            <xs:element name="resposabileTecnicoRequisitiProfessionali" type="imppulizie:ResponsabileTecnicoImpresePulizieRequisitiProfessionaliType" maxOccurs="unbounded"/>
-        </xs:choice>
-    </xs:complexType>
-    
-    <xs:complexType name="DichiaranteRequisitiType">  
         <xs:sequence>
-            <xs:element name="altriRequisiti" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
-            <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+            <xs:choice minOccurs="0">
+                <xs:element name="dichiaranteRequisiti" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
+                <xs:element name="allegatoResposabileTecnicoRequisitiProfessionali" type="imppulizie:AllegatoResponsabileTecnicoImpresePulizieRequisitiProfessionaliType" maxOccurs="unbounded"/>
+            </xs:choice>
         </xs:sequence>
     </xs:complexType>
-    
+      
     <xs:complexType name="DichiarazioniImpresePulizieRequisitiProfessionaliType">
         <xs:sequence>
             <xs:choice>
@@ -96,7 +86,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="ResponsabileTecnicoImpresePulizieRequisitiProfessionaliType">
+    <xs:complexType name="AllegatoResponsabileTecnicoImpresePulizieRequisitiProfessionaliType">
         <xs:complexContent>
             <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
                  <xs:sequence>
@@ -111,6 +101,7 @@
                          </xs:complexType>
                      </xs:element>
                      <xs:element name="dichiarazioni" type="imppulizie:DichiarazioniImpresePulizieRequisitiProfessionaliType"/>
+                     <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
                  </xs:sequence>
             </xs:extension>
         </xs:complexContent>                
@@ -137,61 +128,49 @@
         </xs:sequence>
     </xs:complexType>
     
-    <!-- ALLEGATI -->
-    <xs:complexType name="allegatoRequisitiAltriSoggettiType">
-        <xs:sequence>
-            <xs:element name="altriSoggetti" type="aggregate:PersonaAnagraficaType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
-        </xs:sequence>
-    </xs:complexType>
    
-    
+   
+    <!-- ALLEGATI  -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIA" type="imppulizie:AllegatiSCIAType"/>
             <xs:element name="allegatiSCIAUnica" type="imppulizie:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiSCIACondizionata" type="imppulizie:AllegatiSCIACondizionataType"/>      
-            <xs:element name="allegatiAltri" type="imppulizie:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="imppulizie:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
+            <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO INCLUSO IN DICHIARAZIONI -->
         </xs:sequence>                                
     </xs:complexType>
 
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoIndustriaInsalubre" minOccurs="0"/>
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoComunicazioneIndustriaInsalubre" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
 
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaAUA" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoEmissioneAtmosferaGeneraleAUA" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoEmissioneAtmosferaAUA" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
-    
-    <xs:complexType name="AllegatiAltriBaseType">
-        <xs:sequence>
-            <xs:element name="AttestazioneVersamentoOneri" type="imppulizie:allegatoVersamentoOneriBaseType" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
-            
-        </xs:sequence>                                
-    </xs:complexType>
-    
    
-    <xs:complexType name="allegatoVersamentoOneriBaseType" abstract="true"/>
-    <xs:complexType name="allegatoVersamentoOneriType">
+    
+    <!-- TYPE ALLEGATI  -->
+    <xs:complexType name="AllegatoPossessoRequisitiAltriSoggettiType">
         <xs:complexContent>
-            <xs:extension base="imppulizie:allegatoVersamentoOneriBaseType">
+            <xs:extension base="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType">
                 <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
+                    <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

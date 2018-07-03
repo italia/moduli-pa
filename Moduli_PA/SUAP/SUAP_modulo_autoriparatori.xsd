@@ -9,7 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_autoriparatori"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
 
     <xs:annotation>
         <xs:documentation>
@@ -37,14 +37,7 @@
             <xs:element name="dichiarazioni" type="autoriparatori:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="autoriparatori:TabellaAllegatiType"/>
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                        <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO  INCLUSO IN DICHIARAZIONI -->
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element> 
+           
         </xs:sequence>  
     </xs:complexType>
 
@@ -63,55 +56,34 @@
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="autoriparatori:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiSCIACondizionata" type="autoriparatori:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="autoriparatori:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoIndustriaInsalubre" minOccurs="0"/>
-        </xs:sequence>                                
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiSCIACondizionataBaseType">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaGenerale" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoEmissioneAtmosferaAUA" minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <!-- ALLEGATO DICHIARAZIONE RESPONSABILE TECNICO  INCLUSO IN DICHIARAZIONI -->
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoComunicazioneIndustriaInsalubre" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
-        <xs:complexContent>
-            <xs:extension base="autoriparatori:AllegatiSCIACondizionataBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoAutorizzazioneInDeroga" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoEmissioneAtmosferaGeneraleAUA" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoEmissioneAtmosferaAUA" type="moduli:AllegatoType"  minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInDeroga" type="moduli:AllegatoBaseType"  minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
-    
-    <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="autoriparatori:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+   
+  
    
    
    <!-- BASIC TYPE -->
@@ -128,16 +100,17 @@
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
             <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="autoriparatori:DichiarazioneRequisitiProfessionaliType"/>
-            <xs:element name="resposabileTecnicoRequisitiProfessionali" type="autoriparatori:ResponsabileTecnicoRequisitiProfessionaliType" maxOccurs="unbounded"/>
+            <xs:element name="allegatoResposabileTecnicoRequisitiProfessionali" type="autoriparatori:AllegatoResponsabileTecnicoRequisitiProfessionaliType" maxOccurs="unbounded"/>
         </xs:choice>
     </xs:complexType>
     
-    <xs:complexType name="ResponsabileTecnicoRequisitiProfessionaliType" >
+    <xs:complexType name="AllegatoResponsabileTecnicoRequisitiProfessionaliType" >
         <xs:complexContent>
             <xs:extension base="suapcommon:ResponsabileTecnicoRequisitiProfessionaliBaseType">
                 <xs:sequence>
                     <xs:element name="tipoQualifica" type="autoriparatori:TipoQualificaType"/>
                     <xs:element name="dichiarazioni" type="autoriparatori:DichiarazioneRequisitiProfessionaliType"/>
+                    <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
                  </xs:sequence>
             </xs:extension>
         </xs:complexContent>

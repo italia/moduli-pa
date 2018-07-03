@@ -9,13 +9,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_cessazione"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
 
-    <xs:annotation>
-        <xs:documentation>
-            COMUNICAZIONE DI CESSAZIONE O SOSPENSIONE TEMPORANEA DI ATTIVITÀ 
-        </xs:documentation>
-    </xs:annotation>
+    
 
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -28,6 +24,11 @@
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloCessazioneType" >
+        <xs:annotation>
+            <xs:documentation>
+                COMUNICAZIONE DI CESSAZIONE O SOSPENSIONE TEMPORANEA DI ATTIVITÀ 
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -41,8 +42,8 @@
     
     <xs:complexType name="AllegatiType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>                                
     </xs:complexType>
         

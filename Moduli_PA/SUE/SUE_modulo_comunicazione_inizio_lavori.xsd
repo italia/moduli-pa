@@ -9,14 +9,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_comunicazione_inizio_lavori"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            C. COMUNICAZIONE INIZIO LAVORI
-            PER OPERE DIRETTE A SODDISFARE OBIETTIVE ESIGENZE CONTINGENTI E TEMPORANEE E AD ESSERE IMMEDIATAMENTE RIMOSSE AL CESSARE DELLA NECESSITÀ E, COMUNQUE, ENTRO UN TERMINE NON SUPERIORE A NOVANTA GIORNI
-        </xs:documentation>
-    </xs:annotation>
+   
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components" schemaLocation="SUE_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -30,15 +25,27 @@
     <xs:element name="ModuloCIL" type="cil:ModuloCILType" />
     
     <xs:complexType name="ModuloCILType">
+        <xs:annotation>
+            <xs:documentation>
+                C. COMUNICAZIONE INIZIO LAVORI
+                PER OPERE DIRETTE A SODDISFARE OBIETTIVE ESIGENZE CONTINGENTI E TEMPORANEE E AD ESSERE IMMEDIATAMENTE RIMOSSE AL CESSARE DELLA NECESSITÀ E, COMUNQUE, ENTRO UN TERMINE NON SUPERIORE A NOVANTA GIORNI
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>    
             
             <!-- SOGGETTI -->
-            <xs:element name="schedaTitolare" type="suecommon:TitolareType"/> 
+            <xs:element name="schedaTitolare" type="suecommon:TitolareType">
+                <xs:annotation>
+                    <xs:documentation>
+                        schedaTitolare: in caso di più titolari, la sezione è ripetibile nell’allegato “SOGGETTI COINVOLTI”
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element> 
 
             <!-- DICHIARAZIONI -->
             <xs:element name="titoloPossesso" type="suecommon:TitoloPossessoType"/>               
             <xs:element name="operePreviste" type="suecommon:OperePrevisteType"/>
-            <xs:element name="comunicaInizioLavori" type="cil:ComunicaInzioLavoriType"/>
+            <xs:element name="comunicaInizioLavori" type="cil:ComunicaInizioLavoriType"/>
             <xs:element name="localizzazioneIntervento" type="suecommon:LocalizzazioneInterventoType"/>
             <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType" minOccurs="0" maxOccurs="unbounded" />           
             <xs:element name="impreseEsecutrici" type="suecommon:ComunicazioniImpreseEsecutriciDeiLavoriType"/>
@@ -51,9 +58,9 @@
     </xs:complexType>
 
     <!-- BASE TYPE -->
-    <xs:element name="allegatoSoggettiCoinvolti" type="cil:SoggettiCoinvoltiType"/>
-    
-    <xs:complexType name="SoggettiCoinvoltiType" >
+   
+   
+    <xs:complexType name="AllegatoSoggettiCoinvoltiType" >
         <xs:annotation>
             <xs:documentation xml:lang="it">Soggetti Coinvolti</xs:documentation>
         </xs:annotation>       
@@ -74,7 +81,7 @@
     </xs:complexType>
    
     <!-- Reference cil:ComunicaInzioLavoriType -->
-    <xs:complexType name="ComunicaInzioLavoriType">
+    <xs:complexType name="ComunicaInizioLavoriType">
         <xs:sequence>
             <xs:element name="dataInizio" minOccurs="0" type="xs:date"/>
             <xs:element name="dataFine" minOccurs="0" type="xs:date"/>
@@ -85,25 +92,25 @@
     <!-- Reference scia:TabellaAllegatiType -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIA" type="cil:AllegatiCILType"/>
-            <xs:element name="allegatiSCIAUnica" type="cil:AllegatiAltreComunicazioniType"/>
+            <xs:element name="allegatiCIL" type="cil:AllegatiCILType"/>
+            <xs:element name="allegatiAltreComunicazioni" type="cil:AllegatiAltreComunicazioniType"/>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiCILType">
         <xs:sequence>
-            <xs:element ref="suecommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="cil:allegatoSoggettiCoinvolti" minOccurs="1"/>
-            <xs:element ref="suecommon:allegatoVersamentoDirittiSegreteria" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoDocumentiIdentita" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoAssensoTerzi" minOccurs="0"/>
-            <xs:element ref="suecommon:allegatoNotificaPreliminare" minOccurs="0"/>            
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSoggettiCoinvolti" type="cil:AllegatoSoggettiCoinvoltiType" minOccurs="1"/>
+            <xs:element name="allegatoVersamentoDirittiSegreteria" type="moduli:AllegatoBaseType" minOccurs="0" />
+            <xs:element name="allegatoDocumentoIdentita" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoAssensoTerzi" type="moduli:AllegatoType" minOccurs="0" />
+            <xs:element name="allegatoNotificaPreliminare" type="moduli:AllegatoType" minOccurs="0" />            
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiAltreComunicazioniType">
         <xs:sequence>
-            <xs:element ref="suecommon:allegatoAltreComunicazioni" minOccurs="0" />            
+            <xs:element name="allegatoAltreComunicazioni" type="suecommon:AllegatoAltreComunicazioniType" minOccurs="0" />          
         </xs:sequence>
     </xs:complexType>
 

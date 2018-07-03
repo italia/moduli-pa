@@ -9,14 +9,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_a_domicilio"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ 
-            PER L’ESERCIZIO DI VENDITA PRESSO IL DOMICILIO DEI CONSUMATORI
-        </xs:documentation>
-    </xs:annotation>
+    
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -30,6 +25,12 @@
     <xs:element name="ModuloSomministrzioneDomicilio" type="sommdom:ModuloSommaDomicilioType"/>
     
     <xs:complexType name="ModuloSommaDomicilioType" >
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ 
+                PER L’ESERCIZIO DI VENDITA PRESSO IL DOMICILIO DEI CONSUMATORI
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagraficaCottura" type="suapcommon:IntegrazioneAnagraficaType"/>
@@ -37,13 +38,7 @@
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="sommdom:TabellaAllegatiType"/>                 
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element> 
+           
        </xs:sequence>
     </xs:complexType>
     
@@ -53,32 +48,25 @@
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIAUnica" type="sommdom:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiAltri" type="sommdom:AllegatiAltriBaseType"/>      
+            <xs:element name="allegatiAltri" type="sommdom:AllegatiAltriType"/>      
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="1"/>
-            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
         </xs:sequence>                                
     </xs:complexType>
       
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
-    </xs:complexType>  
-      
     <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="sommdom:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:sequence>
+            <xs:element name="allegatoVersamentoOneri"  type="moduli:AllegatoBaseType" minOccurs="0"/>                                                                                                                                                 
+        </xs:sequence>  
     </xs:complexType>
     
-    <!-- AGGREGATE COMPONENTS TYPE -->
     
 </xs:schema>

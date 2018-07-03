@@ -9,13 +9,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_spacci_interni"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
-    <xs:annotation>
-        <xs:documentation>
-            SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI VENDITA IN SPACCI INTERNI (ESERCIZIO COMMERCIALE IN LOCALE NON APERTO AL PUBBLICO)
-        </xs:documentation>
-    </xs:annotation>
+    
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -30,72 +26,57 @@
         
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSpacciInterniType">
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI VENDITA IN SPACCI INTERNI (ESERCIZIO COMMERCIALE IN LOCALE NON APERTO AL PUBBLICO)
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="spacci:AperturaType"/>
-                <xs:element name="trasferimento" type="spacci:TrasferimentoType"/>
-                <xs:element name="ampliamento" type="spacci:AmpliamentoType"/>
+                <xs:sequence>
+                    <xs:element name="trasferimento" type="spacci:TrasferimentoType" minOccurs="0"/>
+                    <xs:element name="ampliamento" type="spacci:AmpliamentoType" minOccurs="0"/>
+                </xs:sequence>
             </xs:choice>
             <xs:element name="altreDichiarazioni" type="spacci:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="spacci:TabellaAllegatiType"/>
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>            
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0"/>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoNotificaSanitaria" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaProdottiAlimentazioneAnimale" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0"/>            
-            <xs:element ref="suapcommon:allegatoPrevenzioniIncendi" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaFarmaciBanco" minOccurs="0"/>
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAVenditaProdottiAlimentazioneAnimale" type="moduli:AllegatoType" minOccurs="0"/>   
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaIngrossoFarmaciBanco" type="moduli:AllegatoType" minOccurs="0"/> 
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoVenditaFitosanitari" minOccurs="0"/>
-            <xs:element ref="suapcommon:allegatoVenditaPreziosi" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaFitosanitari" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaPreziosi"  type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>   
     
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo" minOccurs="0"/>                                                                                                                                      
-        </xs:sequence>  
-    </xs:complexType>
-  
-    <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="spacci:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/>                                                                                                                                                 
-                </xs:sequence>  
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
+
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiSCIA" type="spacci:AllegatiSCIAType"/>
             <xs:element name="allegatiSCIAUnica" type="spacci:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiSCIACondizionata" type="spacci:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="spacci:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
     

@@ -8,7 +8,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     
     targetNamespace="http://www.agid.gov.it/AgID_aggregate_components"  
-    elementFormDefault="qualified"
+    elementFormDefault="qualified" attributeFormDefault="qualified"
     version="1.1.0" xml:lang="it">
     
     <xs:import namespace="http://www.w3.org/ns/corevocabulary/BasicComponents" schemaLocation="ISA_Core_Vocabularies/CoreVocabularies-BasicComponents-1.1.xsd"/>
@@ -61,7 +61,7 @@
     
     <xs:complexType name="ToponimoType">
         <xs:sequence>
-            <xs:element name="specie" type="isacvbc:AddressLocatorNameType"/>
+            <xs:element name="specie" type="enum:DUGEnum"/>
             <xs:element name="indirizzo" type="isacvbc:AddressLocatorNameType"/>
         </xs:sequence>
     </xs:complexType>
@@ -80,7 +80,6 @@
             <xs:documentation>Tipo astratto. Tutti gli elementi CoordinateCatastaliBase sono ereditati da questo tipo utile per specificare le coordinate catastali</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="tipo" type="enum:TipoCoordinateCatastaliEnum" />
             <xs:element name="foglio" type="xs:string"/>
             <xs:element name="particella" type="xs:string"/>
             <xs:element name="particellaDenominatore" type="xs:string" minOccurs="0"/>

@@ -9,13 +9,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_ageaffari"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
    
-    <xs:annotation>
-        <xs:documentation>
-            COMUNICAZIONE PER L’ESERCIZIO DELL’ATTIVITÀ DELLE AGENZIE D’AFFARI DI COMPETENZA DEL COMUNE
-        </xs:documentation>
-    </xs:annotation>
+    
    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -29,26 +25,27 @@
     <xs:element name="ModuloAgenzieAffari" type="ageaffari:ModuloAgenzieAffari" />
     
     <xs:complexType name="ModuloAgenzieAffari">
+        <xs:annotation>
+            <xs:documentation>
+                COMUNICAZIONE PER L’ESERCIZIO DELL’ATTIVITÀ DELLE AGENZIE D’AFFARI DI COMPETENZA DEL COMUNE
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="ageaffari:AperturaType"/>
-                <xs:element name="trasferimento" type="ageaffari:TrasferimentoType"/>
-                <xs:element name="cessazione" type="ageaffari:CessazioneType"/>
+                <xs:sequence>
+                    <xs:element name="trasferimento" type="ageaffari:TrasferimentoType" minOccurs="0"/>
+                    <xs:element name="cessazione" type="ageaffari:CessazioneType" minOccurs="0"/>
+                </xs:sequence>
             </xs:choice>
+            
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             
             <xs:element name="tabellaAllegati" type="ageaffari:TabellaAllegatiType"/>                 
             
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="altriSoggetti" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                        <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+           
         </xs:sequence>
     </xs:complexType>  
     
@@ -124,27 +121,49 @@
         <xs:sequence>
             <xs:element name="protocolloTrasferimento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="trasferimentoDaA" type="suapcommon:TrasferimentoDaAType"/>
+            <xs:element name="dichiarazioni" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence> 
     </xs:complexType>
    
-    <xs:complexType name="CessazioneType">
+    <xs:complexType name="CessazioneType" >
         <xs:sequence>
             <xs:element name="protocolloCessazione" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="dichiarazioni" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="autoVidimazioneRegistroAffari" type="ageaffari:AutoVidimazioneRegistroAffariType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
     <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoTabellaTariffePrestazioni" minOccurs="1" />
-            <xs:element ref="suapcommon:allegatoTimbroSocieta" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0" maxOccurs="2" />
+            <xs:element name="allegati">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0" />
+                        <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded" />
+                        <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
+                        <xs:element name="allegatoTabellaTariffePrestazioni" type="moduli:AllegatoType"  minOccurs="1" />
+                        <xs:element name="allegatoTimbroSocieta" type="moduli:AllegatoType" minOccurs="0" />
+                        <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
+                        <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="AutoVidimazioneRegistroAffariType"><!-- ALLEGATO B -->
+    <xs:complexType name="AutoVidimazioneRegistroAffariType">
         <xs:annotation>
             <xs:documentation>
                 Dichiarazione di  auto vidimazione del Registro giornale degli affari

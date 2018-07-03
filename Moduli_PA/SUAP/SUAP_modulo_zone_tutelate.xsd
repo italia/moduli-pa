@@ -9,7 +9,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_zone_tutelate"
-    elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.1.0">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.0">
     
     <xs:annotation>
         <xs:documentation>
@@ -31,25 +31,25 @@
         
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloZoneTutelateType">
+        <xs:annotation>
+            <xs:documentation>
+                DOMANDA DI AUTORIZZAZIONE PER BAR, RISTORANTI E ALTRI ESERCIZI DI SOMMINISTRAZIONE DI ALIMENTI E BEVANDE
+                (IN ZONE TUTELATE)
+            </xs:documentation>
+        </xs:annotation> 
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="tutela:AperturaType"/>
-                <xs:element name="trasferimento" type="tutela:TrasferimentoType"/>
-                <xs:element name="ampliamento" type="tutela:AmpliamentoType"/>
+                <xs:sequence>
+                    <xs:element name="trasferimento" type="tutela:TrasferimentoType" minOccurs="0"/>
+                    <xs:element name="ampliamento" type="tutela:AmpliamentoType" minOccurs="0"/>
+                </xs:sequence>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
             <xs:element name="tabellaAllegati" type="tutela:TabellaAllegatiType"/> 
-            <xs:element name="Allegati">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="socio" type="aggregate:PersonaAnagraficaType" minOccurs="0" maxOccurs="unbounded"/>
-                        <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element> 
         </xs:sequence>
     </xs:complexType>
 
@@ -88,56 +88,38 @@
     <!-- ALLEGATI -->    
     <xs:complexType name="AllegatiAutorizzazioneSCIAType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoProcuraDelega" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoDocumentoIdentitaTitolare" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoPlanimetrieLocali" />
-            <xs:element ref="suapcommon:allegatoNotificaSanitaria" />
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPlanimetrieLocali" type="moduli:AllegatoType"  />
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <!-- ALLEGATO DICHIARAZIONE PREPOSTO INCLUSO IN DICHIARAZIONI -->
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiAutorizzazioneSCIAUnicaType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoComunicazioneAlcolici" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0" />
+            <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiAltreAutorizzazioneType">
         <xs:sequence>
-            <xs:element ref="suapcommon:allegatoImpattoAcustico" minOccurs="0" />
-            <xs:element ref="suapcommon:allegatoInsegnaEsercizio" minOccurs="0" />
+            <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0" />
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriBaseType" abstract="true">
-        <xs:sequence>
-            <xs:element ref="suapcommon:allegatoImpostaDiBollo"/>           
-        </xs:sequence>                                
-    </xs:complexType>
     
-    <xs:complexType name="AllegatiAltriType">
-        <xs:complexContent>
-            <xs:extension base="tutela:AllegatiAltriBaseType">
-                <xs:sequence>
-                    <xs:element ref="suapcommon:allegatoVersamentoOneri" minOccurs="0"/> 
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
             <xs:element name="allegatiAutorizzazioneSCIA" type="tutela:AllegatiAutorizzazioneSCIAType"/>            
             <xs:element name="allegatiAutorizzazioneSCIAUnica" type="tutela:AllegatiAutorizzazioneSCIAUnicaType"/>
             <xs:element name="allegatiAltreAutorizzazione" type="tutela:AllegatiAltreAutorizzazioneType"/>
-            <xs:element name="allegatiAltri" type="tutela:AllegatiAltriBaseType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType_BolloObbligatorio"/>
         </xs:sequence>
     </xs:complexType>
-    
-    <!-- BASIC COMPONENTS TYPE -->
-
-    <!-- ENUMERATION -->
-
       
 </xs:schema>
