@@ -14,5 +14,3 @@ Una prima analisi realizzata da AgID ha evidenziato la possibilit&agrave;  di p
 - un core vocabulary che definisce tutti i data entity comuni a tutti i moduli, suddiviso in data entity elementari (come ad esempio: nome, cognome, etc.) e data entity aggregati (come ad esempio: persona costituito da nome, cognome, etc.);
 - eventuali scope vocabulary che a partire dai data entity presenti nel core vocabulary definisce i data entity comuni ad uno dei specifici ambiti di interesse: Attivit&agrave;  commerciali e assimilabili, Edilizia e Ambiente.
 - la definizione di specifici XSD per ogni modulo che assicuri la formalizzazione dei moduli a partire dal core vocabulary e scope vocabulary.
-
-Per visionare lo stato dei lavori si rimanda alla [roadmap](ROADMAP.md) del *GdL XML Schema*. 
