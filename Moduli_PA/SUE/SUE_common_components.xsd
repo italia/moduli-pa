@@ -34,7 +34,7 @@
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
+            <xs:extension base="aggregate:PersonaAnagraficaType">
                 <xs:sequence>
                     <xs:element name="studiopro" type="aggregate:IndirizzoType"/>
                     <xs:element name="ordineprofessionale" type="suecommon:OrdineProfessionaleType"/>  
@@ -47,10 +47,9 @@
     <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
         <xs:complexContent>
             <xs:extension base="suecommon:ProfessionistaAnagraficaType">
-                <xs:choice minOccurs="0">
-                    <xs:element name="direttoreLavori" type="basic:EmptyType"/>
-                    <xs:element name="professionistaAbilitato" type="basic:EmptyType"/>
-                </xs:choice>
+                <xs:sequence>
+                    <xs:element name="direttoreLavori" type="basic:EmptyType" minOccurs="0"/>
+                </xs:sequence> 
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

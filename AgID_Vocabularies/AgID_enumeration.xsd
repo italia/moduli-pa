@@ -2053,6 +2053,7 @@
             <xs:enumeration value="VU"/>
             <xs:enumeration value="WF"/>
             <xs:enumeration value="WS"/>
+            <xs:enumeration value="XK"/>
             <xs:enumeration value="YE"/>
             <xs:enumeration value="YT"/>
             <xs:enumeration value="ZA"/>
