@@ -344,10 +344,10 @@
             <xs:element name="nonComportaVariazioneCivici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="comportaVariazioneCivici">
                 <xs:complexType>
-                    <xs:choice>
+                    <xs:sequence>
                         <xs:element name="allegaRichiestaNumerazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="protocolloVariazioneNumerazione" type="aggregate:ProtocolloStandardType" minOccurs="0" maxOccurs="1"/>
-                    </xs:choice>
+                    </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:choice>
@@ -371,16 +371,16 @@
     <xs:complexType name="MontacarichiType">
         <xs:complexContent>
             <xs:extension base="scpa:MontacarichiBaseType">
-                <xs:choice>
-                    <xs:element name="comunicazioneValidaPerMatricola"  type="basic:EmptyType"/>
-                    <xs:element name="attoComunicazione" >
+                <xs:sequence>
+                    <xs:element name="comunicazioneValidaPerMatricola"  type="basic:EmptyType" minOccurs="0"/>
+                    <xs:element name="attoComunicazione" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="protocollo" type="aggregate:ProtocolloStandardType"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
-                </xs:choice>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
