@@ -17,13 +17,22 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="AgID_basic_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="AgID_enumeration.xsd"/>
     
+    <xs:group name="PersonaCoreGroup">
+        <xs:annotation>
+            <xs:documentation>Gruppo di proprietà core associate alla persona</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cognome" type="isacvbc:PersonFamilyNameType"/>
+            <xs:element name="nome" type="isacvbc:PersonGivenNameType"/>
+        </xs:sequence>
+    </xs:group> 
+    
     <xs:group name="PersonaBaseGroup">
         <xs:annotation>
             <xs:documentation>Gruppo di proprietà associate alla persona</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="cognome" type="isacvbc:PersonFamilyNameType"/>
-            <xs:element name="nome" type="isacvbc:PersonGivenNameType"/>
+            <xs:group ref="aggregate:PersonaCoreGroup" />   
             <xs:element name="codiceFiscale" type="basic:CodiceFiscaleType"/>
         </xs:sequence>
     </xs:group>    
@@ -129,18 +138,32 @@
         <xs:attribute name="comuneCatastale" type="basic:CodiceComuneCatastaleType"/>            
     </xs:complexType>
     
+    
+    <xs:complexType name="ProtocolloType">
+        <xs:annotation>
+            <xs:documentation>Tipo per specificare il numero e una data di protocollo</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>			
+            <xs:element name="numeroProtocollo" type="xs:string"/>
+            <xs:element name="dataRegistrazione" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
     <xs:complexType name="ProtocolloStandardType">
         <xs:annotation>
             <xs:documentation>Tipo per specificare i dati che compongono il Protocollo Standard</xs:documentation>
         </xs:annotation>
-        <xs:sequence>			
-            <xs:element name="codiceAmministrazione" type="basic:CodiceAmministrazione" minOccurs="0"/>
-            <xs:element name="codiceAOO" type="basic:CodiceAOO" minOccurs="0"/>
-            <xs:element name="codiceRegistro" type="xs:string" minOccurs="0"/>
-            <xs:element name="numeroProtocollo" type="xs:string"/>
-            <xs:element name="dataRegistrazione" type="xs:date"/>
-            <xs:element name="comuneRilascio" type="xs:string" minOccurs="0"/>
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="aggregate:ProtocolloType">
+                <xs:sequence> 
+                    <xs:element name="codiceAmministrazione" type="basic:CodiceAmministrazione" minOccurs="0"/>
+                    <xs:element name="codiceAOO" type="basic:CodiceAOO" minOccurs="0"/>
+                    <xs:element name="codiceRegistro" type="xs:string" minOccurs="0"/>
+                    <xs:element name="comuneRilascio" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:group name="ContattiFoniaGroup">
