@@ -7,6 +7,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:ccts="urn:un:unece:uncefact:documentation:2"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:pinvalprog="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_1_2018_valutazione_progetto"
 
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
 
@@ -18,6 +19,7 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>  
     
+    <xs:import namespace="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_1_2018_valutazione_progetto" schemaLocation="../PIN/PIN_modulo_1_2018_valutazione_progetto.xsd"/>  
     
     <xs:complexType name="SchedaDittaType">
         <xs:complexContent>
@@ -1334,6 +1336,16 @@
             <xs:extension base="moduli:AllegatoBaseType">
                 <xs:sequence>
                     <xs:element name="specifica" minOccurs="0" type="xs:string"/>                        
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoValutazioneProgettoVVFType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="pin_1_2018_valutazione_progetto" type="pinvalprog:ModuloValutazioneProgettoType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

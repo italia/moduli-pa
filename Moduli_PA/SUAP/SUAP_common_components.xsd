@@ -7,6 +7,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:ccts="urn:un:unece:uncefact:documentation:2"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:pinscia="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_2_2018_SCIA"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
 
@@ -17,6 +18,8 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    <xs:import namespace="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_2_2018_SCIA" schemaLocation="../PIN/PIN_modulo_2_2018_SCIA.xsd"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="SchedaAnagraficaSUAPType">
@@ -958,5 +961,16 @@
         </xs:sequence>
     </xs:complexType>
    
+   
+    <xs:complexType name="AllegatoSCIAPrevenzioniIncendiType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="pin_2_2018_scia" type="pinscia:ModuloSCIAType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     
 </xs:schema>

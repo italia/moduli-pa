@@ -227,7 +227,7 @@
     
     <xs:complexType name="AllegatiLavGettSCIAUnicaType">
         <xs:sequence>
-            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="suapcommon:AllegatoSCIAPrevenzioniIncendiType" minOccurs="0"/>
             <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>

@@ -63,7 +63,7 @@
         <xs:sequence>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
             <xs:element name="allegatoSCIAVenditaProdottiAlimentazioneAnimale" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType"   minOccurs="0"/>
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="suapcommon:AllegatoSCIAPrevenzioniIncendiType"   minOccurs="0"/>
             <xs:element name="allegatoComunicazioneVenditaFarmaciBanco" type="moduli:AllegatoType" minOccurs="0"/> 
             <xs:element name="allegatoComunicazioneVenditaGPL" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoVenditaGASInfiammabile" type="moduli:AllegatoType" minOccurs="0"/>

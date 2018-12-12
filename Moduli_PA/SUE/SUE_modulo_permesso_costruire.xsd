@@ -270,7 +270,7 @@
             <xs:element name="allegatoValitazionePrevisionaleClimaAcustico" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDichiarazioneSostitutiva" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocImpattoAcusticoPerNullaOsta" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoDocRilascioParereVigiliFuoco" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoValutazioneProgettoVigiliFuoco" type="suecommon:AllegatoValutazioneProgettoVVFType" minOccurs="0"/>
             <xs:element name="allegatoDerogaPrevenzioneIncendi" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoPianoDemolizioneAmianto" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDerogaConformitaRequisitiIgienicoSanitari" type="moduli:AllegatoType" minOccurs="0"/>
