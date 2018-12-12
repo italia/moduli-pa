@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:pincommon="http://www.vigilfuoco.it/MODULI_PA/PIN/pin_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"    
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:ccts="urn:un:unece:uncefact:documentation:2"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.vigilfuoco.it/MODULI_PA/PIN/pin_common_components"
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.0.0">
+
+	
+
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+ 
+   
+   	<xs:complexType name="PersonaAnagraficaType">
+        <xs:annotation>
+            <xs:documentation>Tipo per specificare i dati di una persona</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:group ref="aggregate:PersonaBaseGroup"/>
+            <xs:group ref="aggregate:ContattiFoniaGroup" minOccurs="0"/>
+            <xs:element name="residente" type="aggregate:IndirizzoType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="PersonaDelegataType">
+		<xs:sequence> 
+			<xs:element name="titolo" type="xs:string" minOccurs="0"/>
+			<xs:group ref="aggregate:PersonaCoreGroup"/>
+			<xs:group ref="aggregate:ContattiFoniaGroup" minOccurs="0"/>
+			<xs:element name="domicilio" type="aggregate:IndirizzoType" minOccurs="0"/>
+		</xs:sequence> 
+	</xs:complexType>
+   
+   <xs:complexType name="ProfessionistaType">
+        <xs:annotation>
+            <xs:documentation>Tipo per specificare i dati del professionista</xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+        	<xs:element name="titoloProfessionale" type="xs:string"/>     
+        	<xs:element name="cognome" type="xs:string"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="alboProfessionale" type="pincommon:AlboProfessionaleType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+     <xs:complexType name="AlboProfessionaleType">
+     	<xs:sequence>
+     		<xs:element name="ordineCollegioDi" type="xs:string"/>
+     		<xs:element name="numeroIscrizione" type="xs:string"/>
+     	</xs:sequence>
+     </xs:complexType>
+    
+	<!--<xs:complexType name="ProfessionistaAntincendioType">
+		<xs:complexContent>
+			<xs:extension base="pincommon:ProfessionistaType">
+				<xs:annotation>
+					<xs:documentation>Tipo per specificare i dati del professionista antincendio</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>     
+					<xs:element name="alboMinisteriale" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>-->
+       
+        
+	<xs:complexType name="ProfessionistaDatiContattoType">
+		<xs:sequence>
+			<xs:element name="indirizzo" type="aggregate:IndirizzoType" minOccurs="0"/>
+			<xs:element name="contatti" type="aggregate:ContattiDatiType" minOccurs="0" />
+			<!-- campo telefono -->
+		</xs:sequence>
+	</xs:complexType>
+       
+   
+   
+	<xs:complexType name="CorrispondenzaType">
+		<xs:annotation>
+			<xs:documentation>Tipo per specificare i dati relativi alla corrispondenza</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>          
+			<xs:element name="cognome" type="xs:string"/>
+			<xs:element name="nome" type="xs:string"/>
+			<xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+			<xs:element name="contatti" type="aggregate:ContattiType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SedeCustodiaDocumentazioneType">
+		<xs:annotation>
+			<xs:documentation>Tipo per specificare i dati relativi alla sede in cui è custodita documentazione tecnica</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>          
+			<xs:element name="nominativo" type="xs:string"/>
+			<xs:element name="sede" type="aggregate:IndirizzoType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+   
+  	<xs:complexType name="ModuloBaseType" abstract="true">
+  		<xs:annotation>
+  			<xs:documentation>
+  				Struttura di Base corrispondente alla testata della modulistica PIN
+  			</xs:documentation>
+  		</xs:annotation>
+  		<xs:sequence>
+  			<xs:element name="rifPraticaVVF" type="xs:int"/>
+  			<xs:element name="provinciaComando" type="aggregate:ProvinciaType"/>
+  			<xs:element name="richiedente">
+  				<xs:complexType>
+  					<xs:sequence>
+  						<!-- Persona richiedente -->
+  						<xs:element name="datiAnagrafici" type="pincommon:PersonaAnagraficaType"/>
+  						<!-- Ragione sociale richiedente -->
+  						<xs:element name="inQualitaDi" type="xs:string"/>
+  						<xs:element name="indirizzo" type="aggregate:IndirizzoType"/>
+  						<xs:element name="contatti" type="aggregate:ContattiDatiType"/>
+  					</xs:sequence>
+  				</xs:complexType>
+  			</xs:element>
+  		</xs:sequence>
+  	</xs:complexType>
+  
+	<xs:complexType name="LavoriDiType">
+	        <xs:annotation>
+	            <xs:documentation>Specifica il tipo di domanda in base all'attività</xs:documentation>
+	        </xs:annotation>
+	        <xs:choice>
+	            <xs:element name="nuovoInsediamento" 			type="basic:EmptyType" />
+	        	<xs:element name="modificaAttivitaEsistente" 	type="basic:EmptyType" />
+	        </xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="ImpiantoDomandaLavoriDiType">
+		<xs:annotation>
+			<xs:documentation>Specifica il tipo di domanda in base all'attività</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="impiantoNuovo" 			type="basic:EmptyType" />
+			<xs:element name="impiantoAmpliamento" 	type="basic:EmptyType" />
+			<xs:element name="impiantoAltroIntervento" 	type="xs:string" />
+		</xs:choice>
+	</xs:complexType>
+	
+	
+
+	
+  <!-- 
+  CASE 1: 
+  indirizzo e contatti
+  Valutare obbligatorieta
+  -->
+  	<xs:complexType name="AttivitaType">
+  		<xs:annotation>
+  			<xs:documentation>
+  				Nome e indirizzo Attività principale
+  			</xs:documentation>
+  		</xs:annotation>
+  		<xs:sequence>
+  			<xs:element name="tipo" type="xs:string"/>
+  			<xs:element name="indirizzo" type="pincommon:SedeType" minOccurs="0"/>
+  		</xs:sequence>
+  	</xs:complexType>
+  
+	<xs:complexType name="SedeType">
+		<xs:annotation>
+			<xs:documentation>
+				Indirizzo e Contatti
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="indirizzo" type="aggregate:IndirizzoType" minOccurs="0"/>
+			<xs:element name="contattiFonia" type="aggregate:ContattiFoniaType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+  
+  	<xs:complexType name="CodiceAttivitaType">
+  		<xs:sequence>
+  			<xs:element name="numero" type="xs:string"/>
+  			<xs:element name="classe" type="xs:string"/>
+			<xs:element name="categoriaDiRischio" type="xs:string"/>  			
+  		</xs:sequence>
+  	</xs:complexType>
+  
+  	<xs:complexType name="DistintaVersamentoType">
+  		<xs:sequence>
+  			<xs:element name="numAttestato" type="xs:string"/>
+  			<xs:element name="dataVersamento" type="xs:date"/>
+			<xs:element name="tesoreriaProvinciale" type="aggregate:ProvinciaType"/> 	
+			<xs:element name="totaleVersamento" type="xs:decimal"/>
+			<xs:element name="attivitaDettaglio" type="pincommon:AttivitaVersamentoType" maxOccurs="unbounded"  />
+  		</xs:sequence>
+  	</xs:complexType>
+  
+	 
+	<xs:complexType name="AttivitaVersamentoType">
+		<xs:sequence>
+			<xs:element name="attivita" type="pincommon:CodiceAttivitaType"/>
+			<xs:element name="RtoRtV" type="basic:EmptyType"  minOccurs="0"/>
+			<xs:element name="importoVersamento" type="xs:decimal"/>
+		</xs:sequence>
+	</xs:complexType>	
+	
+	
+	<xs:complexType name="AltraDocumentazioneType">
+		<xs:sequence>
+			<xs:element name="tipologiaDocumenti" type="xs:string"/>
+			<xs:element name="docAllegato" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="numero" type="xs:int" default="0" />
+	</xs:complexType>
+	
+	
+	
+</xs:schema>

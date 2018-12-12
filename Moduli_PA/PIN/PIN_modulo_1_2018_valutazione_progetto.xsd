@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:pinvalprog="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_1_2018_valutazione_progetto"
+    xmlns:pincommon="http://www.vigilfuoco.it/MODULI_PA/PIN/pin_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_1_2018_valutazione_progetto"
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.0.0">
+
+	<xs:import namespace="http://www.vigilfuoco.it/MODULI_PA/PIN/pin_common_components" schemaLocation="PIN_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+
+	<xs:annotation>
+        <xs:documentation>
+                PIN 1-2018 Valutazione Progetto: Istanza di valutazione del progetto          
+        </xs:documentation>
+    </xs:annotation>
+ 
+	<xs:element name="ModuloValutazioneProgetto" type="pinvalprog:ModuloValutazioneProgettoType"/>
+
+	<xs:complexType name="ModuloValutazioneProgettoType" >
+  		<xs:complexContent>
+  			<xs:extension base="pincommon:ModuloBaseType">
+  				<xs:sequence>
+  					<!-- CORPO DEL MODULO -->
+
+  					<xs:element name="domandaLavoriDi" type="pincommon:LavoriDiType" />
+  					<xs:element name="attivitaPrincipale" type="pincommon:AttivitaType"/>
+  					<xs:element name="codiceAttivita" type="pincommon:CodiceAttivitaType" maxOccurs="unbounded"/>
+  					<xs:element name="datiProfessionista" type="pincommon:ProfessionistaType"/>
+  				    <xs:element name="datiContattoProfessionista" type="pincommon:ProfessionistaDatiContattoType"/>
+  				  
+  					<!-- Informazioni generali -->
+  					<xs:element name="informazioniGeneraliAttivita" type="xs:string" minOccurs="0"/>
+  					<xs:element name="tipoIntervento" type="xs:string" minOccurs="0"/>
+  					<xs:element name="RtoRtV" type="basic:EmptyType"  minOccurs="0"/>
+  					
+  					<xs:element name="numFascicoliRelazioneTecnica" type="xs:int"/>
+  					<xs:element name="numElaboratiGrafici" type="xs:int"/>
+  					
+  					<!-- Pagamento -->
+  					<xs:element name="distintaVersamento" type="pincommon:DistintaVersamentoType"/>
+  					<xs:element name="datiPerCorrispondenza" type="pincommon:CorrispondenzaType"  minOccurs="0"/>
+  				    
+  				    <!-- Delega -->
+  				    <xs:element name="delegatoChiarimentiTecnici" type="pincommon:PersonaDelegataType" minOccurs="0"/>
+  				</xs:sequence>
+  			</xs:extension>	
+  		</xs:complexContent>
+  	</xs:complexType>
+  
+  	
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+</xs:schema>

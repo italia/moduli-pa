@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:pinscia="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_2_2018_SCIA"
+    xmlns:pincommon="http://www.vigilfuoco.it/MODULI_PA/PIN/pin_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.vigilfuoco.it/MODULI_PA/PIN/modulo_2_2018_SCIA"
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.0.0">
+
+	<xs:import namespace="http://www.vigilfuoco.it/MODULI_PA/PIN/pin_common_components" schemaLocation="PIN_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+
+	<xs:annotation>
+        <xs:documentation>
+                PIN 2-2018 Segnalazione certificata inizio attività ai fini della sicurezza antincendio          
+        </xs:documentation>
+    </xs:annotation>
+ 
+	<xs:element name="ModuloScia" type="pinscia:ModuloSCIAType"/>
+
+	<xs:complexType name="ModuloSCIAType" >
+  		<xs:complexContent>
+  			<xs:extension base="pincommon:ModuloBaseType">
+  				<xs:sequence>
+  					<!-- CORPO DEL MODULO -->
+  					<xs:element name="riferimentoProgetto" type="pinscia:RiferimentoProgettoType" />
+  					<!-- SEGNALA -->
+  					<xs:element name="attivita" type="pincommon:AttivitaType"/>
+  					<xs:element name="codiceAttivita" type="pincommon:CodiceAttivitaType"  maxOccurs="unbounded"/>
+  					<xs:element name="sedeCustodiaFascicoloScia" type="pincommon:SedeCustodiaDocumentazioneType"/>
+  					<xs:element name="RtoRtV" type="basic:EmptyType"  minOccurs="0"/>
+  					<xs:element name="distintaVersamento" type="pincommon:DistintaVersamentoType"/>
+  					<xs:element name="datiPerCorrispondenza" type="pincommon:CorrispondenzaType"  minOccurs="0"/>
+  					
+  					<!-- Delega -->
+  					<xs:element name="delegatoChiarimentiTecnici" type="pincommon:PersonaDelegataType" minOccurs="0"/>
+  					
+  					<!-- ALLEGATI -->
+  					<xs:element name="allegati">
+  						<xs:complexType>
+  							<xs:sequence>
+  								<xs:element name="pin2_1Asseverazione" type="pinscia:pin2_1AsseverazioneType" />
+  							</xs:sequence>
+  						</xs:complexType>
+  					</xs:element> 
+  				</xs:sequence>
+  			</xs:extension>	
+  		</xs:complexContent>
+  	</xs:complexType>
+    	
+  	<xs:complexType name="RiferimentoProgettoType">
+  	  	<xs:sequence>
+  	  	<!-- <xs:choice> -->
+ 	  		<xs:element name="rifProgettiApprovati" minOccurs="0">
+  	  			<xs:complexType>
+  	  				<xs:sequence>
+  	  					<xs:element name="protocolloProgetto" type="aggregate:ProtocolloType" maxOccurs="unbounded" /> 
+  	  				</xs:sequence>
+  	  			</xs:complexType>
+  	  		</xs:element> 
+  	  		<xs:element name="rifDocumentazioneTecnicaCatA" type="basic:EmptyType"  minOccurs="0" /> 
+  	  		<xs:element name="rifDocumentazioneTecnicaModificheArt4-2011" 	type="basic:EmptyType"  minOccurs="0">
+			        <xs:annotation>
+			            <xs:documentation>
+			            alla documentazione tecnica di progetto di cui alla asseverazione allegata
+						(per attività di cat. A,B,C in caso di modifiche di cui art.4, comma 6, del DPR 01/08/2011 n.151, 
+						che non comportino aggravio delle preesistenti condizioni di sicurezza)
+			            </xs:documentation>
+			        </xs:annotation>
+	        </xs:element>
+  	  	<!-- <xs:choice> -->
+  		</xs:sequence>
+   	</xs:complexType>
+  	  	   
+	
+ 
+
+	<!-- Allegato 2.1 - ASSEVERAZIONE -->
+	<xs:complexType name="pin2_1AsseverazioneType">
+		<xs:complexContent>
+			<xs:extension base="moduli:AllegatoType">
+				<xs:sequence>
+					<xs:annotation>
+						<xs:documentation>
+							Allegato 2.1 Asseverazione
+						</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<!-- verificare se acquisire questi dati - sono acquisiti dal modulo pin2 -->
+						<xs:element name="rifPraticaVVF" type="xs:int"/>
+						<xs:element name="datiProfessionista" type="pincommon:ProfessionistaType"/>
+						<xs:element name="datiContattoProfessionista" type="pincommon:ProfessionistaDatiContattoType"/>
+						<xs:element name="lavoriDi" type="pincommon:LavoriDiType" />
+						<xs:element name="attivita" type="pincommon:AttivitaType"/>
+						<xs:element name="codiceAttivita" type="pincommon:CodiceAttivitaType" maxOccurs="unbounded"/>
+						<!-- . -->
+						<xs:element name="riferimentoProgetto" type="pinscia:RiferimentoProgettoType" />
+						
+						<!-- DISTINTA DELLA DOCUMENTAZIONE TECNICA ALLEGATA -->
+						<xs:element name="distintaDocumentazioneAllegata" type="pinscia:distintaDocumentazioneAllegataType" />
+						
+					</xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+  
+	<xs:complexType name="distintaDocumentazioneAllegataType">
+		<xs:sequence>
+			<xs:annotation>
+				<xs:documentation>
+					Nota su obbligatorietà
+					La distinta deve essere compilata in ogni sua parte, mediante l’apposizione in ogni riquadro del relativo numero dei modelli allegati
+					(riportando il valore 0 per le tipologie di certificazione/dichiarazione non presentate) 
+				</xs:documentation>
+			</xs:annotation>
+			
+			<!-- 1. DOCUMENTAZIONE PROGETTUALE -->
+			<xs:element name="relazioneTecnica">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="attoRelazioneTecnica" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="numeroAtti" type="xs:int" default="0" />
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="elaboratiGrafici">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="elaboratoGrafico" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:int" default="0" />
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="pin2_6DichNonAggravioRischio" type="moduli:AllegatoType" minOccurs="0"/>
+			
+			<!-- 2. CERTIFICAZIONI DI ELEMENTI STRUTTURALI PORTANTI  -->
+			<xs:element name="pin2_2CertificazioniREI">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="pin2_2CertREI" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:int" default="0" />
+				</xs:complexType>
+			</xs:element>
+			
+			<!-- 3. DICHIARAZIONI INERENTI I PRODOTTI CLASSIFICATI AI FINI DELLA REAZIONE E DELLA RESISTENZA AL FUOCO ED I DISPOSITIVI DI APERTURA DELLE PORTE  -->
+			<xs:element name="pin2_3DichiarazioniProdotti">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="pin2_3DichProd" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:int" default="0" />
+				</xs:complexType>
+			</xs:element>
+			
+			<!-- 4. DICHIARAZIONI IMPIANTI  -->
+			<xs:element name="dichiarazioniImpianti">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="voce4I" type="pinscia:NrDocumentiAllegatiType" />
+						<xs:element name="voce4II" type="pinscia:NrDocumentiAllegatiType" />
+						<xs:element name="voce4III" type="pinscia:NrDocumentiAllegatiType" />
+						<xs:element name="voce4IV" type="pinscia:NrDocumentiAllegatiType" />
+						<xs:element name="voce4V" type="pinscia:NrDocumentiAllegatiType" />
+						<xs:element name="voce4VI" type="pinscia:NrDocumentiAllegatiType" />
+						<xs:element name="voce4VII" type="pinscia:NrDocumentiAllegatiType" />
+						<xs:element name="voce4VIII" type="pinscia:NrDocumentiAllegatiType" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element> 
+			
+			<!-- 5. ALTRA EVENTUALE DOCUMENTAZIONE  -->	
+			<xs:element name="altraDocumentazioneallegata" type="pincommon:AltraDocumentazioneType"  minOccurs="0" maxOccurs="unbounded" />	
+			
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="NrDocumentiAllegatiType">
+		<xs:sequence>
+			<xs:element name="dichiarazioniDC">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="dc" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:int" default="0" />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dichiarazioniDI">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="pin2_4_di" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:int" default="0" />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dichiarazioniCI">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="pin2_5_ci" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:int" default="0" />
+				</xs:complexType>
+			</xs:element>			
+		</xs:sequence>
+	</xs:complexType>
+
+	<!--  Dichiarazione aggravio rischio -->
+	<xs:complexType name="dichiarazioneNonAggravioRischioType">
+		<xs:sequence>
+			<xs:element name="attivitaSede" type="pincommon:SedeType"/>
+			<xs:element name="attivitaElenco" type="pincommon:CodiceAttivitaType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+ 
+</xs:schema>
