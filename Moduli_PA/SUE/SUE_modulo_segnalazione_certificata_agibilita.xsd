@@ -202,7 +202,7 @@
     
     <xs:complexType name="AllegatoAttestazioneDirettoreLavoriProfessionistaAbilitatoType">
         <xs:sequence>
-            <xs:element name="schedaTecnico" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>               
+            <xs:element name="schedaTecnico" type="scpa:ProfessionistaAnagraficaDirettoreType"/>               
             <xs:element name="assevera" type="scpa:AsseveraType"/>                                                  
             <xs:element name="sicurezzaImpianti" type="scpa:SicurezzaImpiantiType"/>                                
             <xs:element name="sicurezzaStaticaSismica" type="scpa:SicurezzaStaticaSismicaBaseType"/>                
@@ -213,6 +213,17 @@
             <xs:element name="prevenzioneIncendi" type="scpa:PrevenzioneIncendiBaseType" minOccurs="0"/>
             <xs:element name="montacarichi" type="scpa:MontacarichiBaseType" minOccurs="0"/>    
         </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ProfessionistaAnagraficaType">
+                <xs:choice minOccurs="0">
+                    <xs:element name="direttoreLavori" type="basic:EmptyType"/>
+                    <xs:element name="professionistaAbilitato" type="basic:EmptyType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <!-- DICHIARAZIONE ASSEVERATA -->
