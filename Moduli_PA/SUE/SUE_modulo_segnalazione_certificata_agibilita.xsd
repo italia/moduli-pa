@@ -231,7 +231,7 @@
         <xs:choice>
             <xs:element name="agibilitaImmobile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="agibilitaParzialeEdifici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="agibilitaSingoliImmbobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="agibilitaParzialeSingoliImmobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
         </xs:choice>
     </xs:complexType>
     
