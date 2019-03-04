@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_segnalazione_certificata_agibilita"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
     
    
@@ -202,7 +202,7 @@
     
     <xs:complexType name="AllegatoAttestazioneDirettoreLavoriProfessionistaAbilitatoType">
         <xs:sequence>
-            <xs:element name="schedaTecnico" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>               
+            <xs:element name="schedaTecnico" type="scpa:ProfessionistaAnagraficaDirettoreType"/>               
             <xs:element name="assevera" type="scpa:AsseveraType"/>                                                  
             <xs:element name="sicurezzaImpianti" type="scpa:SicurezzaImpiantiType"/>                                
             <xs:element name="sicurezzaStaticaSismica" type="scpa:SicurezzaStaticaSismicaBaseType"/>                
@@ -215,12 +215,23 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ProfessionistaAnagraficaType">
+                <xs:choice minOccurs="0">
+                    <xs:element name="direttoreLavori" type="basic:EmptyType"/>
+                    <xs:element name="professionistaAbilitato" type="basic:EmptyType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <!-- DICHIARAZIONE ASSEVERATA -->
     <xs:complexType name="AsseveraType">
         <xs:choice>
             <xs:element name="agibilitaImmobile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="agibilitaParzialeEdifici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="agibilitaSingoliImmbobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="agibilitaParzialeSingoliImmobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
         </xs:choice>
     </xs:complexType>
     

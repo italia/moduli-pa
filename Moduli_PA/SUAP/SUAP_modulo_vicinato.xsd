@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_vicinato"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
    
     
@@ -131,8 +131,8 @@
     <xs:complexType name="CarattereEsercizioType">        
             <xs:sequence><!-- scelta multipla -->
                 <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
-                <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" />
-                <xs:element name="CarattereTemporaneo" type="suapcommon:CarattereTemporaneoBaseType" />
+                <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleBaseType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="CarattereTemporaneo" type="suapcommon:CarattereTemporaneoBaseType" minOccurs="0" maxOccurs="1" />
             </xs:sequence>
     </xs:complexType>
   

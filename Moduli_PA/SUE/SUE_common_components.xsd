@@ -10,7 +10,7 @@
 
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -232,9 +232,22 @@
     <!-- Reference suecommon:LocalizzazioneInterventoType -->
     <xs:complexType name="LocalizzazioneInterventoType">
         <xs:sequence>
+            <xs:element name="immobile" type="suecommon:LocalizzazioneImmobileType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="LocalizzazioneImmobileType">
+        <xs:sequence>
             <xs:element name="ubicazioneImmobile" type="suecommon:UbicazioneImmobileType"/>
-            <xs:element name="datiCatastali" type="moduli:DatiCatastaliType"/>
-            <xs:element name="destinazioneDUso" type="xs:string"/>
+            <xs:element name="riferimentiCatastali">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="datiCatastali" type="moduli:DatiCatastaliType"/>
+                        <xs:element name="destinazioneDUso" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="coordinate" type="suecommon:CoordinateBaseType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>

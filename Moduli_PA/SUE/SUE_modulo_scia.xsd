@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_scia"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
     
    
