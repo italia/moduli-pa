@@ -442,6 +442,62 @@
         </xs:choice>        
     </xs:complexType>
     
+    <xs:complexType name="ModalitaGestioneType">
+        <xs:sequence>
+            <xs:element name="GestioneDiretta" type="basic:EmptyType"/>
+            <xs:element name="GestioneATerzi" type="basic:EmptyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TipologiaAttivitaSomministrazioneBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaAttivitaSomministrazioneType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:TipologiaAttivitaSomministrazioneBaseType">
+                <xs:sequence>
+                    <xs:element name="ristorazione" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                a) esercizi di ristorazione;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="somministrazioneBevande" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                b) esercizi per la somministrazione di bevande;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>     
+                    <xs:element name="somministrazioneCongiuntaIntrattetimento" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                c) esercizi di cui alle lettere a) e b), in cui la somministrazione di alimenti e di bevande viene effettuata congiuntamente ad attività di intrattenimento e svago;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="somministrazioneEsclusiAlcolici" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                d) esercizi di cui alla lettera b), nei quali è esclusa la somministrazione di bevande alcoliche di qualsiasi gradazione;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  
+    <xs:complexType name="AmpliamentoSuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="AmpliamentoSuperficieEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AmpliamentoSuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="SuperficieEsercizioSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="AllegatoPrepostoRequisitiProfessionaliType">
         <xs:sequence>
             <xs:element name="preposto" type="aggregate:PersonaAnagraficaType"/>
