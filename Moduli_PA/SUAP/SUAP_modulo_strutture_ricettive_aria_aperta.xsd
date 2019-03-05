@@ -31,14 +31,8 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="striaa:AvvioType"/>
-            
-
-
-
-            
-            
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
-            <xs:element name="tabellaAllegati" type="somnonadenoncom:TabellaAllegatiType"/> 
+            <xs:element name="tabellaAllegati" type="striaa:TabellaAllegatiType"/> 
         </xs:sequence>        
     </xs:complexType>
     
@@ -54,10 +48,7 @@
             <xs:element name="capacitaStruttura" type="striaa:CapacitaStrutturaBaseType"/>
         </xs:sequence>
     </xs:complexType>
-
-
-
-    <!-- ALLEGATI -->
+   
     <xs:complexType name="CarattereEsercizioType">
         <xs:sequence>
             <xs:choice>
@@ -73,8 +64,7 @@
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
-    
-    
+   
     <xs:complexType name="TipologiaEsercizioBaseType" abstract="true"/>
     <xs:complexType name="TipologiaEsercizioType">
         <xs:complexContent>
@@ -191,19 +181,63 @@
         <xs:complexContent>
             <xs:extension base="striaa:CapacitaStrutturaBaseType">
                 <xs:sequence>
-                     
+                    <xs:element name="capacitaRicettivaMassima"  type="xs:integer" minOccurs="0"/>
+                    <xs:element name="piazzole" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="libere"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="attrezzate"  type="xs:integer" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="unitaAbitativeFisse" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="unita"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="postiLettoComplessivi"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="tipologia" type="striaa:TipologiaUnitaAbitativeFisseBaseType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
-    ..................................
+    <xs:complexType name="TipologiaUnitaAbitativeFisseBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaUnitaAbitativeFisseType">
+        <xs:complexContent>
+            <xs:extension base="striaa:TipologiaUnitaAbitativeFisseBaseType">
+                <xs:sequence>
+                    
+                    <xs:element name="tipologia" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="unitaStessoTipo"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="monolocali"  type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="appartamenti"  type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="nrCamere"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="soggiornoInVanoPernotto"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="soggiornoInDiversoDaPernotto"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="cucinaInVanoSeparato"  type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="bagniPrivati"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="totalePostiLetto"  type="xs:integer" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- ALLEGATI -->
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatoPrivacy" type="suapcommon:AllegatoPrivacyType"/>
-            <xs:element name="allegatiSCIA" type="somnonadenoncom:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIAUnica" type="somnonadenoncom:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIA" type="striaa:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="striaa:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="striaa:AllegatiSCIACondizionataType"/>
             <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
@@ -212,18 +246,30 @@
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoPlanimetrieStruttura"  type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="AllegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="allegatoPossessoRequisitiRappresentanteTulp" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsType" minOccurs="0"/>
-            <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
-            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
-            <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
-            <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDichiarazioneClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
+            <xs:element name="allegatoSCIASomministrazione" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIASpecificheAttivita" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAltreComunicazioniNormativaRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element name="allegatoDocumentazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDomandaClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="allegatoAltreDomandeNormativaRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
