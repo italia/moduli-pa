@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:somadenoncom="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_aderenti_enti_non_commerciali"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_aderenti_enti_non_commerciali"
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/> 
+    
+    <!-- // Modulo SUAP_modulo_somministrazione_aderenti_enti_non_commerciali ## internal code ref 024 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSommAdeEntiNonComm" type="somadenoncom:ModuloSommAdeEntiNonCommType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloSommAdeEntiNonCommType">
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI SOMMINISTRAZIONE 
+                DI ALIMENTI E BEVANDE ALL’INTERNO DI ASSOCIAZIONI E CIRCOLI ADERENTI A ENTI 
+                O ORGANIZZAZIONI NAZIONALI AVENTI FINALITÀ ASSISTENZIALI E CHE HANNO NATURA 
+                DI ENTI NON COMMERCIALI
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="modalitaGestione" type="somadenoncom:ModalitaGestioneType"/>
+            <xs:element name="avvio" type="somadenoncom:AvvioType"/>
+            <xs:element name="ampliamento" type="somadenoncom:AmpliamentoType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="tabellaAllegati" type="somadenoncom:TabellaAllegatiType"/> 
+        </xs:sequence>        
+    </xs:complexType>
+    
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    <xs:complexType name="ModalitaGestioneType">
+        <xs:sequence>
+            <xs:element name="GestioneDiretta" type="basic:EmptyType"/>
+            <xs:element name="GestioneATerzi" type="basic:EmptyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AvvioType">
+        <xs:sequence>
+            <xs:element name="denominazioneAssociazCircolo" minOccurs="1" type="xs:string"/>
+            <xs:element name="denominazioneEnteAderente" minOccurs="1" type="xs:string"/>
+            <xs:element name="tipologiaAttivitaSomm" type="somadenoncom:TipologiaAttivitaSomministrazioneBaseType"/>
+            <xs:element name="superficieEsercizio" type="somadenoncom:SuperficieEsercizioBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AmpliamentoType">
+        <xs:sequence>
+            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="ampliamentoSuperficieEsercizio" type="somadenoncom:AmpliamentoSuperficieEsercizioBaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AmpliamentoSuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="AmpliamentoSuperficieEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="somadenoncom:AmpliamentoSuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="SuperficieEsercizioSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="TipologiaAttivitaSomministrazioneBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaAttivitaSomministrazioneType">
+        <xs:complexContent>
+            <xs:extension base="somadenoncom:TipologiaAttivitaSomministrazioneBaseType">
+                <xs:sequence>
+                    <xs:element name="ristorazione" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                a) esercizi di ristorazione;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="somministrazioneBevande" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                b) esercizi per la somministrazione di bevande;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>     
+                    <xs:element name="somministrazioneCongiuntaIntrattetimento" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                c) esercizi di cui alle lettere a) e b), in cui la somministrazione di alimenti e di bevande viene effettuata congiuntamente ad attività di intrattenimento e svago;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="somministrazioneEsclusiAlcolici" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                d) esercizi di cui alla lettera b), nei quali è esclusa la somministrazione di bevande alcoliche di qualsiasi gradazione;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="SuperficieEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="somadenoncom:SuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="superficieComplessiva" minOccurs="0" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ALLEGATI -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatoPrivacy" type="suapcommon:AllegatoPrivacyType"/>
+            <xs:element name="allegatiSCIA" type="somadenoncom:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIACondizionata" type="somadenoncom:AllegatiSCIACondizionataType"/> 
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulp" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsType" minOccurs="0"/>
+            <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
+            <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
+            <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+   
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+</xs:schema>    
