@@ -110,7 +110,7 @@
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPlanimetrieStruttura"  type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="AllegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="allegatoPossessoRequisitiRappresentanteTulp" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsType" minOccurs="0"/>
             <xs:element name="allegatoDichiarazioneClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                

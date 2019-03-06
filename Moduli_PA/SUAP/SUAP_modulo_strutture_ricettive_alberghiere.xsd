@@ -32,8 +32,7 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="strialb:AvvioType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
-            
-            <xs:element name="tabellaAllegati" type="striaa:TabellaAllegatiType"/> 
+            <xs:element name="tabellaAllegati" type="strialb:TabellaAllegatiType"/> 
         </xs:sequence>        
     </xs:complexType>
     
@@ -146,20 +145,22 @@
     
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIA" type="striaa:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIAUnica" type="striaa:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiSCIACondizionata" type="striaa:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiSCIA" type="strialb:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="strialb:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="strialb:AllegatiSCIACondizionataType"/>
             <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
+
+............
 
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPlanimetrieStruttura"  type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="AllegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="allegatoPossessoRequisitiRappresentanteTulp" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsType" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsType" minOccurs="0"/>
             <xs:element name="allegatoDichiarazioneClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
@@ -167,10 +168,10 @@
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
             <xs:element name="allegatoSCIAClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
-            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
             <xs:element name="allegatoSCIASomministrazione" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIASpecificheAttivita" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoAltreComunicazioniNormativaRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
