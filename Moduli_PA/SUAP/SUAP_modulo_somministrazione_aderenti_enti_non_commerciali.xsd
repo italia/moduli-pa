@@ -34,9 +34,12 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="modalitaGestione" type="suapcommon:ModalitaGestioneType"/>
-            <xs:element name="avvio" type="somadenoncom:AvvioType"/>
-            <xs:element name="ampliamento" type="somadenoncom:AmpliamentoType"/>
+            <xs:choice>
+                <xs:element name="avvio" type="somadenoncom:AvvioType"/>
+                <xs:element name="ampliamento" type="somadenoncom:AmpliamentoBaseType"/>
+            </xs:choice>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="somadenoncom:TabellaAllegatiType"/> 
         </xs:sequence>        
     </xs:complexType>
@@ -52,11 +55,16 @@
         </xs:sequence> 
     </xs:complexType>
 
+    <xs:complexType name="AmpliamentoBaseType" abstract="true"/>
     <xs:complexType name="AmpliamentoType">
-        <xs:sequence>
-            <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
-            <xs:element name="ampliamentoSuperficieEsercizio" type="suapcommon:AmpliamentoSuperficieEsercizioBaseType" minOccurs="0"/>
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="somadenoncom:AmpliamentoBaseType">
+                <xs:sequence>
+                    <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
+                    <xs:element name="ampliamentoSuperficieEsercizio" type="suapcommon:AmpliamentoSuperficieVenditaType" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <!-- ALLEGATI -->
@@ -73,18 +81,36 @@
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="allegatoPossessoRequisitiRappresentanteTulp" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsType" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="somadenoncom:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
             <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
             <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
-   
+    
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
             <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+                <xs:sequence>
+                    <xs:element name="inQualitaDi" minOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="associazioneCircolo" type="xs:string" minOccurs="0"/>
+                                <xs:element name="dittaImpresa" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
 </xs:schema>    

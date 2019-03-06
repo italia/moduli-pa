@@ -619,7 +619,7 @@
         </xs:complexContent>
     </xs:complexType>
   
-    <xs:complexType name="AmpliamentoSuperficieEsercizioBaseType" abstract="true"/>
+   <!-- <xs:complexType name="AmpliamentoSuperficieEsercizioBaseType" abstract="true"/>
     <xs:complexType name="AmpliamentoSuperficieEsercizioType">
         <xs:complexContent>
             <xs:extension base="suapcommon:AmpliamentoSuperficieEsercizioBaseType">
@@ -628,7 +628,7 @@
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     <xs:complexType name="AllegatoPrepostoRequisitiProfessionaliType">
         <xs:sequence>
@@ -1084,7 +1084,7 @@
         <xs:complexContent>
             <xs:extension base="moduli:AllegatoType">
                 <xs:sequence>
-                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
+                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType"  />
                     <xs:element name="inQualita" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
@@ -1099,28 +1099,20 @@
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element> 
-                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" />
-                    <xs:element name="informativaTrattamentoDatiPersonali" type="suapcommon:AllegatoPrivacyType" minOccurs="1" />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsType">
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" abstract="true">
         <xs:complexContent>
             <xs:extension base="moduli:AllegatoType">
                 <xs:sequence>
-                    <xs:element name="rappresentante" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
-                    <xs:element name="inQualitaDi" minOccurs="1">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="denominazioneAssociazioneCircolo" type="xs:string" minOccurs="0"/>
-                                <xs:element name="denominazioneDittaImpresa" type="xs:string" minOccurs="0"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element> 
-                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" />
-                    <xs:element name="informativaTrattamentoDatiPersonali" type="suapcommon:AllegatoPrivacyType" minOccurs="1" />
+                    <xs:element name="rappresentante" type="aggregate:PersonaAnagraficaType"  />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />        
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1130,36 +1122,16 @@
         <xs:complexContent>
             <xs:extension base="moduli:AllegatoType">
                 <xs:sequence>
-                    <xs:element name="rappresentante" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
-                    <xs:element name="titolare" type="xs:string" minOccurs="1"/>
-                    <xs:element name="indirizzoStruttura" type="xs:string" minOccurs="1"/>
-                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" />
-                    <xs:element name="informativaTrattamentoDatiPersonali" type="suapcommon:AllegatoPrivacyType" minOccurs="1" />
+                    <xs:element name="rappresentante" type="aggregate:PersonaAnagraficaType"  />
+                    <xs:element name="titolare" type="xs:string"/>
+                    <xs:element name="indirizzoStruttura" type="xs:string" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <!--   
-    <xs:complexType name="AllegatoPrivacyType">
-        <xs:complexContent>
-            <xs:extension base="moduli:AllegatoType">
-                <xs:sequence>
-                    <xs:element name="titolareTrattamento" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
-                    <xs:element name="responsabileTrattamento" type="xs:string" minOccurs="1"/>
-                    <xs:element name="responsabileDirittiPrivacy" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
-                    <xs:element name="dichiazioneInformativa" type="basic:EmptyType" minOccurs="1"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    -->
-    
-    <xs:complexType name="AllegatoPrivacyType">
-        <xs:sequence>
-            <xs:element name="dichiazioneInformativa" type="basic:EmptyType" minOccurs="1"/>
-        </xs:sequence>
-    </xs:complexType>
     
     <xs:complexType name="AllegatoResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
         <xs:complexContent>
