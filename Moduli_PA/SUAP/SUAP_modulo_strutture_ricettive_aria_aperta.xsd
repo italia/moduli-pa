@@ -53,14 +53,7 @@
         <xs:sequence>
             <xs:choice>
                 <xs:element name="annuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="stagionale" minOccurs="0" maxOccurs="unbounded">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="dal" type="xs:date"/>
-                            <xs:element name="al" type="xs:date"/>
-                        </xs:sequence>              
-                    </xs:complexType>
-                </xs:element>
+                <xs:element name="stagionale" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoStagionaleType" />
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
