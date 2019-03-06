@@ -31,9 +31,8 @@
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="strialb:AvvioType"/>
-            
-            
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            
             <xs:element name="tabellaAllegati" type="striaa:TabellaAllegatiType"/> 
         </xs:sequence>        
     </xs:complexType>
@@ -87,7 +86,6 @@
             <xs:extension base="strialb:CapacitaStrutturaBaseType">
                 <xs:sequence>
                     <xs:element name="postiLettoComplessiviStruttura"  type="xs:integer" minOccurs="0"/>
-                    
                     <xs:element name="camere" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
@@ -97,7 +95,6 @@
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
-                    
                     <xs:element name="unitaAbitativeFisse" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
@@ -107,8 +104,22 @@
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element> 
-                    
-                    
+                    <xs:element name="unitaAbitativeResidenziale" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                La superficie netta delle unità abitative ad uso residenziale deve essere non superiore al 40% della superficie netta destinata a camere 
+                                (Per camera si intende il singolo locale preordinato al pernottamento della clientela, al quale si accede direttamente da corridoi o altre 
+                                aree comuni mediante porta munita di serratura)
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="unitaAbitativeConPostiLettoNr"  type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
+                                <xs:element name="unitaAbitativeTotaliNr"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="unitaAbitativeMqTotali"  type="xs:integer" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
