@@ -152,15 +152,13 @@
         </xs:sequence>
     </xs:complexType>
 
-............
-
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPlanimetrieStruttura"  type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsType" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiRappresentante" type="suapcommon:AllegatoPossessoRequisitiRappresentanteType" minOccurs="0"/>
             <xs:element name="allegatoDichiarazioneClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
