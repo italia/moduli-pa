@@ -93,27 +93,7 @@
                             <xs:sequence>
                                 <xs:element name="camereNr"  type="xs:integer" minOccurs="0"/>
                                 <xs:element name="camerePostiLettoNr"  type="xs:integer" minOccurs="0"/>
-                               
-                                <xs:element name="distribuzioneCamere" minOccurs="0" maxOccurs="unbounded">
-                                    <xs:complexType>
-                                        <xs:sequence>
-                                            <xs:element name="camereSingoleConBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereSingoleSenzaBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereDoppieConBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereDoppieSenzaBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereTripleConBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereTripleSenzaBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereQuadrupleConBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereQuadrupleSenzaBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camerepiu4LettiConBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camerepiu4LettiSenzaBagno"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereSuite"  type="xs:integer" minOccurs="0"/>
-                                            <xs:element name="camereAltro"  type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
-                                        </xs:sequence>
-                                    </xs:complexType>
-                                </xs:element>
-                            
-                            
+                                <xs:element name="distribuzioneCamere" type="strialb:DistribuzioneCamereType" minOccurs="0" maxOccurs="unbounded"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
@@ -121,44 +101,36 @@
                     <xs:element name="unitaAbitativeFisse" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
-                                <xs:element name="unita"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="unitaConUsoCucina"  type="xs:integer" minOccurs="0"/>
                                 <xs:element name="postiLettoComplessivi"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="tipologia" type="striaa:TipologiaUnitaAbitativeFisseBaseType"/>
+                                <xs:element name="tipologia" type="suapcommon:TipologiaUnitaAbitativeFisseType" minOccurs="0" maxOccurs="unbounded"/>
                             </xs:sequence>
                         </xs:complexType>
-                    </xs:element>
+                    </xs:element> 
+                    
+                    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="TipologiaUnitaAbitativeFisseBaseType" abstract="true"/>
-    <xs:complexType name="TipologiaUnitaAbitativeFisseType">
-        <xs:complexContent>
-            <xs:extension base="striaa:TipologiaUnitaAbitativeFisseBaseType">
-                <xs:sequence>
-                    
-                    <xs:element name="tipologia" minOccurs="0" maxOccurs="unbounded">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="unitaStessoTipo"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="monolocali"  type="basic:EmptyType" minOccurs="0"/>
-                                <xs:element name="appartamenti"  type="basic:EmptyType" minOccurs="0"/>
-                                <xs:element name="nrCamere"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="soggiornoInVanoPernotto"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="soggiornoInDiversoDaPernotto"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="cucinaInVanoSeparato"  type="basic:EmptyType" minOccurs="0"/>
-                                <xs:element name="bagniPrivati"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="totalePostiLetto"  type="xs:integer" minOccurs="0"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
+    <xs:complexType name="DistribuzioneCamereType">
+        <xs:sequence>
+            <xs:element name="camereSingoleConBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereSingoleSenzaBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereDoppieConBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereDoppieSenzaBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereTripleConBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereTripleSenzaBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereQuadrupleConBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereQuadrupleSenzaBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camerepiu4LettiConBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camerepiu4LettiSenzaBagno"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereSuite"  type="xs:integer" minOccurs="0"/>
+            <xs:element name="camereAltro"  type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
     </xs:complexType>
-    
+
     <!-- ALLEGATI -->
     
     <xs:complexType name="TabellaAllegatiType">

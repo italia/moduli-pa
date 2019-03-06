@@ -455,6 +455,33 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+     
+    <xs:complexType name="TipologiaUnitaAbitativeFisseBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaUnitaAbitativeFisseType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:TipologiaUnitaAbitativeFisseBaseType">
+                <xs:sequence>
+                    
+                    <xs:element name="tipologia">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="unitaStessoTipo"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="monolocali"  type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="appartamenti"  type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="nrCamere"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="soggiornoInVanoPernotto"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="soggiornoInDiversoDaPernotto"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="cucinaInVanoSeparato"  type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="bagniPrivati"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="totalePostiLetto"  type="xs:integer" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     <xs:complexType name="DichiarazioniType">
         <xs:sequence>
