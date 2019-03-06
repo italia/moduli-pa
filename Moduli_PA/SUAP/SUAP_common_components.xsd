@@ -576,8 +576,8 @@
     
     <xs:complexType name="ModalitaGestioneType">
         <xs:sequence>
-            <xs:element name="GestioneDiretta" type="basic:EmptyType"/>
-            <xs:element name="GestioneATerzi" type="basic:EmptyType"/>
+            <xs:element name="gestioneDiretta" type="basic:EmptyType"/>
+            <xs:element name="gestioneATerzi" type="basic:EmptyType"/>
         </xs:sequence>
     </xs:complexType>
     
