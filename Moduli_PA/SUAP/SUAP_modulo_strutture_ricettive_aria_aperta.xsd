@@ -41,10 +41,10 @@
     <xs:complexType name="AvvioType">
         <xs:sequence>
             <xs:element name="denominazioneStruttura" minOccurs="1" type="xs:string"/>
-            <xs:element name="carattereEsercizio" type="suapcommon:CarattereEsercizioType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:StruttureRicettiveCarattereEsercizioType"/>
             <xs:element name="tipologiaeEsercizio" type="striaa:TipologiaEsercizioBaseType"/>
-            <xs:element name="classificazioneEsercizio" type="striaa:ClassificazioneBaseType"/>
-            <xs:element name="serviziStruttura" type="striaa:ServiziStrutturaBaseType"/> 
+            <xs:element name="classificazioneEsercizio" type="suapcommon:ClassificazioneBaseType"/>
+            <xs:element name="serviziStruttura" type="suapcommon:ServiziStrutturaBaseType"/> 
             <xs:element name="capacitaStruttura" type="striaa:CapacitaStrutturaBaseType"/>
         </xs:sequence>
     </xs:complexType>
@@ -60,102 +60,6 @@
                         <xs:element name="altro" type="xs:string" minOccurs="0"/>
                     </xs:choice>
                 </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="ClassificazioneBaseType" abstract="true"/>
-    <xs:complexType name="ClassificazioneType">
-        <xs:complexContent>
-            <xs:extension base="striaa:ClassificazioneBaseType">
-                <xs:sequence>
-                    <xs:element name="descrizione" type="xs:string" minOccurs="0"/>
-                    <xs:element name="estremiPlanimetria" type="aggregate:ProtocolloType" minOccurs="0"/> 
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="ServiziStrutturaBaseType" abstract="true"/>
-    <xs:complexType name="ServiziStrutturaType">
-        <xs:complexContent>
-            <xs:extension base="striaa:ServiziStrutturaBaseType">
-                
-                <xs:sequence>
-                    <xs:element name="somministrazioneAlimenti">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType" minOccurs="0"/>
-                                </xs:choice>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element> 
-                
-                    <xs:element name="piscina">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="ImpiantiperClienti" minOccurs="0">
-                                        <xs:complexType>
-                                            <xs:sequence>
-                                                <xs:element name="nrImpianti"  type="xs:integer" minOccurs="0"/>
-                                                <xs:element name="mqImpianto"  type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
-                                            </xs:sequence>
-                                        </xs:complexType>
-                                    </xs:element>
-                                    <xs:element name="ImpiantiAlPubblico"  minOccurs="0">
-                                        <xs:complexType>
-                                            <xs:sequence>
-                                                <xs:element name="nrImpianti"  type="xs:integer" minOccurs="0"/>
-                                                <xs:element name="mqImpianto"  type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
-                                            </xs:sequence>
-                                        </xs:complexType>
-                                    </xs:element>
-                                </xs:choice>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                    
-                    <xs:element name="centroBenessere">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioPerClienti"  type="xs:integer" minOccurs="0"/>
-                                    <xs:element name="servizioAlPubblico"  type="xs:integer" minOccurs="0"/>
-                                </xs:choice>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                    
-                    <xs:element name="palestra">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType" minOccurs="0"/>
-                                </xs:choice>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                    
-                    <xs:element name="altro"  type="xs:string" minOccurs="0"/>
-                    
-                    <xs:element name="serviziGestitiDaTerzi" minOccurs="0" maxOccurs="unbounded">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="descrizioneServizio"  type="xs:string" minOccurs="0"/>
-                                <xs:element name="gestore"  type="xs:string" minOccurs="0"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                </xs:sequence>
-                
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
