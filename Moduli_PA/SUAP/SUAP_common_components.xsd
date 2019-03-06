@@ -355,7 +355,7 @@
         <xs:sequence>
             <xs:choice>
                 <xs:element name="annuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="stagionale" minOccurs="0" maxOccurs="unbounded" type="aggregate:PeriodoStagionaleType" />
+                <xs:element name="stagionale" type="suapcommon:CarattereStagionaleType" />
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -395,7 +395,7 @@
                             <xs:sequence>
                                 <xs:choice>
                                     <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="ImpiantiperClienti" minOccurs="0">
+                                    <xs:element name="impiantiperClienti" minOccurs="0">
                                         <xs:complexType>
                                             <xs:sequence>
                                                 <xs:element name="nrImpianti"  type="xs:integer" minOccurs="0"/>
@@ -466,11 +466,24 @@
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="unitaStessoTipo"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="monolocali"  type="basic:EmptyType" minOccurs="0"/>
-                                <xs:element name="appartamenti"  type="basic:EmptyType" minOccurs="0"/>
-                                <xs:element name="nrCamere"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="soggiornoInVanoPernotto"  type="xs:integer" minOccurs="0"/>
-                                <xs:element name="soggiornoInDiversoDaPernotto"  type="xs:integer" minOccurs="0"/>
+                                <xs:choice  minOccurs="0">
+                                    <xs:element name="monolocali"  type="basic:EmptyType" />
+                                    <xs:element name="appartamentiPiuLocali">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="nrCamere"  type="xs:integer" minOccurs="0"/>
+                                                <xs:element name="soggiorno"  minOccurs="0">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="inVanoPernotto"  type="xs:integer" minOccurs="0"/>
+                                                            <xs:element name="inDiversoDaPernotto"  type="xs:integer" minOccurs="0"/>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
                                 <xs:element name="cucinaInVanoSeparato"  type="basic:EmptyType" minOccurs="0"/>
                                 <xs:element name="bagniPrivati"  type="xs:integer" minOccurs="0"/>
                                 <xs:element name="totalePostiLetto"  type="xs:integer" minOccurs="0"/>
@@ -1113,20 +1126,6 @@
                     <xs:element name="rappresentante" type="aggregate:PersonaAnagraficaType"  />
                     <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                     <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />        
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteType">
-        <xs:complexContent>
-            <xs:extension base="moduli:AllegatoType">
-                <xs:sequence>
-                    <xs:element name="rappresentante" type="aggregate:PersonaAnagraficaType"  />
-                    <xs:element name="titolare" type="xs:string"/>
-                    <xs:element name="indirizzoStruttura" type="xs:string" />
-                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
-                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

@@ -38,10 +38,10 @@
     
     <!-- BASIC COMPONENTS TYPE -->
     
-    <xs:complexType name="AvvioType">
+      <xs:complexType name="AvvioType">
         <xs:sequence>
             <xs:element name="denominazioneStruttura" minOccurs="1" type="xs:string"/>
-            <xs:element name="carattereEsercizio" type="suapcommon:StruttureRicettiveCarattereEsercizioType"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:StruttureRicettiveCarattereEsercizioType"></xs:element>
             <xs:element name="tipologiaeEsercizio" type="strialb:TipologiaEsercizioBaseType"/>
             <xs:element name="classificazioneEsercizio" type="suapcommon:ClassificazioneBaseType"/>
             <xs:element name="serviziStruttura" type="suapcommon:ServiziStrutturaBaseType"/>
@@ -72,7 +72,7 @@
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="altro" type="xs:string" minOccurs="0"/>
+                        <xs:element name="altro" type="xs:string" minOccurs="0"/>   
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -156,9 +156,9 @@
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="allegatoPlanimetrieStruttura"  type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="allegatoPossessoRequisitiRappresentante" type="suapcommon:AllegatoPossessoRequisitiRappresentanteType" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="strialb:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
             <xs:element name="allegatoDichiarazioneClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
@@ -170,17 +170,29 @@
             <xs:element name="allegatoSCIASomministrazione" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSCIASpecificheAttivita" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoAltreComunicazioniNormativaRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAAltreSpecificheAttivita" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAltreComunicazioniNormeRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
-            <xs:element name="allegatoDocumentazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDomandaClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
-            <xs:element name="allegatoAltreDomandeNormativaRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="allegatoAltreDomandeNormeRegionali" type="moduli:AllegatoBaseType"  minOccurs="0"/>
         </xs:sequence>                                
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+                <xs:sequence>
+                    <xs:element name="titolare" type="xs:string"/>
+                    <xs:element name="indirizzoStruttura" type="xs:string" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
 </xs:schema>    
