@@ -66,7 +66,6 @@
     <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatoPrivacy" type="suapcommon:AllegatoPrivacyType"/>
             <xs:element name="allegatiSCIA" type="somnonadenoncom:AllegatiSCIAType"/>
             <xs:element name="allegatiSCIAUnica" type="somnonadenoncom:AllegatiSCIAUnicaType"/>
             <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>

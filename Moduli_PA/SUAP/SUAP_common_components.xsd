@@ -993,9 +993,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
-    
+    <!--   
     <xs:complexType name="AllegatoPrivacyType">
         <xs:complexContent>
             <xs:extension base="moduli:AllegatoType">
@@ -1007,6 +1005,13 @@
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>
+    -->
+    
+    <xs:complexType name="AllegatoPrivacyType">
+        <xs:sequence>
+            <xs:element name="dichiazioneInformativa" type="basic:EmptyType" minOccurs="1"/>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="AllegatoResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
