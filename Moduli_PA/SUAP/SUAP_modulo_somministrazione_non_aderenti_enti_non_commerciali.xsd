@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:somnonadenoncom="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_non_aderenti_enti_non_commerciali"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_non_aderenti_enti_non_commerciali"
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/> 
+    
+    <!-- // Modulo SUAP_modulo_somministrazione_non_aderenti_enti_non_commerciali ## internal code ref 025 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloSommNonAdeEntiNonComm" type="somnonadenoncom:ModuloSommNonAdeEntiNonCommType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloSommNonAdeEntiNonCommType">
+        <xs:annotation>
+            <xs:documentation>
+                DOMANDA DI AUTORIZZAZIONE PER L’ESERCIZIO DI SOMMINISTRAZIONE DI ALIMENTI 
+                E BEVANDE ALL’INTERNO DI ASSOCIAZIONI E CIRCOLI NON ADERENTI A ENTI O ORGANIZZAZIONI NAZIONALI 
+                AVENTI FINALITÀ ASSISTENZIALI E CHE HANNO NATURA DI ENTI NON COMMERCIALI
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="modalitaGestione" type="suapcommon:ModalitaGestioneType"/>
+            <xs:choice>
+                <xs:element name="avvio" type="somnonadenoncom:AvvioType"/>
+                <xs:element name="ampliamento" type="somnonadenoncom:AmpliamentoBaseType"/>
+            </xs:choice>
+           
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+            <xs:element name="tabellaAllegati" type="somnonadenoncom:TabellaAllegatiType"/> 
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+
+    <xs:complexType name="AvvioType">
+        <xs:sequence>
+            <xs:element name="denominazioneAssociazCircolo" type="xs:string"/>
+            <xs:element name="tipologiaAttivitaSomm" type="suapcommon:TipologiaAttivitaSomministrazioneBaseType"/>
+            <xs:element name="superficieEsercizio" type="suapcommon:SuperficieEsercizioBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AmpliamentoBaseType" abstract="true"/>
+    <xs:complexType name="AmpliamentoType">
+        <xs:complexContent>
+            <xs:extension base="somnonadenoncom:AmpliamentoBaseType">
+                <xs:sequence>
+                    <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
+                    <xs:element name="ampliamentoSuperficieEsercizio" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ALLEGATI -->
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiAutorizzazioneSCIA" type="somnonadenoncom:AllegatiAutorizzazioneSCIAType"/>            
+            <xs:element name="allegatiAutorizzazioneSCIAUnica" type="somnonadenoncom:AllegatiAutorizzazioneSCIAUnicaType"/>
+            <xs:element name="allegatiAltreAutorizzazione" type="somnonadenoncom:AllegatiAltreAutorizzazioneType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType_BolloObbligatorio"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiAutorizzazioneSCIAType">
+        <xs:sequence>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="somnonadenoncom:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
+            <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
+            <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
+          
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAutorizzazioneSCIAUnicaType">
+        <xs:sequence>
+            <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAltreAutorizzazioneType">
+        <xs:sequence>
+            <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+                <xs:sequence>
+                    <xs:element name="inQualitaDi" minOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="associazioneCircolo" type="xs:string" minOccurs="0"/>
+                                <xs:element name="dittaImpresa" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+</xs:schema>    

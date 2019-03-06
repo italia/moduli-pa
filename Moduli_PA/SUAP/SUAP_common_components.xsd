@@ -351,6 +351,151 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="StruttureRicettiveCarattereEsercizioType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="annuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="stagionale" type="suapcommon:CarattereStagionaleType" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ClassificazioneBaseType" abstract="true"/>
+    <xs:complexType name="ClassificazioneType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ClassificazioneBaseType">
+                <xs:sequence>
+                    <xs:element name="descrizione" type="xs:string" minOccurs="0"/>
+                    <xs:element name="estremiPlanimetria" type="aggregate:ProtocolloType" minOccurs="0"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ServiziStrutturaBaseType" abstract="true"/>
+    <xs:complexType name="ServiziStrutturaType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ServiziStrutturaBaseType">
+                
+                <xs:sequence>
+                    <xs:element name="somministrazioneAlimenti">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:choice>
+                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType" minOccurs="0"/>
+                                </xs:choice>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
+                    
+                    <xs:element name="piscina">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:choice>
+                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="impiantiperClienti" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="nrImpianti"  type="xs:integer" minOccurs="0"/>
+                                                <xs:element name="mqImpianto"  type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="ImpiantiAlPubblico"  minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="nrImpianti"  type="xs:integer" minOccurs="0"/>
+                                                <xs:element name="mqImpianto"  type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    
+                    <xs:element name="centroBenessere">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:choice>
+                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="servizioPerClienti"  type="xs:integer" minOccurs="0"/>
+                                    <xs:element name="servizioAlPubblico"  type="xs:integer" minOccurs="0"/>
+                                </xs:choice>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    
+                    <xs:element name="palestra">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:choice>
+                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType" minOccurs="0"/>
+                                </xs:choice>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    
+                    <xs:element name="altro"  type="xs:string" minOccurs="0"/>
+                    
+                    <xs:element name="serviziGestitiDaTerzi" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="descrizioneServizio"  type="xs:string" minOccurs="0"/>
+                                <xs:element name="gestore"  type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+     
+    <xs:complexType name="TipologiaUnitaAbitativeFisseBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaUnitaAbitativeFisseType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:TipologiaUnitaAbitativeFisseBaseType">
+                <xs:sequence>
+                    
+                    <xs:element name="tipologia">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="unitaStessoTipo"  type="xs:integer" minOccurs="0"/>
+                                <xs:choice  minOccurs="0">
+                                    <xs:element name="monolocali"  type="basic:EmptyType" />
+                                    <xs:element name="appartamentiPiuLocali">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="nrCamere"  type="xs:integer" minOccurs="0"/>
+                                                <xs:element name="soggiorno"  minOccurs="0">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="inVanoPernotto"  type="xs:integer" minOccurs="0"/>
+                                                            <xs:element name="inDiversoDaPernotto"  type="xs:integer" minOccurs="0"/>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
+                                <xs:element name="cucinaInVanoSeparato"  type="basic:EmptyType" minOccurs="0"/>
+                                <xs:element name="bagniPrivati"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="totalePostiLetto"  type="xs:integer" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="DichiarazioniType">
         <xs:sequence>
             <xs:choice>
@@ -441,6 +586,62 @@
             </xs:element>
         </xs:choice>        
     </xs:complexType>
+    
+    <xs:complexType name="ModalitaGestioneType">
+        <xs:sequence>
+            <xs:element name="gestioneDiretta" type="basic:EmptyType"/>
+            <xs:element name="gestioneATerzi" type="basic:EmptyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TipologiaAttivitaSomministrazioneBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaAttivitaSomministrazioneType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:TipologiaAttivitaSomministrazioneBaseType">
+                <xs:sequence>
+                    <xs:element name="ristorazione" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                a) esercizi di ristorazione;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="somministrazioneBevande" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                b) esercizi per la somministrazione di bevande;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>     
+                    <xs:element name="somministrazioneCongiuntaIntrattetimento" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                c) esercizi di cui alle lettere a) e b), in cui la somministrazione di alimenti e di bevande viene effettuata congiuntamente ad attività di intrattenimento e svago;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="somministrazioneEsclusiAlcolici" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                d) esercizi di cui alla lettera b), nei quali è esclusa la somministrazione di bevande alcoliche di qualsiasi gradazione;
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  
+   <!-- <xs:complexType name="AmpliamentoSuperficieEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="AmpliamentoSuperficieEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AmpliamentoSuperficieEsercizioBaseType">
+                <xs:sequence>
+                    <xs:element name="SuperficieEsercizioSomministrazione" type="suapcommon:AmpliamentoSuperficieVenditaType"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>-->
     
     <xs:complexType name="AllegatoPrepostoRequisitiProfessionaliType">
         <xs:sequence>
@@ -896,7 +1097,7 @@
         <xs:complexContent>
             <xs:extension base="moduli:AllegatoType">
                 <xs:sequence>
-                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" minOccurs="1" />
+                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType"  />
                     <xs:element name="inQualita" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
@@ -911,7 +1112,20 @@
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element> 
-                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType" minOccurs="1" />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="rappresentante" type="aggregate:PersonaAnagraficaType"  />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />        
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
