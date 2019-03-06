@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:striaa="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_strutture_ricettive_aria_aperta"
+    xmlns:strialb="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_strutture_ricettive_alberghiere"
     xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
     xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_strutture_ricettive_aria_aperta"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_strutture_ricettive_alberghiere"
     elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -15,22 +15,24 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/> 
     
-    <!-- // Modulo SUAP_modulo_strutture_ricettive_aria_aperta ## internal code ref 026 // -->
+    <!-- // Modulo SUAP_modulo_strutture_ricettive_alberghiere ## internal code ref 027 // -->
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloStruttureRicettiveAriaAperta" type="striaa:ModuloStruttureRicettiveAriaApertaType"/>
+    <xs:element name="ModuloStruttureRicettiveAlberghiere" type="strialb:ModuloStruttureRicettiveAlberghiereType"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloStruttureRicettiveAriaApertaType">
+    <xs:complexType name="ModuloStruttureRicettiveAlberghiereType">
         <xs:annotation>
             <xs:documentation>
-                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER STRUTTURE RICETTIVE ALL’ARIA APERTA
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER STRUTTURE RICETTIVE ALBERGHIERE
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
-            <xs:element name="apertura" type="striaa:AvvioType"/>
+            <xs:element name="apertura" type="strialb:AvvioType"/>
+            
+            
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="tabellaAllegati" type="striaa:TabellaAllegatiType"/> 
         </xs:sequence>        
@@ -48,7 +50,9 @@
             <xs:element name="capacitaStruttura" type="striaa:CapacitaStrutturaBaseType"/>
         </xs:sequence>
     </xs:complexType>
-  
+   
+    
+   
     <xs:complexType name="TipologiaEsercizioBaseType" abstract="true"/>
     <xs:complexType name="TipologiaEsercizioType">
         <xs:complexContent>
