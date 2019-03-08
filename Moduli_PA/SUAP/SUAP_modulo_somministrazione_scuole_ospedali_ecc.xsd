@@ -42,6 +42,7 @@
                 <xs:element name="ampliamento" type="somscuoleospetc:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="somscuoleospetc:TabellaAllegatiType"/>
         </xs:sequence>  
     </xs:complexType>

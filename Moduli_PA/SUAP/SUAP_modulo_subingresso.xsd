@@ -39,6 +39,7 @@
             <xs:element name="subingresso" type="subingresso:SubingressoType"/>
             <xs:element name="dichiarazioni" type="subingresso:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="subingresso:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="subingresso:TabellaAllegatiType"/> 
         </xs:sequence>
     </xs:complexType>   

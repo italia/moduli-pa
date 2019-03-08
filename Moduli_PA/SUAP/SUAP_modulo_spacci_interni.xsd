@@ -44,6 +44,7 @@
                 </xs:sequence>
             </xs:choice>
             <xs:element name="altreDichiarazioni" type="spacci:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="spacci:TabellaAllegatiType"/>
         </xs:sequence>
     </xs:complexType>

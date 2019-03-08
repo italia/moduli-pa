@@ -42,6 +42,7 @@
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="venddom:TabellaAllegatiType"/>
         </xs:sequence>                
     </xs:complexType>
