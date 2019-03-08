@@ -48,7 +48,7 @@
             <xs:element name="comunicazioneInterventoLeggitimato" type="scpa:ComunicazioneInterventoLeggitimatoBaseType" minOccurs="0"/>  
             <xs:element name="comunicazionefineLavori" type="scpa:ComunicazioneFineLavoriBaseType" minOccurs="0"/>                            
             <xs:element name="presentazioneInizioLavori" type="scpa:PresentazioneInizioLavoriType"/>                 
-           
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             
             <xs:element name="Allegati">
                 <!-- Allegati non referenziati nella tabella allegati -->
@@ -212,6 +212,7 @@
             <xs:element name="toponomastica" type="scpa:ToponomasticaType"/>                                      
             <xs:element name="prevenzioneIncendi" type="scpa:PrevenzioneIncendiBaseType" minOccurs="0"/>
             <xs:element name="montacarichi" type="scpa:MontacarichiBaseType" minOccurs="0"/>    
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     

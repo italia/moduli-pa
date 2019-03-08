@@ -53,6 +53,7 @@
             <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ComunicazioniImpreseEsecutriciDeiLavoriType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <!-- Dichiarazioni del progettista -->
             <xs:element name="dichiarazioniProgettista">
                 <xs:complexType>
@@ -65,6 +66,7 @@
                         <xs:element name="altreComunicazioni" type="suecommon:ComunicazioniSegnalazioniBaseType" minOccurs="0" maxOccurs="unbounded"/>
                         <xs:element name="attiDiAssenso" type="suecommon:AttiAssensoType" minOccurs="0" maxOccurs="unbounded"/>
                         <xs:element name="dichiarazioniNote" type="xs:string"/>
+                        <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

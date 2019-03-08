@@ -59,6 +59,7 @@
             <xs:element name="tecniciIncaricati" type="suecommon:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="suecommon:ImpreseEsecutriciDeiLavoriBaseType"/><!-- ref.impl: suecommon:SciaImpreseEsecutriciDeiLavoriType -->           
             <xs:element name="obblighiSaluteSicurezza" type="scialt:ObblighiSaluteSicurezzaType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="note" type="xs:string"/> 
             
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->

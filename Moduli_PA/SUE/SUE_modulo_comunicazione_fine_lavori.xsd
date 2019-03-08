@@ -45,6 +45,7 @@
             <xs:element name="ubicazioneImmobile" type="suecommon:UbicazioneImmobileType" minOccurs="0"/>
             <!-- Comunicazioni -->
             <xs:element name="fineLavori" type="cfla:FinelavoriType" minOccurs="1"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="soggettiCoinvolti">
                 <xs:complexType>
                     <xs:annotation>

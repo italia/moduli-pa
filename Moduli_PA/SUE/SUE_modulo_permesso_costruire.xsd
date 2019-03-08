@@ -54,6 +54,7 @@
             <xs:element name="tecniciIncaricati" type="permcostr:TecniciIncaricatiDeiLavoriType"/>
             <xs:element name="impreseEsecutrici" type="permcostr:ImpreseEsecutriciDeiLavoriType"/>           
             <xs:element name="obblighiSaluteSicurezza" type="permcostr:ObblighiSaluteSicurezzaType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
             <xs:element name="relazioneTecnicaAsseverazione" type="suecommon:RelazioneTecnicaAsseverazioneType"/>
