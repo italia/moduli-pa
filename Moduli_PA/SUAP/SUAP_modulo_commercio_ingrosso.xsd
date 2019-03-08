@@ -43,6 +43,7 @@
                 <xs:element name="ampliamento" type="commingrosso:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="commingrosso:TabellaAllegatiType"/>  
            
         </xs:sequence>        

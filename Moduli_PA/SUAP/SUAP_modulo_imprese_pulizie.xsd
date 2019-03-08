@@ -38,6 +38,7 @@
             <xs:element name="apertura" type="imppulizie:AperturaType"/>
             <xs:element name="dichiarazioni" type="imppulizie:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="imppulizie:TabellaAllegatiType"/>  
            
         </xs:sequence>

@@ -38,6 +38,7 @@
                 <xs:element name="cessazione" type="cessazione:CessazioneType"/>
                 <xs:element name="sospensione" type="cessazione:SospensioneType"/>
             </xs:choice>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="cessazione:TabellaAllegatiType"/>                 
         </xs:sequence>
     </xs:complexType>   

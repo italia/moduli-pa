@@ -41,6 +41,7 @@
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="appauto:TabellaAllegatiType"/>
         </xs:sequence>        
     </xs:complexType>
@@ -101,9 +102,11 @@
                 <xs:sequence>
                     <xs:element name="installazioni" type="appauto:ApparecchiAutomaticiType" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element name="disinstallazioni" type="appauto:ApparecchiAutomaticiType" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                 </xs:sequence>
                 <xs:attribute name="anno" type="xs:integer"/>
                 <xs:attribute name="primoSemetre" type="xs:boolean" default="true"/>
+                
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

@@ -42,6 +42,7 @@
             <xs:element name="apertura"                 type="tintolav:AperturaType"/>            
             <xs:element name="dichiarazioni"            type="tintolav:DichiarazioniType" minOccurs="0"/><!-- presente solo per tintolavanderie -->
             <xs:element name="altreDichiarazioni"       type="tintolav:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:choice>
                 <xs:element name="tabellaAllegatiTintoLavanderie"     type="tintolav:TabellaAllegatiTintoLavanderieType"/>    
                 <xs:element name="tabellaAllegatiLavanderieGettoni"   type="tintolav:TabellaAllegatiLavanderieGettoniType"/>
@@ -159,6 +160,7 @@
                 <xs:sequence>
                     <xs:element name="dichiarazioni" type="tintolav:DichiarazioniRespTecnLavaRequisitiProfessionaliType"/>
                     <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

@@ -37,6 +37,7 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="apertura" type="autorimesse:AperturaType"/>       
             <xs:element name="altreDichiarazioni" type="autorimesse:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="autorimesse:TabellaAllegatiType"/>  
            
         </xs:sequence>
