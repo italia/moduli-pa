@@ -1194,7 +1194,7 @@
             <xs:element name="tutelaEcologica" type="suecommon:TutelaEcologicaBaseType"/>
             <xs:element name="efficienzaInfrastrutture" type="suecommon:EfficienzaInfrastruttureBaseType"/>
             <xs:element name="note" type="xs:string"/> 
-            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean"/>
         </xs:sequence>
     </xs:complexType>
 
