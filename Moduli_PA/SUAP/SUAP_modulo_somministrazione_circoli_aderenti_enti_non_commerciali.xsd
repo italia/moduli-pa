@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:somadenoncom="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_aderenti_enti_non_commerciali"
+    xmlns:somciradenoncom="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_circoli_aderenti_enti_non_commerciali"
     xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
     xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_aderenti_enti_non_commerciali"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_circoli_aderenti_enti_non_commerciali"
     elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -18,10 +18,10 @@
     <!-- // Modulo SUAP_modulo_somministrazione_aderenti_enti_non_commerciali ## internal code ref 024 // -->
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloSommAdeEntiNonComm" type="somadenoncom:ModuloSommAdeEntiNonCommType"/>
+    <xs:element name="ModuloSommCirAdeEntiNonComm" type="somciradenoncom:ModuloSommCirAdeEntiNonCommType"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloSommAdeEntiNonCommType">
+    <xs:complexType name="ModuloSommCirAdeEntiNonCommType">
         <xs:annotation>
             <xs:documentation>
                 SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI SOMMINISTRAZIONE 
@@ -35,12 +35,12 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:element name="modalitaGestione" type="suapcommon:ModalitaGestioneType"/>
             <xs:choice>
-                <xs:element name="avvio" type="somadenoncom:AvvioType"/>
-                <xs:element name="ampliamento" type="somadenoncom:AmpliamentoBaseType"/>
+                <xs:element name="avvio" type="somciradenoncom:AvvioType"/>
+                <xs:element name="ampliamento" type="somciradenoncom:AmpliamentoBaseType"/>
             </xs:choice>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
-            <xs:element name="tabellaAllegati" type="somadenoncom:TabellaAllegatiType"/> 
+            <xs:element name="tabellaAllegati" type="somciradenoncom:TabellaAllegatiType"/> 
         </xs:sequence>        
     </xs:complexType>
     
@@ -58,7 +58,7 @@
     <xs:complexType name="AmpliamentoBaseType" abstract="true"/>
     <xs:complexType name="AmpliamentoType">
         <xs:complexContent>
-            <xs:extension base="somadenoncom:AmpliamentoBaseType">
+            <xs:extension base="somciradenoncom:AmpliamentoBaseType">
                 <xs:sequence>
                     <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
                     <xs:element name="ampliamentoSuperficieEsercizio" type="suapcommon:AmpliamentoSuperficieVenditaType" />
@@ -70,8 +70,8 @@
     <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIA" type="somadenoncom:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIACondizionata" type="somadenoncom:AllegatiSCIACondizionataType"/> 
+            <xs:element name="allegatiSCIA" type="somciradenoncom:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIACondizionata" type="somciradenoncom:AllegatiSCIACondizionataType"/> 
             <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
@@ -81,7 +81,7 @@
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="somadenoncom:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="somciradenoncom:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
             <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
