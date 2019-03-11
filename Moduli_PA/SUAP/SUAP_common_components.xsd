@@ -676,6 +676,7 @@
                     </xs:choice>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     
@@ -1089,6 +1090,7 @@
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element> 
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                     <xs:element name="documentoIdentitaSocio" type="moduli:AllegatoType" minOccurs="1" />
                 </xs:sequence>
             </xs:extension>

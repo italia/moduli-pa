@@ -196,6 +196,7 @@
             </xs:annotation>
             <xs:sequence>
                 <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             </xs:sequence>
     </xs:complexType>
     

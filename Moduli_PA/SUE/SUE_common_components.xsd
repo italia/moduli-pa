@@ -1251,6 +1251,7 @@
                     <xs:documentation xml:lang="it">Compilare in caso di affidamento dei lavori ad una o più imprese – sezione ripetibile</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     
