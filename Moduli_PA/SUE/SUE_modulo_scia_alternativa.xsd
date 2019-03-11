@@ -61,6 +61,8 @@
             <xs:element name="obblighiSaluteSicurezza" type="scialt:ObblighiSaluteSicurezzaType"/>
             <xs:element name="note" type="xs:string"/> 
             
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+            
             <!-- RELAZIONE TECNICA DI ASSEVERAZIONE -->
             <xs:element name="relazioneTecnicaAsseverazione" type="suecommon:RelazioneTecnicaAsseverazioneType"/>
             

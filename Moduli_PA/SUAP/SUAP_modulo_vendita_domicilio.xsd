@@ -42,6 +42,7 @@
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType" minOccurs="0"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="venddom:TabellaAllegatiType"/>
         </xs:sequence>                
     </xs:complexType>
@@ -64,7 +65,7 @@
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
-            <xs:element name="allegatoComunicazioneNominaIncaricatiVendita" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoComunicazioneNominaIncaricatiVendita" type="venddom:AllegatoComunicazioneNominaIncaricatiVenditaType" minOccurs="0"/>
             <xs:element name="allegatoSCIAVenditaProdottiAlimentazioneAnimale" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
@@ -86,5 +87,29 @@
         </xs:sequence>
     </xs:complexType>
    
+    
+    <xs:complexType name="AllegatoComunicazioneNominaIncaricatiVenditaType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="nuovi" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="incaricato" type="aggregate:PersonaAnagraficaType" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="cessati" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="incaricato" type="aggregate:PersonaAnagraficaType" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
 </xs:schema>

@@ -52,7 +52,7 @@
             <xs:element name="comunicazioniSegnalazioni" type="suecommon:ComunicazioniSegnalazioniType" minOccurs="0" maxOccurs="unbounded" />           
             <xs:element name="impreseEsecutrici" type="suecommon:ComunicazioniImpreseEsecutriciDeiLavoriType"/>
             <xs:element name="obblighiSaluteSicurezza" type="suecommon:ObblighiSaluteSicurezzaType"/>
-
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <!-- ALLEGATI  -->
             <xs:element name="tabellaAllegati" type="cil:TabellaAllegatiType"/>
 
@@ -79,6 +79,7 @@
                     <xs:documentation xml:lang="it">Compilare in caso di affidamento dei lavori ad una o più imprese – sezione ripetibile</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
    

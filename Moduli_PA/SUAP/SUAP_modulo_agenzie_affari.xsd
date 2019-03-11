@@ -44,7 +44,7 @@
             </xs:choice>
             
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
-            
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="ageaffari:TabellaAllegatiType"/>                 
             
            
@@ -187,6 +187,7 @@
             <xs:element name="impresa" type="aggregate:ImpresaAnagraficaType"/>
             <xs:element name="impresaAltroEmail" type="xs:string"/>
             <xs:element name="registroGiornaleVidimazione" type="ageaffari:GiornaleAffariType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     

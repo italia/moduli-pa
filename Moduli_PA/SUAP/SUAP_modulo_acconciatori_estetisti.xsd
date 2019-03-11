@@ -41,6 +41,7 @@
             </xs:choice>
             <!-- DICHIARAZIONI -->
             <xs:element name="altreDichiarazioni" type="acconcestet:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <!-- ALLEGATI -->
             <xs:element name="tabellaAllegati" type="acconcestet:TabellaAllegatiType"/>
             <xs:element name="Allegati">

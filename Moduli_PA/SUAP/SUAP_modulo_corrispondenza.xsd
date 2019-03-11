@@ -40,6 +40,7 @@
             <xs:element name="apertura" type="corrispondenza:AperturaType"/>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="corrispondenza:TabellaAllegatiType"/>                 
         </xs:sequence>
     </xs:complexType>  

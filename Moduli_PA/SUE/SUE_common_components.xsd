@@ -1194,6 +1194,7 @@
             <xs:element name="tutelaEcologica" type="suecommon:TutelaEcologicaBaseType"/>
             <xs:element name="efficienzaInfrastrutture" type="suecommon:EfficienzaInfrastruttureBaseType"/>
             <xs:element name="note" type="xs:string"/> 
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -1250,6 +1251,7 @@
                     <xs:documentation xml:lang="it">Compilare in caso di affidamento dei lavori ad una o più imprese – sezione ripetibile</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     
