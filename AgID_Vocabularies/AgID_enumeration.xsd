@@ -7,7 +7,7 @@
     
     elementFormDefault="qualified" attributeFormDefault="qualified"
     
-    version="1.1.1" xml:lang="it">
+    version="1.2.0" xml:lang="it">
     
     <xs:simpleType name="MimeTypeEnum">
         <xs:annotation>
@@ -2053,6 +2053,7 @@
             <xs:enumeration value="VU"/>
             <xs:enumeration value="WF"/>
             <xs:enumeration value="WS"/>
+            <xs:enumeration value="XK"/>
             <xs:enumeration value="YE"/>
             <xs:enumeration value="YT"/>
             <xs:enumeration value="ZA"/>

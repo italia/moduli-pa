@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_somministrazione_temporanea"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
     
     <xs:annotation>
@@ -52,6 +52,7 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="sommtemp:TabellaAllegatiType"/>
         </xs:sequence>
     </xs:complexType>

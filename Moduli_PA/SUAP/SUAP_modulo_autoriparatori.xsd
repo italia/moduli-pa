@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_autoriparatori"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
 
     <xs:annotation>
@@ -38,6 +38,7 @@
             <xs:element name="apertura" type="autoriparatori:AperturaType"/>
             <xs:element name="dichiarazioni" type="autoriparatori:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="autoriparatori:TabellaAllegatiType"/>
            
         </xs:sequence>  
@@ -113,6 +114,7 @@
                     <xs:element name="tipoQualifica" type="autoriparatori:TipoQualificaType"/>
                     <xs:element name="dichiarazioni" type="autoriparatori:DichiarazioneRequisitiProfessionaliType"/>
                     <xs:element name="allegatoDocumentoIdentitaResposabileTecnico" type="moduli:AllegatoType" />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
                  </xs:sequence>
             </xs:extension>
         </xs:complexContent>

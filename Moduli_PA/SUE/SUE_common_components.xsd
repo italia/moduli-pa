@@ -10,7 +10,7 @@
 
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/sue_common_components"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
     
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -34,7 +34,7 @@
             <xs:documentation>Tipo per specificare tutti i dati anagrafici di un professionista</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="aggregate:PersonaAnagraficaNascitaType">
+            <xs:extension base="aggregate:PersonaAnagraficaType">
                 <xs:sequence>
                     <xs:element name="studiopro" type="aggregate:IndirizzoType"/>
                     <xs:element name="ordineprofessionale" type="suecommon:OrdineProfessionaleType"/>  
@@ -47,10 +47,9 @@
     <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
         <xs:complexContent>
             <xs:extension base="suecommon:ProfessionistaAnagraficaType">
-                <xs:choice minOccurs="0">
-                    <xs:element name="direttoreLavori" type="basic:EmptyType"/>
-                    <xs:element name="professionistaAbilitato" type="basic:EmptyType"/>
-                </xs:choice>
+                <xs:sequence>
+                    <xs:element name="direttoreLavori" type="basic:EmptyType" minOccurs="0"/>
+                </xs:sequence> 
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -233,9 +232,22 @@
     <!-- Reference suecommon:LocalizzazioneInterventoType -->
     <xs:complexType name="LocalizzazioneInterventoType">
         <xs:sequence>
+            <xs:element name="immobile" type="suecommon:LocalizzazioneImmobileType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="LocalizzazioneImmobileType">
+        <xs:sequence>
             <xs:element name="ubicazioneImmobile" type="suecommon:UbicazioneImmobileType"/>
-            <xs:element name="datiCatastali" type="moduli:DatiCatastaliType"/>
-            <xs:element name="destinazioneDUso" type="xs:string"/>
+            <xs:element name="riferimentiCatastali">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="datiCatastali" type="moduli:DatiCatastaliType"/>
+                        <xs:element name="destinazioneDUso" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="coordinate" type="suecommon:CoordinateBaseType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
@@ -1182,6 +1194,7 @@
             <xs:element name="tutelaEcologica" type="suecommon:TutelaEcologicaBaseType"/>
             <xs:element name="efficienzaInfrastrutture" type="suecommon:EfficienzaInfrastruttureBaseType"/>
             <xs:element name="note" type="xs:string"/> 
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -1238,6 +1251,7 @@
                     <xs:documentation xml:lang="it">Compilare in caso di affidamento dei lavori ad una o più imprese – sezione ripetibile</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     

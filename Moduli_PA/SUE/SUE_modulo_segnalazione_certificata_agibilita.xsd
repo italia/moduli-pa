@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUE/modulo_segnalazione_certificata_agibilita"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
     
    
@@ -48,7 +48,7 @@
             <xs:element name="comunicazioneInterventoLeggitimato" type="scpa:ComunicazioneInterventoLeggitimatoBaseType" minOccurs="0"/>  
             <xs:element name="comunicazionefineLavori" type="scpa:ComunicazioneFineLavoriBaseType" minOccurs="0"/>                            
             <xs:element name="presentazioneInizioLavori" type="scpa:PresentazioneInizioLavoriType"/>                 
-           
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             
             <xs:element name="Allegati">
                 <!-- Allegati non referenziati nella tabella allegati -->
@@ -196,13 +196,14 @@
             </xs:annotation>
             <xs:sequence>
                 <xs:element name="schedaTitolare" type="aggregate:PersonaAnagraficaType"  minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             </xs:sequence>
     </xs:complexType>
     
     
     <xs:complexType name="AllegatoAttestazioneDirettoreLavoriProfessionistaAbilitatoType">
         <xs:sequence>
-            <xs:element name="schedaTecnico" type="suecommon:ProfessionistaAnagraficaDirettoreType"/>               
+            <xs:element name="schedaTecnico" type="scpa:ProfessionistaAnagraficaDirettoreType"/>               
             <xs:element name="assevera" type="scpa:AsseveraType"/>                                                  
             <xs:element name="sicurezzaImpianti" type="scpa:SicurezzaImpiantiType"/>                                
             <xs:element name="sicurezzaStaticaSismica" type="scpa:SicurezzaStaticaSismicaBaseType"/>                
@@ -212,7 +213,19 @@
             <xs:element name="toponomastica" type="scpa:ToponomasticaType"/>                                      
             <xs:element name="prevenzioneIncendi" type="scpa:PrevenzioneIncendiBaseType" minOccurs="0"/>
             <xs:element name="montacarichi" type="scpa:MontacarichiBaseType" minOccurs="0"/>    
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProfessionistaAnagraficaDirettoreType">
+        <xs:complexContent>
+            <xs:extension base="suecommon:ProfessionistaAnagraficaType">
+                <xs:choice minOccurs="0">
+                    <xs:element name="direttoreLavori" type="basic:EmptyType"/>
+                    <xs:element name="professionistaAbilitato" type="basic:EmptyType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <!-- DICHIARAZIONE ASSEVERATA -->
@@ -220,7 +233,7 @@
         <xs:choice>
             <xs:element name="agibilitaImmobile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="agibilitaParzialeEdifici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="agibilitaSingoliImmbobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="agibilitaParzialeSingoliImmobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
         </xs:choice>
     </xs:complexType>
     
@@ -344,10 +357,10 @@
             <xs:element name="nonComportaVariazioneCivici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="comportaVariazioneCivici">
                 <xs:complexType>
-                    <xs:choice>
+                    <xs:sequence>
                         <xs:element name="allegaRichiestaNumerazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="protocolloVariazioneNumerazione" type="aggregate:ProtocolloStandardType" minOccurs="0" maxOccurs="1"/>
-                    </xs:choice>
+                    </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:choice>
@@ -371,16 +384,16 @@
     <xs:complexType name="MontacarichiType">
         <xs:complexContent>
             <xs:extension base="scpa:MontacarichiBaseType">
-                <xs:choice>
-                    <xs:element name="comunicazioneValidaPerMatricola"  type="basic:EmptyType"/>
-                    <xs:element name="attoComunicazione" >
+                <xs:sequence>
+                    <xs:element name="comunicazioneValidaPerMatricola"  type="basic:EmptyType" minOccurs="0"/>
+                    <xs:element name="attoComunicazione" minOccurs="0">
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="protocollo" type="aggregate:ProtocolloStandardType"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
-                </xs:choice>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

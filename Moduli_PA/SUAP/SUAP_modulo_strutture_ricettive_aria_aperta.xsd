@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:striaa="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_strutture_ricettive_aria_aperta"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_strutture_ricettive_aria_aperta"
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/> 
+    
+    <!-- // Modulo SUAP_modulo_strutture_ricettive_aria_aperta ## internal code ref 026 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloStruttureRicettiveAriaAperta" type="striaa:ModuloStruttureRicettiveAriaApertaType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloStruttureRicettiveAriaApertaType">
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER STRUTTURE RICETTIVE ALL’ARIA APERTA
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="apertura" type="striaa:AvvioType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="tabellaAllegati" type="striaa:TabellaAllegatiType"/> 
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+    <xs:complexType name="AvvioType">
+        <xs:sequence>
+            <xs:element name="denominazioneStruttura" minOccurs="1" type="xs:string"/>
+            <xs:element name="carattereEsercizio" type="suapcommon:StruttureRicettiveCarattereEsercizioType"/>
+            <xs:element name="tipologiaeEsercizio" type="striaa:TipologiaEsercizioBaseType"/>
+            <xs:element name="classificazioneEsercizio" type="suapcommon:ClassificazioneBaseType"/>
+            <xs:element name="serviziStruttura" type="suapcommon:ServiziStrutturaBaseType"/> 
+            <xs:element name="capacitaStruttura" type="striaa:CapacitaStrutturaBaseType"/>
+        </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="TipologiaEsercizioBaseType" abstract="true"/>
+    <xs:complexType name="TipologiaEsercizioType">
+        <xs:complexContent>
+            <xs:extension base="striaa:TipologiaEsercizioBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="campeggio" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="villaggioturistico" type="basic:EmptyType" minOccurs="0"/> 
+                        <xs:element name="altro" type="xs:string" minOccurs="0"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="CapacitaStrutturaBaseType" abstract="true"/>
+    <xs:complexType name="CapacitaStrutturaType">
+        <xs:complexContent>
+            <xs:extension base="striaa:CapacitaStrutturaBaseType">
+                <xs:sequence>
+                    <xs:element name="capacitaRicettivaMassima"  type="xs:integer" minOccurs="0"/>
+                    <xs:element name="piazzole" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="libere"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="attrezzate"  type="xs:integer" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="unitaAbitativeFisse" minOccurs="0">
+                        <xs:complexType> 
+                            <xs:sequence>
+                                <xs:element name="unita"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="postiLettoComplessivi"  type="xs:integer" minOccurs="0"/>
+                                <xs:element name="tipologia" type="suapcommon:TipologiaUnitaAbitativeFisseBaseType" minOccurs="0" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    
+    
+    <!-- ALLEGATI -->
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="striaa:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="striaa:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="striaa:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPlanimetrieStruttura"  type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="striaa:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
+            <xs:element name="allegatoDichiarazioneClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element name="allegatoSCIAClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
+            <xs:element name="allegatoSCIASomministrazione" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoSCIAAltreSpecificheAttivita" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAltreComunicazioniNormeRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDomandaClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="allegatoAltreDomandeNormeRegionali" type="moduli:AllegatoBaseType"  minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+                <xs:sequence>
+                    <xs:element name="titolare" type="xs:string"/>
+                    <xs:element name="indirizzoStruttura" type="xs:string" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+</xs:schema>    

@@ -10,7 +10,7 @@
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/modulo_panifici"
 
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.1.1">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
     
     
@@ -44,6 +44,7 @@
             <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
 
             <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
         </xs:sequence>
     </xs:complexType>
@@ -182,6 +183,7 @@
             </xs:element>
             <xs:element name="dichiarazione" type="suapcommon:AltreDichiarazioniAltroBaseType"/>     <!-- -->        
             <xs:element name="allegatoDocumentoIdentitaResposabileeAttivitàProduttive" type="moduli:AllegatoType" />
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>
     
