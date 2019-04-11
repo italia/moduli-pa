@@ -356,7 +356,7 @@
 
     <xs:complexType name="StruttureRicettiveCarattereEsercizioType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:CarattereTemporaneoBaseType">
+            <xs:extension base="suapcommon:StruttureRicettiveCarattereEsercizioBaseType">
                 <xs:sequence>
                     <xs:choice>
                         <xs:element name="annuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
