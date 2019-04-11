@@ -354,7 +354,6 @@
 
     <xs:complexType name="StruttureRicettiveCarattereEsercizioBaseType" abstract="true"/>
       
-    
     <xs:complexType name="StruttureRicettiveCarattereEsercizioType">
         <xs:complexContent>
             <xs:extension base="suapcommon:CarattereTemporaneoBaseType">
