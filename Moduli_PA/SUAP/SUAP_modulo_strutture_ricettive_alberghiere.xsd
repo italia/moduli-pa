@@ -41,7 +41,7 @@
       <xs:complexType name="AvvioType">
         <xs:sequence>
             <xs:element name="denominazioneStruttura" minOccurs="1" type="xs:string"/>
-            <xs:element name="carattereEsercizio" type="suapcommon:StruttureRicettiveCarattereEsercizioType"></xs:element>
+            <xs:element name="carattereEsercizio" type="suapcommon:StruttureRicettiveCarattereEsercizioBaseType"></xs:element>
             <xs:element name="tipologiaeEsercizio" type="strialb:TipologiaEsercizioBaseType"/>
             <xs:element name="classificazioneEsercizio" type="suapcommon:ClassificazioneBaseType"/>
             <xs:element name="serviziStruttura" type="suapcommon:ServiziStrutturaBaseType"/>
