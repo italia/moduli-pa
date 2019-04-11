@@ -351,13 +351,20 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="StruttureRicettiveCarattereEsercizioBaseType" abstract="true"/>
+
+
     <xs:complexType name="StruttureRicettiveCarattereEsercizioType">
-        <xs:sequence>
-            <xs:choice>
-                <xs:element name="annuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="stagionale" type="suapcommon:CarattereStagionaleType" />
-            </xs:choice>
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="suapcommon:CarattereTemporaneoBaseType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="annuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="stagionale" type="suapcommon:CarattereStagionaleType"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:complexType name="ClassificazioneBaseType" abstract="true"/>
