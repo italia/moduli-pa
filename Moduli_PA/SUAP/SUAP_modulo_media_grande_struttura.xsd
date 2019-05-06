@@ -50,7 +50,7 @@
         </xs:sequence>  
     </xs:complexType>
     
-    <xs:complexType name="AllegatiType" >
+    <xs:complexType name="AllegatiType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
