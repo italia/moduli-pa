@@ -1053,6 +1053,17 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="ConsensoControlliAutoritaCompetentiBaseType" abstract="true"/>
+    <xs:complexType name="ConsensoControlliAutoritaCompetentiType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:ConsensoControlliAutoritaCompetentiBaseType">
+                <xs:sequence>
+                    <xs:element name="consenso" type="basic:EmptyType"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
     <xs:complexType name="VenditaEsclusivaType">
         <xs:sequence>
             <xs:choice>

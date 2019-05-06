@@ -45,7 +45,7 @@
                 </xs:sequence>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType" />
+            <xs:element name="altreDichiarazioni" type="nontutela:AltreDichiarazioniType" />
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="nontutela:TabellaAllegatiType"/>
         </xs:sequence>
@@ -55,6 +55,22 @@
         <xs:sequence><!-- scelta multipla -->
             <xs:element name="CaratterePermanente"  minOccurs="0" maxOccurs="1" />
             <xs:element name="CarattereStagionale" type="suapcommon:CarattereStagionaleType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">        
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="possessoRequisitiDiSovergliabilita" type="basic:EmptyType" />
+                <xs:element name="consensoControlliAutoritaCompetenti" type="suapcommon:ConsensoControlliAutoritaCompetentiBaseType" >
+                    <xs:annotation>
+                        <xs:documentation>
+                            nel caso in cui l'eservcizio dell'attività venga svolta presso la propria abitazione (home restaurant)
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/> 
         </xs:sequence>
     </xs:complexType>
     
