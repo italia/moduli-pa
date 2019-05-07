@@ -47,9 +47,17 @@
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="vicinato:TabellaAllegatiType"/>                 
-
         </xs:sequence>
     </xs:complexType>  
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="vicinato:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="vicinato:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="vicinato:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>      
+        </xs:sequence>
+    </xs:complexType>
     
     <xs:complexType name="AllegatiSCIAType">
         <xs:sequence>
@@ -79,18 +87,12 @@
             <xs:element name="allegatoAutorizzazioneVenditaPreziosi"  type="moduli:AllegatoType" minOccurs="0"/>
              <xs:element name="allegatoVenditaArmiNoGuerra" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaOnlineFarmaciBanco" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
     
-    <xs:complexType name="TabellaAllegatiType">
-        <xs:sequence>
-            <xs:element name="allegatiSCIA" type="vicinato:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIAUnica" type="vicinato:AllegatiSCIAUnicaType"/>
-            <xs:element name="allegatiSCIACondizionata" type="vicinato:AllegatiSCIACondizionataType"/>
-            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>      
-        </xs:sequence>
-    </xs:complexType>
+
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
