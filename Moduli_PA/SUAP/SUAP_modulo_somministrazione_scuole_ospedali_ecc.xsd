@@ -41,7 +41,7 @@
                 <xs:element name="apertura" type="somscuoleospetc:AvvioType"/>
                 <xs:element name="ampliamento" type="somscuoleospetc:AmpliamentoType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="somscuoleospetc:AltreDichiarazioniType"/>
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="somscuoleospetc:TabellaAllegatiType"/>
         </xs:sequence>  
@@ -58,6 +58,13 @@
         <xs:sequence>
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
             <xs:element name="superficieAmpliamento" type="suapcommon:SuperficieDaABaseType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:sequence>
+            <xs:element name="dichiarazioneRispettoNormeUrbanisticheEdilizie" type="basic:EmptyType"/>
+            <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>                    
         </xs:sequence>
     </xs:complexType>
 

@@ -67,6 +67,7 @@
    
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType"  minOccurs="0"/> 
         </xs:sequence>
     </xs:complexType>
