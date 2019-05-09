@@ -85,7 +85,7 @@
                         <xs:element name="RegistroGiornaleAffari" minOccurs="0">
                             <xs:complexType>
                                 <xs:choice>
-                                    <xs:element name="cartaceo" minOccurs="0" maxOccurs="1">
+                                    <xs:element name="cartaceo">
                                         <xs:complexType>
                                             <xs:sequence>
                                                 <xs:element name="registroGiornaleVidimazione" type="ageaffari:GiornaleAffariType" minOccurs="1" maxOccurs="1"/>
@@ -93,7 +93,7 @@
                                             </xs:sequence>
                                         </xs:complexType>
                                     </xs:element>
-                                    <xs:element name="informatico" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="informatico" type="basic:EmptyType"/>
                                 </xs:choice>
                             </xs:complexType>
                         </xs:element>
@@ -173,9 +173,9 @@
             <xs:element name="inQualita">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="titolare" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="legaleRappresentante" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="altro" type="xs:string" minOccurs="0"/>
+                        <xs:element name="titolare" type="basic:EmptyType"/>
+                        <xs:element name="legaleRappresentante" type="basic:EmptyType"/>
+                        <xs:element name="altro" type="xs:string"/>
                     </xs:choice>
                 </xs:complexType>
             </xs:element>
