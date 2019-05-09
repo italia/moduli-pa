@@ -656,7 +656,6 @@
             <xs:element name="allegatoDocumentoIdentitaPreposto" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="inData" type="xs:date"/>
             <xs:element name="requisiti" type="suapcommon:DichiaranteRequisitiProfessionaliType"/>
-            <xs:element name="allegatoDocumentoIdentitaPreposto" type="moduli:AllegatoType" />   
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
         </xs:sequence>
     </xs:complexType>

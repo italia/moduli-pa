@@ -50,7 +50,16 @@
         </xs:sequence>  
     </xs:complexType>
     
-    <xs:complexType name="AllegatiType" >
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegati" type="mediagrande:AllegatiType"/>
+            <xs:element name="allegatiSCIA_SCIAUnica" type="mediagrande:AllegatiSCIA_SCIAUnicaType"/>
+            <xs:element name="allegatiAutorizzazione" type="mediagrande:AllegatiAutorizzazioneType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType_BolloObbligatorio"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+    <xs:complexType name="AllegatiType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
@@ -83,19 +92,13 @@
             <xs:element name="allegatoVenditaArmiNoGuerra" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoAltreDomandeNormeRegionali" type="moduli:AllegatoBaseType"  minOccurs="0"/>
+            <xs:element name="allegatoAutorizzazioneVenditaOnlineFarmaciBanco" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>  
     </xs:complexType>
     
    
     
-    <xs:complexType name="TabellaAllegatiType">
-        <xs:sequence>
-            <xs:element name="allegati" type="mediagrande:AllegatiType"/>
-            <xs:element name="allegatiSCIA_SCIAUnica" type="mediagrande:AllegatiSCIA_SCIAUnicaType"/>
-            <xs:element name="allegatiAutorizzazione" type="mediagrande:AllegatiAutorizzazioneType"/>
-            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType_BolloObbligatorio"/>
-        </xs:sequence>
-    </xs:complexType>
+
     
     <xs:complexType name="AperturaType">
         <xs:sequence>
