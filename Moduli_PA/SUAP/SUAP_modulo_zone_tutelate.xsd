@@ -90,7 +90,7 @@
         <xs:sequence>
             <xs:choice>
                 <xs:element name="possessoRequisitiDiSovergliabilita" type="basic:EmptyType" />
-                <xs:element name="consensoControlliAutoritaCompetenti" type="suapcommon:ConsensoControlliAutoritaCompetentiBaseType" >
+                <xs:element name="consensoControlliAutoritaCompetenti" type="basic:AbstractBaseType" >
                     <xs:annotation>
                         <xs:documentation>
                             nel caso in cui l'eservcizio dell'attività venga svolta presso la propria abitazione (home restaurant)
