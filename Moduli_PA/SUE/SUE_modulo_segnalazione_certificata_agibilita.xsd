@@ -107,7 +107,7 @@
                         <xs:sequence>
                          <xs:element name="dataFineLavori" type="xs:date" minOccurs="0"/>
                          <xs:choice>
-                             <xs:element name="statoLavoriCompletati"  type="basic:EmptyType"/>
+                             <xs:element name="statoLavoriCompletati" type="basic:EmptyType"/>
                              <xs:element name="statoLavoriParziale"  type="basic:EmptyType"/>
                          </xs:choice>
                         </xs:sequence>
@@ -127,29 +127,10 @@
                 <xs:element name="SCIAUnicaAgibilitaParzialeEdifici"  type="basic:EmptyType" />
                 <xs:element name="SCIAUnicaAgibilitaParzialeSingoliImmobili"  type="basic:EmptyType"/>
             </xs:choice>
-            
-            
             <xs:element name="allegaAttestazioneProfessionista"  type="basic:EmptyType" minOccurs="0"/>
             <xs:element name="allegaComunicazioni" type="basic:EmptyType" minOccurs="0"/>
-            
         </xs:sequence>
     </xs:complexType>
-
-   
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
-    
-   
     
     <!-- Allegati -->
     <xs:complexType name="TabellaAllegatiType">
@@ -231,9 +212,9 @@
     <!-- DICHIARAZIONE ASSEVERATA -->
     <xs:complexType name="AsseveraType">
         <xs:choice>
-            <xs:element name="agibilitaImmobile" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="agibilitaParzialeEdifici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="agibilitaParzialeSingoliImmobili"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="agibilitaImmobile" type="basic:EmptyType"/>
+            <xs:element name="agibilitaParzialeEdifici"  type="basic:EmptyType"/>
+            <xs:element name="agibilitaParzialeSingoliImmobili"  type="basic:EmptyType"/>
         </xs:choice>
     </xs:complexType>
     
@@ -298,15 +279,15 @@
             <xs:extension base="scpa:SicurezzaStaticaSismicaBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="nonHaInteressatoStrutture"  type="basic:EmptyType"  minOccurs="0"/>
-                        <xs:element name="haInteressatoStrutture" >
+                        <xs:element name="nonHaInteressatoStrutture"  type="basic:EmptyType"/>
+                        <xs:element name="haInteressatoStrutture">
                             <xs:complexType>
                                 <xs:choice>
-                                    <xs:element name="certificatoCollaudoStatico"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="estremiCollaudoStatico" type="scpa:ProtocolloType"  minOccurs="0"/>
-                                    <xs:element name="dichiarazioneEsecuzioneInterventi" type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="estremiDichiarazioneEsecuzioneInterventi" type="scpa:ProtocolloType"  minOccurs="0"/>
-                                    <xs:element name="noCollaudoStatico"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="certificatoCollaudoStatico"  type="basic:EmptyType"/>
+                                    <xs:element name="estremiCollaudoStatico" type="scpa:ProtocolloType"/>
+                                    <xs:element name="dichiarazioneEsecuzioneInterventi" type="basic:EmptyType"/>
+                                    <xs:element name="estremiDichiarazioneEsecuzioneInterventi" type="scpa:ProtocolloType"/>
+                                    <xs:element name="noCollaudoStatico"  type="basic:EmptyType"/>
                                 </xs:choice>
                             </xs:complexType>
                         </xs:element>
@@ -322,8 +303,8 @@
             <xs:extension base="scpa:PrestazioneEnergeticaBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="nonSoggettoRequisitiMinimi"  type="basic:EmptyType" minOccurs="0" maxOccurs="1" />
-                        <xs:element name="soggettoRequisitiMinimi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="nonSoggettoRequisitiMinimi"  type="basic:EmptyType"/>
+                        <xs:element name="soggettoRequisitiMinimi" type="basic:EmptyType"/>
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -342,7 +323,7 @@
     <xs:complexType name="DocumentazioneCatastaleType">
         <xs:choice>
             <xs:element name="nonComportaVariazioneIscrizione" type="basic:EmptyType"/>
-            <xs:element name="comportaVariazioneIscrizione" >
+            <xs:element name="comportaVariazioneIscrizione">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="protocolloEstremi" type="aggregate:ProtocolloStandardType"/>
@@ -354,7 +335,7 @@
     
     <xs:complexType name="ToponomasticaType">
         <xs:choice>
-            <xs:element name="nonComportaVariazioneCivici"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="nonComportaVariazioneCivici"  type="basic:EmptyType"/>
             <xs:element name="comportaVariazioneCivici">
                 <xs:complexType>
                     <xs:sequence>
@@ -372,8 +353,8 @@
         <xs:complexContent>
             <xs:extension base="scpa:PrevenzioneIncendiBaseType">
                 <xs:choice>
-                    <xs:element name="nonComportatoVariazioniSicurezza"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                    <xs:element name="comportatoVariazioniSicurezza"  type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="nonComportatoVariazioniSicurezza"  type="basic:EmptyType"/>
+                    <xs:element name="comportatoVariazioniSicurezza"  type="basic:EmptyType"/>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
