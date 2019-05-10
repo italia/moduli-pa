@@ -176,7 +176,7 @@
     
     <xs:complexType name="ComunicazioniImpreseEsecutriciDeiLavoriType">
         <xs:choice>
-            <xs:element name="daSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="daSoggettiCoinvolti" type="basic:EmptyType"/>
             <xs:element name="noPrivatiDitteEsterne" type="basic:AbstractBaseType"/>
         </xs:choice>
     </xs:complexType>
@@ -185,7 +185,7 @@
         <xs:complexContent>
             <xs:extension base="suecommon:ImpreseEsecutriciDeiLavoriBaseType">
                 <xs:choice>
-                    <xs:element name="daSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="daSoggettiCoinvolti" type="basic:EmptyType"/>
                     <xs:element name="noPrivatiDitteEsterne" type="basic:AbstractBaseType"/>
                     <xs:element name="primaInizioLavori" type="basic:AbstractBaseType"/>
                 </xs:choice>
@@ -206,8 +206,8 @@
         <xs:sequence>
             <xs:element name="titolo" type="xs:string"/>
             <xs:choice>
-                <xs:element name="TitolareEsclusivo" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="NonTitolareEsclusivo" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="TitolareEsclusivo" type="basic:EmptyType"/>
+                <xs:element name="NonTitolareEsclusivo" type="basic:EmptyType"/>
             </xs:choice>
         </xs:sequence>        
     </xs:complexType>
@@ -219,10 +219,10 @@
             <xs:extension base="suecommon:OperePrevisteBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="NoPartiComuni" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="PartiComuniCondominio" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="PartiComuniFabbricatoMultiProp" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="PartiComuniNoAssenso" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>                
+                        <xs:element name="NoPartiComuni" type="basic:EmptyType"/>
+                        <xs:element name="PartiComuniCondominio" type="basic:EmptyType"/>
+                        <xs:element name="PartiComuniFabbricatoMultiProp" type="basic:EmptyType"/>
+                        <xs:element name="PartiComuniNoAssenso" type="basic:EmptyType"/>                
                     </xs:choice>
                 </xs:sequence>   
             </xs:extension>
@@ -336,8 +336,8 @@
                     <xs:sequence>
                         <xs:group ref="suecommon:ObblighiSaluteSicurezzaEntitaCantiereGroup"/>
                         <xs:choice>
-                            <xs:element name="noNotifica" minOccurs="0" type="basic:EmptyType"/>
-                            <xs:element name="notifica" minOccurs="0">
+                            <xs:element name="noNotifica" type="basic:EmptyType"/>
+                            <xs:element name="notifica">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="allega" minOccurs="0" type="basic:AbstractBaseType"/> 
@@ -354,8 +354,8 @@
  
     <xs:group name="ObblighiSaluteSicurezzaEntitaCantiereGroup">
         <xs:choice>
-            <xs:element name="inf200ggUomo" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="pariSup200ggUomo" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="inf200ggUomo" type="basic:EmptyType"/>
+            <xs:element name="pariSup200ggUomo" type="basic:EmptyType"/>
         </xs:choice>
     </xs:group>
     
@@ -433,7 +433,7 @@
     <!-- Reference suecommon:SicurezzaImpiantiType -->
     <xs:complexType name="SicurezzaImpiantiType">
         <xs:choice>
-            <xs:element name="nonComportaImpianti" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="nonComportaImpianti" type="basic:EmptyType"/>
             <xs:element name="comportaImpianti" type="suecommon:ComportaImpiantiType"/>
         </xs:choice>
     </xs:complexType>                
@@ -459,8 +459,8 @@
                <xs:sequence>
                     <xs:element name="specifica" type="xs:string"/>
                     <xs:choice>
-                        <xs:element name="nonSoggetto" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="soggetto" minOccurs="0">
+                        <xs:element name="nonSoggetto" type="basic:EmptyType"/>
+                        <xs:element name="soggetto">
                             <xs:complexType>
                                 <xs:complexContent>
                                     <xs:extension base="basic:EmptyType">
@@ -483,11 +483,11 @@
             <xs:extension base="suecommon:ConsumiEnergeticiBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="nonSoggettoRisparmioEnergetico" minOccurs="0" type="basic:EmptyType">
+                        <xs:element name="nonSoggettoRisparmioEnergetico" type="basic:EmptyType">
                             <xs:annotation><xs:documentation>non è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del 
                                 d.P.R. n. 380/2001 e del d.lgs. n. 192/2005</xs:documentation></xs:annotation>
                         </xs:element>                        
-                        <xs:element name="soggettoRisparmioEnergetico" minOccurs="0">
+                        <xs:element name="soggettoRisparmioEnergetico">
                             <xs:annotation><xs:documentation>è soggetto al deposito del progetto e della relazione tecnica di cui 
                                 all’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005</xs:documentation></xs:annotation>
                             <xs:complexType>
@@ -500,11 +500,11 @@
                         </xs:element>                         
                     </xs:choice>
                     <xs:choice>
-                        <xs:element name="nonSoggettoFontiRinnovabili" minOccurs="0" type="basic:EmptyType">
+                        <xs:element name="nonSoggettoFontiRinnovabili" type="basic:EmptyType">
                             <xs:annotation><xs:documentation>non è soggetto al deposito del progetto e della relazione tecnica di cui all’articolo 125 del d.P.R. n. 380/2001 e del d.lgs. n. 192/2005
                                 che l’intervento, in relazione agli obblighi in materia di fonti rinnovabili</xs:documentation></xs:annotation>
                         </xs:element>                       
-                        <xs:element name="soggettoFontiRinnovabili" minOccurs="0">
+                        <xs:element name="soggettoFontiRinnovabili">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="prescrizioniInRelTecnica" minOccurs="0" type="basic:EmptyType">
@@ -574,10 +574,10 @@
             <xs:extension base="suecommon:TutelaInquinamentoAcusticoBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="nonRientraArt8" minOccurs="0" type="basic:EmptyType">
+                        <xs:element name="nonRientraArt8" type="basic:EmptyType">
                             <xs:annotation><xs:documentation>non rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995</xs:documentation></xs:annotation>
                         </xs:element>
-                        <xs:element name="rientraArt8" minOccurs="0">
+                        <xs:element name="rientraArt8">
                             <xs:annotation>
                                 <xs:documentation>rientra nell’ambito di applicazione dell’articolo 8 della l. n. 447/1995, integrato con i 
                                 contenuti dell’articolo 4 del d.P.R. n. 227/2011</xs:documentation>
@@ -608,10 +608,10 @@
                         </xs:element> 
                     </xs:choice> 
                     <xs:choice>
-                        <xs:element name="nonRientra19971205" minOccurs="0" type="basic:EmptyType">
+                        <xs:element name="nonRientra19971205" type="basic:EmptyType">
                             <xs:annotation><xs:documentation>non rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:documentation></xs:annotation>
                         </xs:element>
-                        <xs:element name="rientra19971205" minOccurs="0" type="basic:EmptyType">
+                        <xs:element name="rientra19971205" type="basic:EmptyType">
                             <xs:annotation><xs:documentation>rientra nell’ambito dell’applicazione  del d.P.C.M. 5 dicembre 1997</xs:documentation></xs:annotation>
                         </xs:element> 
                     </xs:choice> 
@@ -644,7 +644,7 @@
                                         </xs:documentation>
                                     </xs:annotation>                                    
                                 </xs:element>
-                                <xs:element name="volSup6000" minOccurs="0">
+                                <xs:element name="volSup6000">
                                     <xs:annotation>
                                         <xs:documentation>le opere comportano la produzione di materiali da scavo per un volume superiore a 6000 mc 
                                         e sono soggette a VIA o AIA, e pertanto, ai sensi dell’art. 184-bis, comma 2-bis del d.lgs. n. 152/2006, 
@@ -686,13 +686,13 @@
     <xs:complexType name="PrevenzioneIncendiType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="nonSoggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
+                <xs:element name="nonSoggettoPrevenzioneIncendi" type="basic:EmptyType">
                     <xs:annotation><xs:documentation>non è soggetto alle norme di prevenzione incendi</xs:documentation></xs:annotation>
                 </xs:element>
-                <xs:element name="soggettoPrevenzioneIncendi" minOccurs="0" type="basic:EmptyType">
+                <xs:element name="soggettoPrevenzioneIncendi" type="basic:EmptyType">
                     <xs:annotation><xs:documentation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:documentation></xs:annotation>
                 </xs:element>
-                <xs:element name="parzialeCoperturaPrevenzioneIncendi" minOccurs="0">
+                <xs:element name="parzialeCoperturaPrevenzioneIncendi">
                     <xs:annotation><xs:documentation>presenta caratteristiche tali da non consentire l’integrale osservanza delle regole tecniche di prevenzione incendi</xs:documentation></xs:annotation>
                     <xs:complexType>
                         <xs:complexContent>
@@ -705,11 +705,11 @@
                 </xs:element>
             </xs:choice>
             <xs:choice>
-                <xs:element name="nonSoggettoValutazioneProgetto" minOccurs="0" type="basic:EmptyType">
+                <xs:element name="nonSoggettoValutazioneProgetto" type="basic:EmptyType">
                     <xs:annotation><xs:documentation>non è soggetto alla valutazione del progetto da parte del Comando Provinciale dei Vigili del Fuoco ai sensi del 
                         d.P.R. n. 151/2011</xs:documentation></xs:annotation>
                 </xs:element>                
-                <xs:element name="soggettoValutazioneProgetto" minOccurs="0">
+                <xs:element name="soggettoValutazioneProgetto">
                     <xs:annotation><xs:documentation>è soggetto alle norme tecniche di prevenzione incendi e le stesse sono rispettate nel progetto</xs:documentation></xs:annotation>
                     <xs:complexType>
                         <xs:complexContent>
@@ -720,7 +720,7 @@
                         </xs:complexContent>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="varianteProgetto" minOccurs="0">
+                <xs:element name="varianteProgetto">
                     <xs:annotation><xs:documentation>costituisce variante e il sottoscritto assevera che le modifiche non costituiscono variazione 
                         dei requisiti di sicurezza antincendio già approvati con parere del Comando Provinciale dei Vigili 
                         del fuoco rilasciato con prot. ______________  in data  |__|__|__|__|__|__|__|__|</xs:documentation></xs:annotation>
@@ -737,12 +737,12 @@
     <!-- Reference suecommon:AmiantoType -->
     <xs:complexType name="AmiantoType">
         <xs:choice>
-            <xs:element name="nonInteressano" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="interessano" minOccurs="0">
+            <xs:element name="nonInteressano" type="basic:EmptyType"/>
+            <xs:element name="interessano">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="PianodiLavoroAllegato" minOccurs="0" type="basic:AbstractBaseType"/>
-                        <xs:element name="PianodiLavoroPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="PianodiLavoroAllegato" type="basic:AbstractBaseType"/>
+                        <xs:element name="PianodiLavoroPrimaInizioLavori" type="basic:EmptyType"/>
                     </xs:choice>       
                 </xs:complexType>
             </xs:element>
@@ -758,8 +758,8 @@
         <xs:complexContent>
             <xs:extension base="suecommon:ConformitaSanitariaBaseType">
                 <xs:choice>
-                    <xs:element name="conforme" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="nonConforme" minOccurs="0">
+                    <xs:element name="conforme" type="basic:EmptyType"/>
+                    <xs:element name="nonConforme">
                         <xs:complexType>
                             <xs:complexContent>
                                 <xs:extension base="basic:EmptyType">
@@ -781,8 +781,8 @@
             <xs:extension base="suecommon:InterventoZonaSismicaBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="nonPrevisteOpere" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="previsteOpere" minOccurs="0">
+                        <xs:element name="nonPrevisteOpere" type="basic:EmptyType"/>
+                        <xs:element name="previsteOpere">
                             <xs:annotation><xs:documentation>prevede la realizzazione di opere di conglomerato cementizio armato, normale e precompresso ed a 
                                 struttura metallica</xs:documentation></xs:annotation>
                             <xs:complexType>
@@ -796,15 +796,15 @@
                         </xs:element>
                     </xs:choice>
                     <xs:choice>
-                        <xs:element name="nonPrevisteOpereNormativaRegionale" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="varianteSostanziale" minOccurs="0">
+                        <xs:element name="nonPrevisteOpereNormativaRegionale" type="basic:EmptyType"/>
+                        <xs:element name="varianteSostanziale">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="progettoEsecutivo" minOccurs="0" type="aggregate:ProtocolloStandardType"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element> 
-                        <xs:element name="previsteOpereNormativaRegionale" minOccurs="0">
+                        <xs:element name="previsteOpereNormativaRegionale">
                             <xs:annotation><xs:documentation>prevede opere in zona sismica da denunciare ai sensi dell’articolo 93 del d.P.R. n. 380/2001 
                                 o della corrispondente normativa regionale</xs:documentation></xs:annotation>
                             <xs:complexType>
@@ -816,7 +816,7 @@
                                 </xs:complexContent>                   
                             </xs:complexType>                            
                         </xs:element> 
-                        <xs:element name="previsteOpereStrutturali" minOccurs="0">
+                        <xs:element name="previsteOpereStrutturali">
                             <xs:annotation><xs:documentation>prevede opere strutturali soggette ad autorizzazione sismica ai sensi dell’articolo 94 del 
                                 d.P.R. n. 380/2001 o della corrispondente normativa regional</xs:documentation></xs:annotation>
                             <xs:complexType>
@@ -910,13 +910,13 @@
     <!-- Reference suecommon:AutorizzazionePaesaggisticaType -->    
     <xs:complexType name="AutorizzazionePaesaggisticaType">
         <xs:choice>
-            <xs:element name="nonRicadeInZonaTutelata" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="nonSoggettoAutorizzazione" minOccurs="0" type="basic:EmptyType">
+            <xs:element name="nonRicadeInZonaTutelata" type="basic:EmptyType"/>
+            <xs:element name="nonSoggettoAutorizzazione" type="basic:EmptyType">
                 <xs:annotation><xs:documentation>ricade  in zona tutelata, ma le opere non comportano alterazione dei luoghi o dell’aspetto 
                     esteriore degli edifici ovvero non sono soggetti ad autorizzazione ai sensi dell’art. 149, d.lgs. 
                     n. 42/2004 e del d.P.R. n. 31/2017,  allegato A e art. 4</xs:documentation></xs:annotation>
             </xs:element>
-            <xs:element name="ricadeInZonaTutelata" minOccurs="0">
+            <xs:element name="ricadeInZonaTutelata">
                 <xs:complexType>
                     <xs:choice>
                         <xs:element name="procedimentoSemplificato">
@@ -953,8 +953,8 @@
     <!-- Reference suecommon:AutorizzazioneSoprintendenzaType -->
     <xs:complexType name="AutorizzazioneSoprintendenzaType">
         <xs:choice>
-            <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="sottopostoTutela" minOccurs="0">
+            <xs:element name="nonSottopostoTutela" type="basic:EmptyType"/>
+            <xs:element name="sottopostoTutela">
                 <xs:complexType>
                     <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta</xs:documentation></xs:annotation>
                     <xs:complexContent>
@@ -974,9 +974,9 @@
         <xs:complexContent>
             <xs:extension base="suecommon:AreaProtettaBaseType">
                 <xs:choice>
-                    <xs:element name="nonRicadeTutela" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="ricadeTutela" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="sottopostoDisposizioni" minOccurs="0">
+                    <xs:element name="nonRicadeTutela" type="basic:EmptyType"/>
+                    <xs:element name="ricadeTutela" type="basic:EmptyType"/>
+                    <xs:element name="sottopostoDisposizioni">
                         <xs:annotation><xs:documentation>è sottoposto alle relative disposizioni</xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio del parere/nulla osta </xs:documentation></xs:annotation>
@@ -999,9 +999,9 @@
         <xs:complexContent>
             <xs:extension base="suecommon:VincoloIdrogeologicoBaseType">
                 <xs:choice>
-                    <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="tutelaSenzaAutorizzazione" minOccurs="0" type="basic:EmptyType"/>                   
-                    <xs:element name="sottopostoTutela" minOccurs="0">
+                    <xs:element name="nonSottopostoTutela" type="basic:EmptyType"/>
+                    <xs:element name="tutelaSenzaAutorizzazione" type="basic:EmptyType"/>                   
+                    <xs:element name="sottopostoTutela">
                         <xs:complexType>
                             <xs:annotation><xs:documentation>si allega la documentazione necessaria ai fini del rilascio dell’autorizzazione</xs:documentation></xs:annotation>
                             <xs:complexContent>
@@ -1023,8 +1023,8 @@
         <xs:complexContent>
             <xs:extension base="suecommon:VincoloIdraulicoBaseType">
                 <xs:choice>
-                    <xs:element name="nonSottopostoTutela" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="sottopostoTutela" minOccurs="0">
+                    <xs:element name="nonSottopostoTutela" type="basic:EmptyType"/>
+                    <xs:element name="sottopostoTutela">
                         <xs:complexType>
                             <xs:complexContent>
                                 <xs:extension base="basic:EmptyType">
@@ -1045,8 +1045,8 @@
         <xs:complexContent>
             <xs:extension base="suecommon:Natura2000BaseType">
                 <xs:choice>
-                    <xs:element name="nonSoggettoVINCA" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="soggettoVINCA" minOccurs="0">
+                    <xs:element name="nonSoggettoVINCA" type="basic:EmptyType"/>
+                    <xs:element name="soggettoVINCA">
                         <xs:complexType>
                             <xs:complexContent>
                                 <xs:extension base="basic:EmptyType">
@@ -1067,9 +1067,9 @@
         <xs:complexContent>
             <xs:extension base="suecommon:RispettoCimiterialeBaseType">
                 <xs:choice>
-                    <xs:element name="nonRicade" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="ricadeConsentito" minOccurs="0" type="basic:EmptyType"/>
-                    <xs:element name="ricadeNonConsentito" minOccurs="0">
+                    <xs:element name="nonRicade" type="basic:EmptyType"/>
+                    <xs:element name="ricadeConsentito" type="basic:EmptyType"/>
+                    <xs:element name="ricadeNonConsentito">
                         <xs:complexType>
                             <xs:complexContent>
                                 <xs:extension base="basic:EmptyType">
@@ -1086,12 +1086,12 @@
     <!-- Reference suecommon:RischioRilevanteType -->
     <xs:complexType name="RischioRilevanteType">
         <xs:choice>
-            <xs:element name="assenzaAttivita" minOccurs="0" type="basic:EmptyType"/>
+            <xs:element name="assenzaAttivita" type="basic:EmptyType"/>
             <xs:element name="presenzaAttivitaAreaDanno">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="nonRicadeAreaDanno" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="ricadeAreaDanno" minOccurs="0">
+                        <xs:element name="nonRicadeAreaDanno" type="basic:EmptyType"/>
+                        <xs:element name="ricadeAreaDanno">
                             <xs:complexType>
                                 <xs:complexContent>
                                     <xs:extension base="basic:EmptyType">
@@ -1103,7 +1103,7 @@
                     </xs:choice>
                 </xs:complexType>              
             </xs:element>
-            <xs:element name="presenzaAttivitaNoAreaDanno" minOccurs="0">
+            <xs:element name="presenzaAttivitaNoAreaDanno">
                 <xs:complexType>
                     <xs:complexContent>
                         <xs:extension base="basic:EmptyType">
