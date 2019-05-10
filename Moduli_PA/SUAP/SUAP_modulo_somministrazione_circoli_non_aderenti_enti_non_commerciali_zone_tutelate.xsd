@@ -37,7 +37,6 @@
                 <xs:element name="avvio" type="somcirnonadenoncomzontut:AvvioType"/>
                 <xs:element name="ampliamento" type="somcirnonadenoncomzontut:AmpliamentoBaseType"/>
             </xs:choice>
-           
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="somcirnonadenoncomzontut:TabellaAllegatiType"/> 

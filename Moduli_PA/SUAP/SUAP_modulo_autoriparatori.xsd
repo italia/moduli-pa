@@ -47,9 +47,9 @@
     <xs:complexType name="AperturaType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="meccatronica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="carrozzeria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="gommista" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="meccatronica" type="basic:EmptyType"/>
+                <xs:element name="carrozzeria" type="basic:EmptyType"/>
+                <xs:element name="gommista" type="basic:EmptyType"/>
             </xs:choice>
             <xs:element name="superficieCoperta" type="xs:decimal"/>         
         </xs:sequence>
@@ -93,10 +93,10 @@
     
     <xs:complexType name="TipoQualificaType">
         <xs:choice>
-            <xs:element name="lavoratoreSubordinato" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="collaboratoreFamiliare" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="socioLavoratore" minOccurs="0" type="basic:EmptyType"/>
-            <xs:element name="altro" minOccurs="0" type="xs:string"/>
+            <xs:element name="lavoratoreSubordinato" type="basic:EmptyType"/>
+            <xs:element name="collaboratoreFamiliare" type="basic:EmptyType"/>
+            <xs:element name="socioLavoratore" type="basic:EmptyType"/>
+            <xs:element name="altro" type="xs:string"/>
         </xs:choice>
     </xs:complexType>
     
@@ -125,7 +125,7 @@
             <xs:element name="attivitaEsercitataPressoImpresa">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="inQualitaDi" type="xs:string" minOccurs="0" default="operaio qualificato"/>
+                        <xs:element name="inQualitaDi" type="xs:string" default="operaio qualificato"/>
                         <xs:element name="pressoImpresa" type="autoriparatori:TipoAttivitaPressoImpresaType"  maxOccurs="unbounded"/>
                      </xs:sequence>
                 </xs:complexType>

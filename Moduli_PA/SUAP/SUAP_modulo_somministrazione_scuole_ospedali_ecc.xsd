@@ -72,9 +72,9 @@
     <xs:complexType name="TipoEsercizioType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="ScuOspRelMilVig" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="mezziDiTrasportoDitta" minOccurs="0" type="xs:string"/>
-                <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>
+                <xs:element name="ScuOspRelMilVig" type="basic:EmptyType"/>
+                <xs:element name="mezziDiTrasportoDitta" type="xs:string"/>
+                <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>

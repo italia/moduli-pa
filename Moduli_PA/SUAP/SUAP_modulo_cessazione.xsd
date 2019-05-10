@@ -61,8 +61,8 @@
             <xs:extension base="cessazione:CessazioneSospensioneType">
                 <xs:sequence>
                         <xs:choice>
-                            <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="decorrenzaDal" type="xs:date" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="contestuale" type="basic:EmptyType"/>
+                            <xs:element name="decorrenzaDal" type="xs:date"/>
                         </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -74,8 +74,8 @@
             <xs:extension base="cessazione:CessazioneSospensioneType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="contestuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="decorrenza" type="basic:PeriodoDateType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="contestuale" type="basic:EmptyType"/>
+                        <xs:element name="decorrenza" type="basic:PeriodoDateType"/>
                     </xs:choice>
                  </xs:sequence>
             </xs:extension>
