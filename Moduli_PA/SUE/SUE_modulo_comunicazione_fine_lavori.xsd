@@ -73,8 +73,8 @@
         <xs:sequence>
             <xs:element name="dataFineLavori" type="xs:date" minOccurs="1"/>
             <xs:choice>
-                <xs:element name="statoLavoriCompletati" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="statoLavoriParziale" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="statoLavoriCompletati" type="basic:EmptyType"/>
+                <xs:element name="statoLavoriParziale" type="basic:EmptyType"/>
             </xs:choice>
             <xs:element name="attoInterventoNome" type="xs:string" minOccurs="1"/>
             <xs:element name="attoInterventoProtocollo" type="aggregate:ProtocolloStandardType" minOccurs="1"/>
