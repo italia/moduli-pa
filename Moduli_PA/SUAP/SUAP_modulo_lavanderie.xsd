@@ -64,8 +64,8 @@
     <xs:complexType name="TipoAttivitaType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="Tintolavanderia" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="LavanderiaGettoni" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="Tintolavanderia" type="basic:EmptyType"/>
+                <xs:element name="LavanderiaGettoni" type="basic:EmptyType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -129,9 +129,9 @@
                         <xs:element name="anniInImpresa" minOccurs="0">
                             <xs:complexType>
                                 <xs:choice>
-                                    <xs:element name="anni1" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                                    <xs:element name="anni2" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                                    <xs:element name="anni3" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="anni1" type="basic:EmptyType"/>
+                                    <xs:element name="anni2" type="basic:EmptyType"/>
+                                    <xs:element name="anni3" type="basic:EmptyType"/>
                                 </xs:choice>
                             </xs:complexType>
                         </xs:element>

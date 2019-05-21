@@ -45,7 +45,6 @@
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="somareeserviziostazioni:TabellaAllegatiType"/>
-            
         </xs:sequence>  
     </xs:complexType>    
     
@@ -53,12 +52,12 @@
         <xs:sequence>
             <xs:choice>
                 <xs:choice>
-                    <xs:element name="areaDiServizio" minOccurs="0" type="xs:string"/>
-                    <xs:element name="stazioneFerroviaria" minOccurs="0" type="xs:string"/>
-                    <xs:element name="stazioneAeroportuale" minOccurs="0" type="xs:string"/>
-                    <xs:element name="stazioneMarittima" minOccurs="0" type="xs:string"/>
+                    <xs:element name="areaDiServizio" type="xs:string"/>
+                    <xs:element name="stazioneFerroviaria" type="xs:string"/>
+                    <xs:element name="stazioneAeroportuale" type="xs:string"/>
+                    <xs:element name="stazioneMarittima" type="xs:string"/>
                 </xs:choice>
-                <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType" minOccurs="0"/>
+                <xs:element name="altro" type="somareeserviziostazioni:TipoEsercizioAltroBaseType"/>
             </xs:choice>    
             <xs:element name="superficieSomministrazione" type="suapcommon:SuperficieEsercizioBaseType" />
             <xs:element name="modalitaGestione" type="somareeserviziostazioni:ModalitaGestioneBaseType"/>

@@ -37,9 +37,9 @@
                     <xs:element name="inQualita" minOccurs="1">
                         <xs:complexType> 
                             <xs:choice>
-                                <xs:element name="titolare" type="basic:EmptyType" minOccurs="0"/>
-                                <xs:element name="legaleRappresentante" type="basic:EmptyType"  minOccurs="0"/>
-                                <xs:element name="altro" type="xs:string"  minOccurs="0"/>
+                                <xs:element name="titolare" type="basic:EmptyType" />
+                                <xs:element name="legaleRappresentante" type="basic:EmptyType"  />
+                                <xs:element name="altro" type="xs:string" />
                             </xs:choice> 
                         </xs:complexType>
                     </xs:element>
@@ -56,8 +56,8 @@
                         <xs:complexType> 
                             <xs:sequence> 
                                 <xs:choice>
-                                    <xs:element name="ProcuraDelega" type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="AgenziaImprese"   minOccurs="0">
+                                    <xs:element name="ProcuraDelega" type="basic:EmptyType" />
+                                    <xs:element name="AgenziaImprese">
                                         <xs:complexType>
                                           <xs:sequence>
                                               <xs:element name="denominazione" type="xs:string"  minOccurs="1"/>
@@ -98,14 +98,14 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:InCentroCommercialeBaseType">
                 <xs:choice>
-                    <xs:element name="si"  minOccurs="0" maxOccurs="1" >
+                    <xs:element name="si">
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="denominazione" type="xs:string" minOccurs="0"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
-                    <xs:element name="no" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="no" type="basic:EmptyType"/>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -359,7 +359,7 @@
             <xs:extension base="suapcommon:StruttureRicettiveCarattereEsercizioBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="annuale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="annuale" type="basic:EmptyType"/>
                         <xs:element name="stagionale" type="suapcommon:CarattereStagionaleType"/>
                     </xs:choice>
                 </xs:sequence>
@@ -389,9 +389,9 @@
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="no"  type="basic:EmptyType"/>
+                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType"/>
+                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType"/>
                                 </xs:choice>
                             </xs:sequence>
                         </xs:complexType>
@@ -401,8 +401,8 @@
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="impiantiperClienti" minOccurs="0">
+                                    <xs:element name="no"  type="basic:EmptyType"/>
+                                    <xs:element name="impiantiPerClienti">
                                         <xs:complexType>
                                             <xs:sequence>
                                                 <xs:element name="nrImpianti"  type="xs:integer" minOccurs="0"/>
@@ -410,7 +410,7 @@
                                             </xs:sequence>
                                         </xs:complexType>
                                     </xs:element>
-                                    <xs:element name="ImpiantiAlPubblico"  minOccurs="0">
+                                    <xs:element name="ImpiantiAlPubblico">
                                         <xs:complexType>
                                             <xs:sequence>
                                                 <xs:element name="nrImpianti"  type="xs:integer" minOccurs="0"/>
@@ -427,9 +427,9 @@
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioPerClienti"  type="xs:integer" minOccurs="0"/>
-                                    <xs:element name="servizioAlPubblico"  type="xs:integer" minOccurs="0"/>
+                                    <xs:element name="no"  type="basic:EmptyType"/>
+                                    <xs:element name="servizioPerClienti"  type="xs:integer"/>
+                                    <xs:element name="servizioAlPubblico"  type="xs:integer"/>
                                 </xs:choice>
                             </xs:sequence>
                         </xs:complexType>
@@ -439,9 +439,9 @@
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:choice>
-                                    <xs:element name="no"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType" minOccurs="0"/>
-                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType" minOccurs="0"/>
+                                    <xs:element name="no"  type="basic:EmptyType"/>
+                                    <xs:element name="servizioPerClienti"  type="basic:EmptyType"/>
+                                    <xs:element name="servizioAlPubblico"  type="basic:EmptyType"/>
                                 </xs:choice>
                             </xs:sequence>
                         </xs:complexType>
@@ -474,7 +474,7 @@
                             <xs:sequence>
                                 <xs:element name="unitaStessoTipo"  type="xs:integer" minOccurs="0"/>
                                 <xs:choice  minOccurs="0">
-                                    <xs:element name="monolocali"  type="basic:EmptyType" />
+                                    <xs:element name="monolocali"  type="basic:EmptyType"/>
                                     <xs:element name="appartamentiPiuLocali">
                                         <xs:complexType>
                                             <xs:sequence>
@@ -748,10 +748,10 @@
     <xs:complexType name="NotificaSanitariaType">
        <xs:sequence>
            <xs:choice>
-               <xs:element name="apertura" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaAperturaType"/>
-               <xs:element name="subingresso" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaSubingressoType"/>
-               <xs:element name="modificaAttivita" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariModificaAttivitaType"/>
-               <xs:element name="cessazioneSospensione" minOccurs="0" maxOccurs="1" type="suapcommon:NotificaSanitariaCessazioneSospensioneType"/>
+               <xs:element name="apertura" type="suapcommon:NotificaSanitariaAperturaType"/>
+               <xs:element name="subingresso" type="suapcommon:NotificaSanitariaSubingressoType"/>
+               <xs:element name="modificaAttivita" type="suapcommon:NotificaSanitariModificaAttivitaType"/>
+               <xs:element name="cessazioneSospensione" type="suapcommon:NotificaSanitariaCessazioneSospensioneType"/>
            </xs:choice>
            <xs:element name="note" type="xs:string" minOccurs="0"/>
            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
@@ -1055,11 +1055,11 @@
     <xs:complexType name="VenditaEsclusivaType">
         <xs:sequence>
             <xs:choice>
-                <xs:element name="DIPENDENTI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
-                <xs:element name="MILITARI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
-                <xs:element name="SOCI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
-                <xs:element name="ACCESSO_SCUOLE" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
-                <xs:element name="ACCESSO_OSPEDALI" minOccurs="0" maxOccurs="1" type="basic:EmptyType"/>
+                <xs:element name="DIPENDENTI" type="basic:EmptyType"/>
+                <xs:element name="MILITARI" type="basic:EmptyType"/>
+                <xs:element name="SOCI" type="basic:EmptyType"/>
+                <xs:element name="ACCESSO_SCUOLE" type="basic:EmptyType"/>
+                <xs:element name="ACCESSO_OSPEDALI" type="basic:EmptyType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -1067,9 +1067,9 @@
     <!-- BASIC COMPONENTS TYPE -->
     <xs:complexType name="RuoloInImpresaType">
         <xs:choice>
-            <xs:element name="DipendenteQualificato" type="basic:EmptyType" minOccurs="0"/>
-            <xs:element name="CoadiutoreFamiliare" type="basic:EmptyType"  minOccurs="0"/>
-            <xs:element name="SocioLavoratore" type="xs:string"  minOccurs="0"/>
+            <xs:element name="DipendenteQualificato" type="basic:EmptyType"/>
+            <xs:element name="CoadiutoreFamiliare" type="basic:EmptyType"/>
+            <xs:element name="SocioLavoratore" type="xs:string"/>
         </xs:choice> 
     </xs:complexType>
     

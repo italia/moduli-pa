@@ -60,10 +60,10 @@
     
     <xs:complexType name="TipologiaManifestazioneType">
         <xs:choice>
-            <xs:element name="sagra" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="fiera" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="religiosaTradizionaleCulturale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="eventoLocale" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="sagra" type="basic:EmptyType"/>
+            <xs:element name="fiera" type="basic:EmptyType"/>
+            <xs:element name="religiosaTradizionaleCulturale" type="basic:EmptyType"/>
+            <xs:element name="eventoLocale" type="basic:EmptyType"/>
         </xs:choice>
    </xs:complexType>
    

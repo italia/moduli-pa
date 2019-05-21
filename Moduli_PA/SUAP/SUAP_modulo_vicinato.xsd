@@ -38,10 +38,8 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="vicinato:AperturaType"/>
-                <xs:sequence>
-                    <xs:element name="trasferimento" type="vicinato:TrasferimentoType" minOccurs="0"/>
-                    <xs:element name="ampliamento" type="vicinato:AmpliamentoType" minOccurs="0"/>
-                </xs:sequence>
+                <xs:element name="trasferimento" type="vicinato:TrasferimentoType"/>
+                <xs:element name="ampliamento" type="vicinato:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
@@ -99,8 +97,8 @@
             <xs:element name="tipoEsercizio" minOccurs="0">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="vicinato" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="vendita_esclusiva_mediante_apparecchi_automatici" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="vicinato" type="basic:EmptyType"/>
+                        <xs:element name="vendita_esclusiva_mediante_apparecchi_automatici" type="basic:EmptyType"/>
                     </xs:choice>
                 </xs:complexType>
             </xs:element>

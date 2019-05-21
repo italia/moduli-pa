@@ -55,9 +55,9 @@
             <xs:extension base="striaa:TipologiaEsercizioBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="campeggio" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="villaggioturistico" type="basic:EmptyType" minOccurs="0"/> 
-                        <xs:element name="altro" type="xs:string" minOccurs="0"/>
+                        <xs:element name="campeggio" type="basic:EmptyType"/>
+                        <xs:element name="villaggioturistico" type="basic:EmptyType"/> 
+                        <xs:element name="altro" type="xs:string"/>
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>

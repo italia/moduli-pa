@@ -42,7 +42,6 @@
                 <xs:element name="trasformazione" type="panifici:TrasformazioneType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="panifici:DichiarazioniType"/>
-
             <xs:element name="altreDichiarazioni" type="panifici:AltreDichiarazioniType" />
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
             <xs:element name="tabellaAllegati" type="panifici:TabellaAllegatiType"/>                 
@@ -107,8 +106,8 @@
             <xs:extension base="panifici:TipoModificaBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="aggiunta" type="basic:EmptyType" minOccurs="0" />
-                        <xs:element name="eliminata" type="basic:EmptyType" minOccurs="0" />
+                        <xs:element name="aggiunta" type="basic:EmptyType"/>
+                        <xs:element name="eliminata" type="basic:EmptyType"/>
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -193,17 +192,17 @@
             <xs:element name="dicConsumoFarina" minOccurs="0">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="minoreuguale300Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="da300a1500Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="maggiore1500Kg" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="minoreuguale300Kg" type="basic:EmptyType"/>
+                        <xs:element name="da300a1500Kg" type="basic:EmptyType"/>
+                        <xs:element name="maggiore1500Kg" type="basic:EmptyType"/>
                     </xs:choice>
                 </xs:complexType>
             </xs:element>
             <xs:element name="dichConsumoIdrico" minOccurs="0">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="minoreuguale5Mc" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="maggiore5Mc" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="minoreuguale5Mc" type="basic:EmptyType"/>
+                        <xs:element name="maggiore5Mc" type="basic:EmptyType"/>
                     </xs:choice>
                 </xs:complexType>
             </xs:element>
