@@ -38,10 +38,8 @@
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
             <xs:choice>
                 <xs:element name="apertura" type="mediagrande:AperturaType"/>
-                <xs:sequence>
-                    <xs:element name="trasferimento" type="mediagrande:TrasferimentoType" minOccurs="0"/>
-                    <xs:element name="ampliamento" type="mediagrande:AmpliamentoType" minOccurs="0"/>
-                </xs:sequence>
+                <xs:element name="trasferimento" type="mediagrande:TrasferimentoType"/>
+                <xs:element name="ampliamento" type="mediagrande:AmpliamentoType"/>
             </xs:choice>
             <xs:element name="dichiarazioni" type="suapcommon:DichiarazioniType"/>
             <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
@@ -135,9 +133,9 @@
     <xs:complexType name="TipoEsercizioType" >
         <xs:sequence>
             <xs:choice>
-                <xs:element name="media_struttura" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="grande_struttura" minOccurs="0" type="basic:EmptyType"/>
-                <xs:element name="apparecchi_automatici" minOccurs="0" type="basic:EmptyType"/>
+                <xs:element name="media_struttura" type="basic:EmptyType"/>
+                <xs:element name="grande_struttura" type="basic:EmptyType"/>
+                <xs:element name="apparecchi_automatici" type="basic:EmptyType"/>
             </xs:choice>
         </xs:sequence>        
     </xs:complexType>

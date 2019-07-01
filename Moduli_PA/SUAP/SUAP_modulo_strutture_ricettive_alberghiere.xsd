@@ -55,10 +55,10 @@
             <xs:extension base="strialb:TipologiaEsercizioBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="albergo" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="rta" type="basic:EmptyType" minOccurs="0"/> 
-                        <xs:element name="albergoDiffuso" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="condhotel" minOccurs="0">
+                        <xs:element name="albergo" type="basic:EmptyType"/>
+                        <xs:element name="rta" type="basic:EmptyType"/> 
+                        <xs:element name="albergoDiffuso" type="basic:EmptyType"/>
+                        <xs:element name="condhotel">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="estremiRiqualificazione"  type="aggregate:ProtocolloType" minOccurs="0"/>
@@ -72,7 +72,7 @@
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="altro" type="xs:string" minOccurs="0"/>   
+                        <xs:element name="altro" type="xs:string"/>   
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>

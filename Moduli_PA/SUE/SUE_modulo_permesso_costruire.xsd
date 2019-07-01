@@ -72,10 +72,10 @@
             <xs:extension base="suecommon:QualificazioneInterventoBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="articolo10" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="assoggettatoSCIA" minOccurs="0" type="xs:string"/>
-                        <xs:element name="conformeDisciplinaUrbanistica" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="derogaPianificazioneUrbanistica" minOccurs="0">
+                        <xs:element name="articolo10" type="basic:EmptyType"/>
+                        <xs:element name="assoggettatoSCIA" type="xs:string"/>
+                        <xs:element name="conformeDisciplinaUrbanistica" type="basic:EmptyType"/>
+                        <xs:element name="derogaPianificazioneUrbanistica">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="densitaEdilizia" minOccurs="0" type="xs:string"/>
@@ -110,7 +110,7 @@
                 <xs:sequence>
                     <xs:choice>
                         <xs:group ref="suecommon:RegolaritaUrbanisticaOptionGroup"/>
-                        <xs:element name="nuovaCostruzione" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="nuovaCostruzione" type="basic:EmptyType"/>
                     </xs:choice>
                     <xs:element name="praticheStessoImmobile" minOccurs="0">
                         <xs:complexType>
@@ -130,19 +130,19 @@
         <xs:complexContent>
             <xs:extension base="suecommon:CalcoloContributoBaseType">
             <xs:choice>
-                <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
-                <xs:element name="titoloOneroso" minOccurs="0">
+                <xs:element name="titoloGratuito" type="xs:string"/>
+                <xs:element name="titoloOneroso">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:choice>
-                                <xs:element name="calcoloSportello" minOccurs="0" type="basic:EmptyType"/>
-                                <xs:element name="calcoloPreventivo" minOccurs="0" type="basic:EmptyType"/>                                                    
+                                <xs:element name="calcoloSportello" type="basic:EmptyType"/>
+                                <xs:element name="calcoloPreventivo" type="basic:EmptyType"/>                                                    
                             </xs:choice>
                             <xs:element name="versamento" minOccurs="0">
                                 <xs:complexType>
                                     <xs:choice>
-                                        <xs:element name="momentoRitiro" minOccurs="0" type="basic:EmptyType"/>
-                                        <xs:element name="chiedeRateizzazione" minOccurs="0">   
+                                        <xs:element name="momentoRitiro" type="basic:EmptyType"/>
+                                        <xs:element name="chiedeRateizzazione">   
                                             <xs:complexType>
                                                 <xs:sequence>
                                                     <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>
@@ -165,17 +165,17 @@
     <xs:complexType name="ObblighiSaluteSicurezzaType">
         <xs:choice>
             <xs:element name="nonRicade" type="basic:EmptyType"/>
-            <xs:element name="ricade" >
+            <xs:element name="ricade">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:group ref="suecommon:ObblighiSaluteSicurezzaEntitaCantiereGroup"/>
                         <xs:choice>
-                            <xs:element name="noNotifica" minOccurs="0" type="basic:EmptyType"/>
-                            <xs:element name="notifica" minOccurs="0">
+                            <xs:element name="noNotifica" type="basic:EmptyType"/>
+                            <xs:element name="notifica">
                                 <xs:complexType>
                                     <xs:choice>
-                                        <xs:element name="allega" minOccurs="0" type="basic:AbstractBaseType"/> 
-                                        <xs:element name="invioPrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/> 
+                                        <xs:element name="allega" type="basic:AbstractBaseType"/> 
+                                        <xs:element name="invioPrimaInizioLavori" type="basic:EmptyType"/> 
                                     </xs:choice>
                                 </xs:complexType>
                             </xs:element>
@@ -232,7 +232,7 @@
         <xs:complexContent>
             <xs:extension base="suecommon:ImpreseEsecutriciDeiLavoriBaseType">
                 <xs:choice>
-                    <xs:element name="daSoggettiCoinvolti" minOccurs="0" type="basic:EmptyType"/>
+                    <xs:element name="daSoggettiCoinvolti" type="basic:EmptyType"/>
                     <xs:element name="primaInizioLavori" type="basic:EmptyType"/>
                 </xs:choice>
             </xs:extension>

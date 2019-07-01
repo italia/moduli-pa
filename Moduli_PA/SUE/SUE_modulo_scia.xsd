@@ -87,9 +87,9 @@
     <!-- Reference scia:PresentazioneType -->
     <xs:complexType name="PresentazioneType">
         <xs:choice>
-            <xs:element name="SCIA" minOccurs="0" type="xs:date"/>
-            <xs:element name="SCIAUnica" minOccurs="0" type="xs:date"/>
-            <xs:element name="SCIACondizionata" minOccurs="0" type="basic:EmptyType" />
+            <xs:element name="SCIA" type="xs:date"/>
+            <xs:element name="SCIAUnica" type="xs:date"/>
+            <xs:element name="SCIACondizionata" type="basic:EmptyType" />
         </xs:choice>
     </xs:complexType>
  
@@ -98,25 +98,25 @@
         <xs:complexContent>
             <xs:extension base="suecommon:CalcoloContributoBaseType">
                 <xs:choice>
-                    <xs:element name="titoloGratuito" minOccurs="0" type="xs:string"/>
-                    <xs:element name="titoloOneroso" minOccurs="0">
+                    <xs:element name="titoloGratuito" type="xs:string"/>
+                    <xs:element name="titoloOneroso">
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="contributo">
                                     <xs:complexType>
                                         <xs:choice>
-                                            <xs:element name="calcoloSportello" minOccurs="0" type="basic:EmptyType"/>
-                                            <xs:element name="calcoloPreventivo" minOccurs="0" type="basic:EmptyType"/>                                                    
+                                            <xs:element name="calcoloSportello" type="basic:EmptyType"/>
+                                            <xs:element name="calcoloPreventivo" type="basic:EmptyType"/>                                                    
                                         </xs:choice>                                        
                                     </xs:complexType>
                                 </xs:element>
                                 <xs:element name="versamento">
                                     <xs:complexType>
                                         <xs:choice>
-                                            <xs:element name="allegaAttestazione" minOccurs="0" type="basic:EmptyType"/>
-                                            <xs:element name="trasmettePrimaInizioLavori" minOccurs="0" type="basic:EmptyType"/>      
-                                            <xs:element name="chiedeRateizzazione" minOccurs="0" type="basic:EmptyType"/>
-                                            <xs:element name="corrispondeInCorso" minOccurs="0" type="basic:EmptyType"/>
+                                            <xs:element name="allegaAttestazione" type="basic:EmptyType"/>
+                                            <xs:element name="trasmettePrimaInizioLavori" type="basic:EmptyType"/>      
+                                            <xs:element name="chiedeRateizzazione" type="basic:EmptyType"/>
+                                            <xs:element name="corrispondeInCorso" type="basic:EmptyType"/>
                                         </xs:choice>  
                                     </xs:complexType>    
                                 </xs:element> 
@@ -134,31 +134,31 @@
             <xs:extension base="suecommon:QualificazioneInterventoBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="manutenzioneStarordinaria" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="corsoDiEsecuzione" minOccurs="0">
+                        <xs:element name="manutenzioneStarordinaria" type="basic:EmptyType"/>
+                        <xs:element name="corsoDiEsecuzione">
                             <xs:complexType>
                             <xs:sequence>
                                 <xs:choice>
-                                    <xs:element name="ricevutaVersamento" minOccurs="0" type="basic:EmptyType"/>
+                                    <xs:element name="ricevutaVersamento" type="basic:EmptyType"/>
                                 </xs:choice>
                             </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="sanatoriaIntervento" minOccurs="0">
+                        <xs:element name="sanatoriaIntervento">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element type="xs:date" name="data"/>
                                     <xs:choice>
-                                        <xs:element name="ricevutaVersamento" minOccurs="0" type="basic:EmptyType"/>
+                                        <xs:element name="ricevutaVersamento" type="basic:EmptyType"/>
                                     </xs:choice>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="varianteInCorsoDOpera" minOccurs="0" type="aggregate:AttoBaseType"/>
+                        <xs:element name="varianteInCorsoDOpera" type="aggregate:AttoBaseType"/>
                     </xs:choice>  
                     <xs:choice>
-                        <xs:element name="procedimentoAutomatizzato" minOccurs="0" type="basic:EmptyType"/>
-                        <xs:element name="procedimentoOrdinario" minOccurs="0" type="basic:EmptyType"/>
+                        <xs:element name="procedimentoAutomatizzato" type="basic:EmptyType"/>
+                        <xs:element name="procedimentoOrdinario" type="basic:EmptyType"/>
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>

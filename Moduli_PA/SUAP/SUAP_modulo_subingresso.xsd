@@ -88,13 +88,13 @@
                 <xs:element name="decorrenzaDa" type="xs:date"/>
             </xs:choice>
             <xs:choice>
-                <xs:element name="compravendita" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="affittoAzienda" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="donazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="fusione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="fallimento" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="successione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="altraMotivazione" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="compravendita" type="basic:EmptyType"/>
+                <xs:element name="affittoAzienda" type="basic:EmptyType"/>
+                <xs:element name="donazione" type="basic:EmptyType"/>
+                <xs:element name="fusione" type="basic:EmptyType"/>
+                <xs:element name="fallimento" type="basic:EmptyType"/>
+                <xs:element name="successione" type="basic:EmptyType"/>
+                <xs:element name="altraMotivazione" type="xs:string"/>
             </xs:choice>
             <xs:element name="attoRegistrazione" type="aggregate:AttoBaseType"/>
             <xs:element name="nuovoSitoWeb" type="xs:anyURI" minOccurs="0"/>
@@ -104,8 +104,8 @@
     <!-- AGGREGATE SPECIALIZED TYPE -->
     <xs:complexType name="DichiarazioniType">
         <xs:choice>
-            <xs:element name="commercioSomministrazione" type="suapcommon:DichiarazioniType" minOccurs="0"/>
-            <xs:element name="acconciatori" minOccurs="0"  >
+            <xs:element name="commercioSomministrazione" type="suapcommon:DichiarazioniType"/>
+            <xs:element name="acconciatori">
                 <xs:complexType>
                     <xs:choice>
                         <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiarazioniAcconciatoriRequisitiProfessionaliType"/>
@@ -113,7 +113,7 @@
                     </xs:choice> 
                 </xs:complexType>
             </xs:element>
-            <xs:element name="estetisti"  minOccurs="0">
+            <xs:element name="estetisti">
                 <xs:complexType>
                     <xs:choice>
                         <xs:element name="dichiaranteResponsabileTecnicoRequisitiProfessionali" type="suapcommon:DichiarazioniEstetistiRequisitiProfessionaliType"/>

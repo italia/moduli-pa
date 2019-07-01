@@ -76,13 +76,13 @@
                 <xs:element name="decorrenzaDa" type="xs:date"/>
             </xs:choice>
             <xs:choice>
-                <xs:element name="compravendita" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="affittoAzienda" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="donazione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="fusione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="fallimento" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="successione" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="altraMotivazione" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="compravendita" type="basic:EmptyType"/>
+                <xs:element name="affittoAzienda" type="basic:EmptyType"/>
+                <xs:element name="donazione" type="basic:EmptyType"/>
+                <xs:element name="fusione" type="basic:EmptyType"/>
+                <xs:element name="fallimento" type="basic:EmptyType"/>
+                <xs:element name="successione" type="basic:EmptyType"/>
+                <xs:element name="altraMotivazione" type="xs:string"/>
             </xs:choice>
             <xs:element name="attoRegistrazione" type="aggregate:AttoBaseType"/>
         </xs:sequence>
@@ -101,14 +101,14 @@
         <xs:sequence>
             <xs:element name="protocolloAmpliamento" type="aggregate:ProtocolloStandardType"/>
             <xs:choice>
-                <xs:element name="ampliamentoIngrossoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
+                <xs:element name="ampliamentoIngrossoSuperficieVendita" type="suapcommon:AmpliamentoSuperficieVenditaType"/>
                 <xs:element name="ampliamentoDettaglioIngrossoSuperficieVendita">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="superficieDaA" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
                             <xs:choice>
-                                <xs:element name="IngrossoSuperficieDaA" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
-                                <xs:element name="DettaglioSuperficieDaA" type="suapcommon:AmpliamentoSuperficieVenditaType" minOccurs="0"/>
+                                <xs:element name="IngrossoSuperficieDaA" type="suapcommon:AmpliamentoSuperficieVenditaType"/>
+                                <xs:element name="DettaglioSuperficieDaA" type="suapcommon:AmpliamentoSuperficieVenditaType"/>
                             </xs:choice>
                         </xs:sequence>
                     </xs:complexType>
@@ -124,7 +124,7 @@
             <xs:extension base="commingrosso:ModalitaVenditaIngrossoSuperficieBaseType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="IngrossoSuperficie" minOccurs="0" type="xs:decimal"/>
+                        <xs:element name="IngrossoSuperficie" type="xs:decimal"/>
                         <xs:element name="DettaglioIngrosso">
                             <xs:complexType>
                                 <xs:sequence>

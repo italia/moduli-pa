@@ -84,7 +84,7 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>                        
-                <xs:element name="AltroTitoloAutorita" type="xs:date" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="AltroTitoloAutorita" type="xs:date"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
