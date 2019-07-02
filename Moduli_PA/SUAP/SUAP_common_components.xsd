@@ -9,7 +9,6 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     
     targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
-
     elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
 
 
