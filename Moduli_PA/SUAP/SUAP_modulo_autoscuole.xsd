@@ -33,7 +33,6 @@
             <xs:element name="apertura" type="autoscuole:AvvioType"/>
             <xs:element name="DichiarazioniRequisitiProfessionali" type="autoscuole:DichiarazioniRequisitiProfessionaliType"/>
             <xs:element name="altreDichiarazioni" type="autoscuole:AltreDichiarazioniType"/>
-
             <xs:element name="tabellaAllegati" type="autoscuole:TabellaAllegatiType"/> 
         </xs:sequence>        
     </xs:complexType>
@@ -373,22 +372,19 @@
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="AllegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
             
-            <xs:element name="allegatoDichiarazioneClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
+            <xs:element name="AllegatoPossessoRequisitiResponsabileDidattico" type="autoscuole:AllegatoPossessoRequisitiResponsabileDidatticoType" minOccurs="0" />
+            <xs:element name="AllegatoPossessoRequisitiPersonaleDocente" type="autoscuole:AllegatoPossessoRequisitiPersonaleDocenteType" minOccurs="0" />
+            
+            <xs:element name="allegatoProprietaImmobili"  type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDichiarazioneAccettazioneConsorzio"  type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
-    
+   
     <xs:complexType name="AllegatiSCIAUnicaType">
         <xs:sequence>
-            <xs:element name="allegatoSCIAClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
-            <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="0"/>
-            <xs:element name="allegatoSCIASomministrazione" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSCIAPrevenzioniIncendi" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoSCIAAltreSpecificheAttivita" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoAltreComunicazioniNormeRegionale" type="moduli:AllegatoBaseType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
@@ -411,6 +407,11 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    
+    
+    
+    
     
     <xs:complexType name="AllegatoPossessoRequisitiResponsabileDidatticoType">
                 <xs:sequence>
