@@ -373,10 +373,7 @@
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="AllegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
-            
-            <xs:element name="AllegatoPossessoRequisitiResponsabileDidattico" type="autoscuole:AllegatoPossessoRequisitiResponsabileDidatticoType" minOccurs="0" />
             <xs:element name="AllegatoPossessoRequisitiPersonaleDocente" type="autoscuole:AllegatoPossessoRequisitiPersonaleDocenteType" minOccurs="0" />
-            
             <xs:element name="allegatoProprietaImmobili"  type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDichiarazioneAccettazioneConsorzio"  type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
@@ -391,37 +388,86 @@
     <xs:complexType name="AllegatiSCIACondizionataType">
         <xs:sequence>
             <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
-            <xs:element name="allegatoDomandaClassificazioneStruttura" type="moduli:AllegatoBaseType" minOccurs="0"/>
-            <xs:element name="allegatoAltreDomandeNormeRegionali" type="moduli:AllegatoBaseType"  minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
-    
-    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+    <xs:complexType name="AllegatoPossessoRequisitiResponsabileDidatticoType">
         <xs:complexContent>
-            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+            <xs:extension base="moduli:AllegatoType">
                 <xs:sequence>
-                    <xs:element name="titolare" type="xs:string"/>
-                    <xs:element name="indirizzoStruttura" type="xs:string" />
+                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType"  />
+                    <xs:choice>
+                        <xs:element name="dittaIndividuale" >
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="denomiazione" type="xs:string"/>
+                                    <xs:element name="organico">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dipendente" type="basic:EmptyType"/>
+                                                <xs:element name="collaboratoreFamiliare" type="basic:EmptyType"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="societa" >
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="denomiazione" type="xs:string"/>
+                                    <xs:element name="organico">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dipendente" type="basic:EmptyType"/>
+                                                <xs:element name="collaboratoreFamiliare" type="basic:EmptyType"/>
+                                                <xs:element name="socio" type="basic:EmptyType"/>
+                                                <xs:element name="amministratore" type="basic:EmptyType"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element name="dichiarazioniRequisitiProfessionali" type="autoscuole:DichiarazioniRequisitiProfessionaliType"  />
+                    <xs:element name="tabellaEsperienzaInsegnante" type="autoscuole:TabellaEsperienzaInsegnanteType"  />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
-    
-    
-    
-    
-    <xs:complexType name="AllegatoPossessoRequisitiResponsabileDidatticoType">
+        
+    <xs:complexType name="AllegatoPossessoRequisitiPersonaleDocenteType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
                 <xs:sequence>
+                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" />
+                    <xs:choice>
+                        <xs:element name="insegnateTeoria">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="dittaIndividualeDenominazione" type="xs:string"/>
+                                    <xs:element name="societaDenominazione" type="xs:string"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="istruttoreGuida">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="dittaIndividualeDenominazione" type="xs:string"/>
+                                    <xs:element name="societaDenominazione" type="xs:string"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element name="dichiarazioniRequisitiProfessionali" type="autoscuole:DichiarazioniRequisitiProfessionaliType"  />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
                 </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
-    
-    
-    
-    
-    
-    
-    
+        
 </xs:schema>    
