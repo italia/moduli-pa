@@ -23,8 +23,7 @@
     <!-- // Modulo SUAP_modulo_somministrazione_circoli_commerciali_zone_non_tutelate ## internal code ref 029 // -->
 
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloSommCirCommZoneNonTutelate"
-        type="somcirzonenontut:ModuloSommCirCommZoneNonTutelateType"/>
+    <xs:element name="ModuloSommCirCommZoneNonTutelate" type="somcirzonenontut:ModuloSommCirCommZoneNonTutelateType"/>
 
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSommCirCommZoneNonTutelateType">
@@ -41,7 +40,7 @@
                 <xs:element name="avvio" type="somcirzonenontut:AvvioType"/>
                 <xs:element name="ampliamento" type="somcirzonenontut:AmpliamentoBaseType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="somcirzonenontut:AltreDichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniCircoliCommercialiType"/>
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean"/>
             <xs:element name="tabellaAllegati" type="somcirzonenontut:TabellaAllegatiType"/>
         </xs:sequence>
@@ -83,38 +82,7 @@
 
 
 
-    <xs:complexType name="AltreDichiarazioniType">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:AltreDichiarazioniType">    
-                <xs:sequence>
-                    <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" /> 
-                    <xs:choice minOccurs="0">
-                        
-                        <xs:element name="adesioneAssociazioneEnteNazionale" type="xs:string" >
-                            <xs:annotation>
-                                <xs:documentation>
-                                    le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e che NON si trova nelle condizioni previste dall'art. 148, commi 3, 5 e 8, del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004)
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="nonAdesioneAssociazioneEnteNazionale" type="basic:EmptyType" >
-                            <xs:annotation>
-                                <xs:documentation>
-                                    che l'associazione/circolo NON aderisce a un ente/organizzazione nazionale le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e NON si trova nelle condizioni previste dall'art. 148 e 149 del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004) 
-                                    che la somministrazione avviene esclusivamente a favore degli associati presso la sede ove sono svolte le attività istituzionali (artt.  2, comma 1 e 3, comma 1, del D.P.R. n. 235 del 2001) 
-                                    di impegnarsi a comunicare ogni variazione relativa a stati, fatti, condizioni e titolarità rispetto a quanto dichiarato (*)
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="venditaBevandeAlcoliche" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="altroInoltre" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>  
-                    </xs:choice>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-
+   
 
 
     <!-- ALLEGATI -->
@@ -131,7 +99,7 @@
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="somcirzonenontut:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93CircoliCommercialiType" minOccurs="0"/>
             <xs:element name="allegatoPlanimetrieLocali" type="moduli:AllegatoType" minOccurs="1"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
@@ -145,22 +113,7 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
-        <xs:complexContent>
-            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
-                <xs:sequence>
-                    <xs:element name="inQualitaDi" minOccurs="1">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="associazioneCircolo" type="xs:string" minOccurs="0"/>
-                                <xs:element name="dittaImpresa" type="xs:string" minOccurs="0"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    
 
 
 </xs:schema>    

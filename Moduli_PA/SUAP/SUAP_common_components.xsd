@@ -1051,6 +1051,40 @@
         </xs:complexContent>
     </xs:complexType>
     
+    
+    <xs:complexType name="AltreDichiarazioniCircoliCommercialiType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltreDichiarazioniType">    
+                <xs:sequence>
+                    <xs:choice minOccurs="0">
+                        
+                        <xs:element name="adesioneAssociazioneEnteNazionale" type="xs:string" >
+                            <xs:annotation>
+                                <xs:documentation>
+                                    le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e che NON si trova nelle condizioni previste dall'art. 148, commi 3, 5 e 8, del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="nonAdesioneAssociazioneEnteNazionale" type="basic:EmptyType" >
+                            <xs:annotation>
+                                <xs:documentation>
+                                    che l'associazione/circolo NON aderisce a un ente/organizzazione nazionale le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e NON si trova nelle condizioni previste dall'art. 148 e 149 del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004) 
+                                    che la somministrazione avviene esclusivamente a favore degli associati presso la sede ove sono svolte le attività istituzionali (artt.  2, comma 1 e 3, comma 1, del D.P.R. n. 235 del 2001) 
+                                    di impegnarsi a comunicare ogni variazione relativa a stati, fatti, condizioni e titolarità rispetto a quanto dichiarato (*)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="venditaBevandeAlcoliche" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="altroInoltre" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>  
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    
+    
     <xs:complexType name="VenditaEsclusivaType">
         <xs:sequence>
             <xs:choice>
@@ -1139,6 +1173,25 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93CircoliCommercialiType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+                <xs:sequence>
+                    <xs:element name="inQualitaDi" minOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="associazioneCircolo" type="xs:string" minOccurs="0"/>
+                                <xs:element name="dittaImpresa" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
     
     
     <xs:complexType name="AllegatoResponsabileTecnicoAcconciatoriRequisitiProfessionaliType">
