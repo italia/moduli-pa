@@ -1166,6 +1166,23 @@
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type">
+                <xs:sequence>
+                    <xs:element name="inQualitaDi" minOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="associazioneCircolo" type="xs:string" minOccurs="0"/>
+                                <xs:element name="dittaImpresa" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     
     <xs:complexType name="AllegatiAltriType">
         <xs:sequence>
