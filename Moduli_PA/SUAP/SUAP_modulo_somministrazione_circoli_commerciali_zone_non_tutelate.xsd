@@ -18,7 +18,7 @@
     <!-- // Modulo SUAP_modulo_somministrazione_circoli_commerciali_zone_non_tutelate ## internal code ref 029 // -->
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloSommCirCommZoneNonTut" type="somcirzonenontut:ModuloSommCirCommZoneNonTutelateType"/>
+    <xs:element name="ModuloSommCirCommZoneNonTutelate" type="somcirzonenontut:ModuloSommCirCommZoneNonTutelateType"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
     <xs:complexType name="ModuloSommCirCommZoneNonTutelateType">
