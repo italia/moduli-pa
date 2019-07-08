@@ -53,6 +53,18 @@
         </xs:sequence> 
     </xs:complexType>
 
+    <xs:complexType name="TipologiaAttivitaSomministrazioneType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:TipologiaAttivitaSomministrazioneBaseType">
+                <xs:sequence>
+                    <xs:element name="tipologia" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+
     <xs:complexType name="AmpliamentoBaseType" abstract="true"/>
     <xs:complexType name="AmpliamentoType">
         <xs:complexContent>
@@ -69,24 +81,28 @@
         <xs:complexContent>
             <xs:extension base="suapcommon:AltreDichiarazioniType">    
                 <xs:sequence>
-                    <xs:element name="aderisceADenominazioneAssociazioneEnteNazionale" type="xs:string" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>
-                                le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e che NON si trova nelle condizioni previste dall'art. 148, commi 3, 5 e 8, del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004)
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="nonAderisceADenominazioneAssociazioneEnteNazionale" type="basic:EmptyType" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>
-                                che l'associazione/circolo NON aderisce a un ente/organizzazione nazionale le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e NON si trova nelle condizioni previste dall'art. 148 e 149 del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004) 
-                                che la somministrazione avviene esclusivamente a favore degli associati presso la sede ove sono svolte le attività istituzionali (artt.  2, comma 1 e 3, comma 1, del D.P.R. n. 235 del 2001) 
-                                di impegnarsi a comunicare ogni variazione relativa a stati, fatti, condizioni e titolarità rispetto a quanto dichiarato (*)
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="venditaBevandeAlcoliche" type="basic:EmptyType" minOccurs="0"/>
-                    <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>  
+                    <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0" /> 
+                    <xs:choice minOccurs="0">
+                        
+                        <xs:element name="adesioneAssociazioneEnteNazionale" type="xs:string" >
+                            <xs:annotation>
+                                <xs:documentation>
+                                    le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e che NON si trova nelle condizioni previste dall'art. 148, commi 3, 5 e 8, del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="nonAdesioneAssociazioneEnteNazionale" type="basic:EmptyType" >
+                            <xs:annotation>
+                                <xs:documentation>
+                                    che l'associazione/circolo NON aderisce a un ente/organizzazione nazionale le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e NON si trova nelle condizioni previste dall'art. 148 e 149 del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004) 
+                                    che la somministrazione avviene esclusivamente a favore degli associati presso la sede ove sono svolte le attività istituzionali (artt.  2, comma 1 e 3, comma 1, del D.P.R. n. 235 del 2001) 
+                                    di impegnarsi a comunicare ogni variazione relativa a stati, fatti, condizioni e titolarità rispetto a quanto dichiarato (*)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="venditaBevandeAlcoliche" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="altroInoltre" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>  
+                    </xs:choice>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -95,13 +111,14 @@
     <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIA" type="somcirzonetut:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIAUnica" type="somcirzonetut:AllegatiSCIAUnicaType"/> 
+            <xs:element name="allegatiAutorizzazioneSCIA" type="somcirzonetut:AllegatiAutorizzazioneSCIAType" minOccurs="0"/>
+            <xs:element name="allegatiAutorizzazioneSCIAUnica" type="somcirzonetut:AllegatiAutorizzazioneSCIAUnicaType" minOccurs="0"/>
+            <xs:element name="allegatiAutorizzazioneAltri" type="somcirzonetut:AllegatiAutorizzazioneAltriType" minOccurs="0"/> 
             <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="AllegatiSCIAType">
+    <xs:complexType name="AllegatiAutorizzazioneSCIAType">
         <xs:sequence>
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
@@ -110,11 +127,16 @@
             <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiAutorizzazioneAltriType">
+        <xs:sequence>
             <xs:element name="allegatoComunicazioneImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
     
-    <xs:complexType name="AllegatiSCIAUnicaType">
+    <xs:complexType name="AllegatiAutorizzazioneSCIAUnicaType">
         <xs:sequence>
             <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
