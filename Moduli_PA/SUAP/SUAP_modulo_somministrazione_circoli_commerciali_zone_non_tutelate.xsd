@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-    xmlns:somciradenoncom="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_circoli_aderenti_enti_non_commerciali"
+    xmlns:somcirzonenontut="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_circoli_commerciali_zone_non_tutelate"
     xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
     xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
     xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
     xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_circoli_aderenti_enti_non_commerciali"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_somministrazione_circoli_commerciali_zone_non_tutelate"
     elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
     <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
@@ -15,50 +15,48 @@
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/> 
     
-    <!-- // Modulo SUAP_modulo_somministrazione_aderenti_enti_non_commerciali ## internal code ref 024 // -->
+    <!-- // Modulo SUAP_modulo_somministrazione_circoli_commerciali_zone_non_tutelate ## internal code ref 029 // -->
     
     <!-- ROOT ELEMENT -->
-    <xs:element name="ModuloSommCirAdeEntiNonComm" type="somciradenoncom:ModuloSommCirAdeEntiNonCommType"/>
+    <xs:element name="ModuloSommCirCommZoneNonTutelate" type="somcirzonenontut:ModuloSommCirCommZoneNonTutelateType"/>
     
     <!-- AGGREGATE COMPONENTS TYPE -->
-    <xs:complexType name="ModuloSommCirAdeEntiNonCommType">
+    <xs:complexType name="ModuloSommCirCommZoneNonTutelateType">
         <xs:annotation>
             <xs:documentation>
-                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI SOMMINISTRAZIONE 
-                DI ALIMENTI E BEVANDE ALL’INTERNO DI ASSOCIAZIONI E CIRCOLI ADERENTI A ENTI 
-                O ORGANIZZAZIONI NAZIONALI AVENTI FINALITÀ ASSISTENZIALI E CHE HANNO NATURA 
-                DI ENTI NON COMMERCIALI
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ PER L’ESERCIZIO DI SOMMINISTRAZIONE DI ALIMENTI E BEVANDE 
+                ALL’INTERNO DI ASSOCIAZIONI E CIRCOLI ADERENTI E NON ADERENTI CHE HANNO NATURA COMMERCIALE 
+                (IN ZONE NON TUTELATE) 
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
             <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
-            <xs:element name="modalitaGestione" type="suapcommon:ModalitaGestioneType"/>
             <xs:choice>
-                <xs:element name="avvio" type="somciradenoncom:AvvioType"/>
-                <xs:element name="ampliamento" type="somciradenoncom:AmpliamentoBaseType"/>
+                <xs:element name="avvio" type="somcirzonenontut:AvvioType"/>
+                <xs:element name="ampliamento" type="somcirzonenontut:AmpliamentoBaseType"/>
             </xs:choice>
-            <xs:element name="altreDichiarazioni" type="suapcommon:AltreDichiarazioniType"/>
+            <xs:element name="altreDichiarazioni" type="somcirzonenontut:AltreDichiarazioniType"/>
             <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
-            <xs:element name="tabellaAllegati" type="somciradenoncom:TabellaAllegatiType"/> 
+            <xs:element name="tabellaAllegati" type="somcirzonenontut:TabellaAllegatiType"/> 
         </xs:sequence>        
     </xs:complexType>
     
     <!-- BASIC COMPONENTS TYPE -->
-
+    
     <xs:complexType name="AvvioType">
         <xs:sequence>
             <xs:element name="denominazioneAssociazCircolo" minOccurs="1" type="xs:string"/>
-            <xs:element name="denominazioneEnteAderente" minOccurs="1" type="xs:string"/>
             <xs:element name="tipologiaAttivitaSomm" type="suapcommon:TipologiaAttivitaSomministrazioneBaseType"/>
             <xs:element name="superficieEsercizio" type="suapcommon:SuperficieEsercizioBaseType"/>
+            <xs:element name="modalitaGestione" type="suapcommon:ModalitaGestioneType"/>
         </xs:sequence> 
     </xs:complexType>
 
     <xs:complexType name="AmpliamentoBaseType" abstract="true"/>
     <xs:complexType name="AmpliamentoType">
         <xs:complexContent>
-            <xs:extension base="somciradenoncom:AmpliamentoBaseType">
+            <xs:extension base="somcirzonenontut:AmpliamentoBaseType">
                 <xs:sequence>
                     <xs:element name="protocolloAvvio" type="aggregate:ProtocolloStandardType"/>
                     <xs:element name="ampliamentoSuperficieEsercizio" type="suapcommon:AmpliamentoSuperficieVenditaType" />
@@ -66,12 +64,42 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltreDichiarazioniType">    
+                <xs:sequence>
+                    <xs:element name="aderisceADenominazioneAssociazioneEnteNazionale" type="xs:string" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e che NON si trova nelle condizioni previste dall'art. 148, commi 3, 5 e 8, del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004)
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="nonAderisceADenominazioneAssociazioneEnteNazionale" type="basic:EmptyType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                che l'associazione/circolo NON aderisce a un ente/organizzazione nazionale le cui finalità assistenziali sono riconosciute dal Ministero dell’Interno e NON si trova nelle condizioni previste dall'art. 148 e 149 del D.P.R. n. 917 del 1986 (TUIR, come riformato nel 2004) 
+                                che la somministrazione avviene esclusivamente a favore degli associati presso la sede ove sono svolte le attività istituzionali (artt.  2, comma 1 e 3, comma 1, del D.P.R. n. 235 del 2001) 
+                                di impegnarsi a comunicare ogni variazione relativa a stati, fatti, condizioni e titolarità rispetto a quanto dichiarato (*)
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="venditaBevandeAlcoliche" type="basic:EmptyType" minOccurs="0"/>
+                    <xs:element name="altro" type="suapcommon:AltreDichiarazioniAltroBaseType" minOccurs="0"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    
 
     <!-- ALLEGATI -->
     <xs:complexType name="TabellaAllegatiType">
         <xs:sequence>
-            <xs:element name="allegatiSCIA" type="somciradenoncom:AllegatiSCIAType"/>
-            <xs:element name="allegatiSCIACondizionata" type="somciradenoncom:AllegatiSCIACondizionataType"/> 
+            <xs:element name="allegatiSCIA" type="somcirzonenontut:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIACondizionata" type="somcirzonenontut:AllegatiSCIACondizionataType"/> 
             <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
         </xs:sequence>
     </xs:complexType>
@@ -81,7 +109,7 @@
             <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="somciradenoncom:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
+            <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="somcirzonenontut:AllegatoPossessoRequisitiRappresentanteTulpsArt93Type" minOccurs="0"/>
             <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
@@ -90,7 +118,7 @@
     </xs:complexType>
     
     <xs:complexType name="AllegatiSCIACondizionataType">
-        <xs:sequence> 
+        <xs:sequence>
             <xs:element name="allegatoNullaOstaImpattoAcustico" type="moduli:AllegatoType" minOccurs="0"/>
         </xs:sequence>                                
     </xs:complexType>
@@ -110,5 +138,7 @@
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
+    </xs:complexType>  
+
+    
 </xs:schema>    
