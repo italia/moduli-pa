@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:autoscuole="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_autoscuole"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/SUAP_modulo_autoscuole"
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../AgID_Vocabularies/AgID_enumeration.xsd"/> 
+    
+    <!-- // Modulo SUAP_autoscuole ## internal code ref 028 // -->
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="ModuloAutoscuole" type="autoscuole:ModuloAutoscuoleType"/>
+    
+    <!-- AGGREGATE COMPONENTS TYPE -->
+    <xs:complexType name="ModuloAutoscuoleType">
+        <xs:annotation>
+            <xs:documentation>
+                SEGNALAZIONE CERTIFICATA DI INIZIO ATTIVITÀ DI AUTOSCUOLA
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schedaAnagrafica" type="suapcommon:SchedaAnagraficaSUAPType"/>
+            <xs:element name="integrazioneAnagrafica" type="suapcommon:IntegrazioneAnagraficaType"/>
+            <xs:element name="apertura" type="autoscuole:AvvioType"/>
+            <xs:element name="dichiarazioniRequisitiProfessionali" type="autoscuole:DichiarazioniRequisitiProfessionaliType"/>
+            <xs:element name="altreDichiarazioni" type="autoscuole:AltreDichiarazioniType"/>
+            <xs:element name="tabellaAllegati" type="autoscuole:TabellaAllegatiType"/> 
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <!-- BASIC COMPONENTS TYPE -->
+    
+
+    
+      <xs:complexType name="AvvioType">
+        <xs:sequence>
+            
+            <xs:choice>
+                <xs:element name="primaSede" type="basic:EmptyType"/>
+                <xs:element name="ulterioreSede"  type="aggregate:ProtocolloType"/>
+            </xs:choice>
+            
+            <xs:choice>
+                <xs:element name="nonAderisceCentroIstruzioneAutomobilistica" type="basic:EmptyType"/>
+                <xs:element name="aderisceCentroIstruzioneAutomobilistica" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="centroIstruzioneAutomobilistica"  type="autoscuole:CentroIstruzioneAutomobilisticaType"/>
+                            <xs:element name="corsi"  type="autoscuole:CorsiType"/>    
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <xs:complexType name="CentroIstruzioneAutomobilisticaType">
+        <xs:sequence>
+            <xs:element name="denominazione" type="xs:string"/>
+            <xs:element name="sede" type="aggregate:IndirizzoType"/>
+            <xs:element name="provvedimento" type="aggregate:AttoRilasciatoDaType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CorsiType">
+        <xs:sequence>
+            <xs:element name="teoria" type="autoscuole:CategoriaPatentiType" minOccurs="0"/>
+            <xs:element name="guida" type="autoscuole:CategoriaPatentiType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+    <xs:complexType name="CategoriaPatentiType">
+        <xs:sequence>
+            <xs:element name="A" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="AM" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="A1" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="A2" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="BE" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="C" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="C1" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="C1E" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="D" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="D1" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="D1E" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="CE" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="DE" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="documentiAbilitazioneProfessionale" type="basic:EmptyType" minOccurs="0"/>
+            <xs:element name="documentiQualificazioneProfessionale" type="basic:EmptyType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:group name="possessoRequistiInsegnateGroup">
+        <xs:sequence>
+            <xs:element name="possessoAbilitazioneInsegnanteTeoria" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attoRilascio" type="aggregate:AttoRilasciatoDaType"/>
+                        <xs:element name="dataRinnovo" type="xs:date"/>
+                        <xs:element name="luogoRinnovo" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="possessoAbilitazioneInsegnanteGuida" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attoRilascio" type="aggregate:AttoRilasciatoDaType"/>
+                        <xs:element name="dataRinnovo" type="xs:date"/>
+                        <xs:element name="luogoRinnovo" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence> 
+    </xs:group> 
+    
+
+    <xs:complexType name="DichiarazioniRequisitiProfessionaliType">
+        <xs:sequence>
+            <xs:element name="sedePrincipale" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>         
+                         <xs:element name="possessoDiplomaIstruzioneSecondoGrado" minOccurs="0">
+                             <xs:complexType>
+                                 <xs:sequence>
+                                     <xs:element name="in" type="xs:string"/>
+                                     <xs:element name="luogo" type="xs:string"/>
+                                     <xs:element name="annoScolasticoDa" >
+                                         <xs:simpleType>
+                                             <xs:restriction base="xs:integer">
+                                                 <xs:minInclusive value="1"/>
+                                                 <xs:maxInclusive value="9999"/>
+                                             </xs:restriction>
+                                         </xs:simpleType>
+                                     </xs:element>
+                                     <xs:element name="annoScolasticoA" >
+                                         <xs:simpleType>
+                                             <xs:restriction base="xs:integer">
+                                                 <xs:minInclusive value="1"/>
+                                                 <xs:maxInclusive value="9999"/>
+                                             </xs:restriction>
+                                         </xs:simpleType>
+                                     </xs:element>
+                                 </xs:sequence>
+                             </xs:complexType>
+                         </xs:element>
+                         
+                         <xs:group ref="autoscuole:possessoRequistiInsegnateGroup"/>
+                         
+                         <xs:element name="esperienzaBiennaleInsegnante" type="autoscuole:TabellaEsperienzaInsegnanteType" minOccurs="0" />
+                     </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="sedeUlteriore" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="nominativo" type="xs:string"/>
+                        <xs:element name="inOrganicoCome">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="dipendente" type="basic:EmptyType"/>
+                                    <xs:element name="collaboratoreFamiliare" type="basic:EmptyType"/>
+                                    <xs:element name="socio" type="basic:EmptyType"/>
+                                    <xs:element name="amministratore" type="basic:EmptyType"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TabellaEsperienzaInsegnanteType">
+        <xs:sequence>
+            <xs:element name="esperienza" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="denominazione" type="xs:string"/>
+                        <xs:element name="provincia" type="xs:string"/>
+                        <xs:element name="periodo" type="aggregate:PeriodoType"/>
+                        <xs:element name="inQualitaDi">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="insegnante" type="basic:EmptyType"/>
+                                    <xs:element name="istruttore" type="basic:EmptyType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+     </xs:complexType>
+    
+    <xs:complexType name="AltreDichiarazioniType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:AltreDichiarazioniType">    
+                <xs:sequence>
+                    <xs:element name="materialeObbligatorio" type="autoscuole:MaterialeObbligatorioType"/>
+                    <xs:element name="mezziADisposizione" type="autoscuole:MezziADisposizioneType" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MaterialeObbligatorioType">
+        <xs:sequence>
+            <xs:element name="cartelliStradali">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="quadroIlluminazione">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tavoleCintureSicurezza">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tavoledispositiviInquinamento">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tavolePrimoSoccorso">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tavoleTrasportoMerciPericolose">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tavoleOrganiMotore">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="gruppoMotoreInScala">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cartelliMotoreDiesel">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cartelliOrganiDiTraino">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="elementiFrenanti">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MezziADisposizioneType">
+        <xs:sequence>
+            <xs:element name="autoCategoriaB" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ciclomotoreCategoriaAM" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="motocicloCategoriaA1" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="motocicloCategoriaA2" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="motocicloCategoriaA" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="autocarroCategoriaC" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="rimorchio" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string" minOccurs="0"/>
+                        <xs:element name="targa" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="autoarticolatoCategoriaCE" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="autobuscategoriaD" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="rimorchioCategoriaDE" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="marcaTipo" type="xs:string"/>
+                        <xs:element name="targa" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <!-- ALLEGATI -->
+    
+    <xs:complexType name="TabellaAllegatiType">
+        <xs:sequence>
+            <xs:element name="allegatiSCIA" type="autoscuole:AllegatiSCIAType"/>
+            <xs:element name="allegatiSCIAUnica" type="autoscuole:AllegatiSCIAUnicaType"/>
+            <xs:element name="allegatiSCIACondizionata" type="autoscuole:AllegatiSCIACondizionataType"/>
+            <xs:element name="allegatiAltri" type="suapcommon:AllegatiAltriType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AllegatiSCIAType">
+        <xs:sequence>
+            <xs:element name="allegatoProcuraDelega" type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDocumentoIdentitaTitolare" type="moduli:AllegatoType"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="allegatoPossessoRequisitiAltriSoci" type="suapcommon:AllegatoPossessoRequisitiAltriSociType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoPossessoRequisitiResponsabileDidattico" type="autoscuole:AllegatoPossessoRequisitiResponsabileDidatticoType" minOccurs="0" />
+            <xs:element name="allegatoPossessoRequisitiPersonaleDocente" type="autoscuole:AllegatoPossessoRequisitiPersonaleDocenteType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="allegatoProprietaImmobili"  type="moduli:AllegatoType" minOccurs="0"/>
+            <xs:element name="allegatoDichiarazioneAccettazioneConsorzio"  type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+   
+    <xs:complexType name="AllegatiSCIAUnicaType">
+        <xs:sequence>
+            <xs:element name="allegatoSCIAInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatiSCIACondizionataType">
+        <xs:sequence>
+            <xs:element name="allegatoAutorizzazioneInsegnaEsercizio" type="moduli:AllegatoType" minOccurs="0"/>
+        </xs:sequence>                                
+    </xs:complexType>
+    
+    <xs:complexType name="AllegatoPossessoRequisitiResponsabileDidatticoType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType"  />
+                    <xs:element name="resposabileDella">
+                        <xs:complexType>
+                            <xs:choice>
+                                <xs:element name="dittaIndividuale" >
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="denomiazione" type="xs:string"/>
+                                            <xs:element name="inOrganicoCome">
+                                                <xs:complexType>
+                                                    <xs:sequence>
+                                                        <xs:element name="dipendente" type="basic:EmptyType" minOccurs="0"/>
+                                                        <xs:element name="collaboratoreFamiliare" type="basic:EmptyType" minOccurs="0"/>
+                                                    </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="societa" >
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="denomiazione" type="xs:string"/>
+                                            <xs:element name="organico">
+                                                <xs:complexType>
+                                                    <xs:sequence>
+                                                        <xs:element name="dipendente" type="basic:EmptyType" minOccurs="0"/>
+                                                        <xs:element name="collaboratoreFamiliare" type="basic:EmptyType" minOccurs="0"/>
+                                                        <xs:element name="socio" type="basic:EmptyType" minOccurs="0"/>
+                                                        <xs:element name="amministratore" type="basic:EmptyType" minOccurs="0"/>
+                                                    </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:choice>
+                        </xs:complexType>
+                    </xs:element>
+                    
+                    <xs:element name="dichiarazioniRequisitiProfessionali" type="autoscuole:DichiarazioniRequisitiProfessionaliType"  />
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
+    <xs:complexType name="AllegatoPossessoRequisitiPersonaleDocenteType">
+        <xs:complexContent>
+            <xs:extension base="moduli:AllegatoType">
+                <xs:sequence>
+                    <xs:element name="soggetto" type="aggregate:PersonaAnagraficaType" />
+                    <xs:sequence>
+                        <xs:element name="insegnateTeoria" minOccurs="0">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="dittaIndividuale" type="xs:string"/>
+                                    <xs:element name="societa" type="xs:string"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="istruttoreGuida" minOccurs="0">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="dittaIndividuale" type="xs:string"/>
+                                    <xs:element name="societa" type="xs:string"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:element name="dichiarazioniRequisitiProfessionali" >
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:group ref="autoscuole:possessoRequistiInsegnateGroup"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean" />
+                    <xs:element name="documentoIdentitaSoggetto" type="moduli:AllegatoType"  />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
+        
+    
+        
+</xs:schema>    
