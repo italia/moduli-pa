@@ -90,6 +90,7 @@
             <xs:documentation>Tipo astratto. Tutti gli elementi CoordinateCatastaliBase sono ereditati da questo tipo utile per specificare le coordinate catastali</xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element name="categoria" type="xs:string" minOccurs="0"/>
             <xs:element name="foglio" type="xs:string"/>
             <xs:element name="particella" type="xs:string"/>
             <xs:element name="particellaDenominatore" type="xs:string" minOccurs="0"/>

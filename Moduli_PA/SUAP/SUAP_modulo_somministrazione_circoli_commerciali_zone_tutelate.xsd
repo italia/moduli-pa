@@ -96,6 +96,7 @@
             <xs:element name="allegatoPossessoRequisitiAltriSoggetti" type="suapcommon:AllegatoPossessoRequisitiAltriSoggettiType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="allegatoPossessoRequisitiRappresentanteTulpsArt93" type="suapcommon:AllegatoPossessoRequisitiRappresentanteTulpsArt93CircoliCommercialiType" minOccurs="0"/>
             <xs:element name="allegatoPlanimetrieLocali"  type="moduli:AllegatoType" minOccurs="1"/>
+            <xs:element name="allegatoComunicazioneVenditaAlcolici" type="moduli:AllegatoType" minOccurs="0"/>
             <xs:element name="allegatoNotificaSanitaria" type="suapcommon:AllegatoNotificaSanitariaType" minOccurs="1"/>
             <xs:element name="allegatoAttoCostitutivo" type="moduli:AllegatoType" minOccurs="1"/>
         </xs:sequence>                                
