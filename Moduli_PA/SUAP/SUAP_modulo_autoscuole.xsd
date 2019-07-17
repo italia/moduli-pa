@@ -220,7 +220,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -228,7 +234,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -236,7 +248,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -244,7 +262,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -252,7 +276,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType"/>
-                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -260,7 +290,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType"/>
-                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -268,7 +304,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType"/>
-                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -276,7 +318,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType"/>
-                        <xs:element name="multimediale" type="basic:EmptyType"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -284,7 +332,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -292,7 +346,13 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -300,12 +360,34 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="tradizionale" type="basic:EmptyType" minOccurs="0"/>
-                        <xs:element name="multimediale" type="basic:EmptyType" minOccurs="0"/>
+                        <xs:element name="multimediale" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="materialeDidattico" type="autoscuole:MaterialeDidatticoType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="MaterialeDidatticoType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="autoprodotto" type="basic:EmptyType"/>
+                <xs:element name="caratteristicheMaterialeUtilizzato">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="marca" type="xs:string"/>
+                            <xs:element name="tipo"  type="xs:string"/>    
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>    
     
     <xs:complexType name="MezziADisposizioneType">
         <xs:sequence>
