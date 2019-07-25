@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:nssm="http://www.agid.gov.it/MODULI_PA/SUAP/Allegati/notifica_sanitaria_struture_militari"
+    xmlns:suapcommon="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components"
+    xmlns:moduli="http://www.agid.gov.it/MODULI_PA/moduli_common_components"
+    xmlns:aggregate="http://www.agid.gov.it/AgID_aggregate_components"
+    xmlns:basic="http://www.agid.gov.it/AgID_basic_components"
+    xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    
+    targetNamespace="http://www.agid.gov.it/MODULI_PA/SUAP/Allegati/notifica_sanitaria_struture_militari"
+
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0">
+
+    
+   
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/SUAP/suap_common_components" schemaLocation="../SUAP_common_components.xsd"/>    
+    <xs:import namespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components" schemaLocation="../../MODULI_common_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../../../AgID_Vocabularies/AgID_basic_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../../../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
+    <xs:import namespace="http://www.agid.gov.it/AgID_enumeration" schemaLocation="../../../AgID_Vocabularies/AgID_enumeration.xsd"/>
+    
+    
+    <!-- ROOT ELEMENT -->
+    <xs:element name="NotificaSanitariaStruttureMilitari" type="nssm:NotificaSanitariaType"/>
+
+    <xs:complexType name="NotificaSanitariaType">
+        <xs:annotation>
+            <xs:documentation>
+                NOTIFICA AI FINI DELLA REGISTRAZIONE PER LE STRUTTURE MILITARI (ART.6, REG. CE N. 852/2004)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="apertura" type="nssm:NotificaSanitariaAperturaType"/>
+                <xs:element name="subingresso" type="nssm:NotificaSanitariaSubingressoType"/>
+                <xs:element name="modificaAttivita"  type="nssm:NotificaSanitariModificaAttivitaType"/>
+                <xs:element name="cessazioneSospensione" type="nssm:NotificaSanitariaCessazioneSospensioneType"/>
+            </xs:choice>
+            <xs:element name="note" type="xs:string" minOccurs="0"/>
+            <xs:element name="dichiarazionePresaVisioneInformativaPrivacy" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+     
+    <xs:complexType name="NotificaSanitariaAperturaType">
+        <xs:sequence>
+            <xs:element name="dichiarante">
+                <xs:complexType>
+                    <xs:group ref="aggregate:PersonaBaseGroup"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sedeFissa" type="xs:boolean" />
+            <xs:element name="sede" type="aggregate:IndirizzoType"/>
+            <xs:element name="contatti" >
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="aggregate:ContattiFoniaType">
+                            <xs:sequence>
+                                <xs:element name="altroDomicilioElettronico" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tipologiaAttivita" type="nssm:NotificaSanitariaTipologiaAttivitaType"/>
+            <xs:element name="inizioAttivita" type="suapcommon:NotificaSanitariaDecorrenzaType"/>
+            <xs:element name="dichiarazioni">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="altro" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="NotificaSanitariaSubingressoType">
+        <xs:complexContent>
+            <xs:extension base="suapcommon:NotificaSanitariaSubingressoType">
+                <xs:sequence>
+                    <xs:element name="dichiarazioni">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="altro" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+      
+    <xs:complexType name="NotificaSanitariModificaAttivitaType">
+        <xs:sequence>
+            <xs:element name="dichiarante">
+                <xs:complexType>
+                    <xs:group ref="aggregate:PersonaBaseGroup"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="protocolloAttivita" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="tipologiaAttivita" type="nssm:NotificaSanitariaTipologiaAttivitaType"/>
+            <xs:element name="decorrenzaModifiche" type="suapcommon:NotificaSanitariaDecorrenzaType"/>
+            <xs:element name="dichiarazioni">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="altro" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+        
+    <xs:complexType name="NotificaSanitariaCessazioneSospensioneType">
+        <xs:sequence>
+            <xs:element name="dichiarante">
+                <xs:complexType>
+                    <xs:group ref="aggregate:PersonaBaseGroup"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="protocolloAttivita" type="aggregate:ProtocolloStandardType"/>
+            <xs:element name="sede" type="aggregate:IndirizzoType"/>
+            <xs:choice>
+                <xs:element name="dataCessazione" type="xs:date"/>
+                <xs:element name="periodoSospensione" type="basic:PeriodoDateType"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+        
+     
+        <xs:complexType name="NotificaSanitariaTipologiaAttivitaType">
+            <xs:sequence>
+                <xs:element name="prodottiFornoPasticceria" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="pastaFarinaceiSimili" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="panePizzaAltriForno" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="prodottiPasticceria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="prodottiGelateria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="cacaoPastigliaggi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="cibiPronti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="produzioneCibiPronti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/> 
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="distributori" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="automaticiAlimentiBevande" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="acquaPotabileTrattata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="ristorazione" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="produzionePastiProntiRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="somministrazionePastiRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="somministrazioneDirettaRistorazionePubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="barAssimilati" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="ristorazionePubblicaInManifestazioniTemporanee" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="altro" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                
+            </xs:sequence>
+        </xs:complexType>
+      
+</xs:schema>
