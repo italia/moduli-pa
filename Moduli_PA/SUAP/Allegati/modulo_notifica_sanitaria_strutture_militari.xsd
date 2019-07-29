@@ -129,46 +129,46 @@
     </xs:complexType>
         
      
-        <xs:complexType name="NotificaSanitariaTipologiaAttivitaType">
-            <xs:sequence>
-                <xs:element name="prodottiFornoPasticceria" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="pastaFarinaceiSimili" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="panePizzaAltriForno" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="prodottiPasticceria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="prodottiGelateria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="cacaoPastigliaggi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="cibiPronti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="produzioneCibiPronti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/> 
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                
-                <xs:element name="distributori" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="automaticiAlimentiBevande" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="acquaPotabileTrattata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                
-                <xs:element name="ristorazione" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="produzionePastiProntiRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="somministrazionePastiRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="somministrazioneDirettaRistorazionePubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="barAssimilati" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="ristorazionePubblicaInManifestazioniTemporanee" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                
-                <xs:element name="altro" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                
-            </xs:sequence>
-        </xs:complexType>
+    <xs:complexType name="NotificaSanitariaTipologiaAttivitaType">
+        <xs:sequence>
+            <xs:element name="prodottiFornoPasticceria" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="pastaFarinaceiSimili" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="panePizzaAltriForno" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="prodottiPasticceria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="prodottiGelateria" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="cacaoPastigliaggi" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="cibiPronti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="produzioneCibiPronti" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/> 
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="distributori" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="automaticiAlimentiBevande" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="acquaPotabileTrattata" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="ristorazione" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="produzionePastiProntiRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="somministrazionePastiRistorazioneCollettiva" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="somministrazioneDirettaRistorazionePubblica" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="barAssimilati" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="ristorazionePubblicaInManifestazioniTemporanee" type="basic:EmptyType" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="altro" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            
+        </xs:sequence>
+    </xs:complexType>
       
 </xs:schema>
