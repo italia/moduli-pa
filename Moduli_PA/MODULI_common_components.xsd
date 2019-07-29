@@ -6,7 +6,7 @@
     xmlns:enumeration="http://www.agid.gov.it/AgID_enumeration"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     targetNamespace="http://www.agid.gov.it/MODULI_PA/moduli_common_components"  
-    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.2.0" xml:lang="it">
+    elementFormDefault="qualified" attributeFormDefault="qualified" version="1.3.0" xml:lang="it">
      
     <xs:import namespace="http://www.agid.gov.it/AgID_basic_components" schemaLocation="../AgID_Vocabularies/AgID_basic_components.xsd"/>
     <xs:import namespace="http://www.agid.gov.it/AgID_aggregate_components" schemaLocation="../AgID_Vocabularies/AgID_aggregate_components.xsd"/>
